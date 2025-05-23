@@ -72,7 +72,7 @@
                         <tr>
                             <th>번호</th>
                             <th>이름</th>
-                            <th>이메일</th>
+                            <th>아이디</th>
                             <th>전화번호</th>
                             <th>가입일</th>
                         </tr>
@@ -81,21 +81,21 @@
                         <tr>
                             <td>3</td>
                             <td>김민경</td>
-                            <td>father@noretest.com</td>
+                            <td>admin01</td>
                             <td>010-1234-5678</td>
-                            <td>2021-12-12</td>
+                            <td>2025-05-22</td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>유명규</td>
-                            <td>kang@sist.co.kr</td>
+                            <td>admin02</td>
                             <td>010-1114-6321</td>
-                            <td>2025-01-10</td>
+                            <td>2025-05-19</td>
                         </tr>
                         <tr>
                             <td>1</td>
                             <td>이대웅</td>
-                            <td>young@sist.co.kr</td>
+                            <td>admin03</td>
                             <td>010-8123-8700</td>
                             <td>2025-05-05</td>
                         </tr>
