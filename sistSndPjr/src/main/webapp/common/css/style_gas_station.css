@@ -1,0 +1,51 @@
+/* ====== 노선별 주유소 ====== */
+
+html, body {
+	padding: 0px;
+	margin : 0px;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    
+}
+
+.line_orange {
+    margin: 80px 10px 30px 20px;
+    width: 5%;
+    height: 5px;
+    background-color: #FF5518;
+    border: none;
+}
+
+h2 {
+	margin: 10px 0px 40px 20px;
+}
+
+.agent-container {
+	display: flex;
+	align-items: center;
+	margin: 30px 20px 40px 20px;
+	border: 1px solid #ccc;
+	padding: 10px;
+	border-radius: 6px;
+	background-color: #f9f9f9;
+}
+
+.agent-box {
+	background-color: #f0f0f0;
+	border: 1px solid #ccc;
+	margin : 5px 50px;
+	padding: 10px 30px;
+	font-weight: bold;
+	border-radius: 6px;
+	margin-right: 10px;
+}
+
+.agent-call {
+	font-weight: bold;
+	font-size: 16px;
+}
