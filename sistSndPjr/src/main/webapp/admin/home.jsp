@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <!-- Sidebar -->
-        <div class="sidebar">
+        <div class="sidebar"> 
             <div class="logo-container">
                 <img src="../common/images/logo.png" alt="로고" class="logo">
                 <span class="logo-text">모두쉼</span>
