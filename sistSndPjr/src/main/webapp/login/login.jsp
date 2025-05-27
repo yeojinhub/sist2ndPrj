@@ -5,12 +5,31 @@
 <jsp:include page="../common/jsp/login_external_file.jsp"/>
 <script>
     $(function(){
-        
-    });
-
-    function login() {
-		
-    }
+        $('#btnLogin').click(()=>{
+			var email = $('#user_email').val();
+			var pass = $('#pass').val();
+			var param = {user_email : email, pass : pass};
+        	
+        	$.ajax({
+				url: 'loginProcess.jsp',
+				type: 'post',
+				data: param,
+				dataType: 'json',
+				error:function(xhr) {
+					console.log(xhr.status + ' / ' + xhr.statusText);
+				},
+				success:function(jsonObj) {
+					if (!jsonObj.loginFlag) {
+						alert("로그인 실패\n아이디와 비밀번호를 확인해주세요.");
+						return;
+					};// end if
+					
+					alert("로그인 성공!\n메인화면으로 넘어갑니다.");
+					location.href = "../user/user_main_page.jsp";
+				}
+        	});// ajax
+        });// click
+    });// ready
 </script>
 <head>
     <meta charset="UTF-8">
@@ -31,7 +50,7 @@
             <h1>로그인</h1>
             <p>계정 정보를 입력하여 로그인하세요.</p>
             
-            <form action="loginProcess.jsp" method="post">
+            <form action="loginProcess.jsp" method="post" id="frmLogin" name="frmLogin">
                 <div class="form-group">
                     <label for="email">이메일</label>
                     <input type="email" id="user_email" name="user_email" placeholder="이메일" required>
@@ -51,7 +70,7 @@
                     <a href="forgotPassword.jsp" class="forgot-password">비밀번호 찾기</a>
                 </div>
                 
-                <button type="button" class="btn btn-confirm" onclick="login()">로그인</button>
+                <button type="button" class="btn btn-confirm" id="btnLogin">로그인</button>
             </form>
             
             <a href="register.jsp" class="btn btn-cancel">회원가입</a>
