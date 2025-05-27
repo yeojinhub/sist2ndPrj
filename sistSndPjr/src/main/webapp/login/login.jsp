@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <jsp:include page="../common/jsp/login_external_file.jsp"/>
@@ -8,8 +9,7 @@
     });
 
     function login() {
-        alert("로그인이 완료되었습니다.");
-        location.href = "../user/user_main_page.jsp";
+		
     }
 </script>
 <head>
@@ -34,12 +34,12 @@
             <form action="loginProcess.jsp" method="post">
                 <div class="form-group">
                     <label for="email">이메일</label>
-                    <input type="email" id="email" name="email" placeholder="이메일" required>
+                    <input type="email" id="user_email" name="user_email" placeholder="이메일" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="password">비밀번호</label>
-                    <input type="password" id="password" name="password" placeholder="비밀번호" required>
+                    <input type="password" id="pass" name="pass" placeholder="비밀번호" required>
                 </div>
                 
                 <div class="form-footer">

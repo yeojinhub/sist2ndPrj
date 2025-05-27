@@ -1,16 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+
+
+
+
+%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="../common/jsp/login_external_file.jsp"/>
 <script>
-$(function(){
-    
-});
+var isIdCheck = false;
 
-function register() {
-    alert("회원가입이 완료되었습니다.\n로그인 페이지로 이동합니다.");
-    location.href = "../user/user_main_page.jsp";
-}
+$(function(){
+	$('#email').keyup((evt)=>{
+		var email = $('#email').val();
+		
+		var param = { id : email };
+		
+		$.ajax({
+			url: "ajax_register_idcheck.jsp",
+			type: "post",
+			data: param,
+			dataType: "json",
+			error: function(xhr) {
+				console.log(xhr.status);
+			},
+			success: function(jsonObj) {
+				var color = "#FF0000;";
+				var msg = "중복된 이메일이 존재합니다.";
+				isIdCheck = jsonObj.isIdCheck;
+				
+				
+				if (jsonObj.isIdCheck) {
+					color = "#0000FF;"
+					msg = "가입 가능한 이메일입니다.";
+				};// end if
+				
+				var output="<span style='color: " + color +"'>" + msg + "</span>";
+				
+				$('#idCheck').html(output);
+			}
+		});
+	});
+	
+    $("#btnRigister").click(()=>{
+		submit();
+    });// click
+    
+    $("#confirmPassword").keyup((evt)=>{
+		if(evt.which == 13) {
+			submit();
+		};// end if
+    });// keyup
+});// ready
+
+function submit() {
+	if (isIdCheck) {
+    	$('#frmRigister').submit();
+	} else {
+		alert('입력하신 정보를 확인해주세요.');
+	};//end if
+	
+};// submit
 </script>
 <head>
     <meta charset="UTF-8">
@@ -32,7 +85,7 @@ function register() {
             <h1>회원가입</h1>
             <p>아래 정보를 입력하여 계정을 만드세요.</p>
             
-            <form action="registerProcess.jsp" method="post">
+            <form action="registerProcess.jsp" method="post" id="frmRigister" name="frmRigister">
                 <div class="form-group">
                     <label for="name">이름</label>
                     <input type="text" id="name" name="name" placeholder="이름" required>
@@ -40,18 +93,19 @@ function register() {
                 
                 <div class="form-group">
                     <label for="email">이메일</label>
-                    <input type="email" id="email" name="email" placeholder="이메일" required>
+                    <input type="email" id="email" name="user_email" placeholder="이메일" required>
+                    <div id="idCheck" style="margin-top: 10px;"></div>
                 </div>
                 
                 <div class="form-group">
                     <label for="phone">전화번호</label>
-                    <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+                    <input type="tel" id="phone" name="tel" placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
                     <small>형식: 010-0000-0000</small>
                 </div>
 
                 <div class="form-group">
                     <label for="password">비밀번호</label>
-                    <input type="password" id="password" name="password" placeholder="비밀번호" required>
+                    <input type="password" id="pass" name="pass" placeholder="비밀번호" required>
                 </div>
                 
                 <div class="form-group">
@@ -59,7 +113,7 @@ function register() {
                     <input type="password" id="confirmPassword" name="confirmPassword" placeholder="비밀번호 확인" required>
                 </div>
                 
-                <button type="button" class="btn btn-confirm" onclick="register()">회원가입</button>
+                <button type="button" class="btn btn-confirm" id="btnRigister">회원가입</button>
                 
                 <div class="text-center" style="margin-top: 16px;">
                     <a href="login.jsp" class="link">이미 계정이 있으신가요? 로그인</a>
