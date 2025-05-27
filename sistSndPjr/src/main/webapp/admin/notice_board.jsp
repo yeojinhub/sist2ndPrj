@@ -70,7 +70,7 @@
                 <table class="data-table">
                     <thead>
                         <tr>
-                        	<th></th>
+                        	<th><input type="checkbox" /></th>
                             <th>번호</th>
                             <th>제목</th>
                             <th>작성자</th>
@@ -79,8 +79,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        	<td></td>
+                        <tr onclick="location.href='notice_board_detail.jsp'">
+                        	<td><input type="checkbox" /></td>
                             <td>10</td>
                             <td>서울 양양 고속도로 홍천 북방터널서 4중 충돌</td>
                             <td>admin01</td>
@@ -88,7 +88,7 @@
                             <td>공지중</td>
                         </tr>
                         <tr>
-                        	<td></td>
+                        	<td><input type="checkbox" /></td>
                             <td>9</td>
                             <td>영동고속도로 둔대jc부근서 교통사고 - 정체</td>
                             <td>admin01</td>
@@ -96,7 +96,7 @@
                             <td>미공지</td>
                         </tr>
                         <tr>
-                        	<td></td>
+                        	<td><input type="checkbox" /></td>
                             <td>8</td>
                             <td>오후4~5시 정체 절정...영동선,서해안선 혼잡</td>
                             <td>admin01</td>
@@ -104,7 +104,7 @@
                             <td>미공지</td>
                         </tr>
                         <tr>
-                        	<td></td>
+                        	<td><input type="checkbox" /></td>
                             <td>7</td>
                             <td>순천완주고속도로 사행선서 8중 추돌 사고-정체</td>
                             <td>admin01</td>
@@ -112,7 +112,7 @@
                             <td>미공지</td>
                         </tr>
                         <tr>
-                        	<td></td>
+                        	<td><input type="checkbox" /></td>
                             <td>6</td>
                             <td>호남고속도로 달리던 전기차, 빗길 미끄러져 사고 후 화재</td>
                             <td>admin01</td>
@@ -120,7 +120,7 @@
                             <td>미공지</td>
                         </tr>
                         <tr>
-                        	<td></td>
+                        	<td><input type="checkbox" /></td>
                             <td>5</td>
                             <td>경부고속도록북대구IC 양방향 진출입차단...”산불연기영향”</td>
                             <td>admin01</td>
@@ -128,32 +128,36 @@
                             <td>미공지</td>
                         </tr>
                         <tr>
+                        	<td><input type="checkbox" /></td>
                             <td>4</td>
-                            <td>유연수</td>
-                            <td>yeonsoo@sist.co.kr</td>
-                            <td>010-8462-2597</td>
-                            <td>2025-05-08</td>
+                            <td>인제산불확산...서울양양고속도로'인제IC~기린5터널'전면차단</td>
+                            <td>admin01</td>
+                            <td>2025-04-26</td>
+                            <td>미공지</td>
                         </tr>
                         <tr>
+                        	<td><input type="checkbox" /></td>
                             <td>3</td>
-                            <td>박선은</td>
-                            <td>ksdsilver@sist.co.kr</td>
-                            <td>010-3648-1211</td>
-                            <td>2025-05-08</td>
+                            <td>설 명절 고속도로 통행료 무료</td>
+                            <td>admin02</td>
+                            <td>2025-01-27</td>
+                            <td>미공지</td>
                         </tr>
                         <tr>
+                        	<td><input type="checkbox" /></td>
                             <td>2</td>
-                            <td>심규민</td>
-                            <td>deepmin@sist.co.kr</td>
-                            <td>010-5689-1209</td>
-                            <td>2025-05-08</td>
+                            <td>설 명절 정체구간</td>
+                            <td>admin02</td>
+                            <td>2025-01-27</td>
+                            <td>미공지</td>
                         </tr>
                         <tr>
+                        	<td><input type="checkbox" /></td>
                             <td>1</td>
-                            <td>주현석</td>
-                            <td>zoo@sist.co.kr</td>
-                            <td>010-9812-2362</td>
-                            <td>2025-05-08</td>
+                            <td>강릉(강릉 방향) 고속도로 교통사고</td>
+                            <td>admin03</td>
+                            <td>2024-12-12</td>
+                            <td>미공지</td>
                         </tr>
                     </tbody>
                 </table>

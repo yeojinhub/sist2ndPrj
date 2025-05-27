@@ -78,7 +78,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr onclick="location.href='user_account_detail.jsp'">
                             <td>10</td>
                             <td>홍길동</td>
                             <td>father@noretest.com</td>

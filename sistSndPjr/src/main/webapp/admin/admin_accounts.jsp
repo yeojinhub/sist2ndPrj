@@ -78,7 +78,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr onclick="location.href='admin_account_detail.jsp'">
                             <td>3</td>
                             <td>김민경</td>
                             <td>admin01</td>

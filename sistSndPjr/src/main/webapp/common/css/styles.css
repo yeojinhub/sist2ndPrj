@@ -191,7 +191,72 @@ body {
 }
 
 .data-table tbody tr:hover {
-  background-color: #f9f9f9;
+  	background-color: #f9f9f9;
+}
+
+.account-content {
+	margin: 100px 150px;
+	background-color: rgb(195,209,255,0.6);
+}
+
+/* Table Styles */
+.account-table {
+  	width: 50%;
+  	margin-left:auto;
+  	margin-right:auto;
+  	border-collapse: collapse;
+}
+
+.account-table td {
+  	padding: 20px;
+  	height: 100px;
+  	text-align: left;
+  	vertical-align: middle;
+}
+
+/* input type Styles */
+.account-table input[type=text],
+.account-table input[type=password] {
+	width : 100%;
+	padding: 10px;
+	height: 60px;
+	text-align: left;
+	font: bold; 
+	font-size : 16px;
+	border : 1px solid #C4C4C4;
+	box-sizing: border-box;
+}
+
+input[readonly] {
+  background-color: #F4F4F4;
+  border : 1px solid #C4C4C4;
+  cursor: not-allowed;
+}
+
+.notice-table {
+  	width: 100%;
+  	margin-left:auto;
+  	margin-right:auto;
+  	border-collapse: collapse;
+}
+
+.notice-table td {
+  	padding: 20px;
+  	height: 100px;
+  	text-align: left;
+  	vertical-align: middle;
+}
+
+/* input type Styles */
+.notice-table input[type=text] {
+	width : 100%;
+	padding: 10px;
+	height: 60px;
+	text-align: left;
+	font: bold; 
+	font-size : 16px;
+	border : 1px solid #C4C4C4;
+	box-sizing: border-box;
 }
 
 /* Pagination Styles */
