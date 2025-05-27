@@ -48,7 +48,7 @@
             	<h3 id="sub-title2">즐겨찾기</h3>
             </div>
          <div class="section section-gray">
-            	<i class="bi bi-chat-dots chat"></i>
+            	<i class="bi bi-chat-dots chat" id="aqwe"></i>
             	<h3 id="sub-title2">문의하기</h3>
             </div>
 
