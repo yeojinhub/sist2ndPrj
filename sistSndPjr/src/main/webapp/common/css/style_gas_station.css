@@ -49,3 +49,27 @@ h2 {
 	font-weight: bold;
 	font-size: 16px;
 }
+
+ /* 페이지네이션 시작 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    font-size: 30px;
+}
+
+.pagination button {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 0 16px;
+    font-size: 15px;
+}
+
+.pagination span {
+    font-size: 20px;
+    margin-right: 10px;
+}
+ /* 페이지네이션 끝 */

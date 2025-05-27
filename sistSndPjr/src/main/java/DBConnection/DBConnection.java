@@ -45,7 +45,7 @@ public class DBConnection {
 			se.printStackTrace();
 		} // end try-catch
 		return conn;
-	}
+	}// getDbCon
 
 	public void dbClose(Connection conn, Statement stmt, ResultSet rs) throws SQLException{
 		
