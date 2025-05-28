@@ -2,6 +2,14 @@
     pageEncoding="UTF-8" info=""%>
 <%
     request.setAttribute("menu", "mypage");
+
+	boolean flag = false;
+	
+	if (session.getAttribute("userData") == null) {
+		flag = true;
+	}// end if
+	
+	pageContext.setAttribute("loginCheck", flag);
 %>
 <!DOCTYPE html>
 <html>
@@ -15,6 +23,11 @@
 
 <script>
     $(function(){
+		if(${loginCheck}) {
+			alert("로그인이 필요합니다.\n로그인 페이지로 이동합니다.");
+			location.href = "../login/login.jsp"
+		}// end if
+    	
     	//여기도 있어야 색이 유지됨
     	$('.menu li a').on('click', function(e) {
         e.preventDefault(); // 링크 이동 막기

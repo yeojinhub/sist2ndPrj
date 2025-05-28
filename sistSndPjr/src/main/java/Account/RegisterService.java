@@ -8,6 +8,12 @@ import kr.co.sist.cipher.DataEncryption;
 
 public class RegisterService {
 	
+	/**
+	 * 회원가입 시 이메일(ID) 중복 확인
+	 * : DB에 저장된 암호화 이메일(ID)를 비교하기 위해 매개변수로 암호화된 이메일(ID)를 받는다.
+	 * @param id 암호화된 이메일(ID)
+	 * @return
+	 */
 	public boolean searchIdCheck(String id) {
 		boolean flag = false;
 		
@@ -31,6 +37,11 @@ public class RegisterService {
 		return flag;
 	}// searchIdCheck
 
+	/**
+	 * 회원가입 insert문
+	 * @param aDTO 회원가입 페이지에서 받아온 정보 (이름, 이메일 등)
+	 * @return
+	 */
 	public boolean addAccount(AccountDTO aDTO) {
 		boolean flag = false;
 		

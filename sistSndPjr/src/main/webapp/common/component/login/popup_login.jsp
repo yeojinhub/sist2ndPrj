@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <style>
-  #reviewSubmitPopup {
+  #reportConfirmPopup {
     position: fixed;
     top: 30%;
     left: 50%;
@@ -17,12 +17,12 @@
     font-family: 'Noto Sans KR', sans-serif;
   }
 
-  #reviewSubmitPopup .logo {
+  #reportConfirmPopup .logo {
     width: 80px;
     margin-bottom: 8px;
   }
 
-  #reviewSubmitPopup .popup-title {
+  #reportConfirmPopup .popup-title {
     font-size: 13px;
     font-weight: 500;
     text-align: left;
@@ -31,34 +31,46 @@
     margin-bottom: 16px;
   }
 
-  #reviewSubmitPopup .popup-content {
+  #reportConfirmPopup .popup-content {
     font-weight: bold;
     margin: 10px 0 20px;
     font-size: 15px;
   }
 
-  #reviewSubmitPopup .popup-buttons {
-    text-align: center;
+  #reportConfirmPopup .popup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
   }
 
-  #reviewSubmitPopup .popup-buttons button {
+  #reportConfirmPopup .popup-buttons button {
     padding: 6px 18px;
     font-size: 14px;
     border: none;
     border-radius: 4px;
-    background-color: #2242d8;
-    color: white;
     cursor: pointer;
+  }
+
+  #reportConfirmPopup .popup-confirm {
+    background-color: #2c3eeb;
+    color: white;
+  }
+
+  #reportConfirmPopup .popup-cancel {
+    background-color: #ccc;
+    color: #333;
   }
 </style>
 
-<div class="popup" id="reviewSubmitPopup">
-  <img src="../common/images/logo251.png" alt="로고" class="logo" />
-  <div class="popup-title">로그인 확인</div>
-  <div class="popup-content">로그인이 필요합니다.<br>로그인 버튼을 눌러 로그인페이지로 이동하세요.</div>
+<div class="popup" id="reportConfirmPopup">
+  <img src="../common/images/logo251.png" alt="로고" class="logo">
+  <div class="popup-title">리뷰 신고</div>
+  <div class="popup-content">리뷰를 신고 하시겠습니까?</div>
   <div class="popup-buttons">
-    <button class="popup-confirm">로그인</button>
+    <button class="popup-confirm">확인</button>
+    <button class="popup-cancel">취소</button>
   </div>
 </div>
+
 
 

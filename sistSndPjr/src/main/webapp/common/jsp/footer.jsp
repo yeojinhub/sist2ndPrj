@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="../common/css/style_mypage.css">
 <div class="footer_wrap">
 	<div class="row">
 		<div class="footer_info_wrap">
