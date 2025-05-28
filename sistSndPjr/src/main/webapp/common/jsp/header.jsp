@@ -22,7 +22,17 @@ if (session.getAttribute("userData") != null) {
 pageContext.setAttribute("loginCheck", loginCheckFlag);
 pageContext.setAttribute("name", name);
 %>
-<link rel="stylesheet" href="../common/css/style_mypage.css">
+<style>
+.login_menu a.no-hover:hover {
+    color: #444 !important;             /* 원래 색상 유지 */
+    font-weight: 500 !important;        /* 원래 굵기 유지 */
+}
+
+.login_menu a.no-hover::after {
+    width: 0 !important;                /* 밑줄 애니메이션 제거 */
+    background-color: transparent !important; /* 밑줄 색 제거 */
+}
+</style>
 <div class="headerTop">
 	<div class="header_content main-wrapper">
 		<h5 class="logo" title="모두쉼로고">
@@ -46,7 +56,7 @@ pageContext.setAttribute("name", name);
 			<ul class="login_menu right">
 				<c:choose>
 					<c:when test="${loginCheck }">
-						<li><a href="http://localhost/sistSndPjr/user/user_mypage.jsp"><span style="color: #0000FF;">${name }</span>님</a></li>
+						<li><a href="http://localhost/sistSndPjr/user/user_mypage.jsp" class="no-hover"><span style="color: #0000FF;">${name }</span>님</a></li>
 						<li><a href="../login/logout.jsp">로그아웃</a></li>
 					</c:when>
 					<c:otherwise>
