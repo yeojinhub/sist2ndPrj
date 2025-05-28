@@ -15,6 +15,40 @@ import DTO.RangeDTO;
 public class PetrolDAO {
 	
 	/**
+	 * 주유소 페이지에 <select> 태그 <option>으로 사용할 노선 구하기 (중복 제거)
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<String> selectAllRoute() throws SQLException{
+		List<String> list = new ArrayList<String>();
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+
+		DBConnection dbCon = DBConnection.getInstance();
+
+		try {
+			conn = dbCon.getDbCon();
+
+			// SQL문 작성
+			String selectQuery = "SELECT DISTINCT ROUTE FROM AREA";
+			pstmt = conn.prepareStatement(selectQuery);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString("ROUTE"));
+			}// end while
+
+		} finally {
+			dbCon.dbClose(conn, pstmt, rs);
+		} // end try-finally
+		
+		return list;
+	}// selectAllRoute
+	
+	/**
 	 * 모든 주유소 정보를 얻어오는 메소드
 	 * @return
 	 * @throws SQLException
