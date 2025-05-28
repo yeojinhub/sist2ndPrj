@@ -45,17 +45,38 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   // Add event listeners for the buttons
-  const registerBtn = document.querySelector(".btn-primary")
+  const registerBtn = document.querySelector(".btn-add")
   if (registerBtn) {
     registerBtn.addEventListener("click", () => {
-      alert("등록 기능이 구현될 예정입니다.")
+      alert("작성 기능이 구현될 예정입니다.")
     })
   }
 
-  const editBtn = document.querySelector(".btn-secondary")
+  const editBtn = document.querySelector(".btn-edit")
   if (editBtn) {
     editBtn.addEventListener("click", () => {
       alert("수정 기능이 구현될 예정입니다.")
+    })
+  }
+  
+  const deleteBtn = document.querySelector(".btn-delete")
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", () => {
+      alert("삭제 기능이 구현될 예정입니다.")
+    })
+  }
+  
+  const hiddenBtn = document.querySelector(".btn-hidden")
+    if (hiddenBtn) {
+      hiddenBtn.addEventListener("click", () => {
+        alert("숨김 기능이 구현될 예정입니다.")
+      })
+    }
+  
+  const backBtn = document.querySelector(".btn-back")
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
+      alert("뒤로가기")
     })
   }
 })

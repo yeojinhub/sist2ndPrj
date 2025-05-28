@@ -17,13 +17,14 @@
 		<!-- Main Content -->
 		<div class="main-content">
 			<div class="header">
-				<h1>문의 관리</h1>
+				<h1>휴게소 상세정보 관리</h1>
 			</div>
 			
-			<div class="search-div-date">
-				<textarea class="search-date" rows="" cols=""></textarea>
-				<span class="search-tilde">~</span>
-				<textarea class="search-date" rows="" cols=""></textarea>
+			<div class="search-div">
+				<span class="search-area">노선명</span>
+				<textarea class="search-title" rows="" cols=""></textarea>
+				<span class="search-area">휴게소명</span>
+				<textarea class="search-title" rows="" cols=""></textarea>
 				<input type="button" class="btn-search" value="검색"/>
 			</div>
 
@@ -33,92 +34,92 @@
 						<tr>
 							<th><input type="checkbox" /></th>
 							<th>번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-							<th>상태</th>
+							<th>휴게소명</th>
+							<th>노선</th>
+							<th>전화번호</th>
+							<th>영업시간</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr onclick="location.href='inquiry_detail.jsp'">
+						<tr onclick="location.href='area_detail.jsp'">
 							<td><input type="checkbox" /></td>
-							<td>10</td>
-							<td>닉네임 변경</td>
-							<td>주현석</td>
-							<td>2025-05-08</td>
-							<td>답변완료</td>
+							<td>210</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
+							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>9</td>
-							<td>탈퇴 후 재가입</td>
-							<td>박선은</td>
-							<td>2025-05-07</td>
-							<td>답변완료</td>
+							<td>209</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
+							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>8</td>
-							<td>전화번호 수정</td>
-							<td>유연수</td>
-							<td>2025-05-03</td>
-							<td>답변완료</td>
+							<td>208</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
+							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>7</td>
-							<td>이벤트 일정</td>
-							<td>신민기</td>
-							<td>2025-05-02</td>
-							<td>답변완료</td>
+							<td>207</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
+							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>6</td>
-							<td>비밀번호 변경</td>
-							<td>현지영</td>
-							<td>2025-05-01</td>
-							<td>답변완료</td>
+							<td>206</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
+							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>5</td>
-							<td>이벤트 일정</td>
-							<td>현지영</td>
-							<td>2025-04-28</td>
-							<td>대기</td>
+							<td>205</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
+							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>4</td>
-							<td>아이디 찾기</td>
-							<td>장태규</td>
-							<td>2025-04-26</td>
-							<td>답변완료</td>
+							<td>204</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
+							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>3</td>
-							<td>전화번호 수정</td>
-							<td>장태규</td>
-							<td>2025-01-27</td>
-							<td>대기</td>
+							<td>203</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
+							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>2</td>
-							<td>회원탈퇴</td>
-							<td>이여진</td>
-							<td>2025-01-27</td>
-							<td>답변완료</td>
+							<td>202</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
+							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>1</td>
-							<td>로그인 오류</td>
-							<td>이여진</td>
-							<td>2024-12-12</td>
-							<td>대기</td>
+							<td>201</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
+							<td>00:00 - 23:59</td>
 						</tr>
 					</tbody>
 				</table>
@@ -133,6 +134,7 @@
 			</div>
 
 			<div class="button-group">
+				<button class="btn btn-add" onclick="location.href='area_add.jsp'">추가</button>
 				<button class="btn btn-delete">삭제</button>
 			</div>
 		</div>
