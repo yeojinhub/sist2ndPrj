@@ -1,3 +1,5 @@
+<%@page import="myPage.InfoService"%>
+<%@page import="DTO.LoginDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../../jsp/external_file.jsp"/>
 
@@ -5,6 +7,36 @@
 <link rel="stylesheet" href="../../css/style_main_page.css">
 <link rel="stylesheet" href="../../css/style_accessory.css">
 <link rel="stylesheet" href="../../css/style_user_menu.css">
+
+<%
+    LoginDTO lDTO = (LoginDTO) session.getAttribute("userData");
+
+    if (lDTO != null) {
+        try {
+            String email = lDTO.getUser_email();
+            InfoService infoService = new InfoService();
+            infoService.deleteUser(email); // 실제 탈퇴 처리
+            session.invalidate(); // 로그아웃 처리
+        } catch (Exception e) {
+            e.printStackTrace();
+%>
+<script>
+    alert("탈퇴 처리 중 오류가 발생했습니다.");
+    window.close();
+</script>
+<%
+            return;
+        }
+    } else {
+%>
+<script>
+    alert("로그인 정보가 없습니다.");
+    window.close();
+</script>
+<%
+        return;
+    }
+%>
 
 <script>
     function reloadPage() {
