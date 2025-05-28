@@ -28,7 +28,7 @@
 						class="fas fa-home"></i> Home</a></li>
 
 				<li class="menu-item has-submenu"><a href="#"
-					class="toggle-submenu"><i class="fas fa-users"></i> 계정관리 <i
+					class="toggle-submenu"><i class="fas fa-users"></i> 계정 관리 <i
 						class="fas fa-chevron-down arrow"></i></a>
 					<ul class="submenu">
 						<li><a href="user_accounts.jsp">회원 계정관리</a></li>
@@ -40,12 +40,12 @@
 						게시판 관리 <i class="fas fa-chevron-down arrow"></i></a>
 					<ul class="submenu">
 						<li><a href="notice_board.jsp">공지사항 관리</a></li>
-						<li><a href="faq_board.jsp">FaQ 관리</a></li>
+						<li><a href="faq_board.jsp">FAQ 관리</a></li>
 						<li><a href="qna_board.jsp">QaA 관리</a></li>
 					</ul></li>
 
 				<li class="menu-item"><a href="inquiries.jsp"><i
-						class="fas fa-question-circle"></i> 문의관리</a></li>
+						class="fas fa-question-circle"></i> 문의 관리</a></li>
 
 				<li class="menu-item"><a href="reviews.jsp"><i
 						class="fas fa-star"></i> 리뷰 조회/신고관리</a></li>
@@ -58,7 +58,14 @@
 		<!-- Main Content -->
 		<div class="main-content">
 			<div class="header">
-				<h1>공지사항 관리</h1>
+				<h1>문의 관리</h1>
+			</div>
+			
+			<div class="search">
+				<textarea rows="" cols=""></textarea>
+				~
+				<textarea rows="" cols=""></textarea>
+				<input type="button" class="btn btn-secondary" value="검색"/>
 			</div>
 
 			<div class="content">
@@ -74,85 +81,85 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr onclick="location.href='notice_board_detail.jsp'">
+						<tr onclick="location.href='inquiry_detail.jsp'">
 							<td><input type="checkbox" /></td>
 							<td>10</td>
-							<td>서울 양양 고속도로 홍천 북방터널서 4중 충돌</td>
-							<td>admin01</td>
+							<td>닉네임 변경</td>
+							<td>주현석</td>
 							<td>2025-05-08</td>
-							<td>공지중</td>
+							<td>답변완료</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>9</td>
-							<td>영동고속도로 둔대jc부근서 교통사고 - 정체</td>
-							<td>admin01</td>
+							<td>탈퇴 후 재가입</td>
+							<td>박선은</td>
 							<td>2025-05-07</td>
-							<td>미공지</td>
+							<td>답변완료</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>8</td>
-							<td>오후4~5시 정체 절정...영동선,서해안선 혼잡</td>
-							<td>admin01</td>
+							<td>전화번호 수정</td>
+							<td>유연수</td>
 							<td>2025-05-03</td>
-							<td>미공지</td>
+							<td>답변완료</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>7</td>
-							<td>순천완주고속도로 사행선서 8중 추돌 사고-정체</td>
-							<td>admin01</td>
+							<td>이벤트 일정</td>
+							<td>신민기</td>
 							<td>2025-05-02</td>
-							<td>미공지</td>
+							<td>답변완료</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>6</td>
-							<td>호남고속도로 달리던 전기차, 빗길 미끄러져 사고 후 화재</td>
-							<td>admin01</td>
+							<td>비밀번호 변경</td>
+							<td>현지영</td>
 							<td>2025-05-01</td>
-							<td>미공지</td>
+							<td>답변완료</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>5</td>
-							<td>경부고속도록북대구IC 양방향 진출입차단...”산불연기영향”</td>
-							<td>admin01</td>
+							<td>이벤트 일정</td>
+							<td>현지영</td>
 							<td>2025-04-28</td>
-							<td>미공지</td>
+							<td>대기</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>4</td>
-							<td>인제산불확산...서울양양고속도로'인제IC~기린5터널'전면차단</td>
-							<td>admin01</td>
+							<td>아이디 찾기</td>
+							<td>장태규</td>
 							<td>2025-04-26</td>
-							<td>미공지</td>
+							<td>답변완료</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>3</td>
-							<td>설 명절 고속도로 통행료 무료</td>
-							<td>admin02</td>
+							<td>전화번호 수정</td>
+							<td>장태규</td>
 							<td>2025-01-27</td>
-							<td>미공지</td>
+							<td>대기</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>2</td>
-							<td>설 명절 정체구간</td>
-							<td>admin02</td>
+							<td>회원탈퇴</td>
+							<td>이여진</td>
 							<td>2025-01-27</td>
-							<td>미공지</td>
+							<td>답변완료</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>1</td>
-							<td>강릉(강릉 방향) 고속도로 교통사고</td>
-							<td>admin03</td>
+							<td>로그인 오류</td>
+							<td>이여진</td>
 							<td>2024-12-12</td>
-							<td>미공지</td>
+							<td>대기</td>
 						</tr>
 					</tbody>
 				</table>
@@ -167,8 +174,8 @@
 			</div>
 
 			<div class="button-group">
-				<button class="btn btn-primary">등록</button>
-				<button class="btn btn-secondary">수정</button>
+				<button class="btn btn-primary">작성</button>
+				<button class="btn btn-secondary">삭제</button>
 			</div>
 		</div>
 	</div>

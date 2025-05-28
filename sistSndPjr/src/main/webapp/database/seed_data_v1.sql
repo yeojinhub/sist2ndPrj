@@ -1296,18 +1296,6 @@ VALUES(SEQ_PET_NUM.NEXTVAL, '1,563원', '1,423원', '1,120원', 'O', 'X', 209);
 INSERT INTO PETROL (PET_NUM, GASOLINE, DIESEL, LPG, ELECT, HYDRO, AREA_NUM)
 VALUES(SEQ_PET_NUM.NEXTVAL, '1,565원', '1,425원', '1,135원', 'O', 'X', 210);
 
--- 리뷰 테이블 가데이터 (ACC_NUM 4~13, 각 5개씩 총 50개)
-
-/* 리뷰 테이블 생성 */
-CREATE TABLE REVIEW (
-    REV_NUM NUMBER(10) NOT NULL, /* 리뷰번호 */
-    CONTENT VARCHAR2(4000) NOT NULL, /* 리뷰내용 */
-    NAME VARCHAR2(255) NOT NULL, /* 리뷰작성자 */
-    INPUT_DATE DATE DEFAULT SYSDATE, /* 리뷰작성일 */
-    REPORT NUMBER(10) DEFAULT 0, /* 누적신고 */
-    AREA_NUM NUMBER(10) NOT NULL, /* 휴게소번호 */
-    ACC_NUM NUMBER(10) NOT NULL /* 계정번호 */
-);
 
 /* 리뷰 테이블 가데이터 생성 */
 /* 1 계정당 5개씩 데이터 */
@@ -1936,7 +1924,7 @@ VALUES (SEQ_INQ_NUM.NEXTVAL, '탈퇴 후 재가입', '탈퇴 후 재가입이 �
 -- ACC_NUM = 13
 INSERT INTO INQUIRY (INQ_NUM, TITLE, CONTENT, NAME, STATUS_TYPE, ACC_NUM)
 VALUES (SEQ_INQ_NUM.NEXTVAL, '닉네임 변경', '닉네임은 이름 말고 바꿀 수 있나요?',
-(SELECT NAME FROM ACCOUNT WHERE ACC_NUM=13), '답변완료' 13);
+(SELECT NAME FROM ACCOUNT WHERE ACC_NUM=13), '답변완료', 13);
 
 
 /* 문의답변 테이블 가데이터 생성 */
@@ -1958,6 +1946,7 @@ VALUES (9, '마이페이지에서 전화번호를 변경하실 수 있습니다.
 INSERT INTO ANSWER (INQ_NUM, CONTENT, NAME)
 VALUES (10, '탈퇴 후 30일 이후 재가입 가능합니다.',
 (SELECT NAME FROM ACCOUNT WHERE ACC_NUM=2));
+INSERT INTO ANSWER (INQ_NUM, CONTENT, NAME)
 VALUES (11, '닉네임은 별도로 없으며 실명제로 운영하고 있습니다.',
 (SELECT NAME FROM ACCOUNT WHERE ACC_NUM=2));
 
@@ -1994,4 +1983,3 @@ VALUES (SEQ_FAQ_NUM.NEXTVAL, '개인정보를 수집하나요?', '모두쉼 홈�
 (SELECT NAME FROM ACCOUNT WHERE ACC_NUM=3),  3);
 
 commit;
-

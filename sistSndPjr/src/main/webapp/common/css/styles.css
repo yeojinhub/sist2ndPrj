@@ -164,6 +164,15 @@ body {
   color: #333;
 }
 
+.search {
+	float: right;
+}
+
+.search textarea {
+  height: 38px;  /* 버튼과 동일한 높이로 맞추기 */
+  resize: none;  /* 사용자가 크기를 조정하지 못하도록 */
+}
+
 /* Table Styles */
 .data-table {
   width: 100%;
@@ -233,8 +242,12 @@ input[readonly] {
   cursor: not-allowed;
 }
 
+.notice-div {
+	margin: 100px 150px;
+}
+
 .notice-table {
-  	width: 100%;
+  	width: 70%;
   	margin-left:auto;
   	margin-right:auto;
   	border-collapse: collapse;

@@ -28,7 +28,7 @@
 						class="fas fa-home"></i> Home</a></li>
 
 				<li class="menu-item has-submenu"><a href="#"
-					class="toggle-submenu"><i class="fas fa-users"></i> 계정관리 <i
+					class="toggle-submenu"><i class="fas fa-users"></i> 계정 관리 <i
 						class="fas fa-chevron-down arrow"></i></a>
 					<ul class="submenu">
 						<li><a href="user_accounts.jsp">회원 계정관리</a></li>
@@ -40,15 +40,15 @@
 						게시판 관리 <i class="fas fa-chevron-down arrow"></i></a>
 					<ul class="submenu">
 						<li><a href="notice_board.jsp">공지사항 관리</a></li>
-						<li><a href="faq_board.jsp">FaQ 관리</a></li>
+						<li><a href="faq_board.jsp">FAQ 관리</a></li>
 						<li><a href="qna_board.jsp">QaA 관리</a></li>
 					</ul></li>
 
 				<li class="menu-item"><a href="inquiries.jsp"><i
-						class="fas fa-question-circle"></i> 문의관리</a></li>
+						class="fas fa-question-circle"></i> 문의 관리</a></li>
 
 				<li class="menu-item"><a href="reviews.jsp"><i
-						class="fas fa-star"></i> 리뷰 조회/신고관리</a></li>
+						class="fas fa-star"></i> 리뷰조회/신고관리</a></li>
 
 				<li class="menu-item"><a href="rest-areas.jsp"><i
 						class="fas fa-map-marker-alt"></i> 휴게소 관리</a></li>
@@ -58,101 +58,101 @@
 		<!-- Main Content -->
 		<div class="main-content">
 			<div class="header">
-				<h1>공지사항 관리</h1>
+				<h1>리뷰조회/신고관리</h1>
 			</div>
-
+			
 			<div class="content">
 				<table class="data-table">
 					<thead>
 						<tr>
 							<th><input type="checkbox" /></th>
 							<th>번호</th>
-							<th>제목</th>
+							<th>휴게소명</th>
+							<th>리뷰 내용</th>
 							<th>작성자</th>
-							<th>작성일</th>
-							<th>상태</th>
+							<th>누적신고</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr onclick="location.href='notice_board_detail.jsp'">
+						<tr onclick="location.href='reviews_detail.jsp'">
 							<td><input type="checkbox" /></td>
-							<td>10</td>
-							<td>서울 양양 고속도로 홍천 북방터널서 4중 충돌</td>
-							<td>admin01</td>
-							<td>2025-05-08</td>
-							<td>공지중</td>
+							<td>50</td>
+							<td>예산(당진)</td>
+							<td>자연경관이 멋진 곳이에요!</td>
+							<td>주현석</td>
+							<td>0</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>9</td>
-							<td>영동고속도로 둔대jc부근서 교통사고 - 정체</td>
-							<td>admin01</td>
-							<td>2025-05-07</td>
-							<td>미공지</td>
+							<td>49</td>
+							<td>매송(서울)</td>
+							<td>피곤할 때 쉬기에 최적의 장소입니다.</td>
+							<td>주현석</td>
+							<td>0</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>8</td>
-							<td>오후4~5시 정체 절정...영동선,서해안선 혼잡</td>
-							<td>admin01</td>
-							<td>2025-05-03</td>
-							<td>미공지</td>
+							<td>48</td>
+							<td>백양사(천안)</td>
+							<td>주차 구역이 넓어서 이용하기 편했어요.</td>
+							<td>주현석</td>
+							<td>0</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>7</td>
-							<td>순천완주고속도로 사행선서 8중 추돌 사고-정체</td>
-							<td>admin01</td>
-							<td>2025-05-02</td>
-							<td>미공지</td>
+							<td>47</td>
+							<td>성주(창원)</td>
+							<td>깨끗하고 정돈된 인상이었어요.</td>
+							<td>주현석</td>
+							<td>0</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>6</td>
-							<td>호남고속도로 달리던 전기차, 빗길 미끄러져 사고 후 화재</td>
-							<td>admin01</td>
-							<td>2025-05-01</td>
-							<td>미공지</td>
+							<td>46</td>
+							<td>영천(포항)</td>
+							<td>뷰가 너무 좋아서 사진도 많이 찍었어요.</td>
+							<td>주현석</td>
+							<td>0</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>5</td>
-							<td>경부고속도록북대구IC 양방향 진출입차단...”산불연기영향”</td>
-							<td>admin01</td>
-							<td>2025-04-28</td>
-							<td>미공지</td>
+							<td>45</td>
+							<td>여주(강릉)</td>
+							<td>드라이브 중 꼭 들러야 할 곳 같아요.</td>
+							<td>심규민</td>
+							<td>0</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>4</td>
-							<td>인제산불확산...서울양양고속도로'인제IC~기린5터널'전면차단</td>
-							<td>admin01</td>
-							<td>2025-04-26</td>
-							<td>미공지</td>
+							<td>44</td>
+							<td>의성(영덕)</td>
+							<td>간식 코너가 다양해서 좋았어요.</td>
+							<td>심규민</td>
+							<td>0</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>3</td>
-							<td>설 명절 고속도로 통행료 무료</td>
-							<td>admin02</td>
-							<td>2025-01-27</td>
-							<td>미공지</td>
+							<td>43</td>
+							<td>구정(삼척)</td>
+							<td>전체적으로 쾌적하고 조용했어요.</td>
+							<td>심규민</td>
+							<td>0</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>2</td>
-							<td>설 명절 정체구간</td>
-							<td>admin02</td>
-							<td>2025-01-27</td>
-							<td>미공지</td>
+							<td>42</td>
+							<td>단양팔경(부산)</td>
+							<td>아이들이 놀기 좋은 공간이 있었어요.</td>
+							<td>심규민</td>
+							<td>0</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td>1</td>
-							<td>강릉(강릉 방향) 고속도로 교통사고</td>
-							<td>admin03</td>
-							<td>2024-12-12</td>
-							<td>미공지</td>
+							<td>41</td>
+							<td>서부산(순천)</td>
+							<td>정체 중 들렸는데 정말 힐링됐어요.</td>
+							<td>심규민</td>
+							<td>0</td>
 						</tr>
 					</tbody>
 				</table>
@@ -167,8 +167,7 @@
 			</div>
 
 			<div class="button-group">
-				<button class="btn btn-primary">등록</button>
-				<button class="btn btn-secondary">수정</button>
+				<button class="btn btn-primary">숨김</button>
 			</div>
 		</div>
 	</div>

@@ -41,8 +41,8 @@
                     <a href="#" class="toggle-submenu"><i class="fas fa-clipboard-list"></i> 게시판 관리 <i class="fas fa-chevron-down arrow"></i></a>
                     <ul class="submenu">
                         <li><a href="notice_board.jsp">공지사항 관리</a></li>
-                        <li><a href="faq_board.jsp">FaQ 관리</a></li>
-                        <li><a href="qna_board.jsp">QaA 관리</a></li>
+                        <li><a href="faq-board.jsp">FaQ 관리</a></li>
+                        <li><a href="qna-board.jsp">QaA 관리</a></li>
                     </ul>
                 </li>
                 
@@ -63,32 +63,27 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1>회원 계정 수정</h1>
+                <h1>FAQ 수정</h1>
             </div>
-            
             <div class="content">
-            	<div class="account-content">
-            		<table class="account-table">
+            	<div class="notice-content">
+            		<table class="notice-table">
             			<tbody>
             				<tr>
-            					<td>이름</td>
-            					<td><input type="text" value="김민경" readonly="readonly" /></td>
+            					<td>작성자</td>
+            					<td><input type="text" value="admin03" /></td>
+            					<td>작성일</td>
+            					<td><input type="text" value="2025-05-08" /></td>
             				</tr>
             				<tr>
-            					<td>아이디</td>
-            					<td><input type="text" value="admin01" readonly="readonly" /></td>
+            					<td>제목</td>
+            					<td colspan="3"><input type="text" value="전기/수소차 충전소 정보 제공 안내" /></td>
             				</tr>
             				<tr>
-            					<td>비밀번호</td>
-            					<td><input type="password" value="admin1234" /></td>
+            					<td>내용</td>
+            					<td colspan="3"><input type="text" value="전기 충전소는 공공데이터 연계로 3~4분 정도 지연이 있으며, 갱신 주기는 5분입니다. 수소 충전소는 정보 확인 시 지연 시간 없이 제공하고 있습니다. *한국환경공단 전기자동차 충전소 정보 등 활용" /></td>
             				</tr>
             				<tr>
-            					<td>전화번호</td>
-            					<td><input type="text" value="010-2390-5309" /></td>
-            				</tr>
-            				<tr>
-            					<td>가입일</td>
-            					<td><input type="text" value="2025-05-07" readonly="readonly" /></td>
             				</tr>
             			</tbody>
             		</table>
@@ -97,6 +92,7 @@
             
             <div class="button-group">
             	<button class="btn btn-primary">수정</button>
+            	<button class="btn btn-secondary">삭제</button>
             	<button class="btn btn-secondary">취소</button>
             </div>
 
