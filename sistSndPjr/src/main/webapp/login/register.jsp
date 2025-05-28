@@ -54,6 +54,14 @@ $(function(){
 			submit();
 		};// end if
     });// keyup
+    
+    $('#emailSelect').change(()=>{
+		if ($('#emailSelect').val() == 'myself') {
+			/* $('#domain') */
+		};
+    });
+    
+    $('#domain').val($('#emailSelect').val());
 });// ready
 
 function submit() {
@@ -65,6 +73,28 @@ function submit() {
 	
 };// submit
 </script>
+<style>
+#emailSelect {
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+#email {
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+#domain {
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,9 +121,21 @@ function submit() {
                     <input type="text" id="name" name="name" placeholder="이름" required>
                 </div>
                 
-                <div class="form-group">
-                    <label for="email">이메일</label>
-                    <input type="email" id="email" name="user_email" placeholder="이메일" required>
+                <label for="email">이메일</label>
+                <div class="form-group" style="display: flex; align-items: center;">
+                    <input type="text" id="email" name="user_email" placeholder="이메일" style="width: 160px;" required>
+                    <span>@</span>	                  
+                    <div id="selectDiv" style="flex: 0;">
+	                    <select id="emailSelect" style="width: 150px;">
+	                    	<option value="naver.com">naver.com</option>
+	                    	<option value="gmail.com">gmail.com</option>
+	                    	<option value="daum.net">daum.net</option>
+	                    	<option value="hanmail.com">hanmail.com</option>
+	                    	<option value="yahoo.kr">yahoo.kr</option>
+	                    	<option value="myself">직접 입력</option>
+	                    </select>
+                    </div>
+                    <input type="text" id="domain" style="width: 160px;" readonly="readonly"/>
                     <div id="idCheck" style="margin-top: 10px;"></div>
                 </div>
                 
