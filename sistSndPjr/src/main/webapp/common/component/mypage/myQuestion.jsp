@@ -76,21 +76,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>3</td>
-                        <td>회원탈퇴 어떻게 해요?</td>
-                        <td>답변완료</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>벌써 월요일이에요?</td>
-                        <td>답변완료</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>행담도휴게소 김치찌개메뉴 가격이 달라요</td>
-                        <td>대기</td>
-                    </tr>
+                    <% %>
                 </tbody>
             </table>
         </div>
