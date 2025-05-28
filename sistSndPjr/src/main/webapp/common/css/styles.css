@@ -382,39 +382,45 @@ input[readonly] {
 
 .left-area,
 .right-area {
-   width: 50%;
-   border: 2px solid blue;
+   width: 650px;
+   /* background-color: rgb(195,209,255,0.6); */
+   border: 1px solid #ccc; 
 }
 
 .top-section {
    display: flex;
    justify-content: space-between;
-   gap: 20px;
+   gap: 10px;
 }
 
 .content {
    display: flex;
    flex-direction: column; /* 세로 방향 정렬 */
    gap: 30px;
-   padding: 20px;
    margin : 0 120px;
    box-sizing: border-box;
 }
 
 .rest-area-details {
-   padding: 20px;
-   font-family: 'Arial', sans-serif;
-   border: 2px solid red;
+   align-content: center;
+   justify-content: center; /* 가로 가운데 정렬 */
+   align-items: center;  /* 세로 가운데 정렬 */
+   /* border: 2px solid yellow;  */
+   padding-top: 25px;
+   padding-left: 75px;
 }
 
 /* 이미지 업로드 섹션 */
 .image-upload-section {
    display: flex;
+   width : 500px;
+   height : 500px;
+   justify-content: center; /* 가로 가운데 정렬 */
+   align-items: center;     /* 세로 가운데 정렬 */
    gap: 20px;
    align-items: center;
    margin-bottom: 30px;
-   border: 2px solid red;
-   
+  border: 2px solid red;
 }
 
 .preview-img {
@@ -449,6 +455,7 @@ input[readonly] {
    display: grid;
    grid-template-columns: 150px 1fr;
    gap: 10px 20px;
+   padding : 30px 20px;
    margin-bottom: 30px;
 }
 
@@ -473,13 +480,14 @@ input[readonly] {
    display: grid;
    grid-template-columns: repeat(2, 1fr); /* 2열로 설정 */
    gap: 10px;
+   padding-left : 20px;
    margin-bottom: 30px;
 }
 .checkbox-group .facility-label {
    margin-top: 30px;
 }
 
-.label-checkbox {
+.checkbox-label {
    margin-right: 20px;
 }
 
