@@ -1,13 +1,14 @@
+<%@page import="GasStation.PaginationUtil"%>
+<%@page import="DTO.PaginationDTO"%>
 <%@page import="GasStation.PetrolService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% request.setCharacterEncoding("UTF-8"); %>
+<jsp:useBean id="rDTO" class="DTO.RangeDTO" scope="page"/>
+<jsp:setProperty name="rDTO" property="*"/>
 <%
 request.setAttribute("menu", "gas");
-
-PetrolService ps = new PetrolService();
-
-pageContext.setAttribute("petrolList", ps.searchAllPetrol());
 %>
 <!DOCTYPE html>
 <html>
@@ -50,7 +51,34 @@ pageContext.setAttribute("petrolList", ps.searchAllPetrol());
 
 			<button class="btn btn-confirm">검색</button>
 		</div>
+		<%
+			PetrolService ps = new PetrolService();
 
+			// 1. 전체 데이터(게시물)수를 구합니다.
+			int totalCount = 0;
+			totalCount = ps.searchTotalCount();
+			// 2. 페이지에 보여질 게시물의 수를 구합니다.
+			int pageScale = 0;
+			pageScale = ps.pageScale();
+			// 3. 총 페이지의 수를 구합니다.
+			int totalPage = 0;
+			totalPage = ps.totalPage(totalCount, pageScale);
+			// 4. 현재페이지(currentPage)에 따른 게시물 시작 번호를 구합니다.
+			int startNum = 0;
+			startNum = ps.startNum(pageScale, rDTO);
+			// 5. 현재페이지(currentPage)에 따른 게시물 끝 번호를 구합니다.
+			int endNum = 0;
+			endNum = ps.endNum(pageScale, rDTO);
+			
+			pageContext.setAttribute("totalCount", totalCount);
+			pageContext.setAttribute("pageScale", pageScale);
+			pageContext.setAttribute("totalPage", totalPage);
+			pageContext.setAttribute("startNum", startNum);
+			pageContext.setAttribute("endNum", endNum);
+			
+			// rDTO를 보내서 시작번호와 끝번호 데이터를 구해온다.
+			pageContext.setAttribute("petrolList", ps.searchAllPetrol(rDTO));
+			%>
 		<table class="user_table" style="flex: 1;">
 			<thead>
 				<tr>
@@ -64,153 +92,31 @@ pageContext.setAttribute("petrolList", ps.searchAllPetrol());
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-				<tr>
-					<td>강릉(강릉)</td>
-					<td>033-648-9559</td>
-					<td>1,574원</td>
-					<td>1,439원</td>
-					<td>1,117원</td>
-					<td>O</td>
-					<td>X</td>
-				</tr>
-
+				<c:if test="${empty petrolList }">
+					<tr>
+						<td colspan="7" style="text-align: center;">주유소 정보가 존재하지 않습니다.</td>
+					</tr>
+				</c:if>
+				<c:forEach var="pDTO" items="${petrolList }" varStatus="i">
+					<tr>
+						<td><c:out value="${pDTO.name }"/></td>					
+						<td><c:out value="${pDTO.tel }"/></td>					
+						<td><c:out value="${pDTO.gasoline }"/></td>					
+						<td><c:out value="${pDTO.diesel }"/></td>					
+						<td><c:out value="${pDTO.lpg }"/></td>					
+						<td><c:out value="${pDTO.elect }"/></td>					
+						<td><c:out value="${pDTO.hydro }"/></td>					
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
-		<div class="pagination">
-			<button class="prev">◀</button>
-			<span style="text-decoration: underline;">1</span>
-			<span>2</span>
-			<span>3</span>
-			<span>4</span>
-			<span>5</span>
-			<button class="next" style="margin-left: -10px;">▶</button>
-		</div>
+		
+		<!-- 페이지네이션 -->
+		<%
+		PaginationDTO pDTO = new PaginationDTO(5, rDTO.getCurrentPage(), totalPage, "gas_station.jsp", null, null);
+		%>
+		<%= PaginationUtil.pagination(pDTO) %>
+		
 		<div class="agent-container" style="flex: 1;">
 			<div class="agent-box">담당자 정보</div>
 			<div class="agent-call">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모두쉼
