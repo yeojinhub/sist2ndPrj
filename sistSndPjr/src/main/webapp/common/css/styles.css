@@ -211,8 +211,51 @@ body {
   	padding: 20px;
   	height: 100px;
   	text-align: left;
-  	vertical-align: middle;
+	vertical-align: middle;
 }
+
+
+/* textarea */
+textarea.one-line {
+    height: 40px;
+    width: 300px;
+    line-height: 40px;
+    padding: 0 10px;
+    resize: none;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-align: left;
+    overflow: hidden;
+    writing-mode: horizontal-tb;
+}
+
+textarea.title {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    resize: none;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-align: left;
+    writing-mode: horizontal-tb;
+    width: 100%;
+    overflow: hidden;
+    
+}
+
+textarea.content {
+    height: 350px;
+    width: 100%;
+    padding: 10px;
+    resize: none;
+    box-sizing: border-box;
+    font-size: 16px;
+    writing-mode: horizontal-tb;
+    text-align: left;
+}
+
+
+
 
 /* input type Styles */
 .account-table input[type=text],
@@ -233,8 +276,16 @@ input[readonly] {
   cursor: not-allowed;
 }
 
+.notice-div {
+	padding-top:40px;
+	padding-bottom : 40px;
+	margin: 80px 120px;
+	background-color: rgb(195,209,255,0.6);
+	font-weight: bold;
+}
+
 .notice-table {
-  	width: 100%;
+  	width: 70%;
   	margin-left:auto;
   	margin-right:auto;
   	border-collapse: collapse;
@@ -242,7 +293,7 @@ input[readonly] {
 
 .notice-table td {
   	padding: 20px;
-  	height: 100px;
+  	height: 40px;
   	text-align: left;
   	vertical-align: middle;
 }
@@ -293,17 +344,21 @@ input[readonly] {
 /* Button Styles */
 .button-group {
   display: flex;
-  justify-content: flex-end;
   margin-top: 20px;
+  margin-left: 1240px;
 }
 
 .btn {
+  height: 50px;
+  width: 80px;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  margin-left: 10px;
+  margin-left: 50px;
+  font-size: 20px;
+
 }
 
 .btn-primary {
@@ -319,3 +374,149 @@ input[readonly] {
 .btn:hover {
   opacity: 0.9;
 }
+
+
+/*휴게소 상세정보 수정*/
+
+/* 기본 컨테이너 스타일 */
+
+.left-area,
+.right-area {
+   width: 50%;
+   border: 2px solid blue;
+}
+
+.top-section {
+   display: flex;
+   justify-content: space-between;
+   gap: 20px;
+}
+
+.content {
+   display: flex;
+   flex-direction: column; /* 세로 방향 정렬 */
+   gap: 30px;
+   padding: 20px;
+   margin : 0 120px;
+   box-sizing: border-box;
+}
+
+.rest-area-details {
+   padding: 20px;
+   font-family: 'Arial', sans-serif;
+   border: 2px solid red;
+}
+
+/* 이미지 업로드 섹션 */
+.image-upload-section {
+   display: flex;
+   gap: 20px;
+   align-items: center;
+   margin-bottom: 30px;
+   border: 2px solid red;
+   
+}
+
+.preview-img {
+   width: 300px;
+   height: 300px;
+   border: 1px solid #ccc;
+   align-content: center;
+   
+}
+
+.image-upload-section input[type="text"] {
+   width: 200px;
+   margin-bottom: 10px;
+   padding: 6px;
+}
+
+.image-upload-section input[type="file"] {
+   margin-bottom: 10px;
+}
+
+.image-upload-section .btn {
+   background-color: #007bff;
+   color: white;
+   border: none;
+   padding: 6px 12px;
+   cursor: pointer;
+   border-radius: 4px;
+}
+
+/* 기본 정보 섹션 */
+.info-section {
+   display: grid;
+   grid-template-columns: 150px 1fr;
+   gap: 10px 20px;
+   margin-bottom: 30px;
+}
+
+.info-section label {
+   font-weight: bold;
+   align-self: center;
+}
+
+.info-section input[type="text"] {
+   padding: 6px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   width: 100%;
+}
+
+/* 편의시설 체크박스 */
+.facility-section h3 {
+   margin-bottom: 10px;
+}
+
+.checkbox-group {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr); /* 2열로 설정 */
+   gap: 10px;
+   margin-bottom: 30px;
+}
+.checkbox-group .facility-label {
+   margin-top: 30px;
+}
+
+.label-checkbox {
+   margin-right: 20px;
+}
+
+.checkbox-group input[type="text"] {
+   padding: 6px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   width: 80%;
+}
+
+/* 음식 리스트 테이블 */
+.menu-section {
+   margin-top: 20px;
+}
+.menu-section h3 {
+   margin-bottom: 10px;
+}
+
+.menu-table {
+   width: 100%;
+   border-collapse: collapse;
+}
+
+.menu-table th,
+.menu-table td {
+   border: 1px solid #ccc;
+   padding: 8px;
+   text-align: center;
+}
+
+.menu-table th {
+   background-color: #E3E3E3;
+}
+
+.menu-table input[type="text"] {
+   width: 100%;
+   padding: 4px;
+   border: 1px solid #ccc;
+}
+
