@@ -71,7 +71,7 @@ request.setAttribute("menu", "board");
 			<jsp:include page="../common/jsp/header.jsp" />
 		</header>
 
-		<div class="container" >
+		<div class="container">
 			<div class="sidebar">
 				<h2 class="title">게시판</h2>
 				<ul class="menu">
