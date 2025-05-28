@@ -1,4 +1,4 @@
-<%@page import="GasStation.PaginationUtil"%>
+<%@page import="Util.PaginationUtil"%>
 <%@page import="DTO.PaginationDTO"%>
 <%@page import="GasStation.PetrolService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

@@ -1,4 +1,4 @@
-package GasStation;
+package Util;
 
 import DTO.PaginationDTO;
 
