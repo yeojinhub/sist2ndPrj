@@ -17,42 +17,36 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1>회원 계정 수정</h1>
+                <h1>FAQ 작성</h1>
             </div>
-            
             <div class="content">
-            	<div>
-            		<table class="account-table account-content">
+            	<div class="notice-div">
+            		<table class="notice-table">
             			<tbody>
             				<tr>
-            					<td>이름</td>
-            					<td><input type="text" value="홍길동" readonly="readonly" /></td>
+            					<td class="tdColumn">작성자</td>
+            					<td><textarea class="one-line"></textarea></td>
+            					<td class="tdColumn">작성일</td>
+            					<td><textarea class="one-line">2025-05-08</textarea></td>
             				</tr>
             				<tr>
-            					<td>이메일</td>
-            					<td><input type="text" value="fatherbrother3@test.com" /></td>
+            					<td>제목</td>
+            					<td colspan="3"><textarea class="title"></textarea></td>
             				</tr>
             				<tr>
-            					<td>비밀번호</td>
-            					<td><input type="password" value="hong3" /></td>
+            					<td>내용</td>
+            					<td colspan="3"><textarea class="content"></textarea></td>
             				</tr>
             				<tr>
-            					<td>전화번호</td>
-            					<td><input type="text" value="010-1234-5678" /></td>
-            				</tr>
-            				<tr>
-            					<td>가입일</td>
-            					<td><input type="text" value="2012-12-21" readonly="readonly" /></td>
             				</tr>
             			</tbody>
             		</table>
             	</div>
             </div>
             
-            <div class="button-group">
-            	<button class="btn btn-edit">수정</button>
-            	<button class="btn btn-delete">삭제</button>
-            	<button class="btn btn-back" onclick="location.href='user_accounts.jsp'">뒤로</button>
+            <div class="button-detail">
+            	<button class="btn btn-add">작성</button>
+            	<button class="btn btn-back" onclick="location.href='faq_board.jsp'">취소</button>
             </div>
 
         </div>

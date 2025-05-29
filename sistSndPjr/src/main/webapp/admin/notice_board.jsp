@@ -11,6 +11,7 @@
 </head>
 <body>
 	<div class="container">
+<<<<<<< HEAD
 		<!-- Sidebar -->
 		<div class="sidebar">
 			<div class="logo-container">
@@ -54,12 +55,29 @@
 						class="fas fa-map-marker-alt"></i> 휴게소 관리</a></li>
 			</ul>
 		</div>
+=======
+        <!-- Sidebar -->
+        <jsp:include page="admin_sidebar.jsp" />
+>>>>>>> aa139969e5ff9909b7b847234c3064e3b816bab7
 
 		<!-- Main Content -->
 		<div class="main-content">
 			<div class="header">
 				<h1>공지사항 관리</h1>
 			</div>
+<<<<<<< HEAD
+=======
+			
+			<div class="search-div">
+				<textarea class="search-title" rows="" cols=""></textarea>
+				<input type="button" class="btn-search" value="검색"/>
+				
+				<textarea class="search-date" rows="" cols=""></textarea>
+				<span class="search-tilde">~</span>
+				<textarea class="search-date" rows="" cols=""></textarea>
+				<input type="button" class="btn-search" value="검색"/>
+			</div>
+>>>>>>> aa139969e5ff9909b7b847234c3064e3b816bab7
 
 			<div class="content">
 				<table class="data-table">
@@ -167,8 +185,13 @@
 			</div>
 
 			<div class="button-group">
+<<<<<<< HEAD
 				<button class="btn btn-primary">등록</button>
 				<button class="btn btn-secondary">수정</button>
+=======
+				<button class="btn btn-add" onclick="location.href='notice_board_write.jsp'">작성</button>
+				<button class="btn btn-delete">삭제</button>
+>>>>>>> aa139969e5ff9909b7b847234c3064e3b816bab7
 			</div>
 		</div>
 	</div>

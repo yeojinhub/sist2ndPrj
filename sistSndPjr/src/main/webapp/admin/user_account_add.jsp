@@ -26,23 +26,23 @@
             			<tbody>
             				<tr>
             					<td>이름</td>
-            					<td><input type="text" value="홍길동" readonly="readonly" /></td>
+            					<td><input type="text" value="" readonly="readonly" /></td>
             				</tr>
             				<tr>
             					<td>이메일</td>
-            					<td><input type="text" value="fatherbrother3@test.com" /></td>
+            					<td><input type="text" value="" /></td>
             				</tr>
             				<tr>
             					<td>비밀번호</td>
-            					<td><input type="password" value="hong3" /></td>
+            					<td><input type="password" value="" /></td>
             				</tr>
             				<tr>
             					<td>전화번호</td>
-            					<td><input type="text" value="010-1234-5678" /></td>
+            					<td><input type="text" value="" /></td>
             				</tr>
             				<tr>
             					<td>가입일</td>
-            					<td><input type="text" value="2012-12-21" readonly="readonly" /></td>
+            					<td><input type="text" value="2025-05-29" readonly="readonly" /></td>
             				</tr>
             			</tbody>
             		</table>
@@ -50,8 +50,7 @@
             </div>
             
             <div class="button-group">
-            	<button class="btn btn-edit">수정</button>
-            	<button class="btn btn-delete">삭제</button>
+            	<button class="btn btn-add">등록</button>
             	<button class="btn btn-back" onclick="location.href='user_accounts.jsp'">뒤로</button>
             </div>
 
