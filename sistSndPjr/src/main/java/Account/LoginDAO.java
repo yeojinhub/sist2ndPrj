@@ -56,5 +56,40 @@ public class LoginDAO {
 
 		return lDTO;
 	}// selectLogin
+	
+	public boolean selectCheckWithdraw(String email) throws SQLException{
+		boolean chkWithdraw = false;
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+
+		DBConnection dbCon = DBConnection.getInstance();
+
+		try {
+			conn = dbCon.getDbCon();
+
+			// SQL문 작성
+			StringBuilder selectQuery = new StringBuilder();
+			selectQuery
+						.append("	SELECT WITHDRAW 	")
+						.append("	FROM ACCOUNT WHERE USER_EMAIL = ?	");
+
+			pstmt = conn.prepareStatement(selectQuery.toString());
+
+			pstmt.setString(1, email);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				chkWithdraw = rs.getString("WITHDRAW").equals("Y");
+			}// end if
+			
+		} finally {
+			dbCon.dbClose(conn, pstmt, rs);
+		} // end try-finally
+		
+		return chkWithdraw;
+	}
 
 }// class

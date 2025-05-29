@@ -1,10 +1,37 @@
+<%@page import="kr.co.sist.cipher.DataDecryption"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+Cookie[] cookies = request.getCookies();
+
+String email = "";
+boolean remember = false;
+
+DataDecryption dd = new DataDecryption("asdf1234asdf1234");
+
+for (Cookie coo : cookies) {
+	if (coo.getName().equals("user_email")) {
+		email = dd.decrypt(coo.getValue());
+		System.out.println(email);
+		remember = true;
+	}// end if
+}// end for
+
+pageContext.setAttribute("email", email);
+pageContext.setAttribute("remember", remember);
+%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="../common/jsp/login_external_file.jsp"/>
 <script>
+	var remember = ${remember};
+
     $(function(){
+		if (remember) {
+			$('#user_email').val('${email}');
+			$('#remember').prop('checked', true);
+		};
+    	
         $('#btnLogin').click(()=>{
 			var email = $('#user_email').val();
 			var pass = $('#pass').val();
@@ -13,6 +40,10 @@
 			
 			
         });// click
+        
+        $('#remember').change(function(){
+        	remember = this.checked;
+        });
     });// ready
     
     function chknull(email, pass) {
@@ -42,7 +73,7 @@
     };
     
     function loginProcess(email, pass) {
-    	var param = {user_email : email, pass : pass};
+    	var param = {user_email : email, pass : pass, remember : remember};
     	
     	$.ajax({
 			url: 'loginProcess.jsp',
@@ -55,8 +86,19 @@
 			success:function(jsonObj) {
 				if (!jsonObj.loginFlag) {
 					alert("로그인 실패\n아이디와 비밀번호를 확인해주세요.");
+					$('#user_email').val('');
+					$('#pass').val('');
+					$('#user_email').focus();
 					return;
 				};// end if
+				
+				if (jsonObj.withdraw) {
+					alert('탈퇴한 계정입니다.\n계정 복구는 고객센터로 문의주세요.');
+					$('#user_email').val('');
+					$('#pass').val('');
+					$('#user_email').focus();
+					return;
+				}
 				
 				alert("로그인 성공!\n메인화면으로 넘어갑니다.");
 				location.href = "../user/user_main_page.jsp";
