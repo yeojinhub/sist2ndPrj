@@ -13,6 +13,20 @@ import DTO.RangeDTO;
 
 public class PetrolService {
 
+	public List<String> searchAllRoute() {
+		List<String> list = new ArrayList<String>();
+		
+		PetrolDAO pDAO = new PetrolDAO();
+		
+		try {
+			list = pDAO.selectAllRoute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 	/**
 	 * 모든 주유소 정보를 얻어오는 메소드
 	 * @return

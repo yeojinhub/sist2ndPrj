@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 import DTO.AccountDTO;
+import kr.co.sist.cipher.DataDecryption;
 import kr.co.sist.cipher.DataEncryption;
 
 public class RegisterService {
@@ -58,9 +59,11 @@ public class RegisterService {
 		String myKey = "asdf1234asdf1234";
 		DataEncryption deInfo = new DataEncryption(myKey);
 		
+		String user_email = aDTO.getEmail()+"@"+aDTO.getDomain();
+		
 		try {
 			aDTO.setName(deInfo.encrypt(aDTO.getName()));
-			aDTO.setUser_email(deInfo.encrypt(aDTO.getUser_email()));
+			aDTO.setUser_email(deInfo.encrypt(user_email));
 			aDTO.setTel(deInfo.encrypt(aDTO.getTel()));
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -4,7 +4,7 @@
 	pageEncoding="UTF-8" info=""%>
 <%
 
-String id = request.getParameter("id");
+String id = request.getParameter("id").trim().toLowerCase();
 
 RegisterService rs = new RegisterService();
 
