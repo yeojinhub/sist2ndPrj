@@ -19,7 +19,7 @@ public class InfoDAO {
 			// SQL문 작성
 			StringBuilder deleteQuery = new StringBuilder();
 			deleteQuery
-			.append("	DELETE FROM ACCOUNT WHERE USER_EMAIL = ?	");
+			.append("	UPDATE ACCOUNT SET WITHDRAW = 'Y' WHERE USER_EMAIL = ?	");
 			
 			pstmt = conn.prepareStatement(deleteQuery.toString());
 			
@@ -52,7 +52,7 @@ public class InfoDAO {
 		}
 	}//updateUser
 	
-	public void updateAccount(String name,String tel, String email) throws SQLException{
+	public void updateAccount(String tel, String email) throws SQLException{
 		PreparedStatement pstmt = null;
 		Connection conn = null;
 		
@@ -62,12 +62,11 @@ public class InfoDAO {
 			conn = dbCon.getDbCon();
 			StringBuilder updateQuery = new StringBuilder();
 			updateQuery.
-			append("UPDATE ACCOUNT SET NAME = ?, TEL = ?	").
+			append("UPDATE ACCOUNT SET TEL = ?	").
 			append("WHERE USER_EMAIL = ?	");
 			pstmt = conn.prepareStatement(updateQuery.toString());
-			pstmt.setString(1, name);
-			pstmt.setString(2, tel);
-			pstmt.setString(3, email);
+			pstmt.setString(1, tel);
+			pstmt.setString(2, email);
 			pstmt.executeUpdate();
 			
 		}finally {

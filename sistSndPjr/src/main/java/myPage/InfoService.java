@@ -25,10 +25,10 @@ public class InfoService {
         }
     }
 	
-	public void changeAccount(String name, String tel, String email) {
+	public void changeAccount(String tel, String email) {
 		InfoDAO iDAO = new InfoDAO();
 		try {
-			iDAO.updateAccount(name, tel, email);
+			iDAO.updateAccount(tel, email);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

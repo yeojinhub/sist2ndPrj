@@ -37,24 +37,52 @@
     
     function toggleEditMode(btn) {
         const form = document.getElementById("infoForm");
-        const nameInput = form.querySelector('input[name="name"]');
         const telInput = form.querySelector('input[name="tel"]');
+        const hintText = document.getElementById("editHint");
 
         const isEditing = btn.dataset.editing === "true";
 
         if (isEditing) {
-            // 확인 누른 상태 → form 제출
+        	const phonePattern = /^\d{3}-\d{4}-\d{4}$/;
+            
+            if (!phonePattern.test($('#tel').val())) {
+                alert('전화번호 형식이 올바르지 않습니다. 예: 010-1234-5678');
+                $('#tel').focus();
+                return;
+            };// end if
             form.submit();
         } else {
-            // 수정 누른 상태 → 입력 가능하게
-            nameInput.removeAttribute("readonly");
+            // 이름은 수정 불가니까 tel만 editable 처리
             telInput.removeAttribute("readonly");
+            telInput.focus();
+
             btn.textContent = "확인";
             btn.dataset.editing = "true";
+            btn.classList.add("editing");
+
+            hintText.style.display = "block";
         }
     }
 </script>
+<style>
+input.pass[readonly] {
+    background-color: #f0f0f0;
+    color: #555;
+    border: 1px solid #ccc;
+}
 
+input.pass:not([readonly]) {
+    background-color: #ffffff;
+    color: #000;
+    border: 1px solid #4CAF50;
+}
+
+button.btn-confirm.editing {
+    background-color: #4CAF50; /* 초록색 */
+    color: white;
+    font-weight: bold;
+}
+</style>
 <form id="infoForm" method="post" action="../common/component/mypage/updateUserInfo.jsp">
     <div style="position: relative;">
         <h3 class="section-title">내 정보</h3>
@@ -68,7 +96,7 @@
         <input type="text" name="email" value="${email}" class="pass" readonly /><br>
 
         <p class="text"><strong>전화번호</strong></p>
-        <input type="text" name="tel" value="${tel}" class="pass" readonly /><br>
+        <input type="text" name="tel" value="${tel}" id="tel" class="pass" readonly /><br>
 
         <div class="button-group">
             <button type="button" class="btn btn-confirm" onclick="toggleEditMode(this)" data-editing="false">수정</button>
