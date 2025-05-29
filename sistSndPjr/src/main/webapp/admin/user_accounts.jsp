@@ -1,13 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="Service.AdminAccountService"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>관리자 대시보드</title>
     <link rel="stylesheet" href="../common/css/styles.css">
-    <script src="script.js"></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -21,6 +26,10 @@
             </div>
             
             <div class="content">
+            <%
+           	AdminAccountService accountService = new AdminAccountService();
+            pageContext.setAttribute("userList", accountService.selectAllUser());
+            %>
                 <table class="data-table">
                     <thead>
                         <tr>
@@ -32,76 +41,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${ empty userList }">
+                    	<tr>
+                    		<td colspan="5">사용자 회원 정보가 존재하지 않습니다.</td>
+                    	</tr>
+                    </c:if>
+                    <c:forEach var="accountDTO" items="${ userList }" varStatus="i">
                         <tr onclick="location.href='user_account_detail.jsp'">
-                            <td>10</td>
-                            <td>홍길동</td>
-                            <td>father@noretest.com</td>
-                            <td>010-1234-5678</td>
-                            <td>2021-12-12</td>
+                            <td><c:out value="${ accountDTO.acc_num }" /></td>
+                            <td><c:out value="${ accountDTO.name }" /></td>
+                            <td><c:out value="${ accountDTO.user_email }" /></td>
+                            <td><c:out value="${ accountDTO.tel }" /></td>
+                            <td><fmt:formatDate value="${ accountDTO.input_date }" pattern="yyyy-MM-dd EEEE HH:mm" /></td>
                         </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>강태일</td>
-                            <td>kang@sist.co.kr</td>
-                            <td>010-1114-6321</td>
-                            <td>2025-01-10</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>이여진</td>
-                            <td>yeojin@sist.co.kr</td>
-                            <td>010-8123-8700</td>
-                            <td>2025-05-05</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>장태규</td>
-                            <td>taegu321@sist.co.kr</td>
-                            <td>010-3764-8070</td>
-                            <td>2025-05-07</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>현지영</td>
-                            <td>jiyeong@sist.co.kr</td>
-                            <td>010-2513-9568</td>
-                            <td>2025-05-08</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>신민기</td>
-                            <td>mingi@sist.co.kr</td>
-                            <td>010-3123-2119</td>
-                            <td>2025-05-08</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>유연수</td>
-                            <td>yeonsoo@sist.co.kr</td>
-                            <td>010-8462-2597</td>
-                            <td>2025-05-08</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>박선은</td>
-                            <td>ksdsilver@sist.co.kr</td>
-                            <td>010-3648-1211</td>
-                            <td>2025-05-08</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>심규민</td>
-                            <td>deepmin@sist.co.kr</td>
-                            <td>010-5689-1209</td>
-                            <td>2025-05-08</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>주현석</td>
-                            <td>zoo@sist.co.kr</td>
-                            <td>010-9812-2362</td>
-                            <td>2025-05-08</td>
-                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
                 
