@@ -29,7 +29,7 @@ request.setAttribute("menu", "gas");
 	<header>
 		<jsp:include page="../common/jsp/header.jsp" />
 	</header>
-	<div class="container" style="display: flex; flex-direction: column;">
+	<div class="container">
 		<div>
 			<hr class="line_blue" style="text-align: center;">
 		</div>
