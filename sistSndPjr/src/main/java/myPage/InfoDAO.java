@@ -2,7 +2,6 @@ package myPage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import DBConnection.DBConnection;
@@ -18,11 +17,11 @@ public class InfoDAO {
 			conn = dbCon.getDbCon();
 			
 			// SQL문 작성
-			StringBuilder selectQuery = new StringBuilder();
-			selectQuery
+			StringBuilder deleteQuery = new StringBuilder();
+			deleteQuery
 			.append("	DELETE FROM ACCOUNT WHERE USER_EMAIL = ?	");
 			
-			pstmt = conn.prepareStatement(selectQuery.toString());
+			pstmt = conn.prepareStatement(deleteQuery.toString());
 			
 			pstmt.setString(1, email);
 			pstmt.executeUpdate(); 
@@ -41,10 +40,10 @@ public class InfoDAO {
 		
 		try {
 			conn = dbCon.getDbCon();
-			StringBuilder selectQuery = new StringBuilder();
-			selectQuery
+			StringBuilder updateQuery = new StringBuilder();
+			updateQuery
 			.append("UPDATE ACCOUNT SET PASS = ? WHERE USER_EMAIL = ?	");
-			pstmt = conn.prepareStatement(selectQuery.toString());
+			pstmt = conn.prepareStatement(updateQuery.toString());
 			pstmt.setString(1, pass);
 			pstmt.setString(2, email);
 			pstmt.executeUpdate();
@@ -52,4 +51,27 @@ public class InfoDAO {
 			dbCon.dbClose(conn, pstmt, null);
 		}
 	}//updateUser
+	
+	public void updateAccount(String name,String tel, String email) throws SQLException{
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+		
+		DBConnection dbCon = DBConnection.getInstance();
+		
+		try {
+			conn = dbCon.getDbCon();
+			StringBuilder updateQuery = new StringBuilder();
+			updateQuery.
+			append("UPDATE ACCOUNT SET NAME = ?, TEL = ?	").
+			append("WHERE USER_EMAIL = ?	");
+			pstmt = conn.prepareStatement(updateQuery.toString());
+			pstmt.setString(1, name);
+			pstmt.setString(2, tel);
+			pstmt.setString(3, email);
+			pstmt.executeUpdate();
+			
+		}finally {
+			dbCon.dbClose(conn, pstmt, null);
+		}
+	}
 }

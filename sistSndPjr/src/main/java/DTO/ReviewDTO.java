@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class ReviewDTO {
 	private int rev_num;
-	private String area_num;
+	private int area_num;
 	private String area_name;
 	private int acc_num;
 	private String content;

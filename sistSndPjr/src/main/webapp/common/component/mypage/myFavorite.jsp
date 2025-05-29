@@ -58,21 +58,7 @@ $(function() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox" name="favoriteCheck" value="1"></td>
-                        <td>강릉(인천)</td>
-                        <td>경부선</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="favoriteCheck" value="2"></td>
-                        <td>거장(대구)</td>
-                        <td>경부선</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="favoriteCheck" value="3"></td>
-                        <td>신창(전남)</td>
-                        <td>경부선</td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>

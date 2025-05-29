@@ -7,21 +7,31 @@ import kr.co.sist.cipher.DataEncryption;
 public class InfoService {
 	// 회원 탈퇴 메서드
 	public void deleteUser(String email) {
+		InfoDAO userDAO = new InfoDAO();
         try {
-            InfoDAO userDAO = new InfoDAO();
             userDAO.deleteUser(email);
         } catch (SQLException e) {
-            throw new RuntimeException("회원 탈퇴 중 오류 발생", e);
+        	e.printStackTrace();
         }
     }//deleteUser
 	
 	public void changePassword(String email, String newRawPassword) {
         try {
-            String pass = DataEncryption.messageDigest("SHA-256", newRawPassword); // 암호화
+        	String pass = DataEncryption.messageDigest("SHA-256", newRawPassword); // 암호화
             InfoDAO iDAO = new InfoDAO();
             iDAO.updatePass(email, pass);
         } catch (Exception e) {
-            throw new RuntimeException("비밀번호 변경 중 오류 발생", e);
+        	e.printStackTrace();
         }
     }
+	
+	public void changeAccount(String name, String tel, String email) {
+		InfoDAO iDAO = new InfoDAO();
+		try {
+			iDAO.updateAccount(name, tel, email);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+	}
 }

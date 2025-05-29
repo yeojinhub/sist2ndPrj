@@ -10,6 +10,8 @@
 	}// end if
 	
 	pageContext.setAttribute("loginCheck", flag);
+	
+	
 %>
 <!DOCTYPE html>
 <html>

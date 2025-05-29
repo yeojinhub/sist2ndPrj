@@ -1,3 +1,4 @@
+<%@page import="kr.co.sist.cipher.DataEncryption"%>
 <%@page import="myPage.InfoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="DTO.LoginDTO" %>
@@ -10,16 +11,20 @@
 
 <%
     request.setCharacterEncoding("UTF-8");
-    LoginDTO user = (LoginDTO) session.getAttribute("userData");
+    LoginDTO lDTO = (LoginDTO) session.getAttribute("userData");
     String newPassword = request.getParameter("newPassword");
 
-    if (user != null && newPassword != null) {
+    if (lDTO != null && newPassword != null) {
         try {
-            String email = user.getUser_email();
+            String email = lDTO.getUser_email();
 
           	InfoService is = new InfoService(); // 일반 클래스
             is.changePassword(email, newPassword); // 비밀번호 변경 수행
 
+            String newPw = DataEncryption.messageDigest("SHA-256", newPassword);
+       		lDTO.setPass(newPw);
+            session.setAttribute("userData", lDTO);
+            
         } catch (Exception e) {
             e.printStackTrace();
 %>
