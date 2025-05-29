@@ -41,8 +41,8 @@
                     <a href="#" class="toggle-submenu"><i class="fas fa-clipboard-list"></i> 게시판 관리 <i class="fas fa-chevron-down arrow"></i></a>
                     <ul class="submenu">
                         <li><a href="notice_board.jsp">공지사항 관리</a></li>
-                        <li><a href="faq-board.jsp">FaQ 관리</a></li>
-                        <li><a href="qna-board.jsp">QaA 관리</a></li>
+                        <li><a href="faq_board.jsp">FaQ 관리</a></li>
+                        <li><a href="qna_board.jsp">QaA 관리</a></li>
                     </ul>
                 </li>
                 

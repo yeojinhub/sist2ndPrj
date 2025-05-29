@@ -1,4 +1,14 @@
+<%@page import="DTO.NoticeDTO"%>
+<%@page import="Notice.NoticeService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+int num = Integer.parseInt(request.getParameter("num")); // 글 번호 파라미터 받기
+
+NoticeService ns = new NoticeService();
+NoticeDTO nDTO = ns.searchOneNotice(num);
+//not_num, content, name, status_type
+pageContext.setAttribute("nDTO", nDTO);
+%>
 <div style="position: relative;">
     <h3 class="section-title">공지사항 상세페이지</h3>
 	<hr class="line_gray">
@@ -7,20 +17,19 @@
     <thead>
         <tr>
             <th style="width: 25%;">제목</th>
-            <td colspan="3">모두쉼 홈페이지 론칭 안내</td>
+            <td colspan="3">${ nDTO.title }</td>
         </tr>
         <tr>
             <th>작성자</th>
-            <td>관리자</td>
+            <td>${ nDTO.name }</td>
             <th>작성일</th>
-            <td>2025-05-05</td>
+            <td>${ nDTO.input_date}</td>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td colspan="4" style="height: 300px; vertical-align: top; padding: 15px;">
-                모두쉼 홈페이지가 새롭게 오픈했습니다.<br>
-                운영시간은 평일 오전 9시부터 오후 6시까지입니다.<br>
+                ${ nDTO.content }
             </td>
         </tr>
     </tbody>
