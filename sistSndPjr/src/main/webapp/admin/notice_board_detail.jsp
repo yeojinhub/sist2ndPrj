@@ -16,8 +16,8 @@
 		<!-- Sidebar -->
 		<div class="sidebar">
 			<div class="logo-container">
-				<img src="../common/images/logo.png" alt="로고" class="logo"> <span
-					class="logo-text">모두쉼</span>
+				<img src="../common/images/logo251.png" alt="로고" class="logo"> <span
+					class="logo-text"></span>
 			</div>
 
 			<div class="admin-info">
@@ -29,8 +29,7 @@
 				<li class="menu-item"><a href="home.jsp"><i
 						class="fas fa-home"></i> Home</a></li>
 
-				<li class="menu-item has-submenu"><a href="#"
-					class="toggle-submenu"><i class="fas fa-users"></i> 계정관리 <i
+				<li class="menu-item has-submenu"><a href="#" class="toggle-submenu"><i class="fas fa-users"></i> 계정관리 <i
 						class="fas fa-chevron-down arrow"></i></a>
 					<ul class="submenu">
 						<li><a href="user_accounts.jsp">회원 계정관리</a></li>
@@ -65,12 +64,12 @@
 			<div class="content">
 				<div class="notice-div"  >
 					<table class="notice-table">
-						<tbody>
+						<tbody >
 							<tr>
-								<td>작성자</td>
-								<td><textarea class="one-line">admin03 </textarea></td>
-								<td style="padding-left: 135px">작성일</td>
-								<td><textarea class="one-line">2025-05-03</textarea></td>
+								<td  class="tdColum" >작성자</td>
+								<td ><textarea class="one-line">admin03 </textarea></td>
+								<td  class="tdColum" >작성일</td>
+								<td ><textarea class="one-line">2025-05-03</textarea></td>
 							</tr>
 							<tr>
 								<td>제목</td>
@@ -84,8 +83,6 @@
 지방방향은 비교적 원활하지만, 서울 방향은 영동선과 서해안선을 위주로 오후 4시께 가장 혼잡할 것으로 보인다.
 시간대별로 오전 9시~10시 정체가 시작돼 오후 4시~5시 절정에 이르다 오후 10시~11시 해소될 것으로 보인다.
         </textarea></td>
-							</tr>
-							<tr>
 							</tr>
 						</tbody>
 					</table>
