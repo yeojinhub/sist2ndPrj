@@ -17,7 +17,7 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1>공지사항 수정</h1>
+                <h1>문의 수정</h1>
             </div>
             <div class="content">
             	<div class="notice-div">
@@ -50,7 +50,7 @@
             <div class="button-detail">
             	<button class="btn btn-edit">수정</button>
             	<button class="btn btn-delete">삭제</button>
-            	<button class="btn btn-back" onclick="location.href='notice_board.jsp'">취소</button>
+            	<button class="btn btn-back" onclick="location.href='inquiries.jsp'">취소</button>
             </div>
 
         </div>

@@ -17,12 +17,12 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1>회원 계정 수정</h1>
+                <h1>관리자 계정 수정</h1>
             </div>
             
             <div class="content">
-            	<div class="account-content">
-            		<table class="account-table">
+            	<div>
+            		<table class="account-table account-content">
             			<tbody>
             				<tr>
             					<td>이름</td>
@@ -50,8 +50,8 @@
             </div>
             
             <div class="button-group">
-            	<button class="btn btn-primary">수정</button>
-            	<button class="btn btn-secondary">취소</button>
+            	<button class="btn btn-edit">수정</button>
+            	<button class="btn btn-back" onclick="location.href='admin_accounts.jsp'">취소</button>
             </div>
 
         </div>

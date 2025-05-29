@@ -209,6 +209,7 @@ body {
   	margin-left:auto;
   	margin-right:auto;
   	border-collapse: collapse;
+  	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .account-table td {
@@ -479,3 +480,135 @@ textarea.content {
 .btn:hover {
 	opacity: 0.9;
 }
+
+.button-group-area-detail {
+   display: flex;
+   padding-left: 200px;
+   margin : 0 30px;
+   justify-content: flex-end;
+}
+
+/*휴게소 상세정보 수정*/
+
+/* 기본 컨테이너 스타일 */
+
+.left-area,
+.right-area {
+   width: 50%;
+   /* border: 2px solid blue; */
+}
+
+.top-section {
+   display: flex;
+   justify-content: space-between;
+   gap: 40px;
+}
+
+.info-section .input-row {
+   margin-left : 20px;
+   margin-top: 20px;
+}
+
+
+/* 기본 정보 섹션 */
+.info-section {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+   margin-bottom: 30px;
+}
+
+.input-row {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+   margin-bottom: 30px;
+}
+
+.input-row label.info-label {
+   width: 10%;
+   min-width: 80px; 
+   font-weight: bold;
+   white-space: nowrap;
+   margin-right:10px;
+}
+
+.input-row input[type="text"] {
+   width: 90%;
+   padding: 5px;
+   min-width: 150px; 
+   border: 1px solid #ccc;
+   border-radius: 4px;
+}
+
+.input-row input[type="text"].small-input {
+  width: 35%;
+  min-width: 120px;
+
+}
+
+.route-label {
+   min-width: 80px; 
+   margin-left: 50px;
+    /* margin-right:2px; */
+}
+
+/* 편의시설 체크박스 */
+.facility-section h3 {
+   margin-bottom: 10px;
+}
+
+.checkbox-group {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr); /* 2열로 설정 */
+   gap: 10px;
+   margin-bottom: 30px;
+}
+.checkbox-group .facility-label {
+   margin-left : 20px;
+   margin-top: 40px;
+}
+
+.label-checkbox {
+   margin-right: 20px;
+}
+
+.checkbox-group input[type="text"] {
+   padding: 6px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   width: 60%;
+}
+
+/* 음식 리스트 테이블 */
+.menu-section {
+   margin-top: 20px;
+}
+
+.menu-table {
+   width: 100%;
+   border-collapse: collapse;
+}
+
+.menu-table th,
+.menu-table td {
+   border-bottom: 1px solid #ccc;
+   padding: 8px;
+   text-align: center;
+}
+
+.menu-table th {
+   background-color: #E3E3E3;
+}
+
+.menu-table input[type="text"] {
+   width: 70%;
+   padding: 4px;
+   border: 1px solid #ccc;
+   text-align: center;
+}
+
+table td input[type="text"].input-num {
+   text-align: center;
+}
+
