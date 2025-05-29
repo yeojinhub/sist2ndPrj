@@ -44,4 +44,27 @@ public class LoginService {
 		return lDTO;
 	}// searchLogin
 	
+	public boolean searchCheckWithdraw(String email) {
+		boolean chkWithdraw = false;
+		
+		LoginDAO lDAO = new LoginDAO();
+		
+		String myKey = "asdf1234asdf1234";
+		DataEncryption de = new DataEncryption(myKey);
+		
+		try {
+			email = de.encrypt(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			chkWithdraw = lDAO.selectCheckWithdraw(email);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return chkWithdraw;
+	}
+	
 }// class
