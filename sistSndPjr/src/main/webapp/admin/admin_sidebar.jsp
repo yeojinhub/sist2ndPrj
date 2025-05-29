@@ -38,6 +38,7 @@
 				관리 <i class="fas fa-chevron-down arrow"></i></a>
 			<ul class="submenu">
 				<li><a href="areas.jsp">상세정보 관리</a></li>
+				<li><a href="food.jsp">주유소 관리</a></li>
 				<li><a href="petrol.jsp">주유소 관리</a></li>
 			</ul></li>
 	</ul>

@@ -612,3 +612,16 @@ table td input[type="text"].input-num {
    text-align: center;
 }
 
+/* 먹거리 작성 */
+.addBtn-wrapper  {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.data-table input[type="text"] {
+   padding: 6px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   width: 60%;
+}
+
