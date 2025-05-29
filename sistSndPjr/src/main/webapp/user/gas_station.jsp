@@ -29,7 +29,7 @@ request.setAttribute("menu", "gas");
 <script>
 $(function(){
 	$('#search').click(()=>{
-		alert('asd');
+		$('#frmSearch').submit();
 	});// click
 });// ready
 </script>
@@ -54,18 +54,18 @@ $(function(){
 		PetrolService ps = new PetrolService();
 
 		// <select> 태그에 노선 <option>을 구하기
-		pageContext.setAttribute("routeList", ps.searchAllRoute());
+		pageContext.setAttribute("routeList", ps.searchAllRoute(rDTO));
 		%>
 
 		<div class="search-box">
 			<form action="gas_station.jsp" id="frmSearch" method="GET">
-				<label>노선명:</label> <select>
+				<label>노선명:</label> <select id="route" name="route">
 					<c:forEach var="route" items="${routeList }" varStatus="i">
 						<option><c:out value="${route }" /></option>
 					</c:forEach>
-				</select> <label>주유소명:</label> <input type="text" /> <label><input
-					type="checkbox"> 전기충전소</label> <label><input
-					type="checkbox"> 수소충전소</label>
+				</select> <label>주유소명:</label> <input type="text" id="keyword" name="keyword" /> <label><input
+					type="checkbox" id="elect" name="elect"> 전기충전소</label> <label><input
+					type="checkbox" id="hydro" name="hydro"> 수소충전소</label>
 
 				<button class="btn btn-confirm" id="search">검색</button>
 			</form>

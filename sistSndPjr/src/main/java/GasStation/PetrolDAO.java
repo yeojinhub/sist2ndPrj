@@ -19,7 +19,7 @@ public class PetrolDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<String> selectAllRoute() throws SQLException{
+	public List<String> selectAllRoute(RangeDTO rDTO) throws SQLException{
 		List<String> list = new ArrayList<String>();
 		
 		ResultSet rs = null;
@@ -67,31 +67,62 @@ public class PetrolDAO {
 
 			// SQL문 작성
 			StringBuilder selectQuery = new StringBuilder();
-			selectQuery.append(" SELECT A.AREA_NUM, NAME, A.TEL, ROUTE, GASOLINE, DIESEL, LPG, ELECT, HYDRO")
+			selectQuery.append(" SELECT * FROM")
+						.append(" (SELECT A.AREA_NUM, NAME, A.TEL, ROUTE, GASOLINE, DIESEL, LPG, ELECT, HYDRO")
 						.append(" FROM AREA A, PETROL P")
-						.append(" WHERE A.AREA_NUM = P.AREA_NUM AND A.AREA_NUM BETWEEN ? AND ? ");
-
-			pstmt = conn.prepareStatement(selectQuery.toString());
-
-			// 바인드 변수 할당
-			pstmt.setInt(1, rDTO.getStartNum());
-			pstmt.setInt(2, rDTO.getEndNum());
+						.append(" WHERE A.AREA_NUM = P.AREA_NUM AND A.AREA_NUM BETWEEN ? AND ?) ");
 			
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				PetrolDTO pDTO = new PetrolDTO();
-				pDTO.setArea_num(rs.getInt("AREA_NUM"));
-				pDTO.setName(rs.getString("NAME"));
-				pDTO.setTel(rs.getString("TEL"));
-				pDTO.setRoute(rs.getString("ROUTE"));
-				pDTO.setGasoline(rs.getString("GASOLINE"));
-				pDTO.setDiesel(rs.getString("DIESEL"));
-				pDTO.setLpg(rs.getString("LPG"));
-				pDTO.setElect(rs.getString("ELECT"));
-				pDTO.setHydro(rs.getString("HYDRO"));
-				list.add(pDTO);
-			}// end while
+			if (rDTO.getRoute() != null) {
+				selectQuery.append(" WHERE INSTR(ROUTE,?) != 0 ");
+			}// end if
+			
+			if (rDTO.getRoute() != null && rDTO.getKeyword() != null) {
+				selectQuery.append(" AND INSTR(NAME,?) != 0 ");
+			}// end if
+			
+			if (rDTO.getElect() != null && rDTO.getElect().equals("O")) {
+				selectQuery.append(" AND ELECT = 'O' ");
+			}// end if
+			
+			if (rDTO.getHydro() != null && rDTO.getHydro().equals("O")) {
+				selectQuery.append(" AND HYDRO = 'O' ");
+			}// end if
+			
+			System.out.println(rDTO);
+			System.out.println(selectQuery.toString());
+			
+//			pstmt = conn.prepareStatement(selectQuery.toString());
+//			
+//			int bindParam = 1;
+//			// 바인드 변수 할당
+//			pstmt.setInt(bindParam++, rDTO.getStartNum());
+//			pstmt.setInt(bindParam++, rDTO.getEndNum());
+//			
+//			if (rDTO.getRoute() != null) {
+//				pstmt.setString(bindParam++, rDTO.getRoute());
+//			}// end if
+//			
+//			if (rDTO.getRoute() != null && rDTO.getKeyword() != null) {
+//				pstmt.setString(bindParam++, rDTO.getRoute());
+//				pstmt.setString(bindParam++, rDTO.getRoute());
+//			}// end if
+//			
+//			
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//				PetrolDTO pDTO = new PetrolDTO();
+//				pDTO.setArea_num(rs.getInt("AREA_NUM"));
+//				pDTO.setName(rs.getString("NAME"));
+//				pDTO.setTel(rs.getString("TEL"));
+//				pDTO.setRoute(rs.getString("ROUTE"));
+//				pDTO.setGasoline(rs.getString("GASOLINE"));
+//				pDTO.setDiesel(rs.getString("DIESEL"));
+//				pDTO.setLpg(rs.getString("LPG"));
+//				pDTO.setElect(rs.getString("ELECT"));
+//				pDTO.setHydro(rs.getString("HYDRO"));
+//				list.add(pDTO);
+//			}// end while
 
 		} finally {
 			dbCon.dbClose(conn, pstmt, rs);
