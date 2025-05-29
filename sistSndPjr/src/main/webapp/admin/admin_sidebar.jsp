@@ -27,7 +27,6 @@
 			<ul class="submenu">
 				<li><a href="notice_board.jsp">공지사항 관리</a></li>
 				<li><a href="faq_board.jsp">FAQ 관리</a></li>
-				<li><a href="qna_board.jsp">QaA 관리</a></li>
 			</ul></li>
 		<li class="menu-item"><a href="inquiries.jsp"><i
 				class="fas fa-question-circle"></i> 문의 관리</a></li>
@@ -38,7 +37,7 @@
 				관리 <i class="fas fa-chevron-down arrow"></i></a>
 			<ul class="submenu">
 				<li><a href="areas.jsp">상세정보 관리</a></li>
-				<li><a href="food.jsp">주유소 관리</a></li>
+				<li><a href="food.jsp">먹거리 관리</a></li>
 				<li><a href="petrol.jsp">주유소 관리</a></li>
 			</ul></li>
 	</ul>

@@ -18,7 +18,7 @@
 		<!-- Main Content -->
 		<div class="main-content">
 			<div class="header">
-				<h1>먹거리 작성</h1>
+				<h1>주유소 등록</h1>
 			</div>
 
 			<div class="content">
