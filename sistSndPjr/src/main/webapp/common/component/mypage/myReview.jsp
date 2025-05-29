@@ -34,20 +34,17 @@
 </style>
 
 <script>
+var $contentDiv = $('.content');
 $(function() {
-    var $contentDiv = $('.content');
-
-    // 테이블 행 클릭 시 상세보기 로드
-	 // tbody 내부 tr.review-row에 이벤트 위임
-    $('tbody').on('click', 'tr.review-row', function(e) {
+    $('.user_table').on('click', '.review-row', function(e) {
         e.preventDefault();
         const revNum = $(this).data('revnum');
 
         if (revNum) {
-            $contentDiv.load('../common/component/mypage/myReviewDetail.jsp?rev_num=' + revNum, function(response, status, xhr) {
+            $('.content').load('../common/component/mypage/myReviewDetail.jsp?rev_num=' + revNum, function(response, status, xhr) {
                 if (status === "error") {
                     console.error("리뷰 상세 페이지 로드 오류:", xhr.status, xhr.statusText);
-                    $contentDiv.html("<p style='color:red;'>리뷰 상세 정보를 불러오는 데 실패했습니다.</p>");
+                    $('.content').html("<p style='color:red;'>리뷰 상세 정보를 불러오는 데 실패했습니다.</p>");
                 } else {
                     console.log("✅ 상세 페이지 로드 성공! rev_num=" + revNum);
                 }

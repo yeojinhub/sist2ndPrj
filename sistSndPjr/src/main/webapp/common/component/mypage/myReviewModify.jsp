@@ -41,6 +41,7 @@
         </tr>
     </tbody>
 </table>
+</div>
 <div class="button-group">
     <button class="btn btn-confirm" id="modifyBtn">수정</button>
 </div>
