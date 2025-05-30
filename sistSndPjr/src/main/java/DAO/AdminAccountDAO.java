@@ -51,7 +51,7 @@ public class AdminAccountDAO {
 			selectAllQuery
 			.append("	select	acc_num, name, user_email, tel, input_date	")
 			.append("	from	account	")
-			.append("	where	roletype=1	")
+			.append("	where	ROLLTYPE=1	")
 			.append("	and withdraw='N'	")
 			;
 			

@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="DTO.AccountDTO"%>
 <%@page import="Service.AdminAccountService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -28,7 +30,8 @@
             <div class="content">
             <%
            	AdminAccountService accountService = new AdminAccountService();
-            pageContext.setAttribute("userList", accountService.selectAllUser());
+            List<AccountDTO> userList = accountService.selectAllUser();
+            request.setAttribute("userList", userList);
             %>
                 <table class="data-table">
                     <thead>
@@ -48,7 +51,7 @@
                     </c:if>
                     <c:forEach var="accountDTO" items="${ userList }" varStatus="i">
                         <tr onclick="location.href='user_account_detail.jsp'">
-                            <td><c:out value="${ accountDTO.acc_num }" /></td>
+                            <td><c:out value="${ i.count }" /></td>
                             <td><c:out value="${ accountDTO.name }" /></td>
                             <td><c:out value="${ accountDTO.user_email }" /></td>
                             <td><c:out value="${ accountDTO.tel }" /></td>

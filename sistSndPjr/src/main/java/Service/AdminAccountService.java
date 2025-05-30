@@ -14,7 +14,7 @@ public class AdminAccountService {
 		AdminAccountDAO accountDAO = AdminAccountDAO.getInstance();
 		
 		try {
-			accountDAO.selectAllUser();
+			userList = accountDAO.selectAllUser();
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} //end try catch
