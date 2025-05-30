@@ -8,13 +8,8 @@
 <jsp:setProperty name="rDTO" property="*" />
 <%
     request.setAttribute("menu", "facility");
-<<<<<<< HEAD
 	request.setCharacterEncoding("UTF-8");
 %>
-<jsp:useBean id="rDTO" class="DTO.RangeDTO" scope="page"/>
-<jsp:setProperty name="rDTO" property="*"/>    
-=======
-%>    
 <%
 RestAreaFacilityService rafs = new RestAreaFacilityService();
 
@@ -41,8 +36,6 @@ pageContext.setAttribute("startNum", startNum);
 pageContext.setAttribute("endNum", endNum);
 pageContext.setAttribute("restAreaFacilityList", rafs.searchAllAreaFacility(rDTO));
 %>
-
->>>>>>> 61aa1845304ba498957ff809596843a4ff9444ec
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,20 +127,6 @@ pageContext.setAttribute("restAreaFacilityList", rafs.searchAllAreaFacility(rDTO
         <th rowspan="2">경정비소</th>
         <th rowspan="2">ex화물차라운지</th>
       </tr>
-<<<<<<< HEAD
-    </thead>
-  <tbody>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=101">강릉(강릉)</a></td>
-    <td>인천기점 231</td>
-    <td>033-648-8850</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle gray"></span><span class="circle brown"></span></td>
-    <td>X</td>
-    <td>X</td>
-    <td>X</td>
-  </tr>
-=======
-  
     </thead>
   <tbody>
   	<c:if test="${ empty restAreaFacilityList }">
@@ -174,14 +153,12 @@ pageContext.setAttribute("restAreaFacilityList", rafs.searchAllAreaFacility(rDTO
 	    <td>${ afDTO.wash }</td><td>${ afDTO.repair }</td><td>${ afDTO.truck }</td>
   	</tr>
 	</c:forEach>
-  
->>>>>>> 61aa1845304ba498957ff809596843a4ff9444ec
 </tbody>
 </table>
 <div id="pageinationDiv">
 
 <%
-PaginationDTO pDTO = new PaginationDTO(5,rDTO.getCurrentPage(),totalPage,"rest_area_facility.jsp",null,null);
+PaginationDTO pDTO = new PaginationDTO(5,rDTO.getCurrentPage(),totalPage,"rest_area_facility.jsp",null,null,null,null,null);
 %>
 <%= PaginationUtil.pagination(pDTO) %>
 </div>

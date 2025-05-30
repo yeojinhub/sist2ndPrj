@@ -85,7 +85,6 @@ public class RestAreaFacilityDAO {
 		pstmt = con.prepareStatement(selectAreaFacility.toString());
 	//5.바인드변수에 값 할당
 		int bindInd = 1;
-		System.out.println(rDTO);
 		pstmt.setInt(bindInd++, rDTO.getStartNum());
 		pstmt.setInt(bindInd++, rDTO.getEndNum());
 		

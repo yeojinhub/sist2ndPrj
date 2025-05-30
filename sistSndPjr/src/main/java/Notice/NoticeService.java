@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import DTO.NoticeDTO;
+import DTO.RangeDTO;
 
 public class NoticeService {
 
@@ -12,7 +13,7 @@ public class NoticeService {
 	 * @param rDTO
 	 * @return 레코드의 수
 	 */
-	public int totalCount( DTO.RangeDTO rDTO) {
+	public int totalCount( RangeDTO rDTO) {
 		int cnt = 0;
 		
 		NoticeDAO nDAO = new NoticeDAO();
