@@ -60,13 +60,22 @@ public class PetrolService {
 	 * 1. 총 레코드(데이터)의 수를 구합니다.
 	 * @return
 	 */
-	public int searchTotalCount(){
+	public int searchTotalCount(RangeDTO rDTO){
 		int cnt = 0;
 	
 		PetrolDAO pDAO = new PetrolDAO();
 		
+		// #. 검색 기능
+		// #-1. ELECT와 HYDRO의 값을 NULL이 아닌 ON일 경우에 DB에 값(O)와 일치시킨다.
+		if (rDTO.getElect() != null) {
+			rDTO.setElect("O");
+		}// end if
+		if (rDTO.getHydro() != null) {
+			rDTO.setHydro("O");
+		}// end if
+		
 		try {
-			cnt = pDAO.selectTotalCount();
+			cnt = pDAO.selectTotalCount(rDTO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
