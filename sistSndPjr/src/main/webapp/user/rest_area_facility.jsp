@@ -2,7 +2,10 @@
     pageEncoding="UTF-8" info=""%>
 <%
     request.setAttribute("menu", "facility");
-%>    
+	request.setCharacterEncoding("UTF-8");
+%>
+<jsp:useBean id="rDTO" class="DTO.RangeDTO" scope="page"/>
+<jsp:setProperty name="rDTO" property="*"/>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,14 +92,10 @@
         <th rowspan="2">휴게소명</th>
         <th rowspan="2">이정</th>
         <th rowspan="2">전화번호</th>
-        <th colspan="2">편의시설</th>
+        <th rowspan="2">편의시설</th>
         <th rowspan="2">세차장</th>
         <th rowspan="2">경정비소</th>
         <th rowspan="2">ex화물차라운지</th>
-      </tr>
-      <tr>
-        <th>휴게소</th>
-        <th>주유소</th>
       </tr>
     </thead>
   <tbody>
@@ -104,86 +103,12 @@
     <td><a href="rest_area_detail.jsp?id=101">강릉(강릉)</a></td>
     <td>인천기점 231</td>
     <td>033-648-8850</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle gray"></span></td>
-    <td><span class="circle brown"></span></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=102">강릉(인천)</a></td>
-    <td>인천기점 231</td>
-    <td>033-647-9970</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle gray"></span></td>
-    <td><span class="circle brown"></span></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=103">강천산(광주)</a></td>
-    <td>고서기점 22</td>
-    <td>063-653-4033</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle pink"></span></td>
-    <td><span class="circle orange"></span></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=104">강천산(대구)</a></td>
-    <td>고서기점 22</td>
-    <td>063-653-3050</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle pink"></span></td>
-    <td><span class="circle orange"></span></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=105">거창(광주)</a></td>
-    <td>고서기점 137</td>
-    <td>055-943-0992</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle pink"></span></td>
-    <td><span class="circle orange"></span></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=106">거창(대구)</a></td>
-    <td>고서기점 137</td>
-    <td>055-943-9534</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle pink"></span></td>
-    <td><span class="circle orange"></span></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=107">건천(부산)</a></td>
-    <td>부산기점 76</td>
-    <td>054-751-6890</td>
-    <td><span class="circle blue"></span></td>
-    <td></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=108">건천(서울)</a></td>
-    <td>부산기점 76</td>
-    <td>054-751-7401</td>
-    <td><span class="circle green"></span><span class="circle gray"></span></td>
-    <td></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=109">경산(서울)</a></td>
-    <td>부산기점 111</td>
-    <td>053-852-5243</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle pink"></span><span class="circle gray"></span><span class="circle purple"></span><span class="circle red"></span></td>
-    <td><span class="circle orange"></span></td>
-    <td>X</td><td>X</td><td>O</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=110">경주(부산)</a></td>
-    <td>부산기점 59</td>
-    <td>054-748-3195</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle pink"></span><span class="circle gray"></span><span class="circle purple"></span><span class="circle red"></span></td>
-    <td><span class="circle orange"></span></td>
-    <td>X</td><td>X</td><td>O</td>
+    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle gray"></span><span class="circle brown"></span></td>
+    <td>X</td>
+    <td>X</td>
+    <td>X</td>
   </tr>
 </tbody>
-
-
-
 </table>
 </div>
 
