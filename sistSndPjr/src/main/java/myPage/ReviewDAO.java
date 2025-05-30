@@ -23,8 +23,8 @@ public class ReviewDAO {
 	        conn = dbCon.getDbCon();
 
 	        StringBuilder selectQuery = new StringBuilder();
-	        selectQuery.append("SELECT r.rev_num, r.content, r.input_date, a.name AS area_name ")
-	           .append("FROM review r ")
+	        selectQuery.append("SELECT r.rev_num, r.content, r.input_date, a.name AS area_name, ")
+	           .append("r.name as user_name FROM review r ")
 	           .append("JOIN area a ON r.area_num = a.area_num ")
 	           .append("WHERE r.acc_num = ( ")
 	           .append("    SELECT acc_num FROM account WHERE user_email = ? ")
@@ -39,6 +39,7 @@ public class ReviewDAO {
 	            ReviewDTO rDTO = new ReviewDTO();
 	            rDTO.setRev_num(rs.getInt("rev_num"));
 	            rDTO.setContent(rs.getString("content"));
+	            rDTO.setUser_name(rs.getString("user_name"));
 	            rDTO.setInput_date(rs.getDate("input_date"));
 	            rDTO.setArea_name(rs.getString("area_name"));  // DTO에 맞게 이름 맞춰줘
 	            list.add(rDTO);
@@ -63,8 +64,8 @@ public class ReviewDAO {
 			conn = dbCon.getDbCon();
 			
 			StringBuilder selectQuery = new StringBuilder();
-			selectQuery.append("SELECT r.rev_num, r.content, r.input_date, a.name AS area_name ")
-            .append("FROM review r ")
+			selectQuery.append("SELECT r.rev_num, r.content, r.input_date, a.name AS area_name, ")
+            .append("r.name as user_name FROM review r ")
             .append("JOIN area a ON r.area_num = a.area_num ")
             .append("WHERE r.rev_num = ?");
 			
@@ -76,6 +77,7 @@ public class ReviewDAO {
 	            rDTO = new ReviewDTO();
 	            rDTO.setRev_num(rs.getInt("rev_num"));
 	            rDTO.setContent(rs.getString("content"));
+	            rDTO.setUser_name(rs.getString("user_name"));
 	            rDTO.setInput_date(rs.getDate("input_date"));
 	            rDTO.setArea_name(rs.getString("area_name"));
 	        }
@@ -106,5 +108,29 @@ public class ReviewDAO {
 		}finally {
 			dbCon.dbClose(conn, pstmt, null);
 		}
+	}
+	
+	public void updateReview(int revNum, String newContent) throws SQLException {
+		Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    
+	    DBConnection dbCon = DBConnection.getInstance();
+	    
+	    try {
+	    	conn = dbCon.getDbCon();
+	    	
+	    	StringBuilder updateQuery = new StringBuilder();
+	    	updateQuery.append("UPDATE review ")
+	             .append("SET content = ?, input_date = SYSDATE ")
+	             .append("WHERE rev_num = ?");
+
+	        pstmt = conn.prepareStatement(updateQuery.toString());
+	        pstmt.setString(1, newContent);
+	        pstmt.setInt(2, revNum);
+
+	        pstmt.executeUpdate();
+	    }finally {
+	        dbCon.dbClose(conn, pstmt, null);
+	    }
 	}
 }

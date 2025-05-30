@@ -39,4 +39,13 @@ public class ReviewService {
 			e.printStackTrace();
 		}
 	}
+	
+	public void modifyReview(int revNum, String newContent) {
+        ReviewDAO dao = new ReviewDAO();
+        try {
+            dao.updateReview(revNum, newContent);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

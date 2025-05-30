@@ -20,4 +20,5 @@ public class ReviewDTO {
 	private int acc_num;
 	private String content;
 	private Date input_date;
+	private String user_name;
 }

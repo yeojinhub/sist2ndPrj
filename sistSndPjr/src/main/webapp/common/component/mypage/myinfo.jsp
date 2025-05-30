@@ -13,9 +13,7 @@
     pageContext.setAttribute("name", name);
     pageContext.setAttribute("email", email);
     pageContext.setAttribute("tel", tel);
-    
-    System.out.println("🧾 세션 내 이름: " + lDTO.getName());
-    System.out.println("🔓 복호화한 이름: " + name);
+   
 %>
 
 <script>
