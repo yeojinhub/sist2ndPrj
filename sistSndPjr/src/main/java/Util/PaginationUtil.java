@@ -11,16 +11,28 @@ public class PaginationUtil {
 		StringBuilder queryString = new StringBuilder("");
 
 		String field = pDTO.getField();
+		String route = pDTO.getRoute();
+		String elect = pDTO.getElect();
+		String hydro = pDTO.getHydro();
 		String keyword = pDTO.getKeyword();
 		String url = pDTO.getUrl();
 		int currentPage = pDTO.getCurrentPage();
 		int pageNumber = pDTO.getPageNumber();
 		int totalPage = pDTO.getTotalPage();
 
-		// 1. filed와 keyword 쿼리스트링 만들기
-		if (field != null && keyword != null) {
-			queryString.append("&filed=").append(field).append("&keyword=").append(keyword);
-		} // end if
+		// 1. Route, Keyword, Elect, Hydro 값 있다면 쿼리스트링 만들기.
+		if (route != null) {
+			queryString.append("&route=").append(route);
+		}// end if
+		if (keyword != null) {
+			queryString.append("&keyword=").append(keyword);
+		}// end if
+		if (elect != null) {
+			queryString.append("&elect=on");
+		}// end if
+		if (hydro != null) {
+			queryString.append("&hydro=on");
+		}// end if
 
 		// 2. 시작, 끝 페이지 구하기.
 		int startPage = ((currentPage - 1) / pageNumber) * pageNumber + 1;
