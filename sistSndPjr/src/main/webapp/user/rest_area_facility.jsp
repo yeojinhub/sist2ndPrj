@@ -1,11 +1,48 @@
+<%@page import="Util.PaginationUtil"%>
+<%@page import="DTO.PaginationDTO"%>
+<%@page import="restarea.facility.RestAreaFacilityService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="rDTO" class="DTO.RangeDTO" scope="page" />
+<jsp:setProperty name="rDTO" property="*" />
 <%
     request.setAttribute("menu", "facility");
+<<<<<<< HEAD
 	request.setCharacterEncoding("UTF-8");
 %>
 <jsp:useBean id="rDTO" class="DTO.RangeDTO" scope="page"/>
 <jsp:setProperty name="rDTO" property="*"/>    
+=======
+%>    
+<%
+RestAreaFacilityService rafs = new RestAreaFacilityService();
+
+//1. 전체 데이터(게시물)수를 구합니다.
+int totalCount = 0;
+totalCount = rafs.totalCount( rDTO );
+// 2. 페이지에 보여질 게시물의 수를 구합니다.
+int pageScale = 0;
+pageScale = rafs.pageScale();
+// 3. 총 페이지의 수를 구합니다.
+int totalPage = 0;
+totalPage = rafs.totalPage(totalCount, pageScale);
+// 4. 현재페이지(currentPage)에 따른 게시물 시작 번호를 구합니다.
+int startNum = 0;
+startNum = rafs.startNum(pageScale, rDTO);
+// 5. 현재페이지(currentPage)에 따른 게시물 끝 번호를 구합니다.
+int endNum = 0;
+endNum = rafs.endNum(pageScale, rDTO);
+
+pageContext.setAttribute("totalCount", totalCount);
+pageContext.setAttribute("pageScale", pageScale);
+pageContext.setAttribute("totalPage", totalPage);
+pageContext.setAttribute("startNum", startNum);
+pageContext.setAttribute("endNum", endNum);
+pageContext.setAttribute("restAreaFacilityList", rafs.searchAllAreaFacility(rDTO));
+%>
+
+>>>>>>> 61aa1845304ba498957ff809596843a4ff9444ec
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,13 +127,14 @@
     <thead>
       <tr>
         <th rowspan="2">휴게소명</th>
-        <th rowspan="2">이정</th>
+        <th rowspan="2">노선</th>
         <th rowspan="2">전화번호</th>
         <th rowspan="2">편의시설</th>
         <th rowspan="2">세차장</th>
         <th rowspan="2">경정비소</th>
         <th rowspan="2">ex화물차라운지</th>
       </tr>
+<<<<<<< HEAD
     </thead>
   <tbody>
   <tr>
@@ -108,8 +146,45 @@
     <td>X</td>
     <td>X</td>
   </tr>
+=======
+  
+    </thead>
+  <tbody>
+  	<c:if test="${ empty restAreaFacilityList }">
+	<tr>
+		<td colspan="3">공지사항이 존재하지 않습니다.</td>
+	</tr>
+	</c:if>
+    
+  <c:forEach var="afDTO" items="${ restAreaFacilityList }" varStatus="i">
+	<tr>
+	    <td><a href="rest_area_detail.jsp?id=${ afDTO.area_num }">${ afDTO.name }</a></td>
+	    <td>${ afDTO.route }</td>
+	    <td>${ afDTO.tel }</td>
+	    <td>
+		 <c:if test="${ afDTO.sleep == 'O' }"><span class="circle green"></span></c:if>
+		 <c:if test="${ afDTO.shower == 'O' }"><span class="circle blue"></span></c:if>
+		 <c:if test="${ afDTO.laundry == 'O' }"><span class="circle purple"></span></c:if>
+		 <c:if test="${ afDTO.shelter == 'O' }"><span class="circle gray"></span></c:if>
+		 <c:if test="${ afDTO.salon == 'O' }"><span class="circle brown"></span></c:if>
+		 <c:if test="${ afDTO.feed == 'O' }"><span class="circle pink"></span></c:if>
+		 <c:if test="${ afDTO.clinic == 'O' }"><span class="circle red"></span></c:if>
+		 <c:if test="${ afDTO.pharmacy == 'O' }"><span class="circle yellow"></span></c:if>
+	    </td>
+	    <td>${ afDTO.wash }</td><td>${ afDTO.repair }</td><td>${ afDTO.truck }</td>
+  	</tr>
+	</c:forEach>
+  
+>>>>>>> 61aa1845304ba498957ff809596843a4ff9444ec
 </tbody>
 </table>
+<div id="pageinationDiv">
+
+<%
+PaginationDTO pDTO = new PaginationDTO(5,rDTO.getCurrentPage(),totalPage,"rest_area_facility.jsp",null,null);
+%>
+<%= PaginationUtil.pagination(pDTO) %>
+</div>
 </div>
 
 </div> <%-- End of container div --%>

@@ -74,7 +74,7 @@ public class NoticeDAO {
 			.append("	select not_num, title, content, name, input_date, status_type	")
 			.append("	from(select not_num, title, content, name, input_date, status_type, 	")
 			.append("	row_number() over(order by input_date desc) rnum 	")
-			.append("	from notice	")
+			.append("	from notice)	")
 			.append("	where rnum between ? and ?	");
 			
 			pstmt = con.prepareStatement(selectNotice.toString());
