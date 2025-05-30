@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자 대시보드</title>
-    <link rel="stylesheet" href="../common/css/styles.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/sistSndPjr/admin/script.js"></script>
 </head>
 <body>
-	<div class="container">
+    <div class="container">
         <!-- Sidebar -->
-        <jsp:include page="admin_sidebar.jsp" />
+        <jsp:include page="/admin/common/jsp/admin_sidebar.jsp" />
 
 		<!-- Main Content -->
 		<div class="main-content">
 			<div class="header">
-				<h1>주유소 관리</h1>
+				<h1>휴게소 상세정보 관리</h1>
 			</div>
 			
 			<div class="search-div">
@@ -35,12 +35,8 @@
 							<th><input type="checkbox" /></th>
 							<th>번호</th>
 							<th>휴게소명</th>
+							<th>노선</th>
 							<th>전화번호</th>
-							<th>휘발유</th>
-							<th>경유</th>
-							<th>LPG</th>
-							<th>전기충전소</th>
-							<th>수소충전소</th>
 							<th>영업시간</th>
 						</tr>
 					</thead>
@@ -48,121 +44,81 @@
 						<tr onclick="location.href='area_detail.jsp'">
 							<td><input type="checkbox" /></td>
 							<td>210</td>
-							<td>강릉대관령(인천)</td>
-							<td>033-647-7112</td>
-							<td>1,574원</td>
-							<td>1,439원</td>
-							<td>1,117원</td>
-							<td>O</td>
-							<td>X</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
 							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>209</td>
-							<td>강릉대관령(인천)</td>
-							<td>033-647-7112</td>
-							<td>1,574원</td>
-							<td>1,439원</td>
-							<td>1,117원</td>
-							<td>O</td>
-							<td>X</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
 							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>208</td>
-							<td>강릉대관령(인천)</td>
-							<td>033-647-7112</td>
-							<td>1,574원</td>
-							<td>1,439원</td>
-							<td>1,117원</td>
-							<td>O</td>
-							<td>X</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
 							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>207</td>
-							<td>강릉대관령(인천)</td>
-							<td>033-647-7112</td>
-							<td>1,574원</td>
-							<td>1,439원</td>
-							<td>1,117원</td>
-							<td>O</td>
-							<td>X</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
 							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>206</td>
-							<td>강릉대관령(인천)</td>
-							<td>033-647-7112</td>
-							<td>1,574원</td>
-							<td>1,439원</td>
-							<td>1,117원</td>
-							<td>O</td>
-							<td>X</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
 							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>205</td>
-							<td>강릉대관령(인천)</td>
-							<td>033-647-7112</td>
-							<td>1,574원</td>
-							<td>1,439원</td>
-							<td>1,117원</td>
-							<td>O</td>
-							<td>X</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
 							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>204</td>
-							<td>강릉대관령(인천)</td>
-							<td>033-647-7112</td>
-							<td>1,574원</td>
-							<td>1,439원</td>
-							<td>1,117원</td>
-							<td>O</td>
-							<td>X</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
 							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>203</td>
-							<td>강릉대관령(인천)</td>
-							<td>033-647-7112</td>
-							<td>1,574원</td>
-							<td>1,439원</td>
-							<td>1,117원</td>
-							<td>O</td>
-							<td>X</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
 							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>202</td>
-							<td>강릉대관령(인천)</td>
-							<td>033-647-7112</td>
-							<td>1,574원</td>
-							<td>1,439원</td>
-							<td>1,117원</td>
-							<td>O</td>
-							<td>X</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
 							<td>00:00 - 23:59</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td>201</td>
-							<td>강릉대관령(인천)</td>
-							<td>033-647-7112</td>
-							<td>1,574원</td>
-							<td>1,439원</td>
-							<td>1,117원</td>
-							<td>O</td>
-							<td>X</td>
+							<td>홍천강(춘천)</td>
+							<td>중앙선</td>
+							<td>033-435-1201</td>
 							<td>00:00 - 23:59</td>
 						</tr>
 					</tbody>
@@ -178,7 +134,8 @@
 			</div>
 
 			<div class="button-group">
-				<button class="btn btn-add" onclick="location.href='petrol_add.jsp'">등록</button>
+				<button class="btn btn-add" onclick="location.href='area_add.jsp'">추가</button>
+				<button class="btn btn-delete">삭제</button>
 			</div>
 		</div>
 	</div>

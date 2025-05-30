@@ -1,18 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="Account.AccountDTO"%>
+<%@page import="Account.AdminAccountService"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>관리자 대시보드</title>
-    <link rel="stylesheet" href="../common/css/styles.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/sistSndPjr/admin/script.js"></script>
 </head>
 <body>
     <div class="container">
         <!-- Sidebar -->
-        <jsp:include page="admin_sidebar.jsp" />
+        <jsp:include page="/admin/common/jsp/admin_sidebar.jsp" />
         
         <!-- Main Content -->
         <div class="main-content">
@@ -21,6 +28,11 @@
             </div>
             
             <div class="content">
+            	<%
+            	AdminAccountService accountService = new AdminAccountService();
+            	List<AccountDTO> adminList = accountService.selectAllAdmin();
+            	request.setAttribute("adminList", adminList);
+            	%>
                 <table class="data-table">
                     <thead>
                         <tr>
@@ -32,27 +44,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${ empty adminList }">
+                    	<tr>
+                    		<td colspan="5">관리자 계정 정보가 없습니다.</td>
+                    	</tr>
+                    </c:if>
+                    <c:forEach var="accountDTO" items="${ adminList }" varStatus="i">
                         <tr onclick="location.href='admin_account_detail.jsp'">
-                            <td>3</td>
-                            <td>김민경</td>
-                            <td>admin01</td>
-                            <td>010-1234-5678</td>
-                            <td>2025-05-22</td>
+                            <td><c:out value="${ i.count }" /></td>
+                            <td><c:out value="${ accountDTO.name }" /></td>
+                            <td><c:out value="${ accountDTO.adm_id }" /></td>
+                            <td><c:out value="${ accountDTO.tel }" /></td>
+                            <td><fmt:formatDate value="${ accountDTO.input_date }" pattern="yyyy-MM-dd" /></td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>유명규</td>
-                            <td>admin02</td>
-                            <td>010-1114-6321</td>
-                            <td>2025-05-19</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>이대웅</td>
-                            <td>admin03</td>
-                            <td>010-8123-8700</td>
-                            <td>2025-05-05</td>
-                        </tr>
+                     </c:forEach>
                     </tbody>
                 </table>
                 

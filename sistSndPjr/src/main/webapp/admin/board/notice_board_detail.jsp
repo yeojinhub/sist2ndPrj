@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자 대시보드</title>
-    <link rel="stylesheet" href="../common/css/styles.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/sistSndPjr/admin/script.js"></script>
 </head>
 <body>
     <div class="container">
         <!-- Sidebar -->
-        <jsp:include page="admin_sidebar.jsp" />
+        <jsp:include page="/admin/common/jsp/admin_sidebar.jsp" />
         
         <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1>문의 수정</h1>
+                <h1>공지사항 수정</h1>
             </div>
             <div class="content">
             	<div class="notice-div">
@@ -50,7 +50,7 @@
             <div class="button-detail">
             	<button class="btn btn-edit">수정</button>
             	<button class="btn btn-delete">삭제</button>
-            	<button class="btn btn-back" onclick="location.href='inquiries.jsp'">취소</button>
+            	<button class="btn btn-back" onclick="location.href='notice_board.jsp'">취소</button>
             </div>
 
         </div>

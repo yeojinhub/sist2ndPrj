@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자 대시보드</title>
-    <link rel="stylesheet" href="../common/css/styles.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/sistSndPjr/admin/script.js"></script>
 </head>
 <body>
     <div class="container">
         <!-- Sidebar -->
-        <jsp:include page="admin_sidebar.jsp" />
+        <jsp:include page="/admin/common/jsp/admin_sidebar.jsp" />
         
         <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1>공지사항 작성</h1>
+                <h1>리뷰 조회</h1>
             </div>
             <div class="content">
             	<div class="notice-div">
@@ -25,17 +25,17 @@
 						<tbody>
 							<tr>
 								<td class="tdColumn">작성자</td>
-								<td><textarea class="one-line">admin03 </textarea></td>
+								<td><textarea class="one-line">주현석</textarea></td>
 								<td class="tdColumn">작성일</td>
 								<td><textarea class="one-line">2025-05-03</textarea></td>
 							</tr>
 							<tr>
-								<td>제목</td>
-								<td colspan="3"><textarea class="title"></textarea></td>
+								<td>휴게소명</td>
+								<td colspan="3"><textarea class="title">예산(당진)</textarea></td>
 							</tr>
 							<tr>
 								<td>내용</td>
-								<td colspan="3"><textarea class="content"></textarea>
+								<td colspan="3"><textarea class="content">자연경관이 멋진 곳이에요!</textarea>
         						</td>
 							</tr>
 						</tbody>
@@ -44,8 +44,8 @@
             </div>
             
             <div class="button-detail">
-            	<button class="btn btn-add">작성</button>
-            	<button class="btn btn-back" onclick="location.href='notice_board.jsp'">취소</button>
+            	<button class="btn btn-hidden">숨김</button>
+            	<button class="btn btn-back" onclick="location.href='reviews.jsp'">취소</button>
             </div>
 
         </div>

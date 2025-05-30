@@ -1,4 +1,4 @@
-package DTO;
+package Account;
 
 import java.sql.Date;
 
@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class AccountDTO {
 	private int acc_num;/* 계정번호 */
 	private String name; /* 계정이름 */

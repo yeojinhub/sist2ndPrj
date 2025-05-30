@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자 대시보드</title>
-    <link rel="stylesheet" href="../common/css/styles.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/sistSndPjr/admin/script.js"></script>
 </head>
 <body>
     <div class="container">
         <!-- Sidebar -->
-        <jsp:include page="admin_sidebar.jsp" />
+        <jsp:include page="/admin/common/jsp/admin_sidebar.jsp" />
         
         <!-- Main Content -->
         <div class="main-content">

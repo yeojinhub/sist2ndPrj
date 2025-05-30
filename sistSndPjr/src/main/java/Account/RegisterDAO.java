@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import DBConnection.DBConnection;
-import DTO.AccountDTO;
 
 public class RegisterDAO {
 	
