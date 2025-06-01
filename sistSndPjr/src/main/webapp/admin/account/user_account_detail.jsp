@@ -71,7 +71,7 @@ request.setAttribute("userDTO", userService.searchOneUser(num));
             <div class="button-group">
             	<button class="btn btn-edit">수정</button>
             	<button class="btn btn-delete">삭제</button>
-            	<button class="btn btn-back" onclick="location.href='user_accounts.jsp'">뒤로</button>
+            	<button class="btn btn-back" onclick="location.href='user_account_list.jsp'">뒤로</button>
             </div>
 
         </div>

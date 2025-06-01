@@ -72,7 +72,7 @@ request.setAttribute("userList", userList);
                 </div>
                 
                 <div class="button-group">
-                    <button class="btn btn-add" onclick="location.href='user_account_add.jsp'">등록</button>
+                    <button class="btn btn-add" onclick="location.href='user_account_add_frm.jsp'">등록</button>
                 </div>
             </div>
         </div>

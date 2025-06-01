@@ -159,8 +159,8 @@ public class AdminAccountDAO {
 			StringBuilder insertQuery = new StringBuilder();
 			insertQuery
 			.append("	insert	into	account	")
-			.append("	(acc_num, name, user_email, pass, tel, input_date, withdraw, roletype)	")
-			.append("	values(seq_acc_num.nextval,?,?,?,?,?,'N',1)	")
+			.append("	(acc_num, name, user_email, pass, tel, input_date, withdraw, ROLLTYPE)	")
+			.append("	values(SEQ_ACC_NUM.NEXTVAL,?,?,?,?,?,'N',1)	")
 			;
 			
 			pstmt = con.prepareStatement(insertQuery.toString());

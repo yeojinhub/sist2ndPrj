@@ -35,7 +35,7 @@ String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 			</div>
 
 			<div class="content">
-				<form name="addForm" action="user_account_add_proccess.jsp" method="post">
+				<form name="addFrm" id="addFrm" action="user_account_add_proccess.jsp" method="post">
 				<table class="account-table account-content">
 					<tbody>
 						<tr>
