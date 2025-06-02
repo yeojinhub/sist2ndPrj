@@ -1,75 +1,99 @@
+<%@page import="DTO.LoginDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script>
-    function deleteFavorite() {
-        if (confirm('즐겨찾기를 삭제하시겠습니까?')) {
-            alert('즐겨찾기가 삭제되었습니다.');
-            window.parent.$('.content').load('../common/component/mypage/myFavorite.jsp', function(response, status, xhr) {
-                if (status === "error") {
-                    console.error("myFavorite.jsp 로드 오류: " + xhr.status + " " + xhr.statusText);
-                }
-            });
-            window.parent.$('#myfavorite').addClass('active');
-            window.parent.$('#myinfo').removeClass('active');
-        }
-    }
-</script>
+<%@ page import="java.util.*, DTO.FavoriteDTO, myPage.FavoriteService" %>
 
-<style>
-        /* 페이지네이션 */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 16px;
-}
-.pagination button {
-    background: none;
-    border: none;
-    color: #9ca3af;
-    cursor: pointer;
-    padding: 0 16px;
-}
-.pagination span {
-    font-size: 14px;
-}
-    
-</style>
+<%
+    request.setCharacterEncoding("UTF-8");
+    LoginDTO lDTO = (LoginDTO) session.getAttribute("userData");
+    String email = lDTO.getUser_email();
+
+    FavoriteService service = new FavoriteService();
+    List<FavoriteDTO> favList = service.searchFavorite(email);
+%>
 
 <script>
-$(function() {
-    $('#checkAll').on('change', function() {
+$(function () {
+    $('#checkAll').on('change', function () {
         const isChecked = $(this).prop('checked');
         $('input[name="favoriteCheck"]').prop('checked', isChecked);
     });
-}); // ready
+
+    $('#deleteBtn').on('click', function () {
+        let checked = $('input[name="favoriteCheck"]:checked');
+        if (checked.length === 0) {
+            alert("삭제할 항목을 선택해주세요.");
+            return;
+        }
+
+        if (!confirm("즐겨찾기를 삭제하시겠습니까?")) return;
+
+        let favNums = [];
+        checked.each(function () {
+            favNums.push($(this).val());
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "../common/component/mypage/deleteFavorite.jsp",
+            traditional: true,
+            data: {
+                favoriteCheck: favNums
+            },
+            success: function (res) {
+                alert("삭제가 완료되었습니다.");
+                window.parent.$(".content").load("../common/component/mypage/myFavorite.jsp");
+            },
+            error: function () {
+                alert("삭제 중 오류가 발생했습니다.");
+            }
+        });
+    });
+});
 </script>
 
 <div style="position: relative;">
     <h3 class="section-title">나의 즐겨찾기</h3>
-	<hr class="line_gray">
+    <hr class="line_gray">
 
-	<div class="user_table">
-            <table>
-                <thead>
-                    <tr>
-                        <th><input type="checkbox" name="checkAll" id="checkAll"></th>
-                        <th>휴게소명</th>
-                        <th>노선</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-            </table>
-        </div>
+    <div class="user_table">
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="checkAll"></th>
+                    <th>휴게소명</th>
+                    <th>노선</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    if (favList != null && !favList.isEmpty()) {
+                        for (FavoriteDTO fav : favList) {
+                %>
+                <tr>
+                    <td><input type="checkbox" name="favoriteCheck" value="<%= fav.getFav_num() %>"></td>
+                    <td><%= fav.getArea_name() %></td>
+                    <td><%= fav.getArea_path() %></td>
+                </tr>
+                <%
+                        }
+                    } else {
+                %>
+                <tr>
+                    <td colspan="3" style="text-align:center;">등록된 즐겨찾기가 없습니다.</td>
+                </tr>
+                <%
+                    }
+                %>
+            </tbody>
+        </table>
+    </div>
 
-        <div class="pagination">
-            <button>◀</button>
-            <span style="text-decoration: underline;">1</span>
-            <button>▶</button>
-        </div>
-
-        <div class="button-group" style="text-align: center;">
-            <button class="btn btn-cancel" onclick="deleteFavorite()">삭제</button>
-        </div>
+    <div class="button-group" style="text-align: center;">
+        <button id="deleteBtn" class="btn btn-cancel">삭제</button>
+    </div>
 </div>
+
+
+
+
+

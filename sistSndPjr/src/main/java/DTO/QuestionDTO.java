@@ -13,11 +13,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class InquiryDTO {
+public class QuestionDTO {
 	private int inq_num;
 	private String title;
 	private int acc_num;
 	private String content;
 	private String status;
 	private Date input_date;
+	private String name;
+	private String answer_content;
 }
