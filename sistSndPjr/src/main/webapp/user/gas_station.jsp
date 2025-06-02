@@ -120,7 +120,7 @@ $(function(){
 		
 
 		%>
-		<table class="user_table" style="flex: 1;">
+		<table class="user_table">
 			<thead>
 				<tr>
 					<th>주유소명</th>
