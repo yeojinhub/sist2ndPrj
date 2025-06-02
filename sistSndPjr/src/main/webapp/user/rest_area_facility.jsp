@@ -8,7 +8,8 @@
 <jsp:setProperty name="rDTO" property="*" />
 <%
     request.setAttribute("menu", "facility");
-%>    
+	request.setCharacterEncoding("UTF-8");
+%>
 <%
 RestAreaFacilityService rafs = new RestAreaFacilityService();
 
@@ -34,6 +35,9 @@ pageContext.setAttribute("totalPage", totalPage);
 pageContext.setAttribute("startNum", startNum);
 pageContext.setAttribute("endNum", endNum);
 pageContext.setAttribute("restAreaFacilityList", rafs.searchAllAreaFacility(rDTO));
+
+// 전체 노선 얻어와서 EL문 사용하기 위한 setAttribute
+pageContext.setAttribute("allRoute", rafs.searchAllRoute());
 %>
 
 <!DOCTYPE html>
@@ -48,7 +52,21 @@ pageContext.setAttribute("restAreaFacilityList", rafs.searchAllAreaFacility(rDTO
 
 <script>
     $(function(){
+    	if (${not empty rDTO.route}) {
+	    	$('#route').val('${rDTO.route}');
+    	}
     	
+    	$('#keyword').val('${rDTO.keyword}');
+    	
+    	if(${not empty rDTO.wash}) {
+    		$('#wash').prop('checked', true);
+    	};// end if
+    	if(${not empty rDTO.repair}) {
+    		$('#repair').prop('checked', true);
+    	};// end if
+    	if(${not empty rDTO.truck}) {
+    		$('#truck').prop('checked', true);
+    	};// end if
     });
 </script>
 </head>
@@ -77,26 +95,26 @@ pageContext.setAttribute("restAreaFacilityList", rafs.searchAllAreaFacility(rDTO
 
 <!-- 검색 필터 영역 -->
 <div class="search-box">
+<form action="rest_area_facility.jsp" method="GET">
   <label for="route">노선명</label>
   <select name="route" id="route">
-    <option value="">선택</option>
-    <option value="경부고속도로">경부고속도로</option>
-    <option value="영동고속도로">영동고속도로</option>
-    <option value="서해안고속도로">서해안고속도로</option>
-    <option value="중부고속도로">중부고속도로</option>
-    <option value="호남고속도로">호남고속도로</option>
+    <option value="select">선택</option>
+    <c:forEach var="route" items="${allRoute }" varStatus="i">
+    <option value="${route }">${route }</option>
+    </c:forEach>
   </select>
 
   <label for="rest-name">휴게소명</label>
-  <input type="text" id="rest-name" name="restName" placeholder="예: 칠곡(상)" />
+  <input type="text" id="keyword" name="keyword" placeholder="예: 칠곡(상)" />
 
   <label class="divider-label">구분</label>
-  <label><input type="checkbox" name="type" value="세차장" /> 세차장</label>
-  <label><input type="checkbox" name="type" value="경정비소" /> 경정비소</label>
-  <label><input type="checkbox" name="type" value="ex화물차라운지" /> ex-화물차라운지</label>
+  <label><input type="checkbox" id="wash" name="wash" value="O" /> 세차장</label>
+  <label><input type="checkbox" id="repair" name="repair" value="O" /> 경정비소</label>
+  <label><input type="checkbox" id="truck" name="truck" value="O" /> ex-화물차라운지</label>
 
 
   <button type="submit" class="btn btn-confirm">조회</button>
+  </form>
 </div>
 		
 <!-- 편의시설 정보 박스 -->
@@ -127,12 +145,11 @@ pageContext.setAttribute("restAreaFacilityList", rafs.searchAllAreaFacility(rDTO
         <th rowspan="2">경정비소</th>
         <th rowspan="2">ex화물차라운지</th>
       </tr>
-  
     </thead>
   <tbody>
   	<c:if test="${ empty restAreaFacilityList }">
 	<tr>
-		<td colspan="3">공지사항이 존재하지 않습니다.</td>
+		<td colspan="7">검색된 휴게소가 없습니다.</td>
 	</tr>
 	</c:if>
     
@@ -154,16 +171,13 @@ pageContext.setAttribute("restAreaFacilityList", rafs.searchAllAreaFacility(rDTO
 	    <td>${ afDTO.wash }</td><td>${ afDTO.repair }</td><td>${ afDTO.truck }</td>
   	</tr>
 	</c:forEach>
-  
 </tbody>
-
-
-
 </table>
 <div id="pageinationDiv">
 
 <%
-PaginationDTO pDTO = new PaginationDTO(5,rDTO.getCurrentPage(),totalPage,"rest_area_facility.jsp",null,null,null,null,null);
+PaginationDTO pDTO = new PaginationDTO(5,rDTO.getCurrentPage(),totalPage,"rest_area_facility.jsp",null,rDTO.getKeyword(),rDTO.getRoute(),null,null,rDTO.getWash(),rDTO.getRepair(),rDTO.getTruck());
+
 %>
 <%= PaginationUtil.pagination(pDTO) %>
 </div>

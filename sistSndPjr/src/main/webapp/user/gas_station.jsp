@@ -120,7 +120,7 @@ $(function(){
 		
 
 		%>
-		<table class="user_table" style="flex: 1;">
+		<table class="user_table">
 			<thead>
 				<tr>
 					<th>주유소명</th>
@@ -155,7 +155,7 @@ $(function(){
 
 		<!-- 페이지네이션 -->
 		<%
-		PaginationDTO pDTO = new PaginationDTO(5, rDTO.getCurrentPage(), totalPage, "gas_station.jsp", null, rDTO.getKeyword(), rDTO.getRoute(), rDTO.getElect(), rDTO.getHydro());
+		PaginationDTO pDTO = new PaginationDTO(5, rDTO.getCurrentPage(), totalPage, "gas_station.jsp", null, rDTO.getKeyword(), rDTO.getRoute(), rDTO.getElect(), rDTO.getHydro(),null,null,null);
 		%>
 		<%=PaginationUtil.pagination(pDTO)%>
 

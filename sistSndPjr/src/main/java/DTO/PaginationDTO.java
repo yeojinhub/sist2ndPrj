@@ -12,6 +12,6 @@ import lombok.ToString;
 public class PaginationDTO {
 
 	private int pageNumber, currentPage, totalPage;
-	private String url, field, keyword, route, elect, hydro;
+	private String url, field, keyword, route, elect, hydro, wash, repair, truck;
 	
 }// class
