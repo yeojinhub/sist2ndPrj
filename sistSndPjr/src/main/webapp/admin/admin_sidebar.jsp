@@ -1,13 +1,16 @@
+<%@page import="AdminLogin.LoginResultDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%
+    LoginResultDTO userData = (LoginResultDTO) session.getAttribute("userData");
+%>
 <div class="sidebar">
 	<div class="logo-container">
 		<img src="../common/images/logo251.png" alt="로고" class="logo">
 	</div>
 
 	<div class="admin-info">
-		<span class="admin-label">관리자</span> <span class="admin-name">김민경님</span>
+		<span class="admin-label">관리자</span> <span class="admin-name"><%= userData.getName() %></span>
 		<button class="logout-btn">로그아웃</button>
 	</div>
 

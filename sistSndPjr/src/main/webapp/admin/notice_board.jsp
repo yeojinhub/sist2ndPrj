@@ -1,4 +1,20 @@
+<%@page import="Pagination.PaginationUtil"%>
+<%@page import="Pagination.PaginationDTO"%>
+<%@page import="AdminLogin.LoginResultDTO"%>
+<%@page import="Notice.NoticeDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="Notice.NoticeService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+NoticeService service = new NoticeService();
+List<NoticeDTO> noticeList = service.getNoticeList();
+request.setAttribute("noticeList", noticeList);
+%>
+<%
+    LoginResultDTO userData = (LoginResultDTO) session.getAttribute("userData");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,190 +26,72 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-	<div class="container">
-<<<<<<< HEAD
-		<!-- Sidebar -->
-		<div class="sidebar">
-			<div class="logo-container">
-				<img src="../common/images/logo.png" alt="로고" class="logo"> <span
-					class="logo-text">모두쉼</span>
-			</div>
-
-			<div class="admin-info">
-				<span class="admin-label">관리자</span> <span class="admin-name">김민경님</span>
-				<button class="logout-btn">로그아웃</button>
-			</div>
-
-			<ul class="menu">
-				<li class="menu-item"><a href="home.jsp"><i
-						class="fas fa-home"></i> Home</a></li>
-
-				<li class="menu-item has-submenu"><a href="#"
-					class="toggle-submenu"><i class="fas fa-users"></i> 계정관리 <i
-						class="fas fa-chevron-down arrow"></i></a>
-					<ul class="submenu">
-						<li><a href="user_accounts.jsp">회원 계정관리</a></li>
-						<li><a href="admin_accounts.jsp">관리자 계정관리</a></li>
-					</ul></li>
-
-				<li class="menu-item has-submenu"><a href="#"
-					class="toggle-submenu"><i class="fas fa-clipboard-list"></i>
-						게시판 관리 <i class="fas fa-chevron-down arrow"></i></a>
-					<ul class="submenu">
-						<li><a href="notice_board.jsp">공지사항 관리</a></li>
-						<li><a href="faq_board.jsp">FaQ 관리</a></li>
-						<li><a href="qna_board.jsp">QaA 관리</a></li>
-					</ul></li>
-
-				<li class="menu-item"><a href="inquiries.jsp"><i
-						class="fas fa-question-circle"></i> 문의관리</a></li>
-
-				<li class="menu-item"><a href="reviews.jsp"><i
-						class="fas fa-star"></i> 리뷰 조회/신고관리</a></li>
-
-				<li class="menu-item"><a href="rest-areas.jsp"><i
-						class="fas fa-map-marker-alt"></i> 휴게소 관리</a></li>
-			</ul>
-		</div>
-=======
+    <div class="container-">
         <!-- Sidebar -->
         <jsp:include page="admin_sidebar.jsp" />
->>>>>>> aa139969e5ff9909b7b847234c3064e3b816bab7
 
-		<!-- Main Content -->
-		<div class="main-content">
-			<div class="header">
-				<h1>공지사항 관리</h1>
-			</div>
-<<<<<<< HEAD
-=======
-			
-			<div class="search-div">
-				<textarea class="search-title" rows="" cols=""></textarea>
-				<input type="button" class="btn-search" value="검색"/>
-				
-				<textarea class="search-date" rows="" cols=""></textarea>
-				<span class="search-tilde">~</span>
-				<textarea class="search-date" rows="" cols=""></textarea>
-				<input type="button" class="btn-search" value="검색"/>
-			</div>
->>>>>>> aa139969e5ff9909b7b847234c3064e3b816bab7
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>공지사항 관리</h1>
+            </div>
 
-			<div class="content">
-				<table class="data-table">
-					<thead>
-						<tr>
-							<th><input type="checkbox" /></th>
-							<th>번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-							<th>상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr onclick="location.href='notice_board_detail.jsp'">
-							<td><input type="checkbox" /></td>
-							<td>10</td>
-							<td>서울 양양 고속도로 홍천 북방터널서 4중 충돌</td>
-							<td>admin01</td>
-							<td>2025-05-08</td>
-							<td>공지중</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td>9</td>
-							<td>영동고속도로 둔대jc부근서 교통사고 - 정체</td>
-							<td>admin01</td>
-							<td>2025-05-07</td>
-							<td>미공지</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td>8</td>
-							<td>오후4~5시 정체 절정...영동선,서해안선 혼잡</td>
-							<td>admin01</td>
-							<td>2025-05-03</td>
-							<td>미공지</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td>7</td>
-							<td>순천완주고속도로 사행선서 8중 추돌 사고-정체</td>
-							<td>admin01</td>
-							<td>2025-05-02</td>
-							<td>미공지</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td>6</td>
-							<td>호남고속도로 달리던 전기차, 빗길 미끄러져 사고 후 화재</td>
-							<td>admin01</td>
-							<td>2025-05-01</td>
-							<td>미공지</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td>5</td>
-							<td>경부고속도록북대구IC 양방향 진출입차단...”산불연기영향”</td>
-							<td>admin01</td>
-							<td>2025-04-28</td>
-							<td>미공지</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td>4</td>
-							<td>인제산불확산...서울양양고속도로'인제IC~기린5터널'전면차단</td>
-							<td>admin01</td>
-							<td>2025-04-26</td>
-							<td>미공지</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td>3</td>
-							<td>설 명절 고속도로 통행료 무료</td>
-							<td>admin02</td>
-							<td>2025-01-27</td>
-							<td>미공지</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td>2</td>
-							<td>설 명절 정체구간</td>
-							<td>admin02</td>
-							<td>2025-01-27</td>
-							<td>미공지</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td>1</td>
-							<td>강릉(강릉 방향) 고속도로 교통사고</td>
-							<td>admin03</td>
-							<td>2024-12-12</td>
-							<td>미공지</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+            <div class="search-div">
+                <textarea class="search-title" rows="" cols=""></textarea>
+                <input type="button" class="btn-search" value="검색"/>
 
-			<div class="pagination">
-				<a href="#" class="first-page"><i
-					class="fas fa-angle-double-left"></i></a> <a href="#" class="active">1</a>
-				<a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
-				<a href="#" class="last-page"><i
-					class="fas fa-angle-double-right"></i></a>
-			</div>
+                <textarea class="search-date" rows="" cols=""></textarea>
+                <span class="search-tilde">~</span>
+                <textarea class="search-date" rows="" cols=""></textarea>
+                <input type="button" class="btn-search" value="검색"/>
+            </div>
 
-			<div class="button-group">
-<<<<<<< HEAD
-				<button class="btn btn-primary">등록</button>
-				<button class="btn btn-secondary">수정</button>
-=======
-				<button class="btn btn-add" onclick="location.href='notice_board_write.jsp'">작성</button>
-				<button class="btn btn-delete">삭제</button>
->>>>>>> aa139969e5ff9909b7b847234c3064e3b816bab7
-			</div>
-		</div>
-	</div>
+            <div class="content">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" /></th>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="notice" items="${noticeList}">
+                            <tr onclick="location.href='notice_board_detail.jsp?not_num=${notice.not_num}'">
+                                <td><input type="checkbox" /></td>
+                                <td><c:out value="${notice.not_num}" /></td>
+                                <td><c:out value="${notice.title}" /></td>
+                                <td><c:out value="${notice.name}" /></td>
+                                <td><fmt:formatDate value="${notice.input_date}" pattern="yyyy-MM-dd" /></td>
+                                <td><c:out value="${notice.status_type}" /></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 페이지네이션 -->
+            <div class="pagination">
+                <!-- 첫 페이지로 이동 -->
+                <a href="?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="first-page"><i class="fas fa-angle-double-left"></i></a>
+
+                <!-- 페이지 번호 표시 -->
+                <c:forEach var="i" begin="1" end="${pagination.totalPages}">
+                    <a href="?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="<c:if test='${i == pagination.currentPage}'>active</c:if>">${i}</a>
+                </c:forEach>
+
+                <!-- 마지막 페이지로 이동 -->
+                <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="last-page"><i class="fas fa-angle-double-right"></i></a>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-add" onclick="location.href='notice_board_write.jsp'">작성</button>
+                <button class="btn btn-delete">삭제</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
