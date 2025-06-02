@@ -81,7 +81,7 @@ public class NoticeService {
 		return endNum;
 	}
 	
-	public List<NoticeDTO> searchAllNotice(){
+	public List<NoticeDTO> searchAllNotice(DTO.RangeDTO rDTO){
 		
 		List<NoticeDTO> list = null;
 		
@@ -89,7 +89,7 @@ public class NoticeService {
 		
 		
 		try {
-			list =  nDAO.selectAllNotice();
+			list =  nDAO.selectNotice(rDTO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -55,7 +55,7 @@ pageContext.setAttribute("totalCount", totalCount);
 pageContext.setAttribute("pageScale", pageScale);
 pageContext.setAttribute("startNum", startNum);
 pageContext.setAttribute("endNum", rDTO.getEndNum());
-pageContext.setAttribute("noticeList", ns.searchAllNotice());
+pageContext.setAttribute("noticeList", ns.searchAllNotice(rDTO));
 %>
 <h3 class="section-title">공지사항</h3>
 <hr class="line_gray">
@@ -96,7 +96,7 @@ pageContext.setAttribute("noticeList", ns.searchAllNotice());
 <div id="pageinationDiv">
 
 <%
-PaginationDTO pDTO = new PaginationDTO(3,rDTO.getCurrentPage(),totalPage,"boardNotice.jsp",null,null);
+PaginationDTO pDTO = new PaginationDTO(3,rDTO.getCurrentPage(),totalPage,"boardNotice.jsp",null,null,null,null,null);
 %>
 <%= PaginationUtil.pagination(pDTO) %>
 </div>

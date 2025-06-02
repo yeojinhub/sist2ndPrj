@@ -163,7 +163,7 @@ pageContext.setAttribute("restAreaFacilityList", rafs.searchAllAreaFacility(rDTO
 <div id="pageinationDiv">
 
 <%
-PaginationDTO pDTO = new PaginationDTO(5,rDTO.getCurrentPage(),totalPage,"rest_area_facility.jsp",null,null);
+PaginationDTO pDTO = new PaginationDTO(5,rDTO.getCurrentPage(),totalPage,"rest_area_facility.jsp",null,null,null,null,null);
 %>
 <%= PaginationUtil.pagination(pDTO) %>
 </div>

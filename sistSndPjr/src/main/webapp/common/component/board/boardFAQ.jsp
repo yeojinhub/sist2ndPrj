@@ -16,12 +16,6 @@ pageContext.setAttribute("faqList", fs.searchAllFAQ());
 	<div style="position: relative;">
 		<h3 class="section-title">공지사항</h3>
 		<hr class="line_gray">
-		<div class="search-box">
-			<select>
-				<option>제목</option>
-			</select> <input type="text" />
-			<button class="btn btn-confirm">검색</button>
-		</div>
 
 		<div class="accordion" id="accordionExample" style="width: 960px;">
 			<c:forEach var="fDTO" items="${ faqList }" varStatus="status">

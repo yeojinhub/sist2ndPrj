@@ -54,7 +54,7 @@ public class NoticeDAO {
 		 * @return
 		 * @throws SQLException
 		 */
-		public List<NoticeDTO> selectBoard(DTO.RangeDTO rDTO)throws SQLException{
+		public List<NoticeDTO> selectNotice(DTO.RangeDTO rDTO)throws SQLException{
 		
 		List<NoticeDTO> list = new ArrayList<NoticeDTO>();
 		
@@ -73,7 +73,7 @@ public class NoticeDAO {
 			selectNotice
 			.append("	select not_num, title, content, name, input_date, status_type	")
 			.append("	from(select not_num, title, content, name, input_date, status_type, 	")
-			.append("	row_number() over(order by input_date desc) rnum 	")
+			.append("	row_number() over(order by not_num desc) rnum 	")
 			.append("	from notice)	")
 			.append("	where rnum between ? and ?	");
 			
@@ -126,7 +126,7 @@ public class NoticeDAO {
 			selectAllNotice
 			.append("	select not_num, title, content, name, input_date, status_type	")
 			.append("	from notice	")
-			.append("	order by input_date desc	");
+			.append("	order by not_num desc	");
 			
 			pstmt = con.prepareStatement( selectAllNotice.toString() );
 			
