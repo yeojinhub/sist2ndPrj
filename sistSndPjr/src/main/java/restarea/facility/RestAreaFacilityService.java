@@ -1,12 +1,27 @@
 package restarea.facility;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import DTO.AreaFacilityDTO;
 
 public class RestAreaFacilityService {
 
+	public List<String> searchAllRoute() {
+		List<String> list = new ArrayList<String>();
+		
+		RestAreaFacilityDAO rafDAO = new RestAreaFacilityDAO();
+		
+		try {
+			list = rafDAO.selectAllRoute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}// end try-catch
+		
+		return list;
+	}// searchAllRoute
+	
 	/**
 	 * 1.총 레코드의 수
 	 * @param rDTO

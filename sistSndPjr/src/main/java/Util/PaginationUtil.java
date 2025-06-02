@@ -15,6 +15,9 @@ public class PaginationUtil {
 		String elect = pDTO.getElect();
 		String hydro = pDTO.getHydro();
 		String keyword = pDTO.getKeyword();
+		String wash = pDTO.getWash();
+		String repair = pDTO.getRepair();
+		String truck = pDTO.getTruck();
 		String url = pDTO.getUrl();
 		int currentPage = pDTO.getCurrentPage();
 		int pageNumber = pDTO.getPageNumber();
@@ -32,6 +35,15 @@ public class PaginationUtil {
 		}// end if
 		if (hydro != null) {
 			queryString.append("&hydro=on");
+		}// end if
+		if (wash != null) {
+			queryString.append("&wash=O");
+		}// end if
+		if (repair != null) {
+			queryString.append("&repair=O");
+		}// end if
+		if (truck != null) {
+			queryString.append("&truck=O");
 		}// end if
 
 		// 2. 시작, 끝 페이지 구하기.

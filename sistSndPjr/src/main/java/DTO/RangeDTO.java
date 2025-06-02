@@ -14,6 +14,7 @@ import lombok.ToString;
 public class RangeDTO {
 
 	private String route, keyword, elect, hydro;
+	private String wash, repair, truck;
 	private int currentPage = 1, startNum, endNum;
 	private int startPage, endPage;
 	

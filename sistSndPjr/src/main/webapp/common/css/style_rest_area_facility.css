@@ -21,14 +21,14 @@
 
 
 /* ===== 안내문 박스 ===== */
-.notice-box {
+/* .notice-box {
   background-color: #f9f9f9;
   border: 1px solid #ccc;
   padding: 20px;
   border-radius: 6px;
   margin: 0 20px 30px 20px;
 }
-
+ */
 .notice-title {
   font-weight: bold;
   font-size: 16px;
@@ -50,7 +50,7 @@
 }
 
 /* ===== 검색 필터 박스 ===== */
-.search-box {
+/* .search-box {
   margin: 0 20px 30px 20px;
   border: 1px solid #ccc;
   padding: 16px;
@@ -93,7 +93,7 @@
   font-size: 14px;
   cursor: pointer;
 }
-
+ */
 /* ===== 편의시설 정보 범례 ===== */
 .facility-legend {
   margin: 10px 20px 20px 20px;
@@ -141,14 +141,14 @@
 .circle.orange { background-color: #e67e22; }   /* 농산물판매장 */
 
 /* 선택적으로 헤더 글자 정렬 등을 보완 */
-.user_table th {
+/* .user_table th {
   background-color: #f5f6fa;
   font-size: 14px;
   color: #333;
   text-align: center;
   vertical-align: middle;
 }
-
+ */
 .user_table td {
   font-size: 14px;
   text-align: center;
