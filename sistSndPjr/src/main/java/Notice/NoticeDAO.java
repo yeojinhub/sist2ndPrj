@@ -12,6 +12,19 @@ import Pagination.PaginationDTO;
 
 public class NoticeDAO {
 
+    private static NoticeDAO noticeDAO;
+
+    private NoticeDAO() {
+        // 생성자 private: 외부에서 new 사용 못 하도록
+    }
+
+    public static NoticeDAO getInstance() {
+        if(noticeDAO==null) {
+        	noticeDAO=new NoticeDAO();
+        }
+        return noticeDAO;
+    }
+	
 	public List<NoticeDTO> getNoticeList() {
 		List<NoticeDTO> noticeList = new ArrayList<>();
 
@@ -228,4 +241,262 @@ public class NoticeDAO {
     
     //pagination///////////////////////////////////////////////////////////////
  
-  }// class
+	/**
+	 * 전체 유저 수를 조회합니다.
+	 * @return 전체 유저 수
+	 * @throws SQLException 예외처리
+	 */
+	public int getTotalNoticeCount() throws SQLException {
+		int totalCount = 0;
+		
+		DBConnection dbCon = DBConnection.getInstance();
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		
+		try {
+			con = dbCon.getDbCon();
+			
+			StringBuilder countQuery = new StringBuilder();
+			countQuery
+			.append("	SELECT COUNT(*) as total_count	")
+			.append("	FROM notice	");
+			
+			pstmt = con.prepareStatement(countQuery.toString());
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				totalCount = rs.getInt("total_count");
+			}
+			
+		} finally {
+			dbCon.dbClose(con, pstmt, rs);
+		}
+		
+		return totalCount;
+	} //getTotalUserCount
+
+	//페이지별 공지사항 조회
+	/**
+	 * 페이지네이션을 적용하여 사용자 목록을 조회합니다. (Oracle 11g 이하 - ROWNUM 사용)
+	 * @param pagination 페이지네이션 정보
+	 * @return 페이지에 해당하는 사용자 목록
+	 * @throws SQLException 예외처리
+	 */
+	public List<NoticeDTO> selectNoticeByPage(PaginationDTO pagination) throws SQLException {
+		List<NoticeDTO> noticeList = new ArrayList<NoticeDTO>();
+		
+		DBConnection dbCon = DBConnection.getInstance();
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		
+		try {
+			con = dbCon.getDbCon();
+			
+			StringBuilder selectPageQuery = new StringBuilder();
+			selectPageQuery
+			.append("	SELECT * FROM (	")
+			.append("		SELECT ROWNUM as rnum, not_num, title, content, name, input_date, status_type,acc_num	")
+			.append("		FROM (	")
+			.append("			SELECT not_num, title, content, name, input_date, status_type, acc_num	")
+			.append("			FROM notice	")
+			.append("			ORDER BY not_num DESC	")
+			.append("		) WHERE ROWNUM <= ?	")
+			.append("	) WHERE rnum >= ?	")
+			;
+			
+			pstmt = con.prepareStatement(selectPageQuery.toString());
+			pstmt.setInt(1, pagination.getEndRowNum());
+			pstmt.setInt(2, pagination.getStartRowNum());
+			
+			rs = pstmt.executeQuery();
+			
+			NoticeDTO noticeDTO = null;
+			
+			while( rs.next() ) {
+				noticeDTO = new NoticeDTO();
+				noticeDTO.setNot_num(rs.getInt("not_num"));
+				noticeDTO.setTitle(rs.getString("title"));
+				noticeDTO.setContent(rs.getString("content"));
+				noticeDTO.setName(rs.getString("name"));
+				noticeDTO.setInput_date(rs.getDate("input_date"));
+				noticeDTO.setStatus_type(rs.getString("status_type"));
+				noticeDTO.setAcc_num(rs.getInt("acc_num"));
+				
+				noticeList.add(noticeDTO);
+			} //end while
+			
+		} finally {
+			dbCon.dbClose(con, pstmt, rs);
+		} //end try finally
+		
+		return noticeList;
+	} //selectUsersByPage
+
+	/**
+	 * 검색 조건에 따른 공지사항 수를 조회합니다.
+	 * @param searchType 검색 유형 (name, email, tel)
+	 * @param searchKeyword 검색어
+	 * @return 검색 조건에 맞는 사용자 수
+	 * @throws SQLException 예외처리
+	 */
+	public int getSearchNoticeCount(String searchType, String searchKeyword,String statusType) throws SQLException {
+		int totalCount = 0;
+		
+		DBConnection dbCon = DBConnection.getInstance();
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		
+		try {
+			con = dbCon.getDbCon();
+			
+			StringBuilder countQuery = new StringBuilder();
+			countQuery
+			.append("	SELECT COUNT(*) as total_count	")
+			.append("	FROM notice	")
+			.append("	WHERE 1=1	");
+			
+			List<String> paramList=new ArrayList<String>();
+			
+			// 검색어가 null이 아닌 경우에만 조건 추가 (PaginationUtil에서 이미 처리됨)
+			if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+				switch (searchType) {
+					case "title":
+						countQuery.append("	AND title LIKE ?	");
+						paramList.add("%"+searchKeyword+"%");
+						break;
+					case "content":
+						countQuery.append("	AND content LIKE ?	");
+						paramList.add("%"+searchKeyword+"%");
+						break;
+					case "author":
+						countQuery.append("	AND name LIKE ?	");
+						paramList.add("%"+searchKeyword+"%");
+						break;
+				}
+			}
+			
+			if (statusType != null && !statusType.trim().isEmpty() && !"all".equals(statusType)) {
+				countQuery.append("	AND status_type=?	");
+				paramList.add(statusType);
+			}
+			
+			pstmt = con.prepareStatement(countQuery.toString());
+			
+			for(int i=0; i<paramList.size();i++) {
+				pstmt.setString(i+1, paramList.get(i));
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				totalCount = rs.getInt("total_count");
+			}
+			
+		} finally {
+			dbCon.dbClose(con, pstmt, rs);
+		}
+		
+		return totalCount;
+	} //getSearchNoticeCount
+	
+	//검색조건에 맞는 페이지별 공지사항 조회
+	/**
+	 * 검색 조건에 따른 사용자 목록을 페이지네이션으로 조회합니다. (Oracle 11g 이하 - ROWNUM 사용)
+	 * @param searchType 검색 유형 (name, email, tel)
+	 * @param searchKeyword 검색어
+	 * @param pagination 페이지네이션 정보
+	 * @return 검색 조건과 페이지에 해당하는 사용자 목록
+	 * @throws SQLException 예외처리
+	 */
+	public List<NoticeDTO> searchNoticeByPage(String searchType, String searchKeyword,String statusType, PaginationDTO pagination) throws SQLException {
+		List<NoticeDTO> noticeList = new ArrayList<NoticeDTO>();
+		
+		DBConnection dbCon = DBConnection.getInstance();
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		
+		try {
+			con = dbCon.getDbCon();
+			
+			StringBuilder searchQuery = new StringBuilder();
+			searchQuery
+			.append("	SELECT * FROM (	")
+			.append("		SELECT ROWNUM as rnum, not_num, title, content, name, input_date, status_type,acc_num	")
+			.append("		FROM (	")
+			.append("			SELECT	not_num, title, content, name, input_date, status_type,acc_num	")
+			.append("			FROM notice	")
+			.append("			WHERE 1=1	");
+			
+			List<String> paramList=new ArrayList<String>();
+			
+			// 검색어가 null이 아닌 경우에만 조건 추가 (PaginationUtil에서 이미 처리됨)
+			if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+				switch (searchType) {
+					case "title":
+						searchQuery.append("	AND title LIKE ?	");
+						paramList.add("%"+searchKeyword+"%");
+						break;
+					case "content":
+						searchQuery.append("	AND content LIKE ?	");
+						paramList.add("%"+searchKeyword+"%");
+						break;
+					case "author":
+						searchQuery.append("	AND name LIKE ?	");
+						paramList.add("%"+searchKeyword+"%");
+						break;
+				}
+			}
+			
+			//상태조건추가
+			if (statusType != null && !statusType.trim().isEmpty() && !"all".equals(statusType)) {
+				searchQuery.append("	AND status_type=?	");
+				paramList.add(statusType);
+			}
+			
+			searchQuery.append("			ORDER BY input_date DESC	");
+			searchQuery.append("		) WHERE ROWNUM <= ?	");
+			searchQuery.append("	) WHERE rnum >= ?	");
+			
+			pstmt = con.prepareStatement(searchQuery.toString());
+			
+			int paramIndex = 1;
+			for(String param : paramList) {
+				pstmt.setString(paramIndex++, param);
+			}
+			
+			pstmt.setInt(paramIndex++, pagination.getEndRowNum());
+			pstmt.setInt(paramIndex, pagination.getStartRowNum());
+			
+			rs = pstmt.executeQuery();
+			
+			NoticeDTO noticeDTO = null;
+			
+			while( rs.next() ) {
+				noticeDTO = new NoticeDTO();
+				noticeDTO.setNot_num(rs.getInt("not_num"));
+				noticeDTO.setTitle(rs.getString("title"));
+				noticeDTO.setContent(rs.getString("content"));
+				noticeDTO.setName(rs.getString("name"));
+				noticeDTO.setInput_date(rs.getDate("input_date"));
+				noticeDTO.setStatus_type(rs.getString("status_type"));
+				noticeDTO.setAcc_num(rs.getInt("acc_num"));
+				
+				noticeList.add(noticeDTO);
+			} //end while
+			
+		} finally {
+			dbCon.dbClose(con, pstmt, rs);
+		} //end try finally
+		
+		return noticeList;
+	} //searchUsersByPage
+
+} //class

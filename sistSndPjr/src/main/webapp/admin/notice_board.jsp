@@ -1,3 +1,4 @@
+<%@page import="Notice.NoticeService.PaginationResult"%>
 <%@page import="Pagination.PaginationUtil"%>
 <%@page import="Pagination.PaginationDTO"%>
 <%@page import="AdminLogin.LoginResultDTO"%>
@@ -8,12 +9,37 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-NoticeService service = new NoticeService();
-List<NoticeDTO> noticeList = service.getNoticeList();
-request.setAttribute("noticeList", noticeList);
+    LoginResultDTO userData = (LoginResultDTO) session.getAttribute("userData");
 %>
 <%
-    LoginResultDTO userData = (LoginResultDTO) session.getAttribute("userData");
+/* NoticeService service=new NoticeService();
+List<NoticeDTO> noticeList=service.getNoticeList();
+request.setAttribute("noticeList", noticeList); */
+	String pagePram=request.getParameter("page");
+	String searchType=request.getParameter("searchType");
+	String searchKeyword=request.getParameter("searchKeyword");
+	String statusType=request.getParameter("statusType");
+	
+	//기본값 설정
+	int currentPage=PaginationUtil.parsePageParameter(pagePram, 1);
+	NoticeService service=new NoticeService();
+	PaginationResult result=null;
+	
+	//검색조건이 잇는지 확인
+	boolean hasSearchConditions=(searchKeyword !=null && !searchKeyword.trim().isEmpty())
+							|| (statusType != null && !statusType.trim().isEmpty() && !"all".equals(statusType));
+	if (hasSearchConditions){
+		result=service.searchNoticeWithPagination(searchType, searchKeyword, statusType, currentPage);
+	}else{
+		result=service.getNoticeListWithPagination(currentPage);
+	}
+	request.setAttribute("noticeList", result.getData());
+	request.setAttribute("pagination", result.getPagination());
+	request.setAttribute("searchType", searchType);
+	request.setAttribute("searchKeyword", searchKeyword);
+	request.setAttribute("statusType", statusType);
+	request.setAttribute("pageInfo", PaginationUtil.getPageInfoText(result.getPagination()));
+
 %>
 <!DOCTYPE html>
 <html>
@@ -36,15 +62,23 @@ request.setAttribute("noticeList", noticeList);
                 <h1>공지사항 관리</h1>
             </div>
 
-            <div class="search-div">
-                <textarea class="search-title" rows="" cols=""></textarea>
-                <input type="button" class="btn-search" value="검색"/>
-
-                <textarea class="search-date" rows="" cols=""></textarea>
-                <span class="search-tilde">~</span>
-                <textarea class="search-date" rows="" cols=""></textarea>
-                <input type="button" class="btn-search" value="검색"/>
-            </div>
+			<form method="get" action="notice_board.jsp" class="search-div">
+			    <select name="searchType">
+			        <option value="title" ${searchType == 'title' ? 'selected' : ''}>제목</option>
+			        <option value="content" ${searchType == 'content' ? 'selected' : ''}>내용</option>
+			        <option value="author" ${searchType == 'author' ? 'author' : ''}>작성자</option>
+			    </select>
+			
+			    <input type="text" name="searchKeyword" placeholder="검색어 입력" value="${searchKeyword != null ? searchKeyword : ''}"/>
+			
+			    <select name="statusType">
+			        <option value="all" ${statusType == 'all' ? 'selected' : ''}>전체</option>
+			        <option value="공지" ${statusType == '공지' ? 'selected' : ''}>공지</option>
+			        <option value="미공지" ${statusType == '미공지' ? 'selected' : ''}>미공지</option>
+			    </select>
+			
+			    <button type="submit" class="btn-search">검색</button>
+			</form>
 
             <div class="content">
                 <table class="data-table">
