@@ -113,11 +113,15 @@ request.setAttribute("pageInfoText", pageInfoText);
                     	</tr>
                     </c:if>
                     <c:forEach var="accountDTO" items="${ userList }" varStatus="i">
-                        <tr onclick="location.href='user_account_detail.jsp?acc_num=${ accountDTO.acc_num }'">
+                        <tr>
                             <td><c:out value="${ pagination.totalCount - ((pagination.currentPage - 1) * pagination.pageSize + i.count) + 1 }" /></td>
-                            <td><c:out value="${ accountDTO.name }" /></td>
-                            <td><c:out value="${ accountDTO.user_email }" /></td>
-                            <td><c:out value="${ accountDTO.tel }" /></td>
+                            <td class="onclickbtn" onclick="location.href='user_account_detail.jsp?acc_num=${ accountDTO.acc_num }'">
+                            	<c:out value="${ accountDTO.name }" />
+                            </td>
+                            <td class="onclickbtn" onclick="location.href='user_account_detail.jsp?acc_num=${ accountDTO.acc_num }'">
+                            	<c:out value="${ accountDTO.user_email }" />
+                            </td>
+                            <td ><c:out value="${ accountDTO.tel }" /></td>
                             <td><fmt:formatDate value="${ accountDTO.input_date }" pattern="yyyy-MM-dd" /></td>
                         </tr>
                     </c:forEach>

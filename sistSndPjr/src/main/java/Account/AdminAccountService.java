@@ -172,6 +172,26 @@ public class AdminAccountService {
 	} //addUser
 	
 	/**
+	 * 사용자 계정 수정
+	 * @param userDTO 등록할 사용자 계정 정보
+	 * @return flag 성공시 true, 실패시 false 반환
+	 */
+	public boolean modifyUser(AccountDTO userDTO) {
+		boolean flag = false;
+		
+		AdminAccountDAO userDAO = AdminAccountDAO.getInstance();
+		
+		try {
+			userDAO.updateUser(userDTO);
+			flag = true;
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} //end try catch
+		
+		return flag;
+	} //modifyUser
+	
+	/**
 	 * 전체 관리자 계정 조회
 	 * @return adminList 조회한 전체 관리자 계정 리스트
 	 */

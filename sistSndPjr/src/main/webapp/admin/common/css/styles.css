@@ -246,6 +246,15 @@ div.notice-div {
 	width: 10%;
 }
 
+.onclickbtn {
+	cursor: pointer;
+	color: #333;
+}
+
+.onclickbtn:hover {
+	color: #5A90D0;
+}
+
 /* Search (검색) Style */
 div.search-div {
 	width:60%;

@@ -184,6 +184,53 @@ public class AdminAccountDAO {
 	} //insertUser
 	
 	/**
+	 * 사용자 계정 수정
+	 * @param userDTO 
+	 * @return flagNum 성공시 1, 실패시 0
+	 * @throws SQLException 예외처리
+	 */
+	public int updateUser(AccountDTO userDTO) throws SQLException {
+		int flagNum = 0;
+		
+		DBConnection dbCon = DBConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			// 1. JNDI 사용객체 생성.
+			// 2. DBCP에서 연결객체 얻기(DataSource).
+			// 3. Connection 얻기.
+			con = dbCon.getDbCon();
+			
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder insertQuery = new StringBuilder();
+			insertQuery
+			.append("	update	account	")
+			.append("	set name=?,	tel=?	")
+			.append("	where	acc_num=?	")
+			;
+			
+			pstmt = con.prepareStatement(insertQuery.toString());
+			
+			// 5. bind 변수에 값 할당
+			pstmt.setString(1, userDTO.getName());
+			pstmt.setString(2, userDTO.getTel());
+			pstmt.setInt(3, userDTO.getAcc_num());
+			
+			// 6. 쿼리문 수행 후 결과 얻기.
+			flagNum = pstmt.executeUpdate();
+			
+		} finally {
+			// 7. 연결 끊기.
+			dbCon.dbClose(con, pstmt, null);
+		} //end try finally
+		
+		return flagNum;
+		
+	} //updateUser
+	
+	/**
 	 * 전체 관리자 계정 조회
 	 * @return adminList 조회한 관리자 계정 리스트
 	 * @throws SQLException 예외처리

@@ -12,7 +12,7 @@ int num=0;
 try{
 num=Integer.parseInt(paramNum);
 }catch (NumberFormatException nfe){
-	response.sendRedirect("user_accounts.jsp");
+	response.sendRedirect("user_account_list.jsp");
 }//end catch
 
 AdminAccountService userService = new AdminAccountService();
@@ -34,6 +34,7 @@ request.setAttribute("userDTO", userService.searchOneUser(num));
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <!-- 사용자 정의 JS 로드 -->
+    <script src="/sistSndPjr/admin/script.js"></script>
     <script src="/sistSndPjr/admin/common/js/user_account_add.js"></script>
     
 </head>
@@ -49,20 +50,20 @@ request.setAttribute("userDTO", userService.searchOneUser(num));
             </div>
             
             <div class="content">
-            	<div>
+            	<form name="modifyFrm" id="modifyFrm" action="user_account_modify_proccess.jsp" method="post">
             		<table class="account-table account-content">
             			<tbody>
             				<tr>
             					<td>이름</td>
-            					<td><input type="text" value="${ userDTO.name }" readonly="readonly" /></td>
+            					<td><input type="text" value="${ userDTO.name }" /></td>
             				</tr>
             				<tr>
             					<td>이메일</td>
-            					<td><input type="text" value="${ userDTO.user_email }" /></td>
+            					<td><input type="text" value="${ userDTO.user_email }" readonly="readonly" /></td>
             				</tr>
             				<tr>
             					<td>비밀번호</td>
-            					<td><input type="password" value="${ userDTO.pass }" /></td>
+            					<td><input type="password" value="${ userDTO.pass }" readonly="readonly" /></td>
             				</tr>
             				<tr>
             					<td>전화번호</td>
@@ -74,13 +75,13 @@ request.setAttribute("userDTO", userService.searchOneUser(num));
             				</tr>
             			</tbody>
             		</table>
-            	</div>
+            	</form>
             </div>
             
             <div class="button-group">
             	<button class="btn btn-edit" id="btnUserEdit">수정</button>
             	<button class="btn btn-delete" id="btnUserDelete">삭제</button>
-            	<button class="btn btn-back" id="btnBack">뒤로</button>
+            	<button class="btn btn-back" id="btnUserBack">뒤로</button>
             </div>
 
         </div>

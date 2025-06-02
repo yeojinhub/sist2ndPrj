@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="/sistSndPjr/admin/script.js"></script>
+    
+    <script src="/sistSndPjr/admin/script.js">
+    </script>
 </head>
 <body>
     <div class="container">
@@ -21,7 +23,7 @@
             </div>
             
             <div class="content">
-            	<div>
+            	<form name="modifyFrm" id="modifyFrm" action="user_account_modify_proccess.jsp" method="post">
             		<table class="account-table account-content">
             			<tbody>
             				<tr>
@@ -46,7 +48,7 @@
             				</tr>
             			</tbody>
             		</table>
-            	</div>
+            	</form>
             </div>
             
             <div class="button-group">

@@ -16,7 +16,7 @@ $(function(){
 		
 	}) // click
 	
-	$("#btnBack").click(function(){
+	$("#btnUserBack").click(function(){
 		location.href='user_account_list.jsp'
 	}) // click
 
