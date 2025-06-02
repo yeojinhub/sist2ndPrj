@@ -1,8 +1,32 @@
 $(function(){
+	
+	$("#btnUserAddFrm").click(function(){
+		location.href='user_account_add_frm.jsp'
+	}) // click
+	
 	$("#btnUserAdd").click(function(){
 		chkNull();
 	}) // click
 	
+	$("#btnUserEdit").click(function(){
+		
+	}) // click
+	
+	$("#btnUserDelete").click(function(){
+		
+	}) // click
+	
+	$("#btnBack").click(function(){
+		location.href='user_account_list.jsp'
+	}) // click
+
+	function preventNavigation(event) {
+		// 이벤트가 발생한 대상이 체크박스인지 확인
+		if (event.target.type === 'checkbox') {
+			event.stopPropagation();  // 부모의 클릭 이벤트가 발생하지 않도록 방지
+		} //end if
+	} //preventNavigation
+
 	function chkNull(){
     	var name = $("#name").val();
 		var email = $("#email").val();

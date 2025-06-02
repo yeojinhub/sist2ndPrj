@@ -26,23 +26,23 @@
             			<tbody>
             				<tr>
             					<td>이름</td>
-            					<td><input type="text" value="김민경" readonly="readonly" /></td>
+            					<td><input type="text" value="${ userDTO.name }" readonly="readonly" /></td>
             				</tr>
             				<tr>
             					<td>아이디</td>
-            					<td><input type="text" value="admin01" readonly="readonly" /></td>
+            					<td><input type="text" value="${ userDTO.adm_id }" readonly="readonly" /></td>
             				</tr>
             				<tr>
             					<td>비밀번호</td>
-            					<td><input type="password" value="admin1234" /></td>
+            					<td><input type="password" value="${ userDTO.pass }" /></td>
             				</tr>
             				<tr>
             					<td>전화번호</td>
-            					<td><input type="text" value="010-2390-5309" /></td>
+            					<td><input type="text" value="${ userDTO.tel }" /></td>
             				</tr>
             				<tr>
             					<td>가입일</td>
-            					<td><input type="text" value="2025-05-07" readonly="readonly" /></td>
+            					<td><input type="text" value="${ userDTO.input_date }" readonly="readonly" /></td>
             				</tr>
             			</tbody>
             		</table>
@@ -51,7 +51,7 @@
             
             <div class="button-group">
             	<button class="btn btn-edit">수정</button>
-            	<button class="btn btn-back" onclick="location.href='admin_accounts.jsp'">취소</button>
+            	<button class="btn btn-back" onclick="location.href='admin_account_list.jsp'">뒤로</button>
             </div>
 
         </div>

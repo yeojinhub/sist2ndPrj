@@ -19,7 +19,7 @@
 				class="fas fa-chevron-down arrow"></i></a>
 			<ul class="submenu">
 				<li><a href="/sistSndPjr/admin/account/user_account_list.jsp">회원 계정관리</a></li>
-				<li><a href="/sistSndPjr/admin/account/admin_accounts.jsp">관리자 계정관리</a></li>
+				<li><a href="/sistSndPjr/admin/account/admin_account_list.jsp">관리자 계정관리</a></li>
 			</ul></li>
 		<li class="menu-item has-submenu"><a href="#"
 			class="toggle-submenu"><i class="fas fa-clipboard-list"></i> 게시판

@@ -248,6 +248,7 @@ div.notice-div {
 
 /* Search (검색) Style */
 div.search-div {
+	width:60%;
 	display: flex;
 	align-items: center;
 	text-align: center;
@@ -282,6 +283,18 @@ span.search-area {
 	margin-right: 10px;  /* 텍스트와 textarea 간격 */
 }
 
+.searchType {
+	height: 30px;
+	width: 100px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #000000;
+	text-align: left;
+	justify-content: left;
+	border: 1px solid #333;
+	border-radius: 4px;
+}
+
 /* input type Styles */
 .account-table input[type=text],
 .account-table input[type=password] {
@@ -307,7 +320,7 @@ textarea.search-title {
 	margin-left: 20px;
 	margin-right: 20px;
 	width: 50%;
-	height: 50px;
+	height: 30px;
 	resize: none;
 	font-size: 16px;
 	text-align: center;
@@ -317,7 +330,7 @@ textarea.search-date {
 	margin-left: 20px;
 	margin-right: 20px;
 	width: 30%;
-	height: 50px;  /* 버튼과 동일한 높이로 맞추기 */
+	height: 30px;  /* 버튼과 동일한 높이로 맞추기 */
 	resize: none;  /* 사용자가 크기를 조정하지 못하도록 */
 	font-size: 16px;
 	text-align: center;
@@ -415,7 +428,7 @@ textarea.content {
 }
 
 .btn-search{
-	padding: 0px 25px;
+	padding: 0px 15px;
 	height: 30px;
 	width: 80px;
 	font-weight: bold;

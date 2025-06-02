@@ -10,12 +10,14 @@ String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 <head>
 <meta charset="UTF-8">
 <title>관리자 대시보드</title>
+
+<!-- 사용자 정의 css 로드 -->
 <link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
+
 <!-- Font Awesome for icons -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<!-- <script src="/sistSndPjr/admin/script.js"></script> -->
-
+	
 <!-- jQuery 로드 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -70,8 +72,7 @@ String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
 			<div class="button-group">
 				<button class="btn btn-add" id="btnUserAdd">등록</button>
-				<button class="btn btn-back"
-					onclick="location.href='user_account_list.jsp'">뒤로</button>
+				<button class="btn btn-back" id="btnBack">뒤로</button>
 			</div>
 
 		</div>
