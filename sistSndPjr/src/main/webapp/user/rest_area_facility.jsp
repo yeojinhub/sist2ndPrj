@@ -1,8 +1,45 @@
+<%@page import="Util.PaginationUtil"%>
+<%@page import="DTO.PaginationDTO"%>
+<%@page import="restarea.facility.RestAreaFacilityService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="rDTO" class="DTO.RangeDTO" scope="page" />
+<jsp:setProperty name="rDTO" property="*" />
 <%
     request.setAttribute("menu", "facility");
-%>    
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+RestAreaFacilityService rafs = new RestAreaFacilityService();
+
+//1. 전체 데이터(게시물)수를 구합니다.
+int totalCount = 0;
+totalCount = rafs.totalCount( rDTO );
+// 2. 페이지에 보여질 게시물의 수를 구합니다.
+int pageScale = 0;
+pageScale = rafs.pageScale();
+// 3. 총 페이지의 수를 구합니다.
+int totalPage = 0;
+totalPage = rafs.totalPage(totalCount, pageScale);
+// 4. 현재페이지(currentPage)에 따른 게시물 시작 번호를 구합니다.
+int startNum = 0;
+startNum = rafs.startNum(pageScale, rDTO);
+// 5. 현재페이지(currentPage)에 따른 게시물 끝 번호를 구합니다.
+int endNum = 0;
+endNum = rafs.endNum(pageScale, rDTO);
+
+pageContext.setAttribute("totalCount", totalCount);
+pageContext.setAttribute("pageScale", pageScale);
+pageContext.setAttribute("totalPage", totalPage);
+pageContext.setAttribute("startNum", startNum);
+pageContext.setAttribute("endNum", endNum);
+pageContext.setAttribute("restAreaFacilityList", rafs.searchAllAreaFacility(rDTO));
+
+// 전체 노선 얻어와서 EL문 사용하기 위한 setAttribute
+pageContext.setAttribute("allRoute", rafs.searchAllRoute());
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +52,21 @@
 
 <script>
     $(function(){
+    	if (${not empty rDTO.route}) {
+	    	$('#route').val('${rDTO.route}');
+    	}
     	
+    	$('#keyword').val('${rDTO.keyword}');
+    	
+    	if(${not empty rDTO.wash}) {
+    		$('#wash').prop('checked', true);
+    	};// end if
+    	if(${not empty rDTO.repair}) {
+    		$('#repair').prop('checked', true);
+    	};// end if
+    	if(${not empty rDTO.truck}) {
+    		$('#truck').prop('checked', true);
+    	};// end if
     });
 </script>
 </head>
@@ -44,26 +95,26 @@
 
 <!-- 검색 필터 영역 -->
 <div class="search-box">
+<form action="rest_area_facility.jsp" method="GET">
   <label for="route">노선명</label>
   <select name="route" id="route">
-    <option value="">선택</option>
-    <option value="경부고속도로">경부고속도로</option>
-    <option value="영동고속도로">영동고속도로</option>
-    <option value="서해안고속도로">서해안고속도로</option>
-    <option value="중부고속도로">중부고속도로</option>
-    <option value="호남고속도로">호남고속도로</option>
+    <option value="select">선택</option>
+    <c:forEach var="route" items="${allRoute }" varStatus="i">
+    <option value="${route }">${route }</option>
+    </c:forEach>
   </select>
 
   <label for="rest-name">휴게소명</label>
-  <input type="text" id="rest-name" name="restName" placeholder="예: 칠곡(상)" />
+  <input type="text" id="keyword" name="keyword" placeholder="예: 칠곡(상)" />
 
   <label class="divider-label">구분</label>
-  <label><input type="checkbox" name="type" value="세차장" /> 세차장</label>
-  <label><input type="checkbox" name="type" value="경정비소" /> 경정비소</label>
-  <label><input type="checkbox" name="type" value="ex화물차라운지" /> ex-화물차라운지</label>
+  <label><input type="checkbox" id="wash" name="wash" value="O" /> 세차장</label>
+  <label><input type="checkbox" id="repair" name="repair" value="O" /> 경정비소</label>
+  <label><input type="checkbox" id="truck" name="truck" value="O" /> ex-화물차라운지</label>
 
 
   <button type="submit" class="btn btn-confirm">조회</button>
+  </form>
 </div>
 		
 <!-- 편의시설 정보 박스 -->
@@ -87,104 +138,48 @@
     <thead>
       <tr>
         <th rowspan="2">휴게소명</th>
-        <th rowspan="2">이정</th>
+        <th rowspan="2">노선</th>
         <th rowspan="2">전화번호</th>
-        <th colspan="2">편의시설</th>
+        <th rowspan="2">편의시설</th>
         <th rowspan="2">세차장</th>
         <th rowspan="2">경정비소</th>
         <th rowspan="2">ex화물차라운지</th>
       </tr>
-      <tr>
-        <th>휴게소</th>
-        <th>주유소</th>
-      </tr>
     </thead>
   <tbody>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=101">강릉(강릉)</a></td>
-    <td>인천기점 231</td>
-    <td>033-648-8850</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle gray"></span></td>
-    <td><span class="circle brown"></span></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=102">강릉(인천)</a></td>
-    <td>인천기점 231</td>
-    <td>033-647-9970</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle gray"></span></td>
-    <td><span class="circle brown"></span></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=103">강천산(광주)</a></td>
-    <td>고서기점 22</td>
-    <td>063-653-4033</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle pink"></span></td>
-    <td><span class="circle orange"></span></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=104">강천산(대구)</a></td>
-    <td>고서기점 22</td>
-    <td>063-653-3050</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle pink"></span></td>
-    <td><span class="circle orange"></span></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=105">거창(광주)</a></td>
-    <td>고서기점 137</td>
-    <td>055-943-0992</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle pink"></span></td>
-    <td><span class="circle orange"></span></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=106">거창(대구)</a></td>
-    <td>고서기점 137</td>
-    <td>055-943-9534</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle pink"></span></td>
-    <td><span class="circle orange"></span></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=107">건천(부산)</a></td>
-    <td>부산기점 76</td>
-    <td>054-751-6890</td>
-    <td><span class="circle blue"></span></td>
-    <td></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=108">건천(서울)</a></td>
-    <td>부산기점 76</td>
-    <td>054-751-7401</td>
-    <td><span class="circle green"></span><span class="circle gray"></span></td>
-    <td></td>
-    <td>X</td><td>X</td><td>X</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=109">경산(서울)</a></td>
-    <td>부산기점 111</td>
-    <td>053-852-5243</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle pink"></span><span class="circle gray"></span><span class="circle purple"></span><span class="circle red"></span></td>
-    <td><span class="circle orange"></span></td>
-    <td>X</td><td>X</td><td>O</td>
-  </tr>
-  <tr>
-    <td><a href="rest_area_detail.jsp?id=110">경주(부산)</a></td>
-    <td>부산기점 59</td>
-    <td>054-748-3195</td>
-    <td><span class="circle green"></span><span class="circle blue"></span><span class="circle pink"></span><span class="circle gray"></span><span class="circle purple"></span><span class="circle red"></span></td>
-    <td><span class="circle orange"></span></td>
-    <td>X</td><td>X</td><td>O</td>
-  </tr>
+  	<c:if test="${ empty restAreaFacilityList }">
+	<tr>
+		<td colspan="7">검색된 휴게소가 없습니다.</td>
+	</tr>
+	</c:if>
+    
+  <c:forEach var="afDTO" items="${ restAreaFacilityList }" varStatus="i">
+	<tr>
+	    <td><a href="rest_area_detail.jsp?id=${ afDTO.area_num }">${ afDTO.name }</a></td>
+	    <td>${ afDTO.route }</td>
+	    <td>${ afDTO.tel }</td>
+	    <td>
+		 <c:if test="${ afDTO.sleep == 'O' }"><span class="circle green"></span></c:if>
+		 <c:if test="${ afDTO.shower == 'O' }"><span class="circle blue"></span></c:if>
+		 <c:if test="${ afDTO.laundry == 'O' }"><span class="circle purple"></span></c:if>
+		 <c:if test="${ afDTO.shelter == 'O' }"><span class="circle gray"></span></c:if>
+		 <c:if test="${ afDTO.salon == 'O' }"><span class="circle brown"></span></c:if>
+		 <c:if test="${ afDTO.feed == 'O' }"><span class="circle pink"></span></c:if>
+		 <c:if test="${ afDTO.clinic == 'O' }"><span class="circle red"></span></c:if>
+		 <c:if test="${ afDTO.pharmacy == 'O' }"><span class="circle yellow"></span></c:if>
+	    </td>
+	    <td>${ afDTO.wash }</td><td>${ afDTO.repair }</td><td>${ afDTO.truck }</td>
+  	</tr>
+	</c:forEach>
 </tbody>
-
-
-
 </table>
+<div id="pageinationDiv">
+
+<%
+PaginationDTO pDTO = new PaginationDTO(5,rDTO.getCurrentPage(),totalPage,"rest_area_facility.jsp",null,rDTO.getKeyword(),rDTO.getRoute(),null,null,rDTO.getWash(),rDTO.getRepair(),rDTO.getTruck());
+%>
+<%= PaginationUtil.pagination(pDTO) %>
+</div>
 </div>
 
 </div> <%-- End of container div --%>

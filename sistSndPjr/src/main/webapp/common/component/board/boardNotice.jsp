@@ -96,7 +96,7 @@ pageContext.setAttribute("noticeList", ns.searchAllNotice());
 <div id="pageinationDiv">
 
 <%
-PaginationDTO pDTO = new PaginationDTO(3,rDTO.getCurrentPage(),totalPage,"boardNotice.jsp",null,null);
+PaginationDTO pDTO = new PaginationDTO(3,rDTO.getCurrentPage(),totalPage,"boardNotice.jsp",null,null,null,null,null);
 %>
 <%= PaginationUtil.pagination(pDTO) %>
 </div>
