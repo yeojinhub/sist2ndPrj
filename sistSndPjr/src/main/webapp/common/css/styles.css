@@ -324,25 +324,26 @@ input[readonly] {
   cursor: not-allowed;
 }
 
+
 /* Textarea Styles */
 textarea.search-title {
-	margin-left: 20px;
-	margin-right: 20px;
-	width: 50%;
-	height: 30px;
-	resize: none;
-	font-size: 16px;
-	text-align: center;
+   margin-left: 20px;
+   margin-right: 20px;
+   width: 50%;
+   height: 30px;
+   resize: none;
+   font-size: 16px;
+   text-align: center;
 }
 
 textarea.search-date {
-	margin-left: 20px;
-	margin-right: 20px;
-	width: 30%;
-	height: 30px;  /* 버튼과 동일한 높이로 맞추기 */
-	resize: none;  /* 사용자가 크기를 조정하지 못하도록 */
-	font-size: 16px;
-	text-align: center;
+   margin-left: 20px;
+   margin-right: 20px;
+   width: 30%;
+   height: 30px;  /* 버튼과 동일한 높이로 맞추기 */
+   resize: none;  /* 사용자가 크기를 조정하지 못하도록 */
+   font-size: 16px;
+   text-align: center;
 }
 
 textarea.one-line {
@@ -359,7 +360,7 @@ textarea.one-line {
 }
 
 textarea.title {
-	resize: none;
+   resize: none;
     height: 40px;
     width: 100%;
     line-height: 40px;
@@ -372,7 +373,7 @@ textarea.title {
 }
 
 textarea.content {
-	resize: none;
+   resize: none;
     height: 350px;
     width: 100%;
     padding: 0 10px;
@@ -380,6 +381,73 @@ textarea.content {
     font-size: 16px;
     text-align: left;
     writing-mode: horizontal-tb;
+}
+
+
+
+
+
+
+
+/* quilleditor */
+#quilleditor {
+	background-color: #fff !important;
+	border: 1px solid #ccc;
+	padding: 10px;
+}
+
+.ql-toolbar {
+	background-color: #ECECEC !important;
+	border: 1px solid #ccc;
+}
+
+.ql-container {
+	background-color: #fff !important;
+	height: 500px !important;
+	font-size: 16px;
+}
+
+/* checkbox-container */
+.radio-container {
+	display: flex; /* Flexbox로 설정 */
+	justify-content: center; /* 한 줄로 가운데 정렬 */
+	align-items: center; /* 세로 가운데 정렬 */
+	gap: 80px; /* 체크박스 간의 간격 */
+	width: 100%; /* 부모 셀 너비 100% */
+}
+
+/* checkbox*/
+.radio-container label {
+	font-size: 16px;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.radio-container input[type="radio"] {
+	margin-right: 15px;
+}
+
+/* input  */
+.input-style {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+	font-size: 16px;
+	color: #333;
+	transition: all 0.3s ease;
+}
+
+.input-style:focus {
+	border-color: #4CAF50;
+	background-color: #fff;
+	outline: none;
+}
+
+/* 제목 입력창 스타일 */
+.title {
+	width: 100%;
 }
 
 /* Pagination Styles */

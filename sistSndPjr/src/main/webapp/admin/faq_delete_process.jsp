@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="Notice.NoticeService" %>
-<%@ page import="Notice.NoticeDTO" %>
+<%@ page import="Faq.FaqService" %>
+<%@ page import="Faq.FaqDTO" %>
 <%@ page import="AdminLogin.LoginResultDTO" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
@@ -12,23 +12,17 @@
         return;
     }
 %>
-<jsp:useBean id="ntDTO" class="Notice.NoticeDTO" scope="request" />
-<jsp:setProperty name="ntDTO" property="*" />
+<jsp:useBean id="fDTO" class="Faq.FaqDTO" scope="request" />
+<jsp:setProperty name="fDTO" property="*" />
 <%
-	int notNum=0;
+	int faqNum=0;
 
-
-	notNum=Integer.parseInt(request.getParameter("not_num"));
-	ntDTO.setNot_num(notNum);
+	faqNum=Integer.parseInt(request.getParameter("faq_num"));
 	
-	boolean updateFlag=false;
-	NoticeService noticeService=new NoticeService();
-	updateFlag=noticeService.updateNotice(ntDTO);
-	System.out.println("수정 - title : "+ntDTO.getTitle());
-	System.out.println("수정 - content : "+ntDTO.getContent());
-	System.out.println("수정 - status type : "+ntDTO.getStatus_type());
-	System.out.println("수정 - not_num : "+ntDTO.getNot_num());
-	request.setAttribute("updateFlag", updateFlag);
+	boolean deleteFlag=false;
+	FaqService faqService=new FaqService();
+	deleteFlag=faqService.deleteNotice(faqNum);
+	request.setAttribute("deleteFlag", deleteFlag);
 %>
 
 <!DOCTYPE html>
@@ -43,12 +37,12 @@
     <title><c:out value="${site.name}" /></title>
     <script type="text/javascript">
         <c:choose>
-            <c:when test="${updateFlag}">
-                alert("글수정 완료");
-                location.href="notice_board.jsp";
+            <c:when test="${deleteFlag}">
+                alert("faq글삭제 완료");
+                location.href="faq_board.jsp";
             </c:when>
             <c:otherwise>
-                alert("글수정 실패. 정상적으로 실행되지 않았습니다.");
+                alert("faq글삭제 실패. 정상적으로 실행되지 않았습니다.");
                 history.back();
             </c:otherwise>
         </c:choose>

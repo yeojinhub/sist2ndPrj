@@ -20,68 +20,6 @@
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
 	rel="stylesheet">
 
-<style>
-#quilleditor {
-	background-color: #fff !important;
-	border: 1px solid #ccc;
-	padding: 10px;
-}
-
-.ql-toolbar {
-	background-color: #ECECEC !important;
-	border: 1px solid #ccc;
-}
-
-.ql-container {
-	background-color: #fff !important;
-	height: 500px;
-	font-size: 16px;
-}
-
-/* checkbox-container */
-.radio-container {
-	display: flex; /* Flexbox로 설정 */
-	justify-content: center; /* 한 줄로 가운데 정렬 */
-	align-items: center; /* 세로 가운데 정렬 */
-	gap: 80px; /* 체크박스 간의 간격 */
-	width: 100%; /* 부모 셀 너비 100% */
-}
-
-/* checkbox*/
-.radio-container label {
-	font-size: 16px;
-	cursor: pointer;
-	white-space: nowrap;
-}
-
-.radio-container input[type="radio"] {
-	margin-right: 15px;
-}
-
-/* input  */
-.input-style {
-	width: 100%;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	background-color: #f9f9f9;
-	font-size: 16px;
-	color: #333;
-	transition: all 0.3s ease;
-}
-
-.input-style:focus {
-	border-color: #4CAF50;
-	background-color: #fff;
-	outline: none;
-}
-
-/* 제목 입력창 스타일 */
-.title {
-	width: 100%;
-}
-</style>
-
 <!-- Quill JS -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 

@@ -21,67 +21,6 @@ request.setAttribute("notice", notice);
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
 	rel="stylesheet">
 
-<style>
-#quilleditor {
-	background-color: #fff !important;
-	border: 1px solid #ccc;
-	padding: 10px;
-}
-
-.ql-toolbar {
-	background-color: #ECECEC !important;
-	border: 1px solid #ccc;
-}
-
-.ql-container {
-	background-color: #fff !important;
-	height: 500px;
-	font-size: 16px;
-}
-
-/* checkbox-container */
-.radio-container {
-	display: flex; /* Flexbox로 설정 */
-	justify-content: center; /* 한 줄로 가운데 정렬 */
-	align-items: center; /* 세로 가운데 정렬 */
-	gap: 80px; /* 체크박스 간의 간격 */
-	width: 100%; /* 부모 셀 너비 100% */
-}
-
-/* checkbox*/
-.radio-container label {
-	font-size: 16px;
-	cursor: pointer;
-	white-space: nowrap;
-}
-
-.radio-container input[type="radio"] {
-	margin-right: 15px;
-}
-
-/* input  */
-.input-style {
-	width: 100%;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	background-color: #f9f9f9;
-	font-size: 16px;
-	color: #333;
-	transition: all 0.3s ease;
-}
-
-.input-style:focus {
-	border-color: #4CAF50;
-	background-color: #fff;
-	outline: none;
-}
-
-/* 제목 입력창 스타일 */
-.title {
-	width: 100%;
-}
-</style>
 
 <!-- Quill JS -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
@@ -119,7 +58,7 @@ request.setAttribute("notice", notice);
                                 </tr>
                                 <tr>
                                     <td colspan="4">
-                                        <div class="radio-container" style="border:2px solid #ccc; padding: 10px;">
+                                        <div class="radio-container" style="border:2px solid #ccc; padding: 10px;" >
                                             <label><input type="radio" name="status_type" value="공지" <c:if test="${notice.status_type=='공지'}">checked</c:if> /> 공지</label>
                                             <label><input type="radio" name="status_type" value="미공지" <c:if test="${notice.status_type=='미공지'}">checked</c:if>/> 미공지</label>
                                         </div>
@@ -134,22 +73,24 @@ request.setAttribute("notice", notice);
                         </table>
                     </div>
                 </div>
+                
 
-			<div class="button-group" style="display: flex; gap: 10px; margin-top: 20px;">
-			    <form action="notice_update_process.jsp" method="post" onsubmit="return beforeSubmit();">
+			<div class="button-detail">
+<%-- 			    <form action="notice_update_process.jsp" method="post" onsubmit="return beforeSubmit();" >
 			        <input type="hidden" name="not_num" value="${notice.not_num}" />
-			        <input type="hidden" name="content" id="content" />
+			        <input type="hidden" name="content" id="content" /> --%>
+			        
 			        <button class="btn btn-edit" type="submit">수정</button>
 			        <button class="btn btn-back" type="button" onclick="location.href='notice_board.jsp'">취소</button>
-			    </form>
+		</form>
 			
-			    <form action="notice_delete_process.jsp" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-			        <input type="hidden" name="not_num" value="${notice.not_num}" />
+			    <form action="faq_delete_process.jsp" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+			        <input type="hidden" name="not_num" value="${faq.faq_num}" />
 			        <button type="submit" class="btn btn-delete">삭제</button>
 			    </form>
+			    </div>
 			</div>
         </div>
-    </div>
 
     <script>
         var quill = new Quill('#quilleditor', {
