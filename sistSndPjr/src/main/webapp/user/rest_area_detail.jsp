@@ -1,3 +1,4 @@
+<%@page import="DTO.LoginDTO"%>
 <%@page import="DTO.AreaDetailDTO"%>
 <%@page import="restarea.detail.RestAreaDetailService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,10 +17,16 @@ String direction = adDTO.getDirection() == null ? "" : adDTO.getDirection();
 // 로그인 세션 확인 (즐겨찾기 추가 버튼 활성화 유무)
 boolean loginChk = session.getAttribute("userData") != null;
 
+// 로그인 체크 후 확인되면 DTO에 담기 (즐겨찾기 추가 버튼 사용 위해)
+if (loginChk) {
+	LoginDTO lDTO = (LoginDTO) session.getAttribute("userData");
+	pageContext.setAttribute("lDTO", lDTO);
+}// end if
+
 // EL문 사용을 위한 Attribute 설정
 pageContext.setAttribute("adDTO", adDTO);
 pageContext.setAttribute("loginChk", loginChk);
-%>  
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,10 +40,24 @@ pageContext.setAttribute("loginChk", loginChk);
 <script>
 $(function(){
 	// 즐겨찾기 버튼
+	var email = '${lDTO.user_email}';
+	var id = '${adDTO.area_num}';
+	var param = { email : email , id : id };
+	
     $('#btnFavorite').click(()=>{
 		if (${loginChk}) {
-			alert('즐겨찾기의 추가되었습니다.');
-			// ajax로 처리해야함.
+			$.ajax({
+				url:'ajax_rest_area_favorite.jsp',
+				type:'post',
+				data: param,
+				dataType:'json',
+				error:function(xhr) {
+					console.log(xhr.status);
+				},
+				success:function(jsonObj) {
+					alert(jsonObj.favoriteChk);
+				}
+			});
 			return;
 		};// end if
 		

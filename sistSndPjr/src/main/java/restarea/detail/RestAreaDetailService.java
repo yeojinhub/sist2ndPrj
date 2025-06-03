@@ -6,6 +6,11 @@ import DTO.AreaDetailDTO;
 
 public class RestAreaDetailService {
 	
+	/**
+	 * ID 파라미터로 디테일 조회
+	 * @param num ID파라미터
+	 * @return
+	 */
 	public AreaDetailDTO searchRestAreaDetail(int num) {
 		AreaDetailDTO adDTO = null;
 		
@@ -29,5 +34,19 @@ public class RestAreaDetailService {
 		
 		return adDTO;
 	}// searchRestAreaDetail
+	
+	public boolean searchFavorite(String email, int area_num) {
+		boolean flag = false;
+		
+		RestAreaDetailDAO radDAO = new RestAreaDetailDAO();
+		
+		try {
+			flag = radDAO.selectFavorite(email, area_num);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}// end try-catch
+		
+		return flag;
+	}// searchFavorite
 	
 }// class
