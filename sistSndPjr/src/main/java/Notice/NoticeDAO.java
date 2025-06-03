@@ -15,7 +15,6 @@ public class NoticeDAO {
     private static NoticeDAO noticeDAO;
 
     private NoticeDAO() {
-        // 생성자 private: 외부에서 new 사용 못 하도록
     }
 
     public static NoticeDAO getInstance() {

@@ -50,6 +50,50 @@ request.setAttribute("noticeList", noticeList); */
     <script src="script.js"></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+		/* 검색 영역 */
+		.search-div {
+		  width: 60%;
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		  margin: 50px auto 30px auto; /* 아래 테이블과 간격 포함 */
+		  gap: 10px;
+		}
+		
+		.search-div select,
+		.search-div input[type="text"],
+		.search-div button {
+		  height: 30px;
+		  font-size: 16px;
+		  border-radius: 4px;
+		  border: 1px solid #C4C4C4;
+		}
+		
+		.search-div select {
+		  width: 100px;
+		  font-weight: bold;
+		  color: #000;
+		}
+		
+		.search-div input[type="text"].search-title {
+		  width: 50%;
+		  padding: 0 8px;
+		  text-align: center;
+		}
+		
+		.btn-search {
+		  padding: 0 15px;
+		  width: 80px;
+		  font-size: 10px;
+		  font-weight: bold;
+		  background-color: #D9D9D9;
+		  border: none;
+		  cursor: pointer;
+		  color:#ffffff;
+		  background-color: #96b1ad;
+		}   
+    </style>
 </head>
 <body>
     <div class="container-">
@@ -69,7 +113,7 @@ request.setAttribute("noticeList", noticeList); */
 			        <option value="author" ${searchType == 'author' ? 'author' : ''}>작성자</option>
 			    </select>
 			
-			    <input type="text" name="searchKeyword" placeholder="검색어 입력" value="${searchKeyword != null ? searchKeyword : ''}"/>
+			    <input type="text" class="search-title" name="searchKeyword" placeholder="검색어 입력" value="${searchKeyword != null ? searchKeyword : ''}"/>
 			
 			    <select name="statusType">
 			        <option value="all" ${statusType == 'all' ? 'selected' : ''}>전체</option>

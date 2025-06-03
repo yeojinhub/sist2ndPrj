@@ -119,7 +119,7 @@ request.setAttribute("notice", notice);
                                 </tr>
                                 <tr>
                                     <td colspan="4">
-                                        <div class="radio-container" style="border:1px solid #ccc; padding: 10px;">
+                                        <div class="radio-container" style="border:2px solid #ccc; padding: 10px;">
                                             <label><input type="radio" name="status_type" value="공지" <c:if test="${notice.status_type=='공지'}">checked</c:if> /> 공지</label>
                                             <label><input type="radio" name="status_type" value="미공지" <c:if test="${notice.status_type=='미공지'}">checked</c:if>/> 미공지</label>
                                         </div>
@@ -135,16 +135,19 @@ request.setAttribute("notice", notice);
                     </div>
                 </div>
 
-                <div class="button-detail">
-                    <button class="btn btn-edit" type="submit">수정</button>
-                    <button class="btn btn-back" type="button" onclick="location.href='notice_board.jsp'">취소</button>
-                </div>
-            </form>
-            <!-- 삭제 -->
-            <form action="notice_delete_process.jsp" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-                <input type="hidden" name="not_num" value="${notice.not_num}" />
-                <button type="submit" class="btn btn-delete">삭제</button>
-            </form>
+			<div class="button-group" style="display: flex; gap: 10px; margin-top: 20px;">
+			    <form action="notice_update_process.jsp" method="post" onsubmit="return beforeSubmit();">
+			        <input type="hidden" name="not_num" value="${notice.not_num}" />
+			        <input type="hidden" name="content" id="content" />
+			        <button class="btn btn-edit" type="submit">수정</button>
+			        <button class="btn btn-back" type="button" onclick="location.href='notice_board.jsp'">취소</button>
+			    </form>
+			
+			    <form action="notice_delete_process.jsp" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+			        <input type="hidden" name="not_num" value="${notice.not_num}" />
+			        <button type="submit" class="btn btn-delete">삭제</button>
+			    </form>
+			</div>
         </div>
     </div>
 
