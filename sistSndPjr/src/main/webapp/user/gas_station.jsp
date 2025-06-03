@@ -39,7 +39,7 @@ $(function(){
 	<header>
 		<jsp:include page="../common/jsp/header.jsp" />
 	</header>
-	<div class="container2">
+	<div class="container" style="flex-direction : column;">
 		<div>
 			<hr class="line_blue" style="text-align: center;">
 		</div>
@@ -136,7 +136,7 @@ $(function(){
 		%>
 		<%=PaginationUtil.pagination(pDTO)%>
 
-		<div class="agent-container" style="flex: 1;">
+		<div class="agent-container" style="flex: 0;">
 			<div class="agent-box">담당자 정보</div>
 			<div class="agent-call">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모두쉼
 				콜센터 : 02-1234-5678</div>
