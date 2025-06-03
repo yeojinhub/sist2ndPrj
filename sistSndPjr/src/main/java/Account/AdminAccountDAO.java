@@ -204,14 +204,14 @@ public class AdminAccountDAO {
 			con = dbCon.getDbCon();
 			
 			// 4. 쿼리문 생성객체 얻기.
-			StringBuilder insertQuery = new StringBuilder();
-			insertQuery
+			StringBuilder updateQuery = new StringBuilder();
+			updateQuery
 			.append("	update	account	")
 			.append("	set name=?,	tel=?	")
 			.append("	where	acc_num=?	")
 			;
 			
-			pstmt = con.prepareStatement(insertQuery.toString());
+			pstmt = con.prepareStatement(updateQuery.toString());
 			
 			// 5. bind 변수에 값 할당
 			pstmt.setString(1, userDTO.getName());
@@ -229,6 +229,50 @@ public class AdminAccountDAO {
 		return flagNum;
 		
 	} //updateUser
+	
+	/**
+	 * 사용자 계정 삭제
+	 * @param userDTO 
+	 * @return flagNum 성공시 1, 실패시 0
+	 * @throws SQLException 예외처리
+	 */
+	public int deleteUser(int accNum) throws SQLException {
+		int flagNum = 0;
+		
+		DBConnection dbCon = DBConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			// 1. JNDI 사용객체 생성.
+			// 2. DBCP에서 연결객체 얻기(DataSource).
+			// 3. Connection 얻기.
+			con = dbCon.getDbCon();
+			
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder deleteQuery = new StringBuilder();
+			deleteQuery
+			.append("	delete	from	account	")
+			.append("	where	acc_num=?	")
+			;
+			
+			pstmt = con.prepareStatement(deleteQuery.toString());
+			
+			// 5. bind 변수에 값 할당
+			pstmt.setInt(1, accNum);
+			
+			// 6. 쿼리문 수행 후 결과 얻기.
+			flagNum = pstmt.executeUpdate();
+			
+		} finally {
+			// 7. 연결 끊기.
+			dbCon.dbClose(con, pstmt, null);
+		} //end try finally
+		
+		return flagNum;
+		
+	} //deleteUser
 	
 	/**
 	 * 전체 관리자 계정 조회
@@ -284,6 +328,108 @@ public class AdminAccountDAO {
 		
 		return adminList;
 	} //selectAllAdmin
+	
+	/**
+	 * 단일 관리자 계정 조회
+	 * @param num 조회할 관리자 계정 번호
+	 * @return adminDTO 조회한 관리자 계정 정보
+	 * @throws SQLException 예외처리
+	 */
+	public AccountDTO selectOneAdmin(int num) throws SQLException {
+		AccountDTO adminDTO = null;
+		
+		DBConnection dbCon = DBConnection.getInstance();
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		
+		try {
+			// 1. JNDI 사용객체 생성.
+			// 2. DBCP에서 연결객체 얻기(DataSource).
+			// 3. Connection 얻기.
+			con = dbCon.getDbCon();
+			
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder selectOneQuery = new StringBuilder();
+			selectOneQuery
+			.append("	select	acc_num, name, adm_id, pass, tel, input_date	")
+			.append("	from	account	")
+			.append("	where	acc_num=?	")
+			;
+			
+			pstmt = con.prepareStatement(selectOneQuery.toString());
+			
+			// 5. bind 변수에 값 할당
+			pstmt.setInt(1, num);
+			
+			// 6. 쿼리문 수행 후 결과 얻기.
+			rs=pstmt.executeQuery();
+			
+			while( rs.next() ) {
+				adminDTO = new AccountDTO();
+				adminDTO.setAcc_num(rs.getInt("acc_num"));;
+				adminDTO.setName(rs.getString("name"));
+				adminDTO.setAdm_id(rs.getString("adm_id"));
+				adminDTO.setPass(rs.getString("pass"));
+				adminDTO.setTel(rs.getString("tel"));
+				adminDTO.setInput_date(rs.getDate("input_date"));
+			} //end while
+			
+		} finally {
+			// 7. 연결 끊기.
+			dbCon.dbClose(con, pstmt, rs);
+		} //end try finally
+		
+		return adminDTO;
+	} //selectOneAdmin
+	
+	/**
+	 * 관리자 계정 수정
+	 * @param adminDTO 
+	 * @return flagNum 성공시 1, 실패시 0
+	 * @throws SQLException 예외처리
+	 */
+	public int updateAdmin(AccountDTO adminDTO) throws SQLException {
+		int flagNum = 0;
+		
+		DBConnection dbCon = DBConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			// 1. JNDI 사용객체 생성.
+			// 2. DBCP에서 연결객체 얻기(DataSource).
+			// 3. Connection 얻기.
+			con = dbCon.getDbCon();
+			
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder updateQuery = new StringBuilder();
+			updateQuery
+			.append("	update	account	")
+			.append("	set name=?,	tel=?	")
+			.append("	where	acc_num=?	")
+			;
+			
+			pstmt = con.prepareStatement(updateQuery.toString());
+			
+			// 5. bind 변수에 값 할당
+			pstmt.setString(1, adminDTO.getName());
+			pstmt.setString(2, adminDTO.getTel());
+			pstmt.setInt(3, adminDTO.getAcc_num());
+			
+			// 6. 쿼리문 수행 후 결과 얻기.
+			flagNum = pstmt.executeUpdate();
+			
+		} finally {
+			// 7. 연결 끊기.
+			dbCon.dbClose(con, pstmt, null);
+		} //end try finally
+		
+		return flagNum;
+		
+	} //updateAdmin
 	
 	/**
 	 * 전체 유저 수를 조회합니다.

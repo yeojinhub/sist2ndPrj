@@ -46,21 +46,23 @@ request.setAttribute("pageInfoText", pageInfoText);
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>관리자 대시보드</title>
-    
-    <!-- 사용자 정의 css 로드 -->
-    <link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- jQuery 로드 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <!-- 사용자 정의 JS 로드 -->
-    <script src="/sistSndPjr/admin/script.js"></script>
-    <script src="/sistSndPjr/admin/common/js/user_account_add.js"></script>
+<meta charset="UTF-8">
+<title>관리자 대시보드</title>
+
+<!-- 사용자 정의 css 로드 -->
+<link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- jQuery 로드 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- 사용자 정의 JS 로드 -->
+<script src="/sistSndPjr/admin/script.js"></script>
+<script src="/sistSndPjr/admin/common/js/user_account_manage.js"></script>
+
 </head>
 <body>
     <div class="container">

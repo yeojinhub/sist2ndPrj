@@ -133,16 +133,16 @@ public class AdminAccountService {
 	
 	/**
 	 * 단일 사용자 계정 조회
-	 * @param acc_num 조회할 사용자 계정 번호
+	 * @param accNum 조회할 사용자 계정 번호
 	 * @return userDTO 조회한 사용자 계정 정보
 	 */
-	public AccountDTO searchOneUser(int acc_num) {
+	public AccountDTO searchOneUser(int accNum) {
 		AccountDTO userDTO=null;
 		
 		AdminAccountDAO userDAO=AdminAccountDAO.getInstance();
 		
 		try {
-			userDTO = userDAO.selectOneUser(acc_num);
+			userDTO = userDAO.selectOneUser(accNum);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}  //end try catch
@@ -173,7 +173,7 @@ public class AdminAccountService {
 	
 	/**
 	 * 사용자 계정 수정
-	 * @param userDTO 등록할 사용자 계정 정보
+	 * @param userDTO 수정할 사용자 계정 정보
 	 * @return flag 성공시 true, 실패시 false 반환
 	 */
 	public boolean modifyUser(AccountDTO userDTO) {
@@ -192,6 +192,26 @@ public class AdminAccountService {
 	} //modifyUser
 	
 	/**
+	 * 사용자 계정 삭제
+	 * @param accNum 삭제할 사용자 계정 번호
+	 * @return flag 성공시 true, 실패시 false 반환
+	 */
+	public boolean removeUser(int accNum) {
+		boolean flag = false;
+		
+		AdminAccountDAO userDAO = AdminAccountDAO.getInstance();
+		
+		try {
+			userDAO.deleteUser(accNum);
+			flag = true;
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} //end try catch
+		
+		return flag;
+	} //removeUser
+	
+	/**
 	 * 전체 관리자 계정 조회
 	 * @return adminList 조회한 전체 관리자 계정 리스트
 	 */
@@ -207,5 +227,45 @@ public class AdminAccountService {
 		
 		return adminList;
 	} //selectAllAdmin
+	
+	/**
+	 * 단일 관리자 계정 조회
+	 * @param accNum 조회할 관리자 계정 번호
+	 * @return adminDTO 조회한 관리자 계정 정보
+	 */
+	public AccountDTO searchOneAdmin(int accNum) {
+		AccountDTO adminDTO = null;
+		
+		AdminAccountDAO adminDAO=AdminAccountDAO.getInstance();
+		
+		try {
+			adminDTO = adminDAO.selectOneAdmin(accNum);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  //end try catch
+		
+		return adminDTO;
+		
+	} //searchOneAdmin
+	
+	/**
+	 * 관리자 계정 수정
+	 * @param adminDTO 수정할 관리자 계정 정보
+	 * @return flag 성공시 true, 실패시 false 반환
+	 */
+	public boolean modifyAdmin(AccountDTO adminDTO) {
+		boolean flag = false;
+		
+		AdminAccountDAO adminDAO = AdminAccountDAO.getInstance();
+		
+		try {
+			adminDAO.updateAdmin(adminDTO);
+			flag = true;
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} //end try catch
+		
+		return flag;
+	} //modifyAdmin
 
 } //class

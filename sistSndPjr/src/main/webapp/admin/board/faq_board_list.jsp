@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+%><!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>관리자 대시보드</title>
-    <link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="/sistSndPjr/admin/script.js"></script>
+<meta charset="UTF-8">
+<title>관리자 대시보드</title>
+
+<!-- 사용자 정의 css 로드 -->
+<link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- jQuery 로드 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- 사용자 정의 JS 로드 -->
+<script src="/sistSndPjr/admin/script.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -41,7 +54,13 @@
                             <th>작성일</th>
                         </tr>
                     </thead>
-                    <tbody> 
+                    <tbody>
+                    <c:if test="${ empty userList }">
+                    	<tr>
+                    		<td colspan="5">FAQ 게시판 정보가 존재하지 않습니다.</td>
+                    	</tr>
+                   	</c:if>
+                   	<c:forEach var="faqDTO" items="${ faqList }" varStatus="i">
                         <tr onclick="location.href='faq_board_detail.jsp'">
                         	<td><input type="checkbox" /></td>
                             <td>5</td>
@@ -49,6 +68,7 @@
                             <td>admin03</td>
                             <td>2025-05-07</td>
                         </tr>
+                   	</c:forEach>
                         <tr>
                         	<td><input type="checkbox" /></td>
                             <td>4</td>

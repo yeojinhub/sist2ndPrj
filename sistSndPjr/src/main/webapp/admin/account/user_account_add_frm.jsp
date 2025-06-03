@@ -23,7 +23,7 @@ String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
 <!-- 사용자 정의 JS 로드 -->
 <script src="/sistSndPjr/admin/script.js"></script>
-<script src="/sistSndPjr/admin/common/js/user_account_add.js"></script>
+<script src="/sistSndPjr/admin/common/js/user_account_manage.js"></script>
 
 </head>
 <body>
