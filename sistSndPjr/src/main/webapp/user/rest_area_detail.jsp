@@ -1,42 +1,24 @@
+<%@page import="DTO.AreaDetailDTO"%>
+<%@page import="restarea.detail.RestAreaDetailService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
 <%
 String id = request.getParameter("id");
 
-String name = "알 수 없음";
-String direction = "";
+RestAreaDetailService rads = new RestAreaDetailService();
 
-if ("101".equals(id)) {
-    name = "강릉휴게소";
-    direction = "강릉방향";
-} else if ("102".equals(id)) {
-    name = "강릉휴게소";
-    direction = "인천방향";
-} else if ("103".equals(id)) {
-    name = "강천산휴게소";
-    direction = "광주방향";
-} else if ("104".equals(id)) {
-    name = "강천산휴게소";
-    direction = "대구방향";
-} else if ("105".equals(id)) {
-    name = "거창휴게소";
-    direction = "광주방향";
-} else if ("106".equals(id)) {
-    name = "거창휴게소";
-    direction = "대구방향";
-} else if ("107".equals(id)) {
-    name = "건천휴게소";
-    direction = "부산방향";
-} else if ("108".equals(id)) {
-    name = "건천휴게소";
-    direction = "서울방향";
-} else if ("109".equals(id)) {
-    name = "경산휴게소";
-    direction = "서울방향";
-} else if ("110".equals(id)) {
-    name = "경주휴게소";
-    direction = "부산방향";
-}
+AreaDetailDTO adDTO = rads.searchRestAreaDetail(Integer.parseInt(id));
+
+// 휴게소명, 방향 설정
+String name = adDTO.getName();
+String direction = adDTO.getDirection() == null ? "" : adDTO.getDirection();
+
+// 로그인 세션 확인 (즐겨찾기 추가 버튼 활성화 유무)
+boolean loginChk = session.getAttribute("userData") != null;
+
+// EL문 사용을 위한 Attribute 설정
+pageContext.setAttribute("adDTO", adDTO);
+pageContext.setAttribute("loginChk", loginChk);
 %>  
 <!DOCTYPE html>
 <html>
@@ -50,8 +32,21 @@ if ("101".equals(id)) {
 
 <script>
 $(function(){
+	// 즐겨찾기 버튼
+    $('#btnFavorite').click(()=>{
+		if (${loginChk}) {
+			alert('즐겨찾기의 추가되었습니다.');
+			// ajax로 처리해야함.
+			return;
+		};// end if
+		
+		if (confirm('로그인 후 이용가능합니다.\n로그인 하시겠습니까?')) {
+			location.href = '../login/login.jsp';
+		};// end if
+    });// click
+	
 	// 페이지 최초 로딩 시
-    $("#tabContent").load("../common/component/restarea/rest_area_info.jsp");
+    $("#tabContent").load("../common/component/restarea/rest_area_info.jsp?id=${adDTO.area_num}");
 
     // 탭 클릭 시
     $(".tab-btn").click(function () {
@@ -60,12 +55,13 @@ $(function(){
 
       const tabName = $(this).data("tab");
       let file = "";
-      if (tabName === "info") file = "../common/component/restarea/rest_area_info.jsp";
-      else if (tabName === "food") file = "../common/component/restarea/rest_area_food.jsp";
-      else if (tabName === "review") file = "../common/component/restarea/rest_area_review.jsp";
+      if (tabName === "info") file = "../common/component/restarea/rest_area_info.jsp?id=${adDTO.area_num}";
+      else if (tabName === "food") file = "../common/component/restarea/rest_area_food.jsp?id=${adDTO.area_num}";
+      else if (tabName === "review") file = "../common/component/restarea/rest_area_review.jsp?id=${adDTO.area_num}";
 
       $("#tabContent").load(file);
-    });    	 
+      
+    });// ready    	 
 });
 </script>
 </head>
@@ -87,8 +83,8 @@ $(function(){
 <hr class="rest-title-divider">
 
 <div class="rest-title-row">
-  <h2 class="rest-name"><%= name %> (<%= direction %>)</h2>
-  <button class="favorite-btn">★ 즐겨찾기 추가</button>
+  <h2 class="rest-name"><%= name %> <%= direction %></h2>
+  <input type="button" class="favorite-btn" id="btnFavorite" value="★ 즐겨찾기 추가"/>
 </div>
 
 <div class="detail-tab">
@@ -99,13 +95,14 @@ $(function(){
 
 <div id="tabContent"></div>
 
-
-</div>
 <div class="agent-container" style="margin-top: 20px;">
     <div class="agent-box">담당자 정보</div>
     <div class="agent-call">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모두쉼 콜센터 : 02-1234-5678</div>
 </div>
+</div> <!-- END div(container) -->
+
 </body>
+<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=bd811b0f31f210496827de3ea38119ae&autoload=false"></script>
 <div class="footer" style="width: 100%;">
 <footer>
 <jsp:include page="../common/jsp/footer.jsp" />

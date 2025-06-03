@@ -182,11 +182,11 @@ PaginationDTO pDTO = new PaginationDTO(5,rDTO.getCurrentPage(),totalPage,"rest_a
 </div>
 </div>
 
-</div> <%-- End of container div --%>
 <div class="agent-container">
 		<div class="agent-box">담당자 정보</div>
 		<div class="agent-call">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모두쉼 콜센터 : 02-1234-5678</div>
 	</div>
+</div> <%-- End of container div --%>
 <div class="footer" style="width: 100%;">
 <footer>
 <jsp:include page="../common/jsp/footer.jsp" />
