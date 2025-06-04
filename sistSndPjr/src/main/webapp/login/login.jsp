@@ -12,7 +12,6 @@ DataDecryption dd = new DataDecryption("asdf1234asdf1234");
 for (Cookie coo : cookies) {
 	if (coo.getName().equals("user_email")) {
 		email = dd.decrypt(coo.getValue());
-		System.out.println(email);
 		remember = true;
 	}// end if
 }// end for

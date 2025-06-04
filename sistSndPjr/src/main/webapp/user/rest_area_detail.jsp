@@ -42,7 +42,8 @@ $(function(){
 	// 즐겨찾기 버튼
 	var email = '${lDTO.user_email}';
 	var id = '${adDTO.area_num}';
-	var param = { email : email , id : id };
+	var originalName = '${adDTO.originalName }';
+	var param = { email : email , id : id , originalName : originalName };
 	
     $('#btnFavorite').click(()=>{
 		if (${loginChk}) {

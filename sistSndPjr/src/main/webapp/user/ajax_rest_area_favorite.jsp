@@ -11,11 +11,16 @@ RestAreaDetailService rads = new RestAreaDetailService();
 
 boolean favoriteChk = rads.searchFavorite(email, area_num);
 
-System.out.println(favoriteChk);
+boolean result = false;
+
+if (!favoriteChk) {
+	
+}// end if
 
 // 2. 내일하자
 JSONObject jsonObj = new JSONObject();
 jsonObj.put("favoriteChk", favoriteChk);
+jsonObj.put("result", result);
 
 %>
 

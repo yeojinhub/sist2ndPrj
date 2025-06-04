@@ -44,6 +44,7 @@ public class RestAreaDetailDAO {
 			if (rs.next()) {
 				adDTO = new AreaDetailDTO();
 				adDTO.setArea_num(rs.getInt("AREA_NUM"));
+				adDTO.setOriginalName(rs.getString("NAME"));
 				adDTO.setName(rs.getString("NAME"));
 				adDTO.setRoute(rs.getString("ROUTE"));
 				adDTO.setAddr(rs.getString("ADDR"));
@@ -115,5 +116,11 @@ public class RestAreaDetailDAO {
 
 		return flag;
 	}// selectFavorite
+	
+	public boolean insertFavorite() {
+		boolean flag = false;
+		
+		return flag;
+	}// insertFavorite
 
 }// class
