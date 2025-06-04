@@ -11,6 +11,15 @@ request.setAttribute("menu", "board");
 <jsp:include page="../common/jsp/external_file.jsp" />
 
 <style>
+footer {
+  margin-top: auto; /* 이 속성이 핵심 */
+}
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    flex: 1;
+}
 </style>
 
 <script>
@@ -88,9 +97,8 @@ request.setAttribute("menu", "board");
 	</div>
 
 
-	</div>
-</body>
 	<footer>
 		<jsp:include page="../common/jsp/footer.jsp" />
 	</footer>
+</body>
 </html>

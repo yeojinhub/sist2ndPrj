@@ -177,6 +177,7 @@ pageContext.setAttribute("allRoute", rafs.searchAllRoute());
 
 <%
 PaginationDTO pDTO = new PaginationDTO(5,rDTO.getCurrentPage(),totalPage,"rest_area_facility.jsp",null,rDTO.getKeyword(),rDTO.getRoute(),null,null,rDTO.getWash(),rDTO.getRepair(),rDTO.getTruck());
+
 %>
 <%= PaginationUtil.pagination(pDTO) %>
 </div>
