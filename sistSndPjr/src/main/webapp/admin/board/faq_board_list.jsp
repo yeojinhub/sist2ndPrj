@@ -1,8 +1,15 @@
+<%@page import="Board.FaqDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="Board.FaqService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-%><!DOCTYPE html>
+FaqService faqService = new FaqService();
+List<FaqDTO> faqList = faqService.searchAllFaq();
+request.setAttribute("faqList", faqList);
+%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -20,6 +27,7 @@
 
 <!-- 사용자 정의 JS 로드 -->
 <script src="/sistSndPjr/admin/script.js"></script>
+<script src="/sistSndPjr/admin/common/js/faq_board_manage.js"></script>
 
 </head>
 <body>
@@ -55,48 +63,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <c:if test="${ empty userList }">
+                    <c:if test="${ empty faqList }">
                     	<tr>
                     		<td colspan="5">FAQ 게시판 정보가 존재하지 않습니다.</td>
                     	</tr>
                    	</c:if>
                    	<c:forEach var="faqDTO" items="${ faqList }" varStatus="i">
-                        <tr onclick="location.href='faq_board_detail.jsp'">
+                        <tr>
                         	<td><input type="checkbox" /></td>
-                            <td>5</td>
-                            <td>전기/수소차 충전소 정보 제공 안내</td>
-                            <td>admin03</td>
-                            <td>2025-05-07</td>
+                            <td><c:out value="${ i.count }" /></td>
+                            <td class="onclickbtn" onclick="location.href='faq_board_detail.jsp?faq_num=${ faqDTO.faq_num }'">
+                            	<c:out value="${ faqDTO.title }" />
+                            </td>
+                            <td class="onclickbtn" onclick="location.href='faq_board_detail.jsp?faq_num=${ faqDTO.faq_num }'">
+                            	<c:out value="${ faqDTO.name }" />
+                            </td>
+                            <td><fmt:formatDate value="${ faqDTO.input_date }" pattern="yyyy-MM-dd" /> </td>
                         </tr>
                    	</c:forEach>
-                        <tr>
-                        	<td><input type="checkbox" /></td>
-                            <td>4</td>
-                            <td>통행료와 관련된 내용은 어디에 문의하나요?</td>
-                            <td>admin03</td>
-                            <td>2025-05-07</td>
-                        </tr>
-                        <tr>
-                        	<td><input type="checkbox" /></td>
-                            <td>3</td>
-                            <td>주유소 정보는 실시간인가요?</td>
-                            <td>admin03</td>
-                            <td>2025-05-03</td>
-                        </tr>
-                        <tr>
-                        	<td><input type="checkbox" /></td>
-                            <td>2</td>
-                            <td>내비게이션 기능이 있나요??</td>
-                            <td>admin03</td>
-                            <td>2025-05-04</td>
-                        </tr>
-                        <tr>
-                        	<td><input type="checkbox" /></td>
-                            <td>1</td>
-                            <td>개인정보를 수집하나요?</td>
-                            <td>admin03</td>
-                            <td>2025-05-01</td>
-                        </tr>
                     </tbody>
                 </table>
                 
@@ -111,8 +95,8 @@
                 </div>
                 
                 <div class="button-group">
-                    <button class="btn btn-add" onclick="location.href='faq_board_write.jsp'">작성</button>
-                    <button class="btn btn-delete">삭제</button>
+                    <button class="btn btn-add" id="btnFaqWriteFrm">작성</button>
+                    <button class="btn btn-remove" id="btnFaqRemove">삭제</button>
                 </div>
             </div>
         </div>
