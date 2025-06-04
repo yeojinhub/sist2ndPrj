@@ -137,8 +137,10 @@ pageContext.setAttribute("adDTO", adDTO);
 		<td><c:out value="${adDTO.wash }"/></td>
 	</tr>
 	<tr>
-		<td colspan="2">Ex. 화물차라운지</td>
-		<td colspan="2"><c:out value="${adDTO.truck }"/></td>
+		<td>Ex. 화물차라운지</td>
+		<td><c:out value="${adDTO.truck }"/></td>
+		<td>추가시설</td>
+		<td><c:out value="${adDTO.temp }"/></td>
 	</tr>
 </table>
 

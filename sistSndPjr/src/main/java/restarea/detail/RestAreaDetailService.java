@@ -28,6 +28,10 @@ public class RestAreaDetailService {
 				adDTO.setName(adDTO.getName()+"휴게소");
 			}// end else-if
 			
+			if (adDTO.getTemp() == null) {
+				adDTO.setTemp("없음");
+			}// end if
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}// end try-catch
