@@ -21,6 +21,22 @@
     <jsp:include page="../common/jsp/external_file.jsp"/>
 
     <style>
+    .content {
+    min-width: 0; /* flexbox에서 overflow 방지 */
+    flex: 1;       /* 나머지 영역 차지 */
+    padding: 24px;
+    box-sizing: border-box;
+}
+    
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
     </style>
 
 <script>
@@ -105,7 +121,7 @@
     <header>
         <jsp:include page="../common/jsp/header.jsp"/>
     </header>
-<body>
+
 <div class="container">
 	<div class="sidebar">
 	<h2 class="title">마이페이지</h2>
@@ -120,9 +136,7 @@
     <div class="content">
 	<jsp:include page="../common/component/mypage/myinfoRecheckPass.jsp"/>
 	</div>
-	</div>
 </div>
-</body>
 	<footer>
 	<jsp:include page="../common/jsp/footer.jsp"/>
     </footer>
