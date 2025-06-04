@@ -94,7 +94,7 @@ $(function(){
     });// click
 	
 	// 페이지 최초 로딩 시
-    $("#tabContent").load("../common/component/restarea/rest_area_info.jsp?id=${adDTO.area_num}");
+	$("#tabContent").load("../common/component/restarea/rest_area_info.jsp?id=${adDTO.area_num}");
 
     // 탭 클릭 시
     $(".tab-btn").click(function () {
@@ -103,12 +103,17 @@ $(function(){
 
       const tabName = $(this).data("tab");
       let file = "";
-      if (tabName === "info") file = "../common/component/restarea/rest_area_info.jsp?id=${adDTO.area_num}";
-      else if (tabName === "food") file = "../common/component/restarea/rest_area_food.jsp?id=${adDTO.area_num}";
-      else if (tabName === "review") file = "../common/component/restarea/rest_area_review.jsp?id=${adDTO.area_num}";
+      if (tabName === "info") {
+		file = "../common/component/restarea/rest_area_info.jsp?id=${adDTO.area_num}";
+      }
+      else if (tabName === "food") { 
+		file = "../common/component/restarea/rest_area_food.jsp?id=${adDTO.area_num}";
+      }
+      else if (tabName === "review") {
+		file = "../common/component/restarea/rest_area_review.jsp?id=${adDTO.area_num}";
+      }
 
       $("#tabContent").load(file);
-      
     });// ready    	 
 });
 </script>
