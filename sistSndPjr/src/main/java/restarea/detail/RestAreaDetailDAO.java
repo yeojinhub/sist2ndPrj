@@ -75,12 +75,13 @@ public class RestAreaDetailDAO {
 
 	/**
 	 * 현재 로그인한 유저가 해당 휴게소를 즐겨찾기에 추가 했는지 확인합니다.
+	 * 
 	 * @param email
 	 * @param area_num
 	 * @return
 	 * @throws SQLException
 	 */
-	public boolean selectFavorite(String email, int area_num) throws SQLException{
+	public boolean selectFavorite(String email, int area_num) throws SQLException {
 		boolean flag = false;
 
 		DBConnection dbCon = DBConnection.getInstance();
@@ -93,12 +94,9 @@ public class RestAreaDetailDAO {
 			conn = dbCon.getDbCon();
 
 			StringBuilder selectQuery = new StringBuilder();
-			selectQuery
-			.append(" SELECT * ")
-			.append(" FROM (SELECT A.ACC_NUM, USER_EMAIL ,AREA_NUM ")
-			.append(" 		FROM ACCOUNT A, FAVORITE F ")
-			.append(" 		WHERE A.ACC_NUM = F.ACC_NUM) ")
-			.append(" WHERE USER_EMAIL = ? AND AREA_NUM = ? ");
+			selectQuery.append(" SELECT * ").append(" FROM (SELECT A.ACC_NUM, USER_EMAIL ,AREA_NUM ")
+					.append(" 		FROM ACCOUNT A, FAVORITE F ").append(" 		WHERE A.ACC_NUM = F.ACC_NUM) ")
+					.append(" WHERE USER_EMAIL = ? AND AREA_NUM = ? ");
 
 			pstmt = conn.prepareStatement(selectQuery.toString());
 
@@ -116,11 +114,66 @@ public class RestAreaDetailDAO {
 
 		return flag;
 	}// selectFavorite
-	
-	public boolean insertFavorite() {
+
+	public boolean insertFavorite(String restareaName, int acc_num, int area_num) throws SQLException {
 		boolean flag = false;
-		
+
+		DBConnection dbCon = DBConnection.getInstance();
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = dbCon.getDbCon();
+
+			StringBuilder insertQuery = new StringBuilder();
+			insertQuery.append(" INSERT INTO FAVORITE ").append(" VALUES(SEQ_FAV_NUM.NEXTVAL, ?, ?, ?) ");
+
+			pstmt = conn.prepareStatement(insertQuery.toString());
+
+			// 바인드 변수 할당
+			pstmt.setString(1, restareaName);
+			pstmt.setInt(2, acc_num);
+			pstmt.setInt(3, area_num);
+
+			flag = pstmt.executeUpdate() != 0;
+
+		} finally {
+			dbCon.dbClose(conn, pstmt, null);
+		} // end try-finally
+
 		return flag;
 	}// insertFavorite
+
+	public boolean deleteFavorite(int acc_num, int area_num) throws SQLException {
+		boolean flag = false;
+
+		DBConnection dbCon = DBConnection.getInstance();
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = dbCon.getDbCon();
+
+			StringBuilder insertQuery = new StringBuilder();
+			insertQuery
+			.append(" DELETE FROM FAVORITE ")
+			.append(" WHERE ACC_NUM = ? AND AREA_NUM = ? ");
+
+			pstmt = conn.prepareStatement(insertQuery.toString());
+
+			// 바인드 변수 할당
+			pstmt.setInt(1, acc_num);
+			pstmt.setInt(2, area_num);
+
+			flag = pstmt.executeUpdate() != 0;
+
+		} finally {
+			dbCon.dbClose(conn, pstmt, null);
+		} // end try-finally
+
+		return flag;
+	}// deleteFavorite
 
 }// class

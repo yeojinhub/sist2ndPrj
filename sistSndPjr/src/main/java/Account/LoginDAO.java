@@ -32,7 +32,7 @@ public class LoginDAO {
 			// SQL문 작성
 			StringBuilder selectQuery = new StringBuilder();
 			selectQuery
-						.append("	SELECT NAME, TEL 	")
+						.append("	SELECT ACC_NUM ,NAME, TEL 	")
 						.append("	FROM ACCOUNT WHERE USER_EMAIL = ? AND PASS = ?	");
 
 			pstmt = conn.prepareStatement(selectQuery.toString());
@@ -44,6 +44,7 @@ public class LoginDAO {
 
 			if (rs.next()) {
 				lDTO = new LoginDTO();
+				lDTO.setAcc_num(rs.getInt("ACC_NUM"));
 				lDTO.setName(rs.getString("NAME"));
 				lDTO.setTel(rs.getString("TEL"));
 				lDTO.setUser_email(email);

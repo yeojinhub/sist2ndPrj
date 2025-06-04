@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 public class LoginDTO {
 
+	private int acc_num;
 	private String user_email, pass, name, tel;
 	
 }

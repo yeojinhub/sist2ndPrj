@@ -53,4 +53,32 @@ public class RestAreaDetailService {
 		return flag;
 	}// searchFavorite
 	
+	public boolean addFavorite(String restareaName, int acc_num, int area_num) {
+		boolean flag = false;
+		
+		RestAreaDetailDAO radDAO = new RestAreaDetailDAO();
+		
+		try {
+			flag = radDAO.insertFavorite(restareaName, acc_num, area_num);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}// end try-catch
+		
+		return flag;
+	}// addFavorite
+	
+	public boolean removeFavorite(int acc_num, int area_num) {
+		boolean flag = false;
+		
+		RestAreaDetailDAO radDAO = new RestAreaDetailDAO();
+		
+		try {
+			flag = radDAO.deleteFavorite(acc_num, area_num);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}// end try-catch
+		
+		return flag;
+	}// addFavorite
+	
 }// class

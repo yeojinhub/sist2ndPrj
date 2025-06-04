@@ -32,15 +32,17 @@ pageContext.setAttribute("adDTO", adDTO);
 
 .info-table {
 	width: 100%;
-	border-collapse: collapse;
+	border-collapse: collapse; 
 	margin-top: 10px;
 	font-size: 14px;
+	table-layout: fixed;
 }
 
 .info-table th, .info-table td {
 	border: 1px solid #ccc;
 	padding: 10px;
 	text-align: center;
+	aspect-ratio: 1 / 1;
 }
 
 .info-table th {
@@ -93,13 +95,11 @@ pageContext.setAttribute("adDTO", adDTO);
 <table class="info-table">
 	<tr>
 		<th>주소</th>
-		<td><c:out value="${adDTO.addr }"/></td>
-		<th>노선</th>
-		<td><c:out value="${adDTO.route }"/></td>
+		<td colspan="3"><c:out value="${adDTO.addr }"/></td>
 	</tr>
 	<tr>
-		<th>운영시간</th>
-		<td><c:out value="${adDTO.operation_time }"/></td>
+		<th>노선</th>
+		<td><c:out value="${adDTO.route }"/></td>
 		<th>전화번호</th>
 		<td><c:out value="${adDTO.tel }"/></td>
 	</tr>

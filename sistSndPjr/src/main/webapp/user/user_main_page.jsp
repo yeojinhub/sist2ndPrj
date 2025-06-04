@@ -4,7 +4,7 @@
     request.setAttribute("menu", "home");
 %>    
 <!DOCTYPE html>
-<html>
+<html>	
 <head>
     <meta charset="UTF-8">
     <title>메인 페이지</title>
