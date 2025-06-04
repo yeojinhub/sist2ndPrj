@@ -31,8 +31,19 @@ public class NoticeDAO {
 			.append("	select count(not_num) cnt	")
 			.append("	from notice	");
 			
+			//검색키워드가 존재
+			if(rDTO.getKeyword() != null && !"".equals(rDTO.getKeyword())) {
+				selectNumQuery.append("where instr(").append(rDTO.getFieldName())
+				.append(" ,?) != 0");
+			}
+			
 			pstmt = con.prepareStatement(selectNumQuery.toString());
 
+			//5.바인드변수에 값 할당
+			if(rDTO.getKeyword() != null && !"".equals(rDTO.getKeyword())) {
+				pstmt.setString(1, rDTO.getKeyword());
+			}
+			
 		//6.쿼리문 수행 후 결과 얻기
 			rs = pstmt.executeQuery();
 			
@@ -74,12 +85,21 @@ public class NoticeDAO {
 			.append("	select not_num, title, content, name, input_date, status_type	")
 			.append("	from(select not_num, title, content, name, input_date, status_type, 	")
 			.append("	row_number() over(order by not_num desc) rnum 	")
-			.append("	from notice)	")
-			.append("	where rnum between ? and ?	");
+			.append("	from notice	");
+			
+			if(rDTO.getKeyword() != null && !"".equals(rDTO.getKeyword())) {
+				selectNotice.append("where instr(").append(rDTO.getFieldName())
+				.append(" ,?) != 0");
+			}
+			
+			selectNotice.append(")	where rnum between ? and ?	");
 			
 			pstmt = con.prepareStatement(selectNotice.toString());
 		//5.바인드변수에 값 할당
 			int bindInd = 1;
+			if(rDTO.getKeyword() != null && !"".equals(rDTO.getKeyword())) {
+				pstmt.setString(bindInd++, rDTO.getKeyword());
+			}
 			pstmt.setInt(bindInd++, rDTO.getStartNum());
 			pstmt.setInt(bindInd++, rDTO.getEndNum());
 			
