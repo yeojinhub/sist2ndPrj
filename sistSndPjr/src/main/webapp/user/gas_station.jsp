@@ -60,7 +60,7 @@ $(function(){
 	<header>
 		<jsp:include page="../common/jsp/header.jsp" />
 	</header>
-	<div class="container" style="flex-direction : column;">
+	<div class="container" style="flex-direction : column; height: auto;">
 		<div>
 			<hr class="line_blue" style="text-align: center;">
 		</div>
@@ -169,7 +169,7 @@ $(function(){
 
 
 </body>
-<div class="footer">
+<div class="footer" style="width: 100%;">
 	<footer>
 		<jsp:include page="../common/jsp/footer.jsp" />
 	</footer>
