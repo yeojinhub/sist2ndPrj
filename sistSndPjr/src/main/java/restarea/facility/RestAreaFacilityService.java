@@ -1,25 +1,39 @@
-package Notice;
+package restarea.facility;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import DTO.NoticeDTO;
-import DTO.RangeDTO;
+import DTO.AreaFacilityDTO;
 
-public class NoticeService {
+public class RestAreaFacilityService {
 
+	public List<String> searchAllRoute() {
+		List<String> list = new ArrayList<String>();
+		
+		RestAreaFacilityDAO rafDAO = new RestAreaFacilityDAO();
+		
+		try {
+			list = rafDAO.selectAllRoute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}// end try-catch
+		
+		return list;
+	}// searchAllRoute
+	
 	/**
 	 * 1.총 레코드의 수
 	 * @param rDTO
 	 * @return 레코드의 수
 	 */
-	public int totalCount( RangeDTO rDTO) {
+	public int totalCount( DTO.RangeDTO rDTO ) {
 		int cnt = 0;
 		
-		NoticeDAO nDAO = new NoticeDAO();
+		RestAreaFacilityDAO rafDAO = new RestAreaFacilityDAO();
 		
 		try {
-			cnt = nDAO.selectTotalCount(rDTO);
+			cnt = rafDAO.selectTotalCount(rDTO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -82,36 +96,22 @@ public class NoticeService {
 		return endNum;
 	}
 	
-	public List<NoticeDTO> searchAllNotice(DTO.RangeDTO rDTO){
+
+	public List<AreaFacilityDTO> searchAllAreaFacility(DTO.RangeDTO rDTO){
 		
-		List<NoticeDTO> list = null;
+		List<AreaFacilityDTO> list = null;
 		
-		NoticeDAO nDAO = new NoticeDAO();
+		RestAreaFacilityDAO rafDAO = new RestAreaFacilityDAO();
 		
 		
 		try {
-			list =  nDAO.selectNotice(rDTO);
+			list =  rafDAO.selectFacility(rDTO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		
 		return list;
-	}
-	
-	public NoticeDTO searchOneNotice(int num) {
-		
-		NoticeDTO nDTO = null;
-		
-		NoticeDAO nDAO = new NoticeDAO();
-		
-		try {
-			nDTO = nDAO.selectOneNotice(num);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return nDTO;
 	}
 	
 }

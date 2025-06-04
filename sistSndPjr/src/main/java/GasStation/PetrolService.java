@@ -13,13 +13,13 @@ import DTO.RangeDTO;
 
 public class PetrolService {
 
-	public List<String> searchAllRoute() {
+	public List<String> searchAllRoute(RangeDTO rDTO) {
 		List<String> list = new ArrayList<String>();
 		
 		PetrolDAO pDAO = new PetrolDAO();
 		
 		try {
-			list = pDAO.selectAllRoute();
+			list = pDAO.selectAllRoute(rDTO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -36,6 +36,15 @@ public class PetrolService {
 		
 		PetrolDAO pDAO = new PetrolDAO();
 		
+		// #. 검색 기능
+		// #-1. ELECT와 HYDRO의 값을 NULL이 아닌 ON일 경우에 DB에 값(O)와 일치시킨다.
+		if (rDTO.getElect() != null) {
+			rDTO.setElect("O");
+		}// end if
+		if (rDTO.getHydro() != null) {
+			rDTO.setHydro("O");
+		}// end if
+		
 		try {
 			list = pDAO.selectAllPetrol(rDTO);
 		} catch (SQLException e) {
@@ -51,13 +60,22 @@ public class PetrolService {
 	 * 1. 총 레코드(데이터)의 수를 구합니다.
 	 * @return
 	 */
-	public int searchTotalCount(){
+	public int searchTotalCount(RangeDTO rDTO){
 		int cnt = 0;
 	
 		PetrolDAO pDAO = new PetrolDAO();
 		
+		// #. 검색 기능
+		// #-1. ELECT와 HYDRO의 값을 NULL이 아닌 ON일 경우에 DB에 값(O)와 일치시킨다.
+		if (rDTO.getElect() != null) {
+			rDTO.setElect("O");
+		}// end if
+		if (rDTO.getHydro() != null) {
+			rDTO.setHydro("O");
+		}// end if
+		
 		try {
-			cnt = pDAO.selectTotalCount();
+			cnt = pDAO.selectTotalCount(rDTO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
