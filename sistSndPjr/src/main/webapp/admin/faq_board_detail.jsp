@@ -111,17 +111,13 @@ request.setAttribute("fDTO", fDTO);
 							<tbody>
 								<tr>
 									<td class="tdColumn">작성자</td>
-									<td><input type="text" class="input-style"
-										value="${fDTO.name}" readonly /></td>
+									<td><input type="text" class="input-style" value="${fDTO.name}" readonly /></td>
 									<td class="tdColumn">작성일</td>
-									<td><input type="text" class="input-style"
-										value="${fDTO.input_date}" readonly /></td>
+									<td><input type="text" class="input-style" value="${fDTO.input_date}" readonly /></td>
 								</tr>
 								<tr>
 									<td>제목</td>
-									<td colspan="3"><input type="text"
-										class="input-style title" name="title" value="${fDTO.title}"
-										required />
+									<td colspan="3"><input type="text" class="input-style title" name="title" value="${fDTO.title}" required />
 								</tr>
 								<tr>
 									<td colspan="4">
