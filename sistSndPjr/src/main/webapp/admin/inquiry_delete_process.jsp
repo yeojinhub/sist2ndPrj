@@ -32,12 +32,7 @@ request.setAttribute("deleteFlag", deleteSuccess);
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><c:out value="${site_name}" /></title>
-    <c:import url="${url}/common/jsp/external_file.jsp" />
-    <style type="text/css">
-        #container { min-height: 600px; margin-top: 30px; margin-left: 20px; }
-    </style>
-    <title><c:out value="${site.name}" /></title>
+    <title>문의 사항 삭제 결과</title>
     <script type="text/javascript">
         <c:choose>
             <c:when test="${deleteFlag}">

@@ -167,7 +167,6 @@ public class InquiryDAO {
             e.printStackTrace();
             throw e;
         } finally {
-            // 리소스 해제 - 중요!
             try {
                 dbCon.dbClose(con, pstmt, null);
             } catch (SQLException e) {
@@ -504,4 +503,4 @@ public class InquiryDAO {
 
     
 
-}
+}//class

@@ -24,9 +24,7 @@
 	boolean updateFlag=false;
 	FaqService noticeService=new FaqService();
 	updateFlag=noticeService.updateNotice(fDTO);
-	System.out.println("수정 - title : "+fDTO.getTitle());
-	System.out.println("수정 - content : "+fDTO.getContent());
-	System.out.println("수정 - not_num : "+fDTO.getFaq_num());
+
 	request.setAttribute("updateFlag", updateFlag);
 %>
 
@@ -34,12 +32,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><c:out value="${site_name}" /></title>
-    <c:import url="${url}/common/jsp/external_file.jsp" />
-    <style type="text/css">
-        #container { min-height: 600px; margin-top: 30px; margin-left: 20px; }
-    </style>
-    <title><c:out value="${site.name}" /></title>
+    <title>FAQ 수정 결과</title>
     <script type="text/javascript">
         <c:choose>
             <c:when test="${updateFlag}">
@@ -53,6 +46,4 @@
         </c:choose>
     </script>
 </head>
-<body>
-</body>
 </html>

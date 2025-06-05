@@ -166,4 +166,4 @@ public class NoticeService {
         public List<NoticeDTO> getData() { return data; }
         public PaginationDTO getPagination() { return pagination; }
     }
-}
+}//class

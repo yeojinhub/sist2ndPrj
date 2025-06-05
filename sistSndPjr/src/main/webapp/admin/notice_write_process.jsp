@@ -44,7 +44,7 @@
                 location.href="notice_board.jsp";
             </c:when>
             <c:otherwise>
-                alert("글쓰기 실패. 정상적으로 실행되지 않았습니다.");
+                alert("글쓰기 실패. 정상적으로 실행되지 않았습니다..");
                 history.back();
             </c:otherwise>
         </c:choose>

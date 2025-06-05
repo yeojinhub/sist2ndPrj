@@ -66,6 +66,10 @@ if (answer != null) {
     			<input type="hidden" name="answerWriter" value="${userData.name}" />
             		<table class="notice-table">
 						<tbody>
+						<tr>
+							<td colspan="4">
+							<div style="padding: 10px; background-color: #334b48; border-radius: 8px; font-weight: bold; font-size: 18px;text-align: left;color:#f0f0f0;">문의</div></td>
+						</tr>
 							<tr>
 								<td class="tdColumn">작성자</td>
 								<td><input type="text" class="input-style" value="${inquiry.name}" readonly /></td>

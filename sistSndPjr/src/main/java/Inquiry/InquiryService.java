@@ -72,7 +72,7 @@ public class InquiryService {
         }
     }
     
-    //delete - 문의 + 답변
+    //delete - 문의 + 답변//////////////////////////////////////
     public boolean deleteInquiryAndAnswer(int inqNum) {
         Connection conn = null;
         PreparedStatement deleteAnswerStmt = null;
@@ -169,7 +169,7 @@ public class InquiryService {
 				}
 			}
             
-            System.out.println("가져온 공지사항 개수 : "+inquiryList.size());
+            System.out.println("가져온 문의사항 개수 : "+inquiryList.size());
         } catch (SQLException se) {
             se.printStackTrace();
             // 오류 발생 시 빈 페이지네이션 생성

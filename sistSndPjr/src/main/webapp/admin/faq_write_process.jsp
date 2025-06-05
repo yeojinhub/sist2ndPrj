@@ -36,15 +36,15 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>공지사항 작성 결과</title>
+    <title>FAQ 작성 결과</title>
     <script type="text/javascript">
         <c:choose>
             <c:when test="${writeFlag}">
-                alert("faq글쓰기 완료");
+                alert("FAQ글쓰기 완료");
                 location.href="faq_board.jsp";
             </c:when>
             <c:otherwise>
-                alert("faq글쓰기 실패. 정상적으로 실행되지 않았습니다.");
+                alert("FAQ글쓰기 실패. 정상적으로 실행되지 않았습니다.");
                 history.back();
             </c:otherwise>
         </c:choose>
