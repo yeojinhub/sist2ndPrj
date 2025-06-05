@@ -1,3 +1,32 @@
+/* 시퀀스 삭제 */
+/* 계정번호 시퀀스 삭제 */
+DROP SEQUENCE SEQ_ACC_NUM;
+
+/* 휴게소번호 시퀀스 삭제 */
+DROP SEQUENCE SEQ_AREA_NUM;
+
+/* 즐겨찾기번호 시퀀스 삭제 */
+DROP SEQUENCE SEQ_FAV_NUM;
+
+/* 주유소번호 시퀀스 삭제 */
+DROP SEQUENCE SEQ_PET_NUM;
+
+/* 리뷰번호 시퀀스 삭제 */
+DROP SEQUENCE SEQ_REV_NUM;
+
+/* 음식번호 시퀀스 삭제 */
+DROP SEQUENCE SEQ_FOOD_NUM;
+
+/* 문의사항번호 시퀀스 삭제 */
+DROP SEQUENCE SEQ_INQ_NUM;
+
+/* 공지사항번호 시퀀스 삭제 */
+DROP SEQUENCE SEQ_NOT_NUM;
+
+/* FAQ번호 시퀀스 삭제 */
+DROP SEQUENCE SEQ_FAQ_NUM;
+
+
 /* 테이블 삭제 */
 /* 계정 테이블 삭제 */
 DROP TABLE ACCOUNT
@@ -43,34 +72,7 @@ DROP TABLE NOTICE
 DROP TABLE FAQ
 	CASCADE CONSTRAINTS;
 
-/* 시퀀스 삭제 */
-/* 계정번호 시퀀스 삭제 */
-DROP SEQUENCE SEQ_ACC_NUM;
-
-/* 휴게소번호 시퀀스 삭제 */
-DROP SEQUENCE SEQ_AREA_NUM;
-
-/* 즐겨찾기번호 시퀀스 삭제 */
-DROP SEQUENCE SEQ_FAV_NUM;
-
-/* 주유소번호 시퀀스 삭제 */
-DROP SEQUENCE SEQ_PET_NUM;
-
-/* 리뷰번호 시퀀스 삭제 */
-DROP SEQUENCE SEQ_REV_NUM;
-
-/* 음식번호 시퀀스 삭제 */
-DROP SEQUENCE SEQ_FOOD_NUM;
-
-/* 문의사항번호 시퀀스 삭제 */
-DROP SEQUENCE SEQ_INQ_NUM;
-
-/* 공지사항번호 시퀀스 삭제 */
-DROP SEQUENCE SEQ_NOT_NUM;
-
-/* FAQ번호 시퀀스 삭제 */
-DROP SEQUENCE SEQ_FAQ_NUM;
-
+	
 /* 테이블 생성 */
 /* 계정 테이블 생성 */
 CREATE TABLE ACCOUNT (
@@ -90,10 +92,22 @@ CREATE TABLE ACCOUNT (
 CREATE TABLE AREA (
     AREA_NUM NUMBER(10) NOT NULL, /* 휴게소번호 */
     NAME VARCHAR2(255) NOT NULL, /* 휴게소이름 */
-    ROUTE VARCHAR2(255), /* 휴게소노선 */
     ADDR VARCHAR2(255) NOT NULL, /* 휴게소주소 */
     TEL VARCHAR2(50), /* 휴게소전화전호 */
+    ROUTE VARCHAR2(255), /* 휴게소노선 */
     OPERATION_TIME VARCHAR2(255) DEFAULT '00:00 - 23:59', /* 휴게소영업시간 */
+    FEED VARCHAR2(10) DEFAULT 'X', /* 수유실 */
+    SLEEP VARCHAR2(10) DEFAULT 'X', /* 수면실 */
+    SHOWER VARCHAR2(10) DEFAULT 'X', /* 샤워실 */
+    LAUNDRY VARCHAR2(10) DEFAULT 'X', /* 세탁실 */
+    CLINIC VARCHAR2(10) DEFAULT 'X', /* 병원 */
+    PHARMACY VARCHAR2(10) DEFAULT 'X', /* 약국 */
+    SHELTER VARCHAR2(10) DEFAULT 'X', /* 쉼터 */
+    SALON VARCHAR2(10) DEFAULT 'X', /* 이발소 */
+    AGRICULTURAL VARCHAR2(10) DEFAULT 'X', /* 농산물판매장 */
+    REPAIR VARCHAR2(10) DEFAULT 'X', /* 경정비소 */
+    TRUCK VARCHAR2(10) DEFAULT 'X', /* 화물차라운지 */
+    TEMP VARCHAR2(10), /* 추가시설 */
     LAT VARCHAR2(255)  NOT NULL, /* 휴게소위도 */
     LNG VARCHAR2(255)  NOT NULL /* 휴게소경도 */
 );
@@ -114,8 +128,7 @@ CREATE TABLE PETROL (
     DIESEL VARCHAR2(255), /* 경유 */
     LPG VARCHAR2(255), /* LPG */
     ELECT VARCHAR2(255) DEFAULT 'X', /* 전기 */
-    HYDRO VARCHAR2(255) DEFAULT 'X', /* 수소 */
-    AREA_NUM NUMBER(10) NOT NULL /* 휴게소번호 */
+    HYDRO VARCHAR2(255) DEFAULT 'X' /* 수소 */
 );
 
 /* 리뷰 테이블 생성 */
@@ -125,6 +138,7 @@ CREATE TABLE REVIEW (
     NAME VARCHAR2(255) NOT NULL, /* 리뷰작성자 */
     INPUT_DATE DATE DEFAULT SYSDATE, /* 리뷰작성일 */
     REPORT NUMBER(10) DEFAULT 0, /* 누적신고 */
+    HIDDEN_TYPE VARCHAR2(255) DEFAULT 'N', /*리뷰숨김여부*/
     AREA_NUM NUMBER(10) NOT NULL, /* 휴게소번호 */
     ACC_NUM NUMBER(10) NOT NULL /* 계정번호 */
 );
@@ -136,23 +150,6 @@ CREATE TABLE FOOD (
     IMAGE BLOB, /* 음식사진 */
     PRICE VARCHAR2(50), /* 음식가격 */
     AREA_NUM NUMBER(10) NOT NULL /* 휴게소번호 */
-);
-
-/* 편의시설 테이블 생성 */
-CREATE TABLE FACILITY (
-    AREA_NUM NUMBER(10) NOT NULL, /* 휴게소번호 */
-    FEED VARCHAR2(10) DEFAULT 'X', /* 수유실 */
-    SLEEP VARCHAR2(10) DEFAULT 'X', /* 수면실 */
-    SHOWER VARCHAR2(10) DEFAULT 'X', /* 샤워실 */
-    LAUNDRY VARCHAR2(10) DEFAULT 'X', /* 세탁실 */
-    CLINIC VARCHAR2(10) DEFAULT 'X', /* 병원 */
-    PHARMACY VARCHAR2(10) DEFAULT 'X', /* 약국 */
-    SHELTER VARCHAR2(10) DEFAULT 'X', /* 쉼터 */
-    SALON VARCHAR2(10) DEFAULT 'X', /* 이발소 */
-    REPAIR VARCHAR2(10) DEFAULT 'X', /* 경정비소 */
-    WASH VARCHAR2(10) DEFAULT 'X', /* 세차장 */
-    TRUCK VARCHAR2(10) DEFAULT 'X', /* 화물차라운지 */
-    TEMP VARCHAR2(10) /* 추가시설 */
 );
 
 /* 문의사항 테이블 생성 */
@@ -191,19 +188,14 @@ CREATE TABLE FAQ (
     TITLE VARCHAR2(500) NOT NULL, /* FAQ제목 */
     CONTENT VARCHAR2(4000) NOT NULL, /* FAQ내용 */
     NAME VARCHAR2(255) NOT NULL, /* FAQ작성자 */
-		INPUT_DATE DATE DEFAULT SYSDATE, /* FAQ작성일 */
+	INPUT_DATE DATE DEFAULT SYSDATE, /* FAQ작성일 */
     ACC_NUM NUMBER(10) NOT NULL /* 계정번호 */
 );
+
 
 /* 시퀀스 생성 */
 /* 계정번호 시퀀스 생성 */
 CREATE SEQUENCE SEQ_ACC_NUM
-INCREMENT BY 1
-START WITH 1
-MAXVALUE 9999999999;
-
-/* 휴게소번호 시퀀스 생성 */
-CREATE SEQUENCE SEQ_AREA_NUM
 INCREMENT BY 1
 START WITH 1
 MAXVALUE 9999999999;
@@ -213,6 +205,7 @@ CREATE SEQUENCE SEQ_FAV_NUM
 INCREMENT BY 1
 START WITH 1
 MAXVALUE 9999999999;
+
 
 /* 주유소번호 시퀀스 생성 */
 CREATE SEQUENCE SEQ_PET_NUM
@@ -249,6 +242,7 @@ CREATE SEQUENCE SEQ_FAQ_NUM
 INCREMENT BY 1
 START WITH 1
 MAXVALUE 9999999999;
+
 
 /* Primary Key 설정 */
 /* 계정번호 PK 설정 */
@@ -287,6 +281,7 @@ ADD CONSTRAINT PK_NOTICE PRIMARY KEY (NOT_NUM);
 ALTER TABLE FAQ
 ADD CONSTRAINT PK_FAQ PRIMARY KEY (FAQ_NUM);
 
+
 /* Foreign Key 설정 */
 /* 즐겨찾기 테이블 계정번호 FK 설정 */
 ALTER TABLE FAVORITE
@@ -321,12 +316,6 @@ REFERENCES AREA (AREA_NUM);
 /* 음식 테이블 휴게소번호 FK 설정 */
 ALTER TABLE FOOD
 ADD CONSTRAINT FK_AREA_TO_FOOD
-FOREIGN KEY (AREA_NUM)
-REFERENCES AREA (AREA_NUM);
-
-/* 편의시설 테이블 휴게소번호 FK 설정 */
-ALTER TABLE FACILITY
-ADD CONSTRAINT FK_AREA_TO_FACILITY
 FOREIGN KEY (AREA_NUM)
 REFERENCES AREA (AREA_NUM);
 
