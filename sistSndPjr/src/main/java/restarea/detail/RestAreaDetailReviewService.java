@@ -8,7 +8,9 @@ import java.util.List;
 
 import DTO.AreaDetailReviewDTO;
 import DTO.AreaDetailReviewRangeDTO;
+import DTO.LoginDTO;
 import DTO.RangeDTO;
+import kr.co.sist.cipher.DataDecryption;
 
 public class RestAreaDetailReviewService {
 
@@ -19,12 +21,52 @@ public class RestAreaDetailReviewService {
 		
 		try {
 			list = radrDAO.seleteAllReview(area_num, adrrDTO);
+			
+			String myKey = "asdf1234asdf1234";
+			DataDecryption dd = new DataDecryption(myKey);
+			
+			for(AreaDetailReviewDTO item : list) {
+				try {
+					item.setName(dd.decrypt(item.getName()));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}// end try-catch
+			}// end for
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}// end try-catch
 		
 		return list;
 	}// searchAllReview
+	
+	public boolean addReview(int area_num, String msg, LoginDTO lDTO) {
+		boolean flag = false;
+		
+		RestAreaDetailReviewDAO radrDAO = new RestAreaDetailReviewDAO();
+		
+		try {
+			flag = radrDAO.insertReview(area_num, msg, lDTO);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}// end try-catch
+		
+		return flag;
+	}// addReview
+	
+	public boolean modifyReviewReport(int rev_num) {
+		boolean flag = false;
+		
+		RestAreaDetailReviewDAO radrDAO = new RestAreaDetailReviewDAO();
+		
+		try {
+			flag = radrDAO.updateReviewReport(rev_num);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}// end try-catch
+		
+		return flag;
+	}// modifyReviewReport
 	
 	/********************************* pagination ************************************/
 	

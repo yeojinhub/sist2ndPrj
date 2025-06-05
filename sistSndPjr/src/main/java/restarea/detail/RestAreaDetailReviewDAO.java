@@ -10,10 +10,12 @@ import java.util.List;
 import DBConnection.DBConnection;
 import DTO.AreaDetailReviewDTO;
 import DTO.AreaDetailReviewRangeDTO;
+import DTO.LoginDTO;
 
 public class RestAreaDetailReviewDAO {
 
-	public List<AreaDetailReviewDTO> seleteAllReview(int area_num, AreaDetailReviewRangeDTO adrrDTO) throws SQLException {
+	public List<AreaDetailReviewDTO> seleteAllReview(int area_num, AreaDetailReviewRangeDTO adrrDTO)
+			throws SQLException {
 		List<AreaDetailReviewDTO> list = new ArrayList<AreaDetailReviewDTO>();
 
 		DBConnection dbCon = DBConnection.getInstance();
@@ -26,12 +28,10 @@ public class RestAreaDetailReviewDAO {
 			conn = dbCon.getDbCon();
 
 			StringBuilder selectQuery = new StringBuilder();
-			selectQuery
-			.append(" SELECT * ")
-			.append(" FROM (SELECT REV_NUM, CONTENT, NAME, INPUT_DATE, REPORT, HIDDEN_TYPE, AREA_NUM, ACC_NUM, ROW_NUMBER() OVER(ORDER BY INPUT_DATE) RNUM ")
-			.append(" FROM REVIEW ")
-			.append(" WHERE AREA_NUM = ? AND HIDDEN_TYPE = 'N') ")
-			.append(" WHERE RNUM BETWEEN ? AND ? ");
+			selectQuery.append(" SELECT * ").append(
+					" FROM (SELECT REV_NUM, CONTENT, NAME, INPUT_DATE, REPORT, HIDDEN_TYPE, AREA_NUM, ACC_NUM, ROW_NUMBER() OVER(ORDER BY INPUT_DATE) RNUM ")
+					.append(" FROM REVIEW ").append(" WHERE AREA_NUM = ? AND HIDDEN_TYPE = 'N') ")
+					.append(" WHERE RNUM BETWEEN ? AND ? ");
 
 			pstmt = conn.prepareStatement(selectQuery.toString());
 
@@ -61,15 +61,79 @@ public class RestAreaDetailReviewDAO {
 		return list;
 	}// seleteAllReview
 
-	/********************************* pagination ************************************/
+	public boolean insertReview(int area_num, String msg, LoginDTO lDTO) throws SQLException {
+		boolean flag = false;
+
+		DBConnection dbCon = DBConnection.getInstance();
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = dbCon.getDbCon();
+
+			StringBuilder insertQuery = new StringBuilder();
+			insertQuery.append(" INSERT INTO REVIEW(REV_NUM, CONTENT, NAME, AREA_NUM, ACC_NUM) ")
+					.append(" VALUES(SEQ_REV_NUM.NEXTVAL, ?, ?, ?, ?) ");
+
+			pstmt = conn.prepareStatement(insertQuery.toString());
+
+			// 바인드 변수 할당
+			pstmt.setString(1, msg);
+			pstmt.setString(2, lDTO.getName());
+			pstmt.setInt(3, area_num);
+			pstmt.setInt(4, lDTO.getAcc_num());
+
+			flag = pstmt.executeUpdate() != 0;
+
+		} finally {
+			dbCon.dbClose(conn, pstmt, null);
+		} // end try-finally
+
+		return flag;
+	}// insertReview
+
+	public boolean updateReviewReport(int rev_num) throws SQLException {
+		boolean flag = false;
+
+		DBConnection dbCon = DBConnection.getInstance();
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = dbCon.getDbCon();
+
+			StringBuilder insertQuery = new StringBuilder();
+			insertQuery	.append(" UPDATE REVIEW SET REPORT = REPORT + 1 ")
+						.append(" WHERE REV_NUM = ? ");
+
+			pstmt = conn.prepareStatement(insertQuery.toString());
+
+			// 바인드 변수 할당
+			pstmt.setInt(1, rev_num);
+
+			flag = pstmt.executeUpdate() != 0;
+
+		} finally {
+			dbCon.dbClose(conn, pstmt, null);
+		} // end try-finally
+
+		return flag;
+	}// updateReviewReport
+
+	/*********************************
+	 * pagination
+	 ************************************/
 
 	/**
 	 * 1. 총 게시물(데이터) 카운트 구하기.
+	 * 
 	 * @param id 휴게소넘버
 	 * @return
 	 * @throws SQLException
 	 */
-	public int selectTotalCount(int id) throws SQLException{
+	public int selectTotalCount(int id) throws SQLException {
 		int cnt = 0;
 
 		DBConnection dbCon = DBConnection.getInstance();
@@ -82,9 +146,7 @@ public class RestAreaDetailReviewDAO {
 			conn = dbCon.getDbCon();
 
 			StringBuilder selectQuery = new StringBuilder();
-			selectQuery	.append(" SELECT COUNT(*) CNT ")
-						.append(" FROM REVIEW ")
-						.append(" WHERE AREA_NUM = ?");
+			selectQuery.append(" SELECT COUNT(*) CNT ").append(" FROM REVIEW ").append(" WHERE AREA_NUM = ?");
 
 			pstmt = conn.prepareStatement(selectQuery.toString());
 
@@ -95,7 +157,7 @@ public class RestAreaDetailReviewDAO {
 
 			if (rs.next()) {
 				cnt = rs.getInt("CNT");
-			}// end if
+			} // end if
 
 		} finally {
 			dbCon.dbClose(conn, pstmt, rs);
@@ -104,6 +166,8 @@ public class RestAreaDetailReviewDAO {
 		return cnt;
 	}// selectTotalCount
 
-	/********************************* pagination ************************************/
+	/*********************************
+	 * pagination
+	 ************************************/
 
 }// class

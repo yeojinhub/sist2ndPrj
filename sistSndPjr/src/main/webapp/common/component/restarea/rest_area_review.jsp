@@ -9,6 +9,9 @@
 <jsp:setProperty name="adrrDTO" property="*"/>
 <jsp:include page="popup_review_submit.jsp" />
 <jsp:include page="popup_review_report.jsp" />
+<%
+pageContext.setAttribute("reportBlock", session.getAttribute("reportBlock"));
+%>
 
 <!-- 리뷰 스타일 및 목록 -->
 <style>
@@ -144,7 +147,12 @@ startNum = radrs.startNum(pageScale, adrrDTO);
 int endNum = 0;
 endNum = radrs.endNum(pageScale, adrrDTO);
 
+// 리뷰 작성 후 리로드하기 위한 변수 작업
+int reloadPage = totalPage == 0 ? 1 : totalPage;
+
 pageContext.setAttribute("reviewList", radrs.searchAllReview(id, adrrDTO));
+pageContext.setAttribute("reloadPage", reloadPage);
+pageContext.setAttribute("id", id);
 %>
 <!-- 리뷰 목록 -->
 <div class="review-list">
@@ -165,7 +173,7 @@ pageContext.setAttribute("reviewList", radrs.searchAllReview(id, adrrDTO));
 					</div>
 					<div class="review-content">
 						<div>${review.content }</div>
-						<div class="report-btn">🚨 신고</div>
+						<div class="report-btn" data-rev-num="${review.rev_num }">🚨 신고</div>
 					</div>
 				</div>
 			</c:forEach>
@@ -194,29 +202,97 @@ pageContext.setAttribute("reviewList", radrs.searchAllReview(id, adrrDTO));
 <!-- jQuery 로직 -->
 <script>
 	$(function() {
-
+		var revNum;
+		
 		// 작성 버튼 눌렀을 때
 		$("#submitBtn").on("click", function() {
-			const text = $("#reviewText").val().trim();
-			if (text) {
-				$("#reviewSubmitPopup").fadeIn();
-				$("#reviewText").val("");
-			}
-		});
+			$("#reviewSubmitPopup").fadeIn();
+		});// click
 
 		// 신고 버튼 눌렀을 때
 		$(".report-btn").on("click", function() {
+			revNum = $(this).data('revNum');
 			$("#reportConfirmPopup").fadeIn();
 		});
 
-		// 팝업 버튼 닫기
-		$("#reviewSubmitPopup .popup-confirm").on("click", function() {
+		// 작성 버튼 처리 - 로그인 (비로그인)
+		$("#reviewSubmitPopup #btnLogin").on("click", function() {
 			$("#reviewSubmitPopup").fadeOut();
+			location.href = '../login/login.jsp';
 		});
+		
+		// 작성 버튼 처리 - 작성 (로그인)
+		$("#reviewSubmitPopup #btnWrite").on("click", function() {
+			// 유효성 검증 (비속어 등)
+			
+			
+			// ajax
+			const text = $("#reviewText").val().trim();
+			var param = { msg : text , id : ${id} };
+			
+			$.ajax({
+				url:'../common/component/restarea/ajax_rest_area_review_write.jsp',
+				type:'get',
+				data: param,
+				dataType:'json',
+				error:function(xhr) {
+					console.log(xhr.status + ' / ' + xhr.statusText);
+				},
+				success:function(jsonObj) {
+					if (jsonObj.successChk) {
+						alert('작성이 완료되었습니다.');
+						var url = '../common/component/restarea/rest_area_review.jsp?id=' + ${param.id} + '&currentPage=' + ${reloadPage};
+		                $('#tabContent').load(url);
+					} else {
+						alert('문제가 발생하였습니다.\n잠시 후 다시 작성해주세요.');
+					}// end else-if
+				}
+			});// ajax
+			
+			$("#reviewSubmitPopup").fadeOut();
+		});// click
 
-		$("#reportConfirmPopup .popup-confirm, #reportConfirmPopup .popup-cancel").on("click", function() {
+		// 신고 버튼 - 확인(로그인)
+		$("#reportConfirmPopup #btnConfirm").on("click", function() {
+
+			var reportBlock = ${reportBlock};
+			
+ 			if (reportBlock) {
+				alert('신고 기능 남용 방지');
+				$("#reportConfirmPopup").fadeOut();
+				return;
+			}// end if
+			
+			$.ajax({
+				url:'../common/component/restarea/ajax_rest_area_review_report.jsp',
+				type:'post',
+				data: { revNum : revNum },
+				dataType:'json',
+				error:function(xhr) {
+					console.log(xhr.status + ' / ' + xhr.statusText);
+				},
+				success:function(jsonObj) {
+					if(jsonObj.successChk) {
+						alert('신고 완료하였습니다.');
+					} else {
+						alert('신고 실패하였습니다.\n잠시 후 다시 시도해주세요.');
+					}// end else-if
+				}
+			});
+			
 			$("#reportConfirmPopup").fadeOut();
-		});
+		});// click
+		
+		// 신고 버튼 - 취소(로그인)
+		$("#reportConfirmPopup #btnCancel").on("click", function() {
+			$("#reportConfirmPopup").fadeOut();
+		});// click
+		
+		// 신고 버튼 - 로그인(비로그인)
+		$("#reportConfirmPopup #btnLogin").on("click", function() {
+			$("#reportConfirmPopup").fadeOut();
+			location.href = '../login/login.jsp';
+		});// click
 		
 		
 		// 페이지네이션	

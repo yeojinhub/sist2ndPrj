@@ -71,7 +71,7 @@ pageContext.setAttribute("loginChk", loginChk2);
 			<div class="popup-title">리뷰 작성</div>
 			<div class="popup-content">리뷰를 작성하시겠습니까?</div>
 			<div class="popup-buttons">
-				<button class="popup-confirm" name="btnWrite">작성</button>
+				<button class="popup-confirm" id="btnWrite">작성</button>
 			</div>
 		</c:when>
 		<c:otherwise>
@@ -80,21 +80,11 @@ pageContext.setAttribute("loginChk", loginChk2);
 				로그인이 필요합니다.<br>로그인페이지로 이동하시겠습니까?
 			</div>
 			<div class="popup-buttons">
-				<button class="popup-confirm" name="btnLogin">로그인</button>
+				<button class="popup-confirm" id="btnLogin">로그인</button>
 			</div>
 		</c:otherwise>
 	</c:choose>
 </div>
-<script>
-$(function() {
-	$('.popup-confirm').click(()=>{
-		
-	});// click
-	
-	$('#btnLogin').click(()=>{
-		alert('로그인하러 가보자');
-	});
-});// ready
-</script>
+
 
 
