@@ -128,7 +128,8 @@ CREATE TABLE PETROL (
     DIESEL VARCHAR2(255), /* 경유 */
     LPG VARCHAR2(255), /* LPG */
     ELECT VARCHAR2(255) DEFAULT 'X', /* 전기 */
-    HYDRO VARCHAR2(255) DEFAULT 'X' /* 수소 */
+    HYDRO VARCHAR2(255) DEFAULT 'X', /* 수소 */
+    AREA_NUM NUMBER(10) NOT NULL /* 휴게소번호 */
 );
 
 /* 리뷰 테이블 생성 */
