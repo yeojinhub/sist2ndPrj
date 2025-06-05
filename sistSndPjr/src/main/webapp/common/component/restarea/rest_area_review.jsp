@@ -2,6 +2,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:useBean id="adrrDTO" class="DTO.AreaDetailReviewRangeDTO" scope="page"/>
+<jsp:setProperty name="adrrDTO" property="*"/>
 <%
 request.setCharacterEncoding("UTF-8");
 
@@ -10,6 +12,8 @@ int id = Integer.parseInt(request.getParameter("id"));
 RestAreaDetailReviewService radrs = new RestAreaDetailReviewService();
 
 pageContext.setAttribute("reviewList", radrs.searchAllReview(id));
+
+System.out.println(adrrDTO);
 %>
 <jsp:include page="popup_review_submit.jsp" />
 <jsp:include page="popup_review_report.jsp" />
@@ -95,7 +99,24 @@ pageContext.setAttribute("reviewList", radrs.searchAllReview(id));
 	cursor: pointer;
 }
 </style>
+<%
 
+// 1. 총 게시물 확인
+int totalCount = 0;
+totalCount = radrs.searchTotalCount(id);
+// 2. 보여질 게시물의 수
+int pageScale = 0;
+pageScale = radrs.pageScale(10);
+// 3. 총 페이지 수를 구한다.
+
+
+
+
+
+
+
+
+%>
 <!-- 리뷰 목록 -->
 <div class="review-list">
 	<c:choose>
@@ -167,8 +188,6 @@ pageContext.setAttribute("reviewList", radrs.searchAllReview(id));
 			const page = $(e.target).text().trim(); // 선택한 페이지 반환
 			const url = '../common/component/restarea/rest_area_review.jsp?id=${param.id}&currentPage='+page;
 			$('#tabContent').load(url);
-			<% System.out.println(request.getParameter("id"));%>
-			<% System.out.println(request.getParameter("currentPage"));%>
 		});
 		
 		

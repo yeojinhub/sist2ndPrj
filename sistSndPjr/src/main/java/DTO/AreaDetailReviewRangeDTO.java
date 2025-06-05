@@ -14,6 +14,6 @@ import lombok.ToString;
 public class AreaDetailReviewRangeDTO {
 
 	private int currentPage = 1, startNum, endNum;
-	private int startPage, endPage;
+	private int startPage, endPage, id;
 	
 }// class

@@ -12,30 +12,28 @@ import DTO.AreaDetailReviewDTO;
 
 public class RestAreaDetailReviewDAO {
 
-	public List<AreaDetailReviewDTO> seleteAllReview(int area_num) throws SQLException{
+	public List<AreaDetailReviewDTO> seleteAllReview(int area_num) throws SQLException {
 		List<AreaDetailReviewDTO> list = new ArrayList<AreaDetailReviewDTO>();
-		
+
 		DBConnection dbCon = DBConnection.getInstance();
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			conn = dbCon.getDbCon();
-			
+
 			StringBuilder selectQuery = new StringBuilder();
-			selectQuery	.append(" SELECT * ")
-						.append(" FROM REVIEW ")
-						.append(" WHERE AREA_NUM = ?");
-			
+			selectQuery.append(" SELECT * ").append(" FROM REVIEW ").append(" WHERE AREA_NUM = ?");
+
 			pstmt = conn.prepareStatement(selectQuery.toString());
-			
+
 			// 바인드 변수 할당
 			pstmt.setInt(1, area_num);
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
 				AreaDetailReviewDTO adrDTO = new AreaDetailReviewDTO();
 				adrDTO.setAcc_num(rs.getInt("ACC_NUM"));
@@ -46,13 +44,58 @@ public class RestAreaDetailReviewDAO {
 				adrDTO.setName(rs.getString("NAME"));
 				adrDTO.setInput_date(rs.getDate("INPUT_DATE"));
 				list.add(adrDTO);
-			}// end while
-			
+			} // end while
+
 		} finally {
 			dbCon.dbClose(conn, pstmt, rs);
-		}// end try-finally
-		
+		} // end try-finally
+
 		return list;
 	}// seleteAllReview
-	
+
+	/********************************* pagination ************************************/
+
+	/**
+	 * 1. 총 게시물(데이터) 카운트 구하기.
+	 * @param id 휴게소넘버
+	 * @return
+	 * @throws SQLException
+	 */
+	public int selectTotalCount(int id) throws SQLException{
+		int cnt = 0;
+
+		DBConnection dbCon = DBConnection.getInstance();
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = dbCon.getDbCon();
+
+			StringBuilder selectQuery = new StringBuilder();
+			selectQuery	.append(" SELECT COUNT(*) CNT ")
+						.append(" FROM REVIEW ")
+						.append(" WHERE AREA_NUM = ?");
+
+			pstmt = conn.prepareStatement(selectQuery.toString());
+
+			// 바인드 변수 할당
+			pstmt.setInt(1, id);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				cnt = rs.getInt("CNT");
+			}// end if
+
+		} finally {
+			dbCon.dbClose(conn, pstmt, rs);
+		} // end try-finally
+
+		return cnt;
+	}// selectTotalCount
+
+	/********************************* pagination ************************************/
+
 }// class
