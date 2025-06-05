@@ -60,11 +60,8 @@ public class RestAreaFacilityDAO {
 	        con = db.getDbCon();
 
 	        StringBuilder selectQuery = new StringBuilder();
-	        selectQuery.append("SELECT COUNT(*) CNT ")
-	                   .append("FROM ( ")
-	                   .append("  SELECT A.AREA_NUM, NAME, ROUTE, WASH, REPAIR, TRUCK ")
-	                   .append("  FROM AREA A, FACILITY F ")
-	                   .append("  WHERE A.AREA_NUM = F.AREA_NUM ");
+	        selectQuery.append(" SELECT COUNT(*) CNT ")
+	                   .append(" FROM AREA ");
 
 	        // 동적 조건 리스트
 	        List<String> conditions = new ArrayList<>();
@@ -72,7 +69,6 @@ public class RestAreaFacilityDAO {
 
 	        String route = rDTO.getRoute();
 	        String keyword = rDTO.getKeyword();
-	        String wash = rDTO.getWash();
 	        String repair = rDTO.getRepair();
 	        String truck = rDTO.getTruck();
 
@@ -84,9 +80,6 @@ public class RestAreaFacilityDAO {
 	            conditions.add("INSTR(NAME, ?) != 0");
 	            params.add(keyword);
 	        }
-	        if (wash != null) {
-	            conditions.add("WASH = 'O'");
-	        }
 	        if (repair != null) {
 	            conditions.add("REPAIR = 'O'");
 	        }
@@ -96,11 +89,9 @@ public class RestAreaFacilityDAO {
 
 	        // 조건이 있으면 AND로 붙이기
 	        if (!conditions.isEmpty()) {
-	            selectQuery.append(" AND ");
+	        	selectQuery.append(" WHERE ");
 	            selectQuery.append(String.join(" AND ", conditions));
 	        }
-
-	        selectQuery.append(" )");
 
 	        pstmt = con.prepareStatement(selectQuery.toString());
 
@@ -142,31 +133,35 @@ public class RestAreaFacilityDAO {
 	        StringBuilder query = new StringBuilder();
 	        query.append(" SELECT * FROM ( ")
 	             .append(" SELECT ")
-	             .append(" AREA_NUM, FEED, SLEEP, SHOWER, LAUNDRY, CLINIC, PHARMACY, SHELTER, SALON, REPAIR, WASH, TRUCK, TEMP, NAME, ROUTE, TEL, ")
+	             .append(" AREA_NUM, FEED, SLEEP, SHOWER, LAUNDRY, CLINIC, PHARMACY, SHELTER, SALON, REPAIR, TRUCK, TEMP, NAME, ROUTE, TEL, ")
 	             .append(" ROW_NUMBER() OVER(ORDER BY AREA_NUM) RNUM ")
 	             .append(" FROM ( ")
-	             .append(" SELECT A.AREA_NUM, FEED, SLEEP, SHOWER, LAUNDRY, CLINIC, PHARMACY, SHELTER, SALON, REPAIR, WASH, TRUCK, TEMP, NAME, ROUTE, TEL ")
-	             .append(" FROM FACILITY F, AREA A ")
-	             .append(" WHERE A.AREA_NUM = F.AREA_NUM ");
+	             .append(" SELECT AREA_NUM, FEED, SLEEP, SHOWER, LAUNDRY, CLINIC, PHARMACY, SHELTER, SALON, REPAIR, TRUCK, TEMP, NAME, ROUTE, TEL ")
+	             .append(" FROM AREA ");
 
-	        // 동적 조건 추가
 	        List<Object> params = new ArrayList<>();
+	        List<String> conditions = new ArrayList<>(); // 조건 리스트 생성
+
+	        // 조건 추가 방식 변경
 	        if (rDTO.getRoute() != null && !rDTO.getRoute().equals("select")) {
-	            query.append(" AND INSTR(ROUTE, ?) != 0 ");
+	            conditions.add("INSTR(ROUTE, ?) != 0");
 	            params.add(rDTO.getRoute());
 	        }
 	        if (rDTO.getKeyword() != null && !rDTO.getKeyword().isEmpty()) {
-	            query.append(" AND INSTR(NAME, ?) != 0 ");
+	            conditions.add("INSTR(NAME, ?) != 0");
 	            params.add(rDTO.getKeyword());
 	        }
-	        if (rDTO.getWash() != null) {
-	            query.append(" AND WASH = 'O' ");
-	        }
 	        if (rDTO.getRepair() != null) {
-	            query.append(" AND REPAIR = 'O' ");
+	            conditions.add("REPAIR = 'O'");
 	        }
 	        if (rDTO.getTruck() != null) {
-	            query.append(" AND TRUCK = 'O' ");
+	            conditions.add("TRUCK = 'O'");
+	        }
+
+	        // ▼ WHERE 조건 추가 로직 변경
+	        if (!conditions.isEmpty()) {
+	            query.append(" WHERE ");
+	            query.append(String.join(" AND ", conditions));
 	        }
 
 	        query.append("   ) ") // 서브쿼리 닫기
@@ -196,7 +191,6 @@ public class RestAreaFacilityDAO {
 	            dto.setShelter(rs.getString("SHELTER"));
 	            dto.setSalon(rs.getString("SALON"));
 	            dto.setRepair(rs.getString("REPAIR"));
-	            dto.setWash(rs.getString("WASH"));
 	            dto.setTruck(rs.getString("TRUCK"));
 	            dto.setTemp(rs.getString("TEMP"));
 	            dto.setName(rs.getString("NAME"));
@@ -250,7 +244,6 @@ public class RestAreaFacilityDAO {
 				afDTO.setShelter(rs.getString("shelter"));
 				afDTO.setSalon(rs.getString("salon"));
 				afDTO.setRepair(rs.getString("repair"));
-				afDTO.setWash(rs.getString("wash"));
 				afDTO.setTruck(rs.getString("truck"));
 				afDTO.setTemp(rs.getString("temp"));
 				afDTO.setName(rs.getString("name"));

@@ -15,7 +15,7 @@ public class AreaFacilityDTO {
 
 	private int area_num;
 	private String name,route,addr,tel,operation_time;
-	private String feed,sleep,shower,laundry,clinic,pharmacy,shelter,salon,repair,wash,truck,temp;
+	private String feed,sleep,shower,laundry,clinic,pharmacy,shelter,salon,repair,truck,temp;
 	private double lat,lng;	
 
 	

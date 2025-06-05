@@ -1,20 +1,11 @@
+<%@page import="DTO.AreaDetailReviewPaginationDTO"%>
 <%@page import="restarea.detail.RestAreaDetailReviewService"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="adrrDTO" class="DTO.AreaDetailReviewRangeDTO" scope="page"/>
 <jsp:setProperty name="adrrDTO" property="*"/>
-<%
-request.setCharacterEncoding("UTF-8");
-
-int id = Integer.parseInt(request.getParameter("id"));
-
-RestAreaDetailReviewService radrs = new RestAreaDetailReviewService();
-
-pageContext.setAttribute("reviewList", radrs.searchAllReview(id));
-
-System.out.println(adrrDTO);
-%>
 <jsp:include page="popup_review_submit.jsp" />
 <jsp:include page="popup_review_report.jsp" />
 
@@ -100,6 +91,9 @@ System.out.println(adrrDTO);
 }
 </style>
 <%
+int id = Integer.parseInt(request.getParameter("id"));
+
+RestAreaDetailReviewService radrs = new RestAreaDetailReviewService();
 
 // 1. 총 게시물 확인
 int totalCount = 0;
@@ -108,14 +102,18 @@ totalCount = radrs.searchTotalCount(id);
 int pageScale = 0;
 pageScale = radrs.pageScale(10);
 // 3. 총 페이지 수를 구한다.
+int totalPage = 0;
+totalPage = radrs.totalPage(totalCount, pageScale);
+// 4. 현재 페이지(currentPage)에 따른 게시물 시작 번호
+int startNum = 0;
+startNum = radrs.startNum(pageScale, adrrDTO);
+// 5. 현재 페이지(currentPage)에 따른 게시물 시작 번호
+int endNum = 0;
+endNum = radrs.endNum(pageScale, adrrDTO);
 
+System.out.println(adrrDTO);
 
-
-
-
-
-
-
+pageContext.setAttribute("reviewList", radrs.searchAllReview(id));
 %>
 <!-- 리뷰 목록 -->
 <div class="review-list">
@@ -147,7 +145,11 @@ pageScale = radrs.pageScale(10);
 
 <!-- 페이지네이션 -->
 <div class="pagenation">
-	<span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+	<%
+	AreaDetailReviewPaginationDTO adrpDTO = new AreaDetailReviewPaginationDTO(5, adrrDTO.getCurrentPage(), totalPage, "rest_area_review.jsp");
+	
+	
+	%>
 </div>
 
 <!-- 리뷰 작성 -->

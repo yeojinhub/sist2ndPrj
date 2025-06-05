@@ -71,15 +71,35 @@ pageContext.setAttribute("foodList", list);
 .more-btn:hover {
 	color: #2f5fd0;
 }
+
+.info-table {
+	width: 100%;
+	border-collapse: collapse; 
+	margin-top: 10px;
+	font-size: 14px;
+	table-layout: fixed;
+}
+
+.info-table th, .info-table td {
+	border: 1px solid #ccc;
+	padding: 10px;
+	text-align: center;
+	aspect-ratio: 1 / 1;
+}
+
+.info-table th {
+	background-color: #f5f5f5;
+	font-weight: bold;
+}
 </style>
 
 <div class="food-table">
-	<table class="user_table">
+	<table class="info-table">
 		<thead>
 			<tr>
-				<th>번호</th>
-				<th>음식명</th>
-				<th>가격</th>
+				<th style="width: 20%;">번호</th>
+				<th style="width: 60%;">음식명</th>
+				<th style="width: 20%;">가격</th>
 			</tr>
 		</thead>
 		<tbody>

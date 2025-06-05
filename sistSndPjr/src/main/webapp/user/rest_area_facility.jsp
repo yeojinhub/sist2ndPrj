@@ -57,10 +57,7 @@ pageContext.setAttribute("allRoute", rafs.searchAllRoute());
     	}
     	
     	$('#keyword').val('${rDTO.keyword}');
-    	
-    	if(${not empty rDTO.wash}) {
-    		$('#wash').prop('checked', true);
-    	};// end if
+
     	if(${not empty rDTO.repair}) {
     		$('#repair').prop('checked', true);
     	};// end if
@@ -108,7 +105,6 @@ pageContext.setAttribute("allRoute", rafs.searchAllRoute());
   <input type="text" id="keyword" name="keyword" placeholder="예: 칠곡(상)" />
 
   <label class="divider-label">구분</label>
-  <label><input type="checkbox" id="wash" name="wash" value="O" /> 세차장</label>
   <label><input type="checkbox" id="repair" name="repair" value="O" /> 경정비소</label>
   <label><input type="checkbox" id="truck" name="truck" value="O" /> ex-화물차라운지</label>
 
@@ -141,7 +137,6 @@ pageContext.setAttribute("allRoute", rafs.searchAllRoute());
         <th rowspan="2">노선</th>
         <th rowspan="2">전화번호</th>
         <th rowspan="2">편의시설</th>
-        <th rowspan="2">세차장</th>
         <th rowspan="2">경정비소</th>
         <th rowspan="2">ex화물차라운지</th>
       </tr>
@@ -168,7 +163,7 @@ pageContext.setAttribute("allRoute", rafs.searchAllRoute());
 		 <c:if test="${ afDTO.clinic == 'O' }"><span class="circle red"></span></c:if>
 		 <c:if test="${ afDTO.pharmacy == 'O' }"><span class="circle yellow"></span></c:if>
 	    </td>
-	    <td>${ afDTO.wash }</td><td>${ afDTO.repair }</td><td>${ afDTO.truck }</td>
+	    <td>${ afDTO.repair }</td><td>${ afDTO.truck }</td>
   	</tr>
 	</c:forEach>
 </tbody>
@@ -176,7 +171,7 @@ pageContext.setAttribute("allRoute", rafs.searchAllRoute());
 <div id="pageinationDiv">
 
 <%
-PaginationDTO pDTO = new PaginationDTO(5,rDTO.getCurrentPage(),totalPage,"rest_area_facility.jsp",null,rDTO.getKeyword(),rDTO.getRoute(),null,null,rDTO.getWash(),rDTO.getRepair(),rDTO.getTruck());
+PaginationDTO pDTO = new PaginationDTO(5,rDTO.getCurrentPage(),totalPage,"rest_area_facility.jsp",null,rDTO.getKeyword(),rDTO.getRoute(),null,null,null,rDTO.getRepair(),rDTO.getTruck());
 
 %>
 <%= PaginationUtil.pagination(pDTO) %>

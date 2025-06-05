@@ -31,8 +31,9 @@ public class RestAreaDetailDAO {
 
 			StringBuilder selectQuery = new StringBuilder();
 			selectQuery.append(
-					" SELECT A.AREA_NUM, NAME, ROUTE, ADDR, TEL, OPERATION_TIME, LAT, LNG, FEED, SLEEP, SHOWER, LAUNDRY, CLINIC, PHARMACY, SHELTER, SALON, REPAIR, WASH, TRUCK, TEMP ")
-					.append(" FROM AREA A, FACILITY F ").append(" WHERE A.AREA_NUM = F.AREA_NUM AND A.AREA_NUM = ? ");
+				    " SELECT AREA_NUM, NAME, ROUTE, ADDR, TEL, OPERATION_TIME, LAT, LNG, FEED, SLEEP, SHOWER, LAUNDRY, CLINIC, PHARMACY, SHELTER, SALON, REPAIR, TRUCK, TEMP ")
+				    .append(" FROM AREA ")
+				    .append(" WHERE AREA_NUM = ? ");
 
 			pstmt = conn.prepareStatement(selectQuery.toString());
 
@@ -61,7 +62,6 @@ public class RestAreaDetailDAO {
 				adDTO.setShelter(rs.getString("SHELTER"));
 				adDTO.setSalon(rs.getString("SALON"));
 				adDTO.setRepair(rs.getString("REPAIR"));
-				adDTO.setWash(rs.getString("WASH"));
 				adDTO.setTruck(rs.getString("TRUCK"));
 				adDTO.setTemp(rs.getString("TEMP"));
 			} // end if

@@ -1,7 +1,7 @@
 .rest-name {
   font-size: 24px;
   font-weight: bold;
-  color: #2f5fd0;
+  color: #008080;
 }
 .rest-title-row {
   display: flex;
@@ -53,9 +53,9 @@
 }
 
 .tab-btn.active {
-  background-color: #2f5fd0;
+  background-color: #3BC1B7;
   color: white;
-  border-bottom: 2px solid #2f5fd0;
+  border-bottom: 2px solid #3BC1B7;
 }
 
 

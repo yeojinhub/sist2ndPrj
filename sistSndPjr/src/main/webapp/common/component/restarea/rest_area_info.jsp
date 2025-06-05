@@ -133,14 +133,12 @@ pageContext.setAttribute("adDTO", adDTO);
 	<tr>
 		<td>경정비소</td>
 		<td><c:out value="${adDTO.repair }"/></td>
-		<td>세차장</td>
-		<td><c:out value="${adDTO.wash }"/></td>
-	</tr>
-	<tr>
 		<td>Ex. 화물차라운지</td>
 		<td><c:out value="${adDTO.truck }"/></td>
+	</tr>
+	<tr>
 		<td>추가시설</td>
-		<td><c:out value="${adDTO.temp }"/></td>
+		<td colspan="3"><c:out value="${adDTO.temp }"/></td>
 	</tr>
 </table>
 

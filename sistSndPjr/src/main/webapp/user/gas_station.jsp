@@ -118,7 +118,7 @@ $(function(){
 		// rDTO를 보내서 시작번호와 끝번호 데이터를 구해온다.
 		pageContext.setAttribute("petrolList", ps.searchAllPetrol(rDTO));
 		
-
+		System.out.println(rDTO);
 		%>
 		<table class="user_table">
 			<thead>
