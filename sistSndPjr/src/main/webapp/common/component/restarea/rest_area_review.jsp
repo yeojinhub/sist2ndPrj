@@ -1,3 +1,4 @@
+<%@page import="Util.ReviewPaginationUtil"%>
 <%@page import="DTO.AreaDetailReviewPaginationDTO"%>
 <%@page import="restarea.detail.RestAreaDetailReviewService"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
@@ -47,16 +48,6 @@
 	cursor: pointer;
 }
 
-.pagenation {
-	text-align: center;
-	margin: 20px 0;
-}
-
-.pagenation span {
-	margin: 0 5px;
-	cursor: pointer;
-}
-
 .review-write {
 	border-top: 1px solid #ccc;
 	padding-top: 12px;
@@ -89,6 +80,48 @@
 	border-radius: 4px;
 	cursor: pointer;
 }
+
+ /* 페이지네이션 시작 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    font-size: 30px;
+}
+
+.pagination p {
+	margin-top: 20px;
+}
+
+.pagination .next {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    padding: 0 16px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.pagination .prev {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    padding: 0 16px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.pagination .number {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.pagination a {
+	text-decoration: none;
+	color: #333;
+}
+ /* 페이지네이션 끝 */
 </style>
 <%
 int id = Integer.parseInt(request.getParameter("id"));
@@ -111,9 +144,7 @@ startNum = radrs.startNum(pageScale, adrrDTO);
 int endNum = 0;
 endNum = radrs.endNum(pageScale, adrrDTO);
 
-System.out.println(adrrDTO);
-
-pageContext.setAttribute("reviewList", radrs.searchAllReview(id));
+pageContext.setAttribute("reviewList", radrs.searchAllReview(id, adrrDTO));
 %>
 <!-- 리뷰 목록 -->
 <div class="review-list">
@@ -144,12 +175,13 @@ pageContext.setAttribute("reviewList", radrs.searchAllReview(id));
 </div>
 
 <!-- 페이지네이션 -->
-<div class="pagenation">
+<div class="pagination">
 	<%
-	AreaDetailReviewPaginationDTO adrpDTO = new AreaDetailReviewPaginationDTO(5, adrrDTO.getCurrentPage(), totalPage, "rest_area_review.jsp");
+	AreaDetailReviewPaginationDTO adrpDTO = new AreaDetailReviewPaginationDTO(5, adrrDTO.getCurrentPage(), totalPage);
 	
-	
+	ReviewPaginationUtil rp = new ReviewPaginationUtil();
 	%>
+	<%= rp.pagination(adrpDTO) %>
 </div>
 
 <!-- 리뷰 작성 -->
@@ -186,13 +218,35 @@ pageContext.setAttribute("reviewList", radrs.searchAllReview(id));
 			$("#reportConfirmPopup").fadeOut();
 		});
 		
-		$('.pagenation span').click((e)=>{
-			const page = $(e.target).text().trim(); // 선택한 페이지 반환
-			const url = '../common/component/restarea/rest_area_review.jsp?id=${param.id}&currentPage='+page;
-			$('#tabContent').load(url);
-		});
 		
-		
+		// 페이지네이션	
+		 // 페이지 번호 클릭
+	    $('.pagination span').click(function(e){
+	        var page = $(this).text().trim();
+	        var url = '../common/component/restarea/rest_area_review.jsp?id=' + ${param.id} 
+	                + '&currentPage=' + page;
+	        $('#tabContent').load(url);
+	    });
+
+	    // next 버튼 클릭
+	    $('.pagination .next').click(function(){
+	        var nextPage = <%= adrrDTO.getCurrentPage() + 1 %>;
+	        if(nextPage <= <%= totalPage %>) {
+	            var url = '../common/component/restarea/rest_area_review.jsp?id=' + ${param.id} 
+	                    + '&currentPage=' + nextPage;
+	            $('#tabContent').load(url);
+	        }
+	    });
+
+	    // prev 버튼 클릭
+	    $('.pagination .prev').click(function(){
+	        var prevPage = <%= adrrDTO.getCurrentPage() - 1 %>;
+	        if(prevPage >= 1) {
+	            var url = '../common/component/restarea/rest_area_review.jsp?id=' + ${param.id} 
+	                    + '&currentPage=' + prevPage;
+	            $('#tabContent').load(url);
+	        }
+	    });
 
 	});
 </script>

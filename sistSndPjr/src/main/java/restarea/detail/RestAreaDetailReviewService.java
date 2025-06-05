@@ -12,13 +12,13 @@ import DTO.RangeDTO;
 
 public class RestAreaDetailReviewService {
 
-	public List<AreaDetailReviewDTO> searchAllReview(int area_num) {
+	public List<AreaDetailReviewDTO> searchAllReview(int area_num, AreaDetailReviewRangeDTO adrrDTO) {
 		List<AreaDetailReviewDTO> list = null;
 		
 		RestAreaDetailReviewDAO radrDAO = new RestAreaDetailReviewDAO();
 		
 		try {
-			list = radrDAO.seleteAllReview(area_num);
+			list = radrDAO.seleteAllReview(area_num, adrrDTO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}// end try-catch

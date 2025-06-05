@@ -9,10 +9,11 @@ import java.util.List;
 
 import DBConnection.DBConnection;
 import DTO.AreaDetailReviewDTO;
+import DTO.AreaDetailReviewRangeDTO;
 
 public class RestAreaDetailReviewDAO {
 
-	public List<AreaDetailReviewDTO> seleteAllReview(int area_num) throws SQLException {
+	public List<AreaDetailReviewDTO> seleteAllReview(int area_num, AreaDetailReviewRangeDTO adrrDTO) throws SQLException {
 		List<AreaDetailReviewDTO> list = new ArrayList<AreaDetailReviewDTO>();
 
 		DBConnection dbCon = DBConnection.getInstance();
@@ -25,12 +26,19 @@ public class RestAreaDetailReviewDAO {
 			conn = dbCon.getDbCon();
 
 			StringBuilder selectQuery = new StringBuilder();
-			selectQuery.append(" SELECT * ").append(" FROM REVIEW ").append(" WHERE AREA_NUM = ?");
+			selectQuery
+			.append(" SELECT * ")
+			.append(" FROM (SELECT REV_NUM, CONTENT, NAME, INPUT_DATE, REPORT, HIDDEN_TYPE, AREA_NUM, ACC_NUM, ROW_NUMBER() OVER(ORDER BY INPUT_DATE) RNUM ")
+			.append(" FROM REVIEW ")
+			.append(" WHERE AREA_NUM = ? AND HIDDEN_TYPE = 'N') ")
+			.append(" WHERE RNUM BETWEEN ? AND ? ");
 
 			pstmt = conn.prepareStatement(selectQuery.toString());
 
 			// 바인드 변수 할당
 			pstmt.setInt(1, area_num);
+			pstmt.setInt(2, adrrDTO.getStartNum());
+			pstmt.setInt(3, adrrDTO.getEndNum());
 
 			rs = pstmt.executeQuery();
 

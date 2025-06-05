@@ -14,6 +14,5 @@ import lombok.ToString;
 public class AreaDetailReviewPaginationDTO {
 
 	private int pageNumber, currentPage, totalPage;
-	private String url;
 	
 }// class
