@@ -60,8 +60,6 @@ request.setAttribute("inquiryList", inquiryList); */
 		  gap: 10px;
 		}
 		
-		.search-div select,
-		.search-div input[type="text"],
 		.search-div button {
 		  height: 30px;
 		  font-size: 16px;
@@ -69,17 +67,20 @@ request.setAttribute("inquiryList", inquiryList); */
 		  border: 1px solid #C4C4C4;
 		}
 		
-		.search-div select {
-		  width: 100px;
-		  font-weight: bold;
-		  color: #000;
+		.status-radio {
+		  display: flex;
+		  gap: 15px;
+		  align-items: center;
 		}
 		
-		.search-div input[type="text"].search-title {
-		  width: 50%;
-		  padding: 0 8px;
-		  text-align: center;
+		.status-radio label {
+		  font-weight: bold;
 		}
+		
+		.status-radio input[type="radio"] {
+		  margin-right: 5px;
+		  transform: scale(1.1);
+		} 
 		
 		.btn-search {
 		  padding: 0 15px;
@@ -106,11 +107,11 @@ request.setAttribute("inquiryList", inquiryList); */
 			</div>
 			
 			<form method="get" action="inquiries.jsp" class="search-div">
-				<select name="statusType">
-			        <option value="all" ${statusType == 'all' ? 'selected' : ''}>전체</option>
-			        <option value="대기" ${statusType == '대기' ? 'selected' : ''}>대기</option>
-			        <option value="답변완료" ${statusType == '답변완료' ? 'selected' : ''}>답변완료</option>
-			    </select>
+			    <div class="status-radio">
+			        <label><input type="radio" name="statusType" value="all" <%= "all".equals(statusType) || statusType == null ? "checked" : "" %>> 전체</label>
+			        <label><input type="radio" name="statusType" value="대기" <%= "대기".equals(statusType) ? "checked" : "" %>> 대기</label>
+			        <label><input type="radio" name="statusType" value="답변완료" <%= "답변완료".equals(statusType) ? "checked" : "" %>> 답변완료</label>
+			    </div>
 			    <%-- <input type="text" class="search-title" name="searchKeyword" placeholder="검색어 입력" value="${searchKeyword != null ? searchKeyword : ''}"/> --%>
 			    <button type="submit" class="btn-search">검색</button>
 			</form>

@@ -49,6 +49,66 @@ request.setAttribute("noticeList", noticeList); */
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <style>
+		/* 검색 영역 */
+		.search-div {
+		  width: 60%;
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		  margin: 50px auto 30px auto; /* 아래 테이블과 간격 포함 */
+		  gap: 10px;
+		}
+		
+		.search-div select,
+		.search-div input[type="text"],
+		.search-div button {
+		  height: 30px;
+		  font-size: 16px;
+		  border-radius: 4px;
+		  border: 1px solid #C4C4C4;
+		}
+		
+		.search-div select {
+		  width: 100px;
+		  font-weight: bold;
+		  color: #000;
+		}
+		
+		.search-div input[type="text"].search-title {
+		  width: 50%;
+		  padding: 0 8px;
+		  text-align: center;
+		}
+		
+		.btn-search {
+		  padding: 0 15px;
+		  width: 80px;
+		  font-size: 10px;
+		  font-weight: bold;
+		  background-color: #D9D9D9;
+		  border: none;
+		  cursor: pointer;
+		  color:#ffffff;
+		  background-color: #96b1ad;
+		} 
+		
+		.status-radio {
+		  display: flex;
+		  gap: 15px;
+		  align-items: center;
+		}
+		
+		.status-radio label {
+		  font-weight: bold;
+		}
+		
+		.status-radio input[type="radio"] {
+		  margin-right: 5px;
+		  transform: scale(1.1);
+		}  
+    </style>
+    
 </head>
 <body>
     <div class="container">
@@ -74,10 +134,11 @@ request.setAttribute("noticeList", noticeList); */
 			</form>
 
 			<div class="content">
+			<form action="faq_multiple_delete.jsp" method="post">
                 <table class="data-table">
                     <thead>
                         <tr>
-                        	<th><input type="checkbox" /></th>
+                        	<th><input type="checkbox" id="selectAll"/></th>
                             <th>번호</th>
                             <th>제목</th>
                             <th>작성자</th>
@@ -87,7 +148,7 @@ request.setAttribute("noticeList", noticeList); */
                     <tbody> 
                         <c:forEach var="faq" items="${faqList}">
                             <tr onclick="location.href='faq_board_detail.jsp?faq_num=${faq.faq_num}'">
-                                <td><input type="checkbox" /></td>
+                                <td><input type="checkbox" name="faq_nums" value="${faq.faq_num}" onclick="event.stopPropagation();" /></td>
                                 <td><c:out value="${faq.faq_num}" /></td>
                                 <td><c:out value="${faq.title}" /></td>
                                 <td><c:out value="${faq.name}" /></td>
@@ -111,11 +172,19 @@ request.setAttribute("noticeList", noticeList); */
             </div>
                 
                 <div class="button-group">
-                    <button class="btn btn-add" onclick="location.href='faq_board_write.jsp'">작성</button>
-                    <button class="btn btn-delete">삭제</button>
+                    <button type="button" class="btn btn-add" onclick="location.href='faq_board_write.jsp'">작성</button>
+                    <button type="submit" class="btn btn-delete">삭제</button>
                 </div>
+               </form> 
             </div>
         </div>
     </div>
 </body>
+
+    <script>
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checked = this.checked;
+        document.querySelectorAll('input[name="faq_nums"]').forEach(cb => cb.checked = checked);
+    });
+	</script>
 </html>

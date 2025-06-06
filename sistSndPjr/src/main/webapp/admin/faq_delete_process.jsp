@@ -1,4 +1,4 @@
-<%@ page import="Inquiry.InquiryService" %>
+<%@ page import="Faq.FaqService" %>
 <%@ page import="AdminLogin.LoginResultDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,14 +11,15 @@ if (userData == null) {
     return;
 }
 
-String inqNumStr = request.getParameter("inq_num");
-int inqNum = 0;
-if (inqNumStr != null && !inqNumStr.trim().isEmpty()) {
-    inqNum = Integer.parseInt(inqNumStr);
+String faqNumStr = request.getParameter("faq_num");
+int faqNum = 0;
+if (faqNumStr != null && !faqNumStr.trim().isEmpty()) {
+	faqNum = Integer.parseInt(faqNumStr);
 }
 
-InquiryService service = new InquiryService();
-boolean deleteSuccess = service.deleteInquiryAndAnswer(inqNum);
+FaqService service = new FaqService();
+boolean deleteSuccess = service.deleteFaq(faqNum);
+
 request.setAttribute("deleteFlag", deleteSuccess);
 %>
 <!DOCTYPE html>
@@ -30,7 +31,7 @@ request.setAttribute("deleteFlag", deleteSuccess);
 	    <c:choose>
 	        <c:when test="${deleteFlag}">
 	            alert("FAQ글삭제 완료");
-	            location.href="inquiries.jsp";
+	            location.href="faq_board.jsp";
 	        </c:when>
 	        <c:otherwise>
 	            alert("FAQ글삭제 실패. 정상적으로 실행되지 않았습니다.");

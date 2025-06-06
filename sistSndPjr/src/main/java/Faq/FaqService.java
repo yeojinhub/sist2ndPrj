@@ -22,7 +22,7 @@ public class FaqService {
 	 * nDAO.getNoticeList(); }// getNoticeList
 	 */	
 	
-	public FaqDTO getNoticeOne(int faqNum) {
+	public FaqDTO getFaqOne(int faqNum) {
 		return fDAO.getFaqOne(faqNum);
 	}//getNoticeOne
 	//전체리스트
@@ -61,7 +61,7 @@ public class FaqService {
     
     
     //delete
-    public boolean deleteNotice(int faqNum) {
+    public boolean deleteFaq(int faqNum) {
    
     		try {
     			return fDAO.deleteFaq(faqNum);
@@ -72,7 +72,7 @@ public class FaqService {
     }
     
     //update
-    public boolean updateNotice(FaqDTO fDTO) {
+    public boolean updatFaq(FaqDTO fDTO) {
     	return fDAO.updateFaq(fDTO);
     }
     
@@ -152,7 +152,7 @@ public class FaqService {
             pagination = PaginationUtil.createPagination(currentPage, pageSize, totalCount);
             
             // 검색 조건과 페이지에 해당하는 공지사항 목록 조회
-            faqList = fDAO.searchNoticeByPage(searchType, searchKeyword, pagination);
+            faqList = fDAO.searchFaqByPage(searchType, searchKeyword, pagination);
             
         } catch (SQLException se) {
             se.printStackTrace();

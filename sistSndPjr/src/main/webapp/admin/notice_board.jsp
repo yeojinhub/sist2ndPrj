@@ -92,7 +92,22 @@ request.setAttribute("noticeList", noticeList); */
 		  cursor: pointer;
 		  color:#ffffff;
 		  background-color: #96b1ad;
-		}   
+		} 
+		
+		.status-radio {
+		  display: flex;
+		  gap: 15px;
+		  align-items: center;
+		}
+		
+		.status-radio label {
+		  font-weight: bold;
+		}
+		
+		.status-radio input[type="radio"] {
+		  margin-right: 5px;
+		  transform: scale(1.1);
+		}  
     </style>
 </head>
 <body>
@@ -115,20 +130,21 @@ request.setAttribute("noticeList", noticeList); */
 			
 			    <input type="text" class="search-title" name="searchKeyword" placeholder="검색어 입력" value="${searchKeyword != null ? searchKeyword : ''}"/>
 			
-			    <select name="statusType">
-			        <option value="all" ${statusType == 'all' ? 'selected' : ''}>전체</option>
-			        <option value="공지" ${statusType == '공지' ? 'selected' : ''}>공지</option>
-			        <option value="미공지" ${statusType == '미공지' ? 'selected' : ''}>미공지</option>
-			    </select>
+			    <div class="status-radio">
+			        <label><input type="radio" name="statusType" value="all" <%= "all".equals(statusType) || statusType == null ? "checked" : "" %>> 전체</label>
+			        <label><input type="radio" name="statusType" value="공지" <%= "공지".equals(statusType) ? "checked" : "" %>> 공지</label>
+			        <label><input type="radio" name="statusType" value="미공지" <%= "미공지".equals(statusType) ? "checked" : "" %>> 미공지</label>
+			    </div>
 			
 			    <button type="submit" class="btn-search">검색</button>
 			</form>
 
             <div class="content">
+            <form action="notice_multiple_delete.jsp" method="post">
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" /></th>
+                            <th><input type="checkbox" id="selectAll"/></th>
                             <th>번호</th>
                             <th>제목</th>
                             <th>작성자</th>
@@ -139,7 +155,7 @@ request.setAttribute("noticeList", noticeList); */
                     <tbody>
                         <c:forEach var="notice" items="${noticeList}">
                             <tr onclick="location.href='notice_board_detail.jsp?not_num=${notice.not_num}'">
-                                <td><input type="checkbox" /></td>
+                                <td><input type="checkbox" name="not_nums" value="${notice.not_num}" onclick="event.stopPropagation();"/></td>
                                 <td><c:out value="${notice.not_num}" /></td>
                                 <td><c:out value="${notice.title}" /></td>
                                 <td><c:out value="${notice.name}" /></td>
@@ -166,10 +182,19 @@ request.setAttribute("noticeList", noticeList); */
             </div>
 
             <div class="button-group">
-                <button class="btn btn-add" onclick="location.href='notice_board_write.jsp'">작성</button>
-                <button class="btn btn-delete">삭제</button>
+                <button type="button" class="btn btn-add" onclick="location.href='notice_board_write.jsp'">작성</button>
+                <button type="submit" class="btn btn-delete">삭제</button>
             </div>
+          </form>  
         </div>
     </div>
 </body>
+
+    <script>
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checked = this.checked;
+        document.querySelectorAll('input[name="not_nums"]').forEach(cb => cb.checked = checked);
+    });
+	</script>
+
 </html>

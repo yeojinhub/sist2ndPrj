@@ -84,8 +84,8 @@ request.setAttribute("notice", notice);
 			        <button class="btn btn-back" type="button" onclick="location.href='notice_board.jsp'">취소</button>
 		</form>
 			
-			    <form action="faq_delete_process.jsp" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-			        <input type="hidden" name="not_num" value="${faq.faq_num}" />
+			    <form action="notice_delete_process.jsp" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+			        <input type="hidden" name="not_num" value="${notice.not_num}" />
 			        <button type="submit" class="btn btn-delete">삭제</button>
 			    </form>
 			    </div>
