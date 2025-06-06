@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../../common/jsp/login_chk.jsp" %>
+
 <%
     LoginResultDTO userData = (LoginResultDTO) session.getAttribute("userData");
 %>
@@ -93,7 +94,30 @@ request.setAttribute("noticeList", noticeList); */
 		  background-color: #96b1ad;
 		}   
     </style>
+     <!-- jquery CDN -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
+<script type="text/javascript">
+    $(function() {
+    	$('#checkAll').change(function () {
+            const isChecked = $(this).prop('checked');
+            $('input[name="faqCheck"]').prop('checked', isChecked);
+        });
+    	
+    	
+    });//ready
     
+    function submitDelete() {
+        const checked = $('input[name="faqCheck"]:checked');
+        if (checked.length == 0) {
+            alert("삭제할 FAQ를 선택하세요.");
+            return;
+        }
+
+        if (!confirm("선택한 FAQ를 삭제하시겠습니까?")) return;
+
+        $('#deleteForm').submit();
+    }
+</script>
 </head>
 <body>
     <div class="container">
@@ -118,29 +142,39 @@ request.setAttribute("noticeList", noticeList); */
 			    <button type="submit" class="btn-search">검색</button>
 			</form>
 
-			<div class="content">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                        	<th><input type="checkbox" /></th>
-                            <th>번호</th>
-                            <th>제목</th>
-                            <th>작성자</th>
-                            <th>작성일</th>
-                        </tr>
-                    </thead>
-                    <tbody> 
-                        <c:forEach var="faq" items="${faqList}">
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td><c:out value="${faq.faq_num}" /></td>
-                                <td class="onclickbtn" onclick="location.href='faq_board_detail.jsp?faq_num=${faq.faq_num}'"><c:out value="${faq.title}" /></td>
-                                <td><c:out value="${faq.name}" /></td>
-                                <td><fmt:formatDate value="${faq.input_date}" pattern="yyyy-MM-dd" /></td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
+			<form id="deleteForm" method="post" action="faq_delete_process.jsp">
+			    <div class="content">
+			        <table class="data-table">
+			            <thead>
+			                <tr>
+			                    <th><input type="checkbox" id="checkAll" /></th>
+			                    <th>번호</th>
+			                    <th>제목</th>
+			                    <th>작성자</th>
+			                    <th>작성일</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+			                <c:forEach var="faq" items="${faqList}">
+			                    <tr>
+			                        <td><input type="checkbox" name="faqCheck" value="${faq.faq_num}" /></td>
+			                        <td><c:out value="${faq.faq_num}" /></td>
+			                        <td class="onclickbtn" onclick="location.href='faq_board_detail.jsp?faq_num=${faq.faq_num}'">
+			                            <c:out value="${faq.title}" />
+			                        </td>
+			                        <td><c:out value="${faq.name}" /></td>
+			                        <td><fmt:formatDate value="${faq.input_date}" pattern="yyyy-MM-dd" /></td>
+			                    </tr>
+			                </c:forEach>
+			            </tbody>
+			        </table>
+			
+			        <div class="button-group">
+			            <button type="button" class="btn btn-add" onclick="location.href='faq_board_write.jsp'">작성</button>
+			            <button type="button" class="btn btn-delete" onclick="submitDelete()">삭제</button>
+			        </div>
+			    </div>
+			</form>
               <!-- 페이지네이션 -->  
             <div class="pagination">
                 <!-- 첫 페이지로 이동 -->
@@ -153,12 +187,6 @@ request.setAttribute("noticeList", noticeList); */
 
                 <!-- 마지막 페이지로 이동 -->
                 <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="last-page"><i class="fas fa-angle-double-right"></i></a>
-            </div>
-                
-                <div class="button-group">
-                    <button class="btn btn-add" onclick="location.href='faq_board_write.jsp'">작성</button>
-                    <button class="btn btn-delete">삭제</button>
-                </div>
             </div>
         </div>
     </div>

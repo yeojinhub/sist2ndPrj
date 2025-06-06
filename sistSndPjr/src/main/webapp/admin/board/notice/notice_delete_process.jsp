@@ -1,28 +1,45 @@
+<%@page import="Notice.NoticeService"%>
+<%@ page import="AdminLogin.LoginResultDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="Notice.NoticeService" %>
-<%@ page import="Notice.NoticeDTO" %>
-<%@ page import="AdminLogin.LoginResultDTO" %>
-<% request.setCharacterEncoding("UTF-8"); %>
 <%
-    LoginResultDTO userData = (LoginResultDTO)session.getAttribute("userData");
-	
-    if (userData == null) {
-        response.sendRedirect("../login/admin_login.jsp");
-        return;
-    }
-%>
-<jsp:useBean id="ntDTO" class="Notice.NoticeDTO" scope="request" />
-<jsp:setProperty name="ntDTO" property="*" />
-<%
-	int notNum=0;
+request.setCharacterEncoding("UTF-8");
 
-	notNum=Integer.parseInt(request.getParameter("not_num"));
-	
-	boolean deleteFlag=false;
-	NoticeService noticeService=new NoticeService();
-	deleteFlag=noticeService.deleteNotice(notNum);
-	request.setAttribute("deleteFlag", deleteFlag);
+LoginResultDTO userData = (LoginResultDTO) session.getAttribute("userData");
+if (userData == null) {
+    response.sendRedirect("../login/admin_login.jsp");
+    return;
+}
+
+String[] noticeNums = request.getParameterValues("noticeCheck");
+String singleNoticeNum = request.getParameter("not_num");
+
+NoticeService service = new NoticeService();
+boolean allDeleted = true;
+
+if (noticeNums != null) {
+    for (String numStr : noticeNums) {
+        try {
+            int num = Integer.parseInt(numStr);
+            if (!service.deleteNotice(num)) {
+                allDeleted = false;
+            }
+        } catch (NumberFormatException e) {
+            allDeleted = false;
+        }
+    }
+} else if (singleNoticeNum != null) {
+    try {
+        int num = Integer.parseInt(singleNoticeNum);
+        allDeleted = service.deleteNotice(num);
+    } catch (NumberFormatException e) {
+        allDeleted = false;
+    }
+} else {
+    allDeleted = false;
+}
+
+request.setAttribute("deleteFlag", allDeleted);
 %>
 
 <!DOCTYPE html>
@@ -34,7 +51,7 @@
         <c:choose>
             <c:when test="${deleteFlag}">
                 alert("글삭제 완료");
-                location.href="notice_board.jsp";
+                location.href = "notice_board.jsp";
             </c:when>
             <c:otherwise>
                 alert("글삭제 실패. 정상적으로 실행되지 않았습니다.");
@@ -46,3 +63,4 @@
 <body>
 </body>
 </html>
+
