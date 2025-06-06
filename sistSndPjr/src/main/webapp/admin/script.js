@@ -23,16 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   // Highlight active menu item based on current page
-  const currentPage = window.location.pathname.split("/").pop()
+  /*const currentPage = window.location.pathname.split("/").pop()*/
   const menuLinks = document.querySelectorAll(".menu a")
 
+  const currentPath = window.location.pathname
   menuLinks.forEach((link) => {
     const href = link.getAttribute("href")
-    if (href === currentPage) {
-      // Add active class to the menu item
+    if (href === currentPath) {
       link.parentElement.classList.add("active")
 
-      // If it's a submenu item, open the parent menu
       const parentMenuItem = link.closest(".has-submenu")
       if (parentMenuItem) {
         parentMenuItem.classList.add("open")
@@ -44,18 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
 
-  // Add event listeners for the buttons
-  const registerBtn = document.querySelector(".btn-primary")
+
+/*  // Add event listeners for the buttons
+  const registerBtn = document.querySelector(".btn-add")
   if (registerBtn) {
     registerBtn.addEventListener("click", () => {
-      alert("등록 기능이 구현될 예정입니다.")
+      alert("작성 기능이 구현될 예정입니다.")
     })
-  }
-
-  const editBtn = document.querySelector(".btn-secondary")
-  if (editBtn) {
-    editBtn.addEventListener("click", () => {
-      alert("수정 기능이 구현될 예정입니다.")
-    })
-  }
+  }*/
 })

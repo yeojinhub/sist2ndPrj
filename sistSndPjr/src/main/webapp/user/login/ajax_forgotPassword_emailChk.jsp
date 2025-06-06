@@ -33,7 +33,7 @@ if (!emailChk) {
 String sessionId = request.getSession().getId();
 // 5-2. SMTP 객체 생성 및 이메일 전송
 SMTP smtp = SMTP.getInstance();
-boolean sendChk = smtp.sendChangePassMail("tgncosist2@gmail.com", sessionId); // 테스트(tgncosist2@gmail.com)
+boolean sendChk = smtp.sendChangePassMail("tgncosist2@gmail.com", sessionId, "localhost"); // 테스트(tgncosist2@gmail.com)
 // 5-3. JSON에 이메일 전송 성공 여부 넣기
 jsonObj.put("sendChk", sendChk);
 

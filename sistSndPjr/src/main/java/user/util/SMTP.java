@@ -4,6 +4,8 @@ import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+import kr.co.sist.cipher.DataEncryption;
+
 public class SMTP {
 	
 	private static SMTP instance;
@@ -18,7 +20,7 @@ public class SMTP {
 		return instance;
 	}// getInstance
 
-	public boolean sendChangePassMail(String email, String sessionId) {
+	public boolean sendChangePassMail(String email, String sessionId, String domain) {
 		boolean flag = false;
 		
 		String host = "smtp.gmail.com"; // 사용할 SMTP 서버 주소 (구글, 네이버, 카페24 등)
@@ -43,8 +45,19 @@ public class SMTP {
 		    Message message = new MimeMessage(session);
 		    message.setFrom(new InternetAddress(user));
 		    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-		    message.setSubject("모두쉼 - 비밀번호 재설정");
-		    String changePassLink = "https://example.com/reset-password?token=abcdefg123456";
+		    message.setSubject("모두쉼 - 비밀번호 재설정"); // 메일 제목
+		    
+		    // QueryString에 이메일과 세션ID를 넣기 전에 이메일 암호화
+		    String myKey = "asdf1234asdf1234";
+		    DataEncryption de = new DataEncryption(myKey);
+		    String emailForLink = "";
+			try {
+				emailForLink = de.encrypt(email);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}// end try-catch
+		    
+		    String changePassLink = "http://"+domain+"/sistSndPjr/user/login/forgotUserChangePasswordPage.jsp?e="+emailForLink+"&si="+sessionId;
 		    String logoImgLink = "https://drive.google.com/u/0/drive-viewer/AKGpiha_XiIO3STkNDjcgU0T7JAX_AGFXRgKzWhNA0-sx_YKXFzPswNTsGdzwcOXnp3QmlbTEiq6lVTicaJlWnynOxQ7aQhX_r9X8nY=s2560";
 		    StringBuilder htmlBuilder = new StringBuilder();
 
