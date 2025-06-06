@@ -22,8 +22,8 @@
 	fDTO.setFaq_num(faqNum);
 	
 	boolean updateFlag=false;
-	FaqService noticeService=new FaqService();
-	updateFlag=noticeService.updateNotice(fDTO);
+	FaqService faqService=new FaqService();
+	updateFlag=faqService.updatFaq(fDTO);
 
 	request.setAttribute("updateFlag", updateFlag);
 %>
@@ -36,11 +36,11 @@
     <script type="text/javascript">
         <c:choose>
             <c:when test="${updateFlag}">
-                alert("글수정 완료");
+                alert("FAQ글수정 완료");
                 location.href="faq_board.jsp";
             </c:when>
             <c:otherwise>
-                alert("글수정 실패. 정상적으로 실행되지 않았습니다.");
+                alert("FAQ글수정 실패. 정상적으로 실행되지 않았습니다.");
                 history.back();
             </c:otherwise>
         </c:choose>
