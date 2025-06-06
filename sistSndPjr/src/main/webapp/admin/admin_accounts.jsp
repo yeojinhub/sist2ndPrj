@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자 대시보드</title>
-    <link rel="stylesheet" href="../common/css/styles.css">
+    <link rel="stylesheet" href="../user/common/css/styles.css">
     <script src="script.js"></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,7 +14,7 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo-container">
-                <img src="../common/images/logo.png" alt="로고" class="logo">
+                <img src="../user/common/images/logo.png" alt="로고" class="logo">
                 <span class="logo-text">모두쉼</span>
             </div>
             
