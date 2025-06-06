@@ -60,6 +60,12 @@ request.setAttribute("inquiryList", inquiryList); */
 		  gap: 10px;
 		}
 		
+		.search-div label {
+		  font-weight: bold;
+		  font-size: 14px;
+		  margin-right: 30px;
+		}
+		
 		.search-div button {
 		  height: 30px;
 		  font-size: 16px;

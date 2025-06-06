@@ -109,7 +109,6 @@
 				<h1>리뷰조회/신고관리</h1>
 			</div>
 						
-			
 			    <form method="get" action="reviews.jsp"  class="search-div">
 			        <label>
 			            <input type="radio" name="hiddenType" value="all" <%= "all".equals(hiddenTypeParam) ? "checked" : "" %> />
