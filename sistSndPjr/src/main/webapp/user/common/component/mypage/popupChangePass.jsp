@@ -1,5 +1,5 @@
+<%@page import="user.account.login.LoginDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="user.account.login.LoginDTO" %>
 <%@ page import="kr.co.sist.cipher.DataEncryption" %>
 <jsp:include page="../../jsp/external_file.jsp"/>
 

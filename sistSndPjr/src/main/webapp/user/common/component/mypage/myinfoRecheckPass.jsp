@@ -1,6 +1,5 @@
 <%@page import="kr.co.sist.cipher.DataEncryption"%>
 <%@page import="kr.co.sist.cipher.DataDecryption"%>
-<%@page import="user.account.login.LoginDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <script>
