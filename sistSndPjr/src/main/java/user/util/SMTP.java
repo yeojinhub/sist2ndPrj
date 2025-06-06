@@ -52,7 +52,7 @@ public class SMTP {
 		    DataEncryption de = new DataEncryption(myKey);
 		    String emailForLink = "";
 			try {
-				emailForLink = de.encrypt(email);
+				emailForLink = de.encrypt("test@test.kr");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}// end try-catch
@@ -62,7 +62,7 @@ public class SMTP {
 		    StringBuilder htmlBuilder = new StringBuilder();
 
 		    htmlBuilder.append("<div style='font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; border:1px solid #ececec; padding:30px;'>")
-		              .append("<h2 style='color:#4a90e2;'>모두쉼 - 비밀번호 재설정</h2>")
+		              .append("<h2 style='color:#4a90e2;'>비밀번호 재설정</h2>")
 		              .append("<p>안녕하세요, <strong>[모두쉼]</strong> 고객센터입니다.</p>")
 		              .append("<p>비밀번호 재설정 요청으로 이메일이 전송되었습니다.<br>")
 		              .append("아래 버튼을 클릭해서 비밀번호를 재설정해 주세요.</p>")

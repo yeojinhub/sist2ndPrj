@@ -1,5 +1,6 @@
 package user.account.forgot;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 import kr.co.sist.cipher.DataDecryption;
@@ -30,5 +31,26 @@ public class ForgotService {
 		
 		return flag;
 	}// searchEmailCheck
+	
+	public boolean modifyPass(String email, String pass) {
+		boolean flag = false;
+		
+		ForgotDAO fDAO = new ForgotDAO();
+		
+		// 비밀번호 암호화(SHA-256);
+		try {
+			pass = DataEncryption.messageDigest("SHA-256", pass);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}//end try-catch
+		
+		try {
+			flag = fDAO.updatePass(email, pass);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}// end try-catch
+		
+		return flag;
+	}// modifyPass
 	
 }// class
