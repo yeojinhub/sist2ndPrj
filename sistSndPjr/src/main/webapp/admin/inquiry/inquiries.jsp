@@ -107,7 +107,7 @@ request.setAttribute("inquiryList", inquiryList); */
 </head>
 <body>
 	<div class="container">
-        <!-- Sidebar -->
+        <!-- Sidebar -->r
         <jsp:include page="/admin/common/jsp/admin_sidebar.jsp" />
 
 		<!-- Main Content -->

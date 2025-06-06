@@ -137,7 +137,7 @@ if (answer != null) {
 			        <button type="button" class="btn btn-back" onclick="location.href='inquiries.jsp'">취소</button>
 			 </form>
 			 
-				<form action="inquiry_delete_process.jsp" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+				<form action="inquiries_delete_process.jsp" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
 				    <input type="hidden" name="inq_num" value="${inquiry.inq_num}" />
 				    <button type="submit" class="btn btn-delete">삭제</button>
 				</form>
