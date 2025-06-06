@@ -30,19 +30,21 @@ public class ReviewService {
 	    }
 		return rDTO;
 	}//getNoticeOne
-    
+	
+///////////////////////////////////////////////////////////////////////   
 	// Hiddn_type 
 	public boolean hideReview(int revNum) {
 	    try {
-	        System.out.println("숨김 처리할 리뷰 번호: " + revNum);
+	        System.out.println("숨김 처리할 리뷰번호: " + revNum);
 	        int result = rDAO.updateHiddenType(revNum, "Y");
-	        System.out.println("updateHiddenType 결과 행 수: " + result);
+	        System.out.println("updateHiddenType 결과 행의 수: " + result);
 	        return result > 0;
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        return false;
 	    }
-	}
+	}//hideReview
+	
 	// Hiddn_type -checkBox
 	public boolean hideReviewsBatch(List<String> revNumStrings) {
 	    try {
@@ -51,16 +53,16 @@ public class ReviewService {
 	            int updated = rDAO.updateHiddenType(revNum, "Y");
 	            if (updated == 0) {
 	                return false;
-	            }
+	            }//if
 	        }
 	        return true;
 	    } catch(Exception e) {
 	        e.printStackTrace();
 	        return false;
 	    }
-	}
-	
-	//페이지네이션 - 출력
+	}//hideReviewsBatch
+///////////////////////////////////////////////////////	
+	//페이지네이션 - 출력(전체)
 	
     public PaginationResult getReviewListWithPagination(int currentPage) {
     	
@@ -71,7 +73,6 @@ public class ReviewService {
         List<ReviewDTO> reviewList = new ArrayList<>();
         PaginationDTO pagination = null;
 
-        
         try {
             int totalCount = rDAO.getTotalReviewCount();
             System.out.println("전체 리뷰수: " + totalCount);
@@ -94,16 +95,15 @@ public class ReviewService {
                     e.printStackTrace();
                     r.setName("복호화 실패");
                 }
-            }
+            }//for
         } catch (SQLException e) {
             e.printStackTrace();
             if (pagination == null) {
                 pagination = PaginationUtil.createPagination(1, pageSize, 0);
-            }
+            }//if
         }
-
         return new PaginationResult(reviewList, pagination);
-    }
+    }//getReviewListWithPagination
 
     public static class PaginationResult {
         private List<ReviewDTO> data;
@@ -121,7 +121,7 @@ public class ReviewService {
         public PaginationDTO getPagination() {
             return pagination;
         }
-    }
+    }//PaginationResult
     
     //검색
     public PaginationResult getFilteredReviewList(String hiddenType, int currentPage) throws SQLException {
@@ -130,6 +130,22 @@ public class ReviewService {
 
         List<ReviewDTO> reviewList = rDAO.searchReviewByPage(hiddenType, pagination);
 
+        String myKey = "asdf1234asdf1234"; // 복호화 키
+        DataDecryption dd = new DataDecryption(myKey);
+        
+        for (ReviewDTO r : reviewList) {
+        	
+            try {
+                String decryptedName = dd.decrypt(r.getName());
+                r.setName(decryptedName);
+                System.out.println("복호화된 이름: " + decryptedName);
+            } catch (Exception e) {
+                e.printStackTrace();
+                r.setName("복호화 실패");
+            }
+        }//for
+        
         return new PaginationResult(reviewList, pagination);
-    }
-}
+    }//getFilteredReviewList
+    
+}//class
