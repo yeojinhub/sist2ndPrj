@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
 <%
-    request.setAttribute("menu", "home");
+    	request.setAttribute("menu", "home");
 %>    
 <!DOCTYPE html>
 <html>	
