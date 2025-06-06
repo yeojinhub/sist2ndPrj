@@ -1,7 +1,7 @@
+<%@page import="user.mypage.question.QuestionService"%>
+<%@page import="user.account.login.LoginDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<%@ page import="user.mypage.question.QuestionService" %>
-<%@ page import="user.account.login.LoginDTO" %>
 
 <%
     request.setCharacterEncoding("UTF-8");

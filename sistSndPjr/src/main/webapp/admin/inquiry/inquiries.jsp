@@ -97,12 +97,6 @@ request.setAttribute("inquiryList", inquiryList); */
 		}   
     </style>
     <script>
-    $(function() {
-		$('#checkboxAll').change(function() {
-			var isChecked = $(this).prop('checked');
-			$('input[name="inquiryCheck"]').prop('checked',isChecked);
-		});// change
-    });// ready
     </script>
 </head>
 <body>
@@ -130,7 +124,6 @@ request.setAttribute("inquiryList", inquiryList); */
 				<table class="data-table">
 					<thead>
 						<tr>
-							<th><input type="checkbox" id="checkboxAll"/></th>
 							<th>번호</th>
 							<th>제목</th>
 							<th>작성자</th>
@@ -141,7 +134,6 @@ request.setAttribute("inquiryList", inquiryList); */
 					<tbody>
 					<c:forEach var="inquiry" items="${inquiryList}" >
 						<tr>
-         					<td><input type="checkbox" value="" name="inquiryCheck"/></td>
                             <td><c:out value="${inquiry.inq_num}" /></td>
                             <td class="onclickbtn" onclick="location.href='inquiry_detail.jsp?inq_num=${inquiry.inq_num}'"><c:out value="${inquiry.title}" /></td>
                             <td><c:out value="${inquiry.name}" /></td>
@@ -166,9 +158,6 @@ request.setAttribute("inquiryList", inquiryList); */
                 <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="last-page"><i class="fas fa-angle-double-right"></i></a>
 			</div>
 
-			<div class="button-group">
-				<button class="btn btn-delete">삭제</button>
-			</div>
 		</div>
 	</div>
 </body>

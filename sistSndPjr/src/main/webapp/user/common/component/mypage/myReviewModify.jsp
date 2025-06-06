@@ -1,6 +1,6 @@
-<%@page import="kr.co.sist.cipher.DataDecryption"%>
+<%@page import="user.mypage.review.ReviewDTO"%>
+<%@page import="user.mypage.review.ReviewService"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ page import="user.mypage.review.ReviewService"%>
 <%
     // POST 요청일 때: AJAX 결과용 텍스트만 찍고 종료
     if ("POST".equalsIgnoreCase(request.getMethod())) {
@@ -21,7 +21,6 @@
 %>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="user.mypage.review.ReviewDTO,user.mypage.review.ReviewService"%>
 <jsp:include page="../../jsp/external_file.jsp"/>
 
 <style>
@@ -35,15 +34,10 @@
 <%
     // GET 요청일 때: 폼 렌더링
     request.setCharacterEncoding("UTF-8");
-
-	// 급하게 복호화
-	String myKey = "asdf1234asdf1234";
-	DataDecryption dd = new DataDecryption(myKey);
-
     int revNum = Integer.parseInt(request.getParameter("rev_num"));
     ReviewDTO review = new ReviewService().searchReviewByNum(revNum);
     String areaName = review.getArea_name();
-    String author   = dd.decrypt(review.getUser_name());
+    String author   = review.getUser_name();
     java.sql.Date date = review.getInput_date();
     String content  = review.getContent();
 %>

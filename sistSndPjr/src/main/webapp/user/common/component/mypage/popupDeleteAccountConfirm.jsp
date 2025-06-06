@@ -40,7 +40,7 @@
 
 <script>
     function reloadPage() {
-        window.opener.location.href = '../../../main/user_main_page.jsp';
+        window.opener.location.href = '../../../user/user_main_page.jsp';
         window.close();
     }
 </script>

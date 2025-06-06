@@ -95,6 +95,27 @@ request.setAttribute("noticeList", noticeList); */
 		  background-color: #96b1ad;
 		}   
     </style>
+     <!-- jquery CDN -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
+    <script type="text/javascript">
+    $(function() {
+    	$('#checkAll').change(function () {
+            const isChecked = $(this).prop('checked');
+            $('input[name="noticeCheck"]').prop('checked', isChecked);
+        });
+    });//ready
+    
+    function submitDelete() {
+        const checked = $('input[name="noticeCheck"]:checked');
+        if (checked.length == 0) {
+            alert("삭제할 공지사항을 선택하세요.");
+            return;
+        }
+        if (confirm("선택한 공지사항을 삭제하시겠습니까?")) {
+            $('#deleteForm').submit();
+        }
+    }
+    </script>
 </head>
 <body>
     <div class="container-">
@@ -125,33 +146,41 @@ request.setAttribute("noticeList", noticeList); */
 			    <button type="submit" class="btn-search">검색</button>
 			</form>
 
-            <div class="content">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th><input type="checkbox" /></th>
-                            <th>번호</th>
-                            <th>제목</th>
-                            <th>작성자</th>
-                            <th>작성일</th>
-                            <th>상태</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="notice" items="${noticeList}">
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td><c:out value="${notice.not_num}" /></td>
-                                <td class="onclickbtn" onclick="location.href='notice_board_detail.jsp?not_num=${notice.not_num}'"><c:out value="${notice.title}" /></td>
-                                <td><c:out value="${notice.name}" /></td>
-                                <td><fmt:formatDate value="${notice.input_date}" pattern="yyyy-MM-dd" /></td>
-                                <td><c:out value="${notice.status_type}" /></td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-
+            <form id="deleteForm" action="notice_delete_process.jsp" method="post">
+			    <table class="data-table">
+			        <thead>
+			            <tr>
+			                <th><input type="checkbox" id="checkAll" /></th>
+			                <th>번호</th>
+			                <th>제목</th>
+			                <th>작성자</th>
+			                <th>작성일</th>
+			                <th>상태</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <c:forEach var="notice" items="${noticeList}">
+			                <tr>
+			                    <td><input type="checkbox" name="noticeCheck" value="${notice.not_num}" /></td>
+			                    <td><c:out value="${notice.not_num}" /></td>
+			                    <td class="onclickbtn" onclick="location.href='notice_board_detail.jsp?not_num=${notice.not_num}'">
+			                        <c:out value="${notice.title}" />
+			                    </td>
+			                    <td><c:out value="${notice.name}" /></td>
+			                    <td><fmt:formatDate value="${notice.input_date}" pattern="yyyy-MM-dd" /></td>
+			                    <td><c:out value="${notice.status_type}" /></td>
+			                </tr>
+			            </c:forEach>
+			        </tbody>
+			    </table>
+			
+			    <div class="button-group">
+			        <button class="btn btn-add" onclick="location.href='notice_board_write.jsp'" type="button">작성</button>
+			        <button class="btn btn-delete" type="button" onclick="submitDelete()">삭제</button>
+			    </div>
+			</form>
+		</div>
+    </div>
             <!-- 페이지네이션 -->
             <div class="pagination">
                 <!-- 첫 페이지로 이동 -->
@@ -165,12 +194,5 @@ request.setAttribute("noticeList", noticeList); */
                 <!-- 마지막 페이지로 이동 -->
                 <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="last-page"><i class="fas fa-angle-double-right"></i></a>
             </div>
-
-            <div class="button-group">
-                <button class="btn btn-add" onclick="location.href='notice_board_write.jsp'">작성</button>
-                <button class="btn btn-delete">삭제</button>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

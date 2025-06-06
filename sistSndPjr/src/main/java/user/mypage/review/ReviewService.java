@@ -1,21 +1,37 @@
 package user.mypage.review;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import user.util.PaginationDTO2;
+
+
+
 public class ReviewService {
-	public List<ReviewDTO> searchReviewsByEmail(String email){
+	public List<ReviewDTO> searchReviewsByEmailWithPaging(String email, PaginationDTO2 paging) {
         List<ReviewDTO> list = null;
-		ReviewDAO rdao = new ReviewDAO();
+        ReviewDAO dao = new ReviewDAO();
         try {
-			list = rdao.selectReviewByEmail(email);
+            list = dao.selectReviewByEmailWithPaging(email, paging.getStartRow(), paging.getEndRow());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+	
+	public int getTotalCnt(String email) {
+		int cnt = 0;
+		ReviewDAO rDAO = new ReviewDAO();
+		try {
+			cnt = rDAO.selectReviewCnt(email);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-        return list;
-    }
+		
+		return cnt;
+	}
 	
 	public ReviewDTO searchReviewByNum(int revNum) {
 		ReviewDTO rDTO = null;

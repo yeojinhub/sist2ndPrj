@@ -9,48 +9,82 @@ import java.util.List;
 
 import user.DBConnection.DBConnection;
 
+
+
 public class ReviewDAO {
-	public List<ReviewDTO> selectReviewByEmail(String email) throws SQLException {
+	
+	public List<ReviewDTO> selectReviewByEmailWithPaging(String email, int startRow, int endRow) throws SQLException {
 	    List<ReviewDTO> list = new ArrayList<>();
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 	    ResultSet rs = null;
-	    
+
 	    DBConnection dbCon = DBConnection.getInstance();
 
 	    try {
 	        conn = dbCon.getDbCon();
 
-	        StringBuilder selectQuery = new StringBuilder();
-	        selectQuery.append("SELECT r.rev_num, r.content, r.input_date, a.name AS area_name, ")
-	           .append("r.name as user_name FROM review r ")
-	           .append("JOIN area a ON r.area_num = a.area_num ")
-	           .append("WHERE r.acc_num = ( ")
-	           .append("    SELECT acc_num FROM account WHERE user_email = ? ")
+	        StringBuilder sql = new StringBuilder();
+	        sql.append("SELECT * FROM (")
+	           .append("    SELECT ROWNUM rnum, inner_query.* FROM (")
+	           .append("        SELECT r.rev_num, r.content, r.input_date, a.name AS area_name ")
+	           .append("          FROM review r ")
+	           .append("          JOIN area a ON r.area_num = a.area_num ")
+	           .append("         WHERE r.acc_num = (SELECT acc_num FROM account WHERE user_email = ?) ")
+	           .append("         ORDER BY r.input_date DESC ")
+	           .append("    ) inner_query ")
 	           .append(") ")
-	           .append("ORDER BY r.input_date DESC");
+	           .append("WHERE rnum BETWEEN ? AND ?");
 
-	        pstmt = conn.prepareStatement(selectQuery.toString());
+	        pstmt = conn.prepareStatement(sql.toString());
 	        pstmt.setString(1, email);
+	        pstmt.setInt(2, startRow);
+	        pstmt.setInt(3, endRow);
+
 	        rs = pstmt.executeQuery();
 
 	        while (rs.next()) {
-	            ReviewDTO rDTO = new ReviewDTO();
-	            rDTO.setRev_num(rs.getInt("rev_num"));
-	            rDTO.setContent(rs.getString("content"));
-	            rDTO.setUser_name(rs.getString("user_name"));
-	            rDTO.setInput_date(rs.getDate("input_date"));
-	            rDTO.setArea_name(rs.getString("area_name"));  // DTO에 맞게 이름 맞춰줘
-	            list.add(rDTO);
+	            ReviewDTO dto = new ReviewDTO();
+	            dto.setRev_num(rs.getInt("rev_num"));
+	            dto.setArea_name(rs.getString("area_name"));
+	            dto.setContent(rs.getString("content"));
+	            dto.setInput_date(rs.getDate("input_date"));
+	            list.add(dto);
 	        }
 
 	    } finally {
-	        dbCon.dbClose(conn, pstmt, rs);;
+	        dbCon.dbClose(conn, pstmt, rs);
 	    }
 
 	    return list;
 	}
 
+	
+	public int selectReviewCnt(String email) throws SQLException {
+        int cnt = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        DBConnection dbCon = DBConnection.getInstance();
+
+        try {
+            conn = dbCon.getDbCon();
+            String sql = "SELECT COUNT(*) FROM review WHERE acc_num = (SELECT acc_num FROM account WHERE user_email = ?)";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, email);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                cnt = rs.getInt(1);
+            }
+
+        } finally {
+            dbCon.dbClose(conn, pstmt, rs);
+        }
+
+        return cnt;
+    }
 	public ReviewDTO selectReviewByNum (int revNum) throws SQLException{
 		ReviewDTO rDTO = null;
 		Connection conn = null;
