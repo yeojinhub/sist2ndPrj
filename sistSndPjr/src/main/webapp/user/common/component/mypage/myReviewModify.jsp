@@ -1,3 +1,4 @@
+<%@page import="kr.co.sist.cipher.DataDecryption"%>
 <%@page import="user.mypage.review.ReviewDTO"%>
 <%@page import="user.mypage.review.ReviewService"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
@@ -37,7 +38,13 @@
     int revNum = Integer.parseInt(request.getParameter("rev_num"));
     ReviewDTO review = new ReviewService().searchReviewByNum(revNum);
     String areaName = review.getArea_name();
-    String author   = review.getUser_name();
+    String author = "";
+    DataDecryption dd = new DataDecryption("asdf1234asdf1234");
+    try {
+    	author   = dd.decrypt(review.getUser_name());
+    } catch (Exception e) {
+    	System.err.println("복호화 실패 사유 : " + e.getMessage() + " / " + review.getUser_name());
+    }//end try-catch
     java.sql.Date date = review.getInput_date();
     String content  = review.getContent();
 %>
@@ -90,14 +97,14 @@ $(function(){
 
     $.post(
       // AJAX용 URL (POST만 응답)
-      '${pageContext.request.contextPath}/common/component/mypage/myReviewModify.jsp?rev_num=' + revNum,
+      '${pageContext.request.contextPath}/user/common/component/mypage/myReviewModify.jsp?rev_num=' + revNum,
       { newContent: newContent }
     ).done(function(response) {
       if (response.trim() === 'OK') {
         alert('리뷰가 수정되었습니다.');
         // 상세 페이지 다시 로드
         window.parent.$('.content').load(
-          '${pageContext.request.contextPath}/common/component/mypage/myReviewDetail.jsp?rev_num=' + revNum
+          '${pageContext.request.contextPath}/user/common/component/mypage/myReviewDetail.jsp?rev_num=' + revNum
         );
       } else {
         alert('수정에 실패했습니다.');

@@ -223,11 +223,18 @@ pageContext.setAttribute("id", id);
 		
 		// 작성 버튼 처리 - 작성 (로그인)
 		$("#reviewSubmitPopup #btnWrite").on("click", function() {
-			// 유효성 검증 (비속어 등)
+			const text = $("#reviewText").val().trim();
 			
+			// 유효성 검증
+			// 1. 리뷰 텍스트창이 비어있을 경우
+			if (text == "" || text == null) {
+				alert('공란을 작성 할 수 없습니다.');
+				$('#reviewText').focus();
+				$("#reviewSubmitPopup").fadeOut();
+				return;
+			};// end if
 			
 			// ajax
-			const text = $("#reviewText").val().trim();
 			var param = { msg : text , id : ${id} };
 			
 			$.ajax({
@@ -274,6 +281,8 @@ pageContext.setAttribute("id", id);
 				success:function(jsonObj) {
 					if(jsonObj.successChk) {
 						alert('신고 완료하였습니다.');
+						var url = '../common/component/restarea/rest_area_review.jsp?id=' + ${param.id};
+		        		$('#tabContent').load(url);
 					} else {
 						alert('신고 실패하였습니다.\n잠시 후 다시 시도해주세요.');
 					}// end else-if

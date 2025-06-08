@@ -58,8 +58,8 @@ public class SMTP {
 		    String emailForLink = "";
 		    String sessionIdForLink = "";
 			try {
-				emailForLink = de.encrypt(email);
-				sessionIdForLink = de.encrypt(sessionId).substring(0,20);
+				emailForLink = de.encrypt(email).replace("+", "%2b");
+				sessionIdForLink = de.encrypt(sessionId).replace("+", "%2b");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}// end try-catch

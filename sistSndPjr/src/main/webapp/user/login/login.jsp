@@ -26,10 +26,12 @@ pageContext.setAttribute("remember", remember);
 	var remember = ${remember};
 
     $(function(){
+		// 아이디 기억하기
 		if (remember) {
 			$('#user_email').val('${email}');
 			$('#remember').prop('checked', true);
-		};
+			$('#pass').focus();
+		};// end if
     	
         $('#btnLogin').click(()=>{
 			var email = $('#user_email').val();

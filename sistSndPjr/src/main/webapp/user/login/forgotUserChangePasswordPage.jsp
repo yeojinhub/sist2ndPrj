@@ -14,7 +14,7 @@ String sessionId = request.getParameter("si");
 
 // 2. 접속한 sessionID와 일치 여부 확인.
 boolean sessionChk = false;
-String nowSessionId = de.encrypt(request.getSession().getId()).substring(0,20);
+String nowSessionId = de.encrypt(request.getSession().getId());
 if (!nowSessionId.equals(sessionId)) {
 	sessionChk = true;
 } // end if

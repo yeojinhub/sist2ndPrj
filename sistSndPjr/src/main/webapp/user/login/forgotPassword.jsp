@@ -22,7 +22,11 @@ $(function(){
 		};//end if
 		
 		// 2-2. 입력한 이메일의 형식이 이메일형식이 아닐때.
-		console.log('[2-2.입력한 이메일의 형식이 이메일형식이 아닐때.] 유효성 검사 미구현');
+		if(!($('#email')[0].checkValidity())) {
+			alert('올바른 이메일 형식이 아닙니다.');
+			$('#email').focus();
+			return;
+		};// end if
 		
 		// 3. 이메일 유무 확인 및 SMTP이용한 이메일 전송 처리
 		$.ajax({
