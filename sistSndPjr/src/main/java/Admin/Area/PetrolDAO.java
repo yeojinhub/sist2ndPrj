@@ -419,7 +419,7 @@ public class PetrolDAO {
 	 * @throws SQLException 예외처리
 	 */
 	public PetrolDTO selectOnePetrol(int num) throws SQLException {
-		System.out.println("DAO num : "+num);
+		System.out.println("DAO에서의 조회할 주유소 번호 : "+num);
 		
 		PetrolDTO petDTO = null;
 		
@@ -445,7 +445,7 @@ public class PetrolDAO {
 			.append("	LEFT JOIN area a ON a.area_num = p.area_num	")
 			.append("	where	p.pet_num=?	")
 			;
-			System.out.println("Query :"+selectOneQuery);
+			System.out.println("DAO에서의 실행할 쿼리문 :"+selectOneQuery);
 			
 			pstmt = con.prepareStatement(selectOneQuery.toString());
 
@@ -468,7 +468,7 @@ public class PetrolDAO {
 				petDTO.setHydro(rs.getString("hydro"));
 				petDTO.setOperationTime(rs.getString("operation_time"));
 			} // end while
-			System.out.println("DAO dto : "+petDTO);
+			System.out.println("DAO에서의 저장된 dto 값 : "+petDTO);
 		} finally {
 			// 7. 연결 끊기.
 			dbCon.dbClose(con, pstmt, rs);
@@ -556,6 +556,7 @@ public class PetrolDAO {
 			.append("	set gasoline=?, diesel=?, lpg=?, elect=?, hydro=?	")
 			.append("	where	pet_num=?	")
 			;
+			System.out.println("DAO에서의 실행할 쿼리문 :"+updateQuery);
 
 			pstmt = con.prepareStatement(updateQuery.toString());
 			
@@ -567,8 +568,12 @@ public class PetrolDAO {
 			pstmt.setString(5, petDTO.getHydro());
 			pstmt.setInt(6, petDTO.getPetNum());
 			
+			System.out.println("DAO에서의 저장된 dto 값 : "+petDTO);
+			
 			// 6. 쿼리문 수행 후 결과 얻기.
 			flagNum = pstmt.executeUpdate();
+			
+			System.out.println("DAO에서의 실행결과 번호 : "+flagNum);
 			
 		} finally {
 			// 7. 연결 끊기.

@@ -18,6 +18,8 @@ petDTO.setLpg(request.getParameter("lpg"));
 petDTO.setElect(request.getParameter("elect"));
 petDTO.setHydro(request.getParameter("hydro"));
 
+System.out.println("process에서의 저장된 dto 값 : "+petDTO);
+
 try {
 	petDTO.setPetNum(Integer.parseInt(request.getParameter("num")));
 	PetrolService petservice = new PetrolService();

@@ -139,7 +139,6 @@ public class PetrolService {
 	} //searchAllPetrol
 	
 	public PetrolDTO searchOnePetrol(int num) {
-		System.out.println("Service num : "+num);
 		
 		PetrolDTO petDTO = null;
 		
@@ -151,7 +150,8 @@ public class PetrolService {
 			se.printStackTrace();
 		} //end try catch
 		
-		System.out.println("Service dto : "+petDTO);
+		System.out.println("Service에서의 조회할 주유소 번호 : "+num);
+		System.out.println("Service에서의 저장된 dto 값  : "+petDTO);
 		
 		return petDTO;
 	} //searchOnePetrol
@@ -192,6 +192,9 @@ public class PetrolService {
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} //end try catch
+		
+		System.out.println("Service에서의 저장된 dto 값  : "+petDAO);
+		System.out.println("Service에서의 실행결과 값 : "+flag);		
 		
 		return flag;
 	} //modifyPetrol
