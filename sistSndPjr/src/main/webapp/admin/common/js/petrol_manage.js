@@ -157,6 +157,7 @@ function chkAddNull(){
 } // chkAddNull
 
 function chkModifyNull(){
+	var num = $("#num").val();
 	var gasoline = $("#gasoline").val();
 	var diesel = $("#diesel").val();
 	var lpg = $("#lpg").val();
@@ -190,6 +191,7 @@ function chkModifyNull(){
 	
 
 	var param = {
+		num: num,
 		gasoline: gasoline,
 		diesel: diesel,
 		lpg: lpg,
@@ -217,7 +219,7 @@ function setEdit(flag, param){
 	
 	if(flag == "m"){
 		url="petrol_modify_process.jsp";
-		modifyPetrolProcess(url);
+		modifyPetrolProcess(url, param);
 	} // end if
 	
 } //setEdit
