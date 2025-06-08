@@ -1,14 +1,62 @@
+<%@page import="java.util.LinkedHashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="Admin.Area.AreaDTO"%>
+<%@page import="Admin.Area.AreaService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String paramNum=request.getParameter("area_num");
+
+int num=0;
+try{
+	num=Integer.parseInt(paramNum);
+} catch(NumberFormatException nfe) {
+	nfe.printStackTrace();
+} //end try catch
+
+AreaService areaService = new AreaService();
+AreaDTO areaDTO = areaService.searchOneArea(num);
+request.setAttribute("areaDTO", areaDTO);
+		
+//Map으로 편의시설 정리
+Map<String, String> facilityMap = new LinkedHashMap<>();
+facilityMap.put("수유실", areaDTO.getFeed());
+facilityMap.put("수면실", areaDTO.getSleep());
+facilityMap.put("샤워실", areaDTO.getShower());
+facilityMap.put("세탁실", areaDTO.getLaundry());
+facilityMap.put("병원", areaDTO.getClinic());
+facilityMap.put("약국", areaDTO.getPharmacy());
+facilityMap.put("쉼터", areaDTO.getShelter());
+facilityMap.put("이발소", areaDTO.getSalon());
+facilityMap.put("농산물판매장", areaDTO.getAgricultural());
+facilityMap.put("경정비소", areaDTO.getRepair());
+facilityMap.put("화물차라운지", areaDTO.getTruck());
+facilityMap.put("추가시설", areaDTO.getTemp());
+
+request.setAttribute("facilityMap", facilityMap);
+
+%>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>관리자 대시보드</title>
-    <link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="/sistSndPjr/admin/script.js"></script>
+<meta charset="UTF-8">
+<title>관리자 대시보드</title>
+
+<!-- 사용자 정의 css 로드 -->
+<link rel="stylesheet" href="/sistSndPjr/admin/common/css/styles.css">
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- jQuery 로드 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- 사용자 정의 JS 로드 -->
+<script src="/sistSndPjr/admin/script.js"></script>
+<script src="/sistSndPjr/admin/common/js/area_manage.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -20,40 +68,43 @@
 			<div class="header">
 				<h1>휴게소 상세정보 수정</h1>
 			</div>
-			<div class="content">
 			
-				<div class="top-section">
-					<div class="left-area">
+			<form name="editFrm" id="editFrm" method="post">
+				<div class="content">
+					<div class="top-section">
+						<div class="left-area">
 						<!-- 기본 정보 -->
 						<div class="info-section">
 							<h3 style="margin-left: 20px;">상세정보</h3>
 							<hr style="border: 1px solid #ccc;">
+							<input type="hidden" name="num" id="num" value="${ areaDTO.area_num }" />
 							<div class="input-row">
-								<label class="info-label">휴게소명</label> <input type="text" value="홍천강(춘천)"
-									readonly>
+								<label class="info-label">휴게소명</label>
+								<input type="text" value="${ areaDTO.name }" readonly="readonly" />
 							</div>
 
 							<div class="input-row">
-								<label class="info-label">주소</label> <input type="text" value="강원도 홍천군 홍천읍 홍천강변로 123-4" readonly>
+								<label class="info-label">주소</label>
+								<input type="text" value="${ areaDTO.addr }" readonly="readonly" />
 							</div>
 
 							<div class="input-row">
-								<label class="info-label">전화번호</label> <input type="text"
-									class="small-input" value="033-435-1201" readonly> <label
-									class="info-label route-label">노선</label> <input type="text"
-									class="small-input" value="중앙선" readonly>
+								<label class="info-label">전화번호</label>
+								<input type="text" class="small-input" value="${ areaDTO.tel }" readonly="readonly" />
+								<label class="info-label route-label">노선</label>
+								<input type="text" class="small-input" value="${ areaDTO.route }" readonly="readonly" />
 							</div>
 
 							<div class="input-row">
-								<label class="info-label">위도</label> <input type="text"
-									class="small-input" value="37.712386" readonly> <label
-									class="info-label route-label">경도</label> <input type="text"
-									class="small-input" value="127.827719" readonly>
+								<label class="info-label">위도</label>
+								<input type="text" class="small-input" value="${ areaDTO.lat }" readonly="readonly" />
+								<label class="info-label route-label">경도</label>
+								<input type="text" class="small-input" value="${ areaDTO.lng }" readonly="readonly" />
 							</div>
 
 							<div class="input-row">
-								<label class="info-label">영업시간</label> <input type="text" value="00:00 - 23:59"
-									readonly>
+								<label class="info-label">영업시간</label>
+								<input type="text" value="${ areaDTO.operation_time }" readonly="readonly" />
 							</div>
 						</div>
 					</div>
@@ -64,30 +115,43 @@
 							<h3 style="margin-left: 20px;">편의시설</h3>
 							<hr style="border: 1px solid #ccc;">
 							<div class="checkbox-group">
-								<label class="facility-label"><input type="checkbox" class="label-checkbox"> 수유실</label>
-								<label class="facility-label"><input type="checkbox" class="label-checkbox"> 쉼터</label>
-								<label class="facility-label"><input type="checkbox" class="label-checkbox"> 수면실</label>
-								<label class="facility-label"><input type="checkbox" class="label-checkbox"> 이발소</label>
-								<label class="facility-label"><input type="checkbox" class="label-checkbox"> 샤워실</label>
-								<label class="facility-label"><input type="checkbox" class="label-checkbox"> 경정비소</label>
-								<label class="facility-label"><input type="checkbox" class="label-checkbox"> 세탁실</label>
-								<label class="facility-label"><input type="checkbox" class="label-checkbox"> 세차장</label>
-								<label class="facility-label"><input type="checkbox" class="label-checkbox"> 병원</label>
-								<label class="facility-label"><input type="checkbox" class="label-checkbox"> 약국</label>
-								<label class="facility-label"><input type="checkbox" class="label-checkbox"> 화물차라운지</label>
-								<label class="facility-label"><input type="checkbox" class="label-checkbox"><input type="text"></label>
+							<c:forEach var="entry" items="${ facilityMap }">
+								<label class="facility-label">
+								<c:choose>
+									<c:when test="${ entry.key eq '추가시설' and entry.value eq 'O' }">
+										<input type="checkbox" class="label-checkbox" name="tempChk" id="tempChk" value="O"
+										<c:if test="${ entry.value eq 'O' }">checked="checked"</c:if> disabled="disabled" />
+										<c:out value="${entry.key}" />
+									</c:when>
+									
+									<c:when test="${ entry.key eq '추가시설' and (entry.value eq 'X' or empty entry.value) }">
+										<input type="checkbox" class="label-checkbox" name="tempChk" id="tempChk" value="O"/>
+										<input type="text" name="tempText" id="tempText" placeholder="${entry.key}"  />
+									</c:when>
+									
+									<c:when test="${ entry.value eq 'O' }">
+										<input type="checkbox" class="label-checkbox" name="${entry.key}" checked="checked" disabled="disabled" />
+										<c:out value="${ entry.key }" />
+									</c:when>
+									
+									<c:otherwise>
+										<input type="checkbox" class="label-checkbox" name="${entry.key}" disabled="disabled" />
+										<c:out value="${ entry.key }" />
+									</c:otherwise>
+								</c:choose>
+								</label>
+							</c:forEach>
 							</div>
 						</div>
 					</div>
+					</div>
 				</div>
 
-			</div>
-
-			<div class="button-group-area-detail">
-				<button class="btn btn-edit">수정</button>
-				<button class="btn btn-back" onclick="location.href='areas.jsp'">취소</button>
-			</div>
-
+				<div class="button-group-area-detail">
+					<input type="button" class="btn btn-edit" id="btnAreaModify" value="수정" />
+					<input type="button" class="btn btn-back" id="btnAreaBack" value="뒤로" />
+				</div>
+			</form>
 		</div>
 	</div>
 </body>
