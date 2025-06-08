@@ -123,10 +123,11 @@ request.setAttribute("inquiryList", inquiryList); */
 			</form>
 
 			<div class="content">
+			<form action="inquiry_multiple_delete.jsp" method="post">
 				<table class="data-table">
 					<thead>
 						<tr>
-							<th><input type="checkbox" /></th>
+							<th><input type="checkbox" id="selectAll"/></th>
 							<th>번호</th>
 							<th>제목</th>
 							<th>작성자</th>
@@ -137,7 +138,7 @@ request.setAttribute("inquiryList", inquiryList); */
 					<tbody>
 					<c:forEach var="inquiry" items="${inquiryList}">
 						<tr onclick="location.href='inquiry_detail.jsp?inq_num=${inquiry.inq_num}'">
-         					<td><input type="checkbox" /></td>
+         					<td><input type="checkbox"  name="inq_nums" value="${inquiry.inq_num}" onclick="event.stopPropagation();" /></td>
                             <td><c:out value="${inquiry.inq_num}" /></td>
                             <td><c:out value="${inquiry.title}" /></td>
                             <td><c:out value="${inquiry.name}" /></td>
@@ -163,9 +164,19 @@ request.setAttribute("inquiryList", inquiryList); */
 			</div>
 
 			<div class="button-group">
-				<button class="btn btn-delete">삭제</button>
+				<button  type="submit" class="btn btn-delete">삭제</button>
 			</div>
+			</form>
 		</div>
 	</div>
 </body>
+
+    <script>
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checked = this.checked;
+        document.querySelectorAll('input[name="inq_nums"]').forEach(cb => cb.checked = checked);
+    });
+	</script>
+
+
 </html>
