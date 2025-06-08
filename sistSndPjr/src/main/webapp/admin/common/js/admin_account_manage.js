@@ -40,7 +40,7 @@ function setEdit(flag) {
 	/* if( confirm("정말 " +msg+ " 하시겠습니까?") ){ */
 	/* } //end if */
 
-} //setEdit
+} // setEdit
 
 function modifyAdminProcess(actionUrl) {
 
@@ -57,11 +57,11 @@ function modifyAdminProcess(actionUrl) {
 		success: function(response) {
 
 			if (response.success) {
-				// 사용자 계정 등록성공
+				// 관리자 계정 수정성공
 				alert("관리자 계정 수정성공");
 				location.href = "admin_account_list.jsp";
 			} else {
-				// 사용자 계정 등록실패
+				// 관리자 계정 수정실패
 				alert("관리자 계정 수정실패" + response.message);
 				history.back();
 			} //end if else

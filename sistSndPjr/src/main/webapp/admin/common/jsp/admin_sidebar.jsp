@@ -36,9 +36,9 @@
 			class="toggle-submenu"><i class="fas fa-map-marker-alt"></i>휴게소
 				관리 <i class="fas fa-chevron-down arrow"></i></a>
 			<ul class="submenu">
-				<li><a href="/sistSndPjr/admin/area/areas.jsp">상세정보 관리</a></li>
-				<li><a href="/sistSndPjr/admin/area/food.jsp">먹거리 관리</a></li>
-				<li><a href="/sistSndPjr/admin/area/petrol.jsp">주유소 관리</a></li>
+				<li><a href="/sistSndPjr/admin/area/area_list.jsp">상세정보 관리</a></li>
+				<li><a href="/sistSndPjr/admin/area/food_list.jsp">먹거리 관리</a></li>
+				<li><a href="/sistSndPjr/admin/area/petrol_list.jsp">주유소 관리</a></li>
 			</ul></li>
 	</ul>
 </div>
