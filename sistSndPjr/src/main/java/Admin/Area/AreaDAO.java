@@ -413,7 +413,7 @@ private static AreaDAO areaDAO;
 			// 6. 쿼리문 수행 후 결과 얻기.
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
+			if (rs.next()) {
 				areaDTO = new AreaDTO();
 				areaDTO.setArea_num(rs.getInt("area_num"));
 				areaDTO.setName(rs.getString("name"));
@@ -421,7 +421,7 @@ private static AreaDAO areaDAO;
 				areaDTO.setTel(rs.getString("tel"));
 				areaDTO.setRoute(rs.getString("route"));
 				areaDTO.setOperation_time(rs.getString("operation_time"));
-				areaDTO.setFeed(rs.getString("feed"));
+				areaDTO.setFeed(rs.getString("FEED"));
 				areaDTO.setSleep(rs.getString("sleep"));
 				areaDTO.setShower(rs.getString("shower"));
 				areaDTO.setLaundry(rs.getString("laundry"));
@@ -435,7 +435,9 @@ private static AreaDAO areaDAO;
 				areaDTO.setTemp(rs.getString("temp"));
 				areaDTO.setLat(rs.getString("lat"));
 				areaDTO.setLng(rs.getString("lng"));
-			} // end while
+			} // end if
+			
+			
 
 		} finally {
 			// 7. 연결 끊기.

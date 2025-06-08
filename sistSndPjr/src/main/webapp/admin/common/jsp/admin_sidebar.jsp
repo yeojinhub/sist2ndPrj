@@ -25,8 +25,8 @@
 			class="toggle-submenu"><i class="fas fa-clipboard-list"></i> 게시판
 				관리 <i class="fas fa-chevron-down arrow"></i></a>
 			<ul class="submenu">
-				<li><a href="/sistSndPjr/admin/board/notice_board.jsp">공지사항 관리</a></li>
-				<li><a href="/sistSndPjr/admin/board/faq_board_list.jsp">FAQ 관리</a></li>
+				<li><a href="/sistSndPjr/admin/board/notice/notice_board.jsp">공지사항 관리</a></li>
+				<li><a href="/sistSndPjr/admin/board/faq/faq_board.jsp">FAQ 관리</a></li>
 			</ul></li>
 		<li class="menu-item"><a href="/sistSndPjr/admin/inquiry/inquiries.jsp"><i
 				class="fas fa-question-circle"></i> 문의 관리</a></li>
