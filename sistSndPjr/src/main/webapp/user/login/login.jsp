@@ -40,6 +40,15 @@ pageContext.setAttribute("remember", remember);
 			
         });// click
         
+        $('#pass').keyup((evt)=>{
+			if(evt.which == 13) {
+				var email = $('#user_email').val();
+				var pass = $('#pass').val();
+
+				chknull(email, pass);
+			}// end if
+        });
+        
         $('#remember').change(function(){
         	remember = this.checked;
         });
