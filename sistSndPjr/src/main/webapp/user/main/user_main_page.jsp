@@ -1,5 +1,13 @@
+<%@page import="java.util.List"%>
+<%@page import="user.notice.NoticeDTO"%>
+<%@page import="user.notice.NoticeService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<jsp:useBean id="rDTO" class="user.util.RangeDTO" scope="page" />
+<jsp:setProperty name="rDTO" property="*" />
 <%
     	request.setAttribute("menu", "home");
 %>    
@@ -11,6 +19,35 @@
     <jsp:include page="../common/jsp/external_file.jsp"/>
 
 <style>
+
+table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+            margin-top: 30px;
+            color: #fff;
+        }
+
+        th, td {
+            padding: 10px 15px;
+            border-bottom: 2px solid #fff; /* 밑줄 */
+            text-align: left;
+        }
+
+        /* 밑줄만 있고 테두리 없음 */
+        table, th, td {
+            border: none;
+        }
+
+        /* td 밑에만 밑줄 */
+        td {
+            border-bottom: 2px solid #fff;
+        }
+        a {
+			cursor: pointer; /* 손가락 모양의 커서 */
+		}
+        
 
 
 </style>
@@ -38,10 +75,29 @@
     		myQuestion();
     	});// click
     	
-    	$('.notice').click(()=>{
+    	/* $('.notice').click(()=>{
 			location.href = 'user_board.jsp';
-    	});// click
-	
+    	});// click */
+    	
+    	$('.notice a').click(function(e) {
+    	    e.preventDefault(); // 기본 클릭 이벤트 방지
+    	    const notNum = $(this).closest('tr').data('num'); // 공지사항 번호 가져오기
+
+    	    // AJAX 요청으로 디테일 페이지 로드
+    	    $.ajax({
+    	        url: 'user_board.jsp', // user_board.jsp로 요청
+    	        method: 'GET',
+    	        data: { 'not_num': notNum }, // 공지사항 번호 전달
+    	        success: function(response) {
+    	            // 성공적으로 받아온 내용을 #content에 표시
+    	            $('#content').html(response);
+    	        },
+    	        error: function(xhr, status, error) {
+    	            console.error('디테일 페이지 로드 오류:', status, error);
+    	        }
+    	    });
+    	});
+    	
     });
     
 function myFavorite() {
@@ -53,7 +109,15 @@ function myQuestion() {
 	$('#hidden').val('question');
 	$('#frmHidden').submit();
 };
+
+
 </script>
+<%
+NoticeService ns = new NoticeService(); 
+List<NoticeDTO> NoticeList = ns.selectMainNotice(rDTO); 
+pageContext.setAttribute("noticeList", ns.selectMainNotice(rDTO));
+%>
+
 </head>
 <body>
  <div class="page-wrapper">
@@ -80,7 +144,39 @@ function myQuestion() {
             </div>
 
 			<div class="section section-red">
-            	<h3 id="sub-title3" class="notice">공지사항</h3><i class="bi bi-plus-square plus" onclick="location.href='user_board.jsp'"></i>
+
+			<table>
+			    <thead>
+			        <tr>
+			            <th><h3 id="sub-title3" class="notice">공지사항</h3></th>
+			            <th><i class="bi bi-plus-square plus" onclick="location.href='user_board.jsp'"></i><br></th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			        <c:if test="${ empty noticeList }">
+						<tr>
+							<td colspan="2">공지사항이 존재하지 않습니다.</td>
+						</tr>
+					</c:if>
+					<c:forEach var="nDTO" items="${ noticeList }" varStatus="i">
+					<tr data-num="${nDTO.not_num}">
+						<td>
+						<a onclick="location.href='user_board.jsp?not_num=${nDTO.not_num}'" >
+						    <c:choose>
+					            <c:when test="${fn:length(nDTO.title) > 20}">
+					                ${fn:substring(nDTO.title, 0, 20)}...
+					            </c:when>
+					            <c:otherwise>
+					                <c:out value="${nDTO.title}" />
+					            </c:otherwise>
+					        </c:choose>
+						</a> </td>
+						<td><fmt:formatDate value="${ nDTO.input_date }" pattern="yyyy-MM-dd"/> </td>
+					</tr>
+					</c:forEach>
+			    </tbody>
+			</table>
+            	
             </div> 
         </div>
     </div>

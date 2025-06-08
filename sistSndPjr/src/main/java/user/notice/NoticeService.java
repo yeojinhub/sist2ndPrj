@@ -113,4 +113,21 @@ public class NoticeService {
 		return nDTO;
 	}
 	
+	public List<NoticeDTO> selectMainNotice(user.util.RangeDTO rDTO){
+		
+		List<NoticeDTO> list = null;
+		
+		NoticeDAO nDAO = new NoticeDAO();
+		
+		
+		try {
+			list =  nDAO.selectMainNotice();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return list;
+	}
+	
 }

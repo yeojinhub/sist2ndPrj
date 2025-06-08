@@ -217,4 +217,47 @@ public class NoticeDAO {
 		
 	}
 	
+	public List<NoticeDTO> selectMainNotice()throws SQLException{
+		
+		List<NoticeDTO> list = new ArrayList<NoticeDTO>();
+		
+		DBConnection db = DBConnection.getInstance();
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		
+		try {
+			
+			con = db.getDbCon();
+			
+			StringBuilder selectMainNotice = new StringBuilder();
+			selectMainNotice
+			.append("	select not_num,title,input_date ")
+			.append("	from notice	")
+			.append("	order by not_num desc	")
+			.append("	fetch first 4 rows only	");
+			
+			pstmt = con.prepareStatement( selectMainNotice.toString() );
+			
+			rs = pstmt.executeQuery();
+			
+			NoticeDTO nDTO = null;
+			while( rs.next() ) {
+				nDTO = new NoticeDTO();
+				nDTO.setNot_num( rs.getInt("not_num"));
+				nDTO.setTitle( rs.getString("title"));
+				nDTO.setInput_date( rs.getDate("input_date"));
+				
+				list.add(nDTO);
+			}
+			
+		}finally {
+			db.dbClose(con, pstmt, rs);
+		}
+		
+		
+		return list;
+	}
+	
 }
