@@ -1,5 +1,6 @@
 package user.util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -43,7 +44,11 @@ public class SMTP {
 
 		try {
 		    Message message = new MimeMessage(session);
-		    message.setFrom(new InternetAddress(user));
+		    try {
+				message.setFrom(new InternetAddress(user,"모두쉼"));
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}// end try-catch
 		    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 		    message.setSubject("모두쉼 - 비밀번호 재설정"); // 메일 제목
 		    
@@ -51,14 +56,16 @@ public class SMTP {
 		    String myKey = "asdf1234asdf1234";
 		    DataEncryption de = new DataEncryption(myKey);
 		    String emailForLink = "";
+		    String sessionIdForLink = "";
 			try {
-				emailForLink = de.encrypt("test@test.kr");
+				emailForLink = de.encrypt(email);
+				sessionIdForLink = de.encrypt(sessionId).substring(0,20);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}// end try-catch
 		    
-		    String changePassLink = "http://"+domain+"/sistSndPjr/user/login/forgotUserChangePasswordPage.jsp?e="+emailForLink+"&si="+sessionId;
-		    String logoImgLink = "https://drive.google.com/u/0/drive-viewer/AKGpiha_XiIO3STkNDjcgU0T7JAX_AGFXRgKzWhNA0-sx_YKXFzPswNTsGdzwcOXnp3QmlbTEiq6lVTicaJlWnynOxQ7aQhX_r9X8nY=s2560";
+		    String changePassLink = "http://"+domain+"/sistSndPjr/user/login/forgotUserChangePasswordPage.jsp?e="+emailForLink+"&si="+sessionIdForLink;
+		    String logoImgLink = "https://i.ibb.co/DD4m6fyT/logo251.png";
 		    StringBuilder htmlBuilder = new StringBuilder();
 
 		    htmlBuilder.append("<div style='font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; border:1px solid #ececec; padding:30px;'>")

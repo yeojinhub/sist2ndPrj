@@ -3,6 +3,18 @@
 <%@page import="org.json.simple.JSONObject"%>
 <%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8" info=""%>
 <% 
+// 6-1. 비밀번호 재설정 남용 방지 플래그
+for (Cookie coo : request.getCookies()) {
+	if (coo.getName().equals("notAbuseEmailSend")) {
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("notAbuseEmailSend", true);
+		%> 
+		<%= jsonObj.toJSONString()%>
+		<%
+		return;
+	}// end if
+}// end for
+
 // 1. ajax로 보낸 파라미터(이메일) 받기
 String email = request.getParameter("email");
 
@@ -33,9 +45,18 @@ if (!emailChk) {
 String sessionId = request.getSession().getId();
 // 5-2. SMTP 객체 생성 및 이메일 전송
 SMTP smtp = SMTP.getInstance();
-boolean sendChk = smtp.sendChangePassMail("tgncosist2@gmail.com", sessionId, "localhost"); // 테스트(tgncosist2@gmail.com)
+boolean sendChk = smtp.sendChangePassMail(email, sessionId, "localhost"); //
 // 5-3. JSON에 이메일 전송 성공 여부 넣기
 jsonObj.put("sendChk", sendChk);
 
+// 6. 잦은 비밀번호 재설정 사용을 방지하기 위한 10분짜리 쿠키 생성
+Cookie cookie = null;
+if (sendChk) { // 비밀번호 재설정 이메일이 정상적으로 전송됬을 경우에만 쿠키 생성.
+	cookie = new Cookie("notAbuseEmailSend", "true");
+
+	cookie.setMaxAge(60*1); // 1분
+	cookie.setPath("/");
+	response.addCookie(cookie);
+}// end if
 %>
 <%= jsonObj.toJSONString() %>

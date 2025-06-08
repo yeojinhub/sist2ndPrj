@@ -1,15 +1,21 @@
+<%@page import="kr.co.sist.cipher.DataEncryption"%>
 <%@page import="kr.co.sist.cipher.DataDecryption"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
+String myKey = "asdf1234asdf1234";
+DataEncryption de = new DataEncryption(myKey);
+DataDecryption dd = new DataDecryption(myKey);
+
 // 1. 잘못된 접근 방지 위해 sessionID를 체크하자.
 // 1-1. QueryString으로 받아온 sessionId 변수.
 String sessionId = request.getParameter("si");
 
 // 2. 접속한 sessionID와 일치 여부 확인.
 boolean sessionChk = false;
-if (!request.getSession().getId().equals(sessionId)) {
+String nowSessionId = de.encrypt(request.getSession().getId()).substring(0,20);
+if (!nowSessionId.equals(sessionId)) {
 	sessionChk = true;
 } // end if
 
@@ -18,8 +24,6 @@ pageContext.setAttribute("sessionChk", sessionChk);
 
 // 4. 사용자에게 입력받은 이메일과 비밀번호 재설정을 요청한 이메일이 일치하는지 확인하기 위해 이메일 파라미터값 setAttribute
 // 4-1. 암호화된 이메일파라미터 복호화
-String myKey = "asdf1234asdf1234";
-DataDecryption dd = new DataDecryption(myKey);
 pageContext.setAttribute("email", request.getParameter("e"));
 pageContext.setAttribute("originalEmail", dd.decrypt(request.getParameter("e")));
 %>

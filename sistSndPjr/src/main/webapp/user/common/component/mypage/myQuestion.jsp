@@ -11,7 +11,7 @@
     request.setCharacterEncoding("UTF-8");
 
     LoginDTO lDTO = (LoginDTO) session.getAttribute("userData");
-    String email = lDTO.getUser_email();
+    String email = lDTO == null ? "" : lDTO.getUser_email();
 
     String type = request.getParameter("type");
     String keyword = request.getParameter("keyword");

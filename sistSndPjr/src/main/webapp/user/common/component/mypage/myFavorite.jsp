@@ -8,7 +8,7 @@
 <%
     request.setCharacterEncoding("UTF-8");
     LoginDTO lDTO = (LoginDTO) session.getAttribute("userData");
-    String email = lDTO.getUser_email();
+    String email = lDTO == null ? "" : lDTO.getUser_email();
 
     String pageParam = request.getParameter("page");
     int currentPage = 1;
