@@ -110,12 +110,24 @@ request.setAttribute("pageInfoText", pageInfoText);
 						<c:forEach var="foodDTO" items="${ areaList }" varStatus="i">
 						<tr>
 							<td><c:out value="${ pagination.totalCount - ((pagination.currentPage - 1) * pagination.pageSize + i.count) + 1 }" /></td>
+							<c:choose>
+							<c:when test="${ empty foodDTO.totalFood || foodDTO.totalFood==0 }">
+							<td onclick="location.href='food_add_frm.jsp'">
+								<c:out value="${ foodDTO.areaName }" />
+							</td>
+							<td onclick="location.href='food_add_frm.jsp'">
+								<c:out value="${ foodDTO.areaRoute }" />
+							</td>
+							</c:when>
+							<c:otherwise>
 							<td onclick="location.href='food_detail.jsp?areaNum=${ foodDTO.areaNum }'">
 								<c:out value="${ foodDTO.areaName }" />
 							</td>
 							<td onclick="location.href='food_detail.jsp?areaNum=${ foodDTO.areaNum }'">
 								<c:out value="${ foodDTO.areaRoute }" />
 							</td>
+							</c:otherwise>
+							</c:choose>
 							<td><c:out value="${ foodDTO.totalFood }" /></td>
 							<td><c:out value="${ foodDTO.operationTime }" /></td>
 						</tr>
