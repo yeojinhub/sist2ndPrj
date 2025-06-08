@@ -223,7 +223,7 @@ body {
 div.notice-div {
 	padding: 40px 0px;
 	margin: 45px 120px;
-	background-color: rgb(195,209,255,0.6);
+	background-color: #96b1ad;
 	font-weight: bold;
 	box-shadow: 0 4px 8px rgb(0,0,0,0.2);
 }
@@ -649,3 +649,66 @@ table td input[type="text"].input-num {
    width: 60%;
 }
 
+
+
+/* 추가된 css 0605*/
+
+/* quilleditor */
+#quilleditor {
+	background-color: #fff !important;
+	border: 1px solid #ccc;
+	padding: 10px;
+}
+
+.ql-toolbar {
+	background-color: #ECECEC !important;
+	border: 1px solid #ccc;
+}
+
+.ql-container {
+	background-color: #fff !important;
+	height: 500px !important;
+	font-size: 16px;
+}
+
+/* checkbox-container */
+.radio-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 80px;
+	width: 100%;
+}
+
+.radio-container label {
+	font-size: 16px;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.radio-container input[type="radio"] {
+	margin-right: 15px;
+}
+
+/* input  */
+.input-style {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+	font-size: 16px;
+	color: #333;
+	transition: all 0.3s ease;
+}
+
+.input-style:focus {
+	border-color: #4CAF50;
+	background-color: #fff;
+	outline: none;
+}
+
+/* 제목 입력창 스타일 */
+.title {
+	width: 100%;
+}

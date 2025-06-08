@@ -1,0 +1,158 @@
+/* ===== 타이틀 스타일 ===== */
+.line_orange {
+  margin: 10px 20px 30px 20px;
+  width: 5%;
+  height: 5px;
+  background-color: #FF5518;
+  border: none;
+}
+.page-title {
+  margin: 40px 20px 20px 20px;
+}
+
+.main-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.sub-title {
+  font-size: 18px;
+}
+
+
+/* ===== 안내문 박스 ===== */
+/* .notice-box {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 6px;
+  margin: 0 20px 30px 20px;
+}
+ */
+.notice-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: #1b66c9;  /* 요청한 푸른색으로 변경 */
+}
+
+
+.notice-list {
+  padding-left: 20px;
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.notice-list li {
+  margin-bottom: 6px;
+  list-style-type: disc;
+}
+
+/* ===== 검색 필터 박스 ===== */
+/* .search-box {
+  margin: 0 20px 30px 20px;
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 6px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  background-color: #f9f9f9;
+}
+
+.search-box label {
+  font-weight: bold;
+  margin-left: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-box .divider-label {
+  margin-left: 30px;
+}
+
+.search-box select,
+.search-box input[type="text"] {
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-box input[type="text"] {
+  width: 200px;
+}
+
+.search-box button {
+  margin-left: auto;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+ */
+/* ===== 편의시설 정보 범례 ===== */
+.facility-legend {
+  margin: 10px 20px 20px 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 16px;
+  background-color: #f9f9f9;
+}
+
+.legend-title {
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  font-size: 14px;
+}
+
+.legend-items span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.circle.green  { background-color: #27ae60; }   /* 수면실 */
+.circle.blue   { background-color: #2980b9; }   /* 샤워실 */
+.circle.purple { background-color: #8e44ad; }   /* 세탁실 */
+.circle.gray   { background-color: #7f8c8d; }   /* 쉼터 */
+.circle.brown  { background-color: #a0522d; }   /* 이발소 */
+.circle.pink   { background-color: #fd79a8; }   /* 수유실 */
+.circle.red    { background-color: #e74c3c; }   /* 병원 */
+.circle.yellow { background-color: #f1c40f; }   /* 약국 */
+.circle.orange { background-color: #e67e22; }   /* 농산물판매장 */
+
+/* 선택적으로 헤더 글자 정렬 등을 보완 */
+/* .user_table th {
+  background-color: #f5f6fa;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  vertical-align: middle;
+}
+ */
+.user_table td {
+  font-size: 14px;
+  text-align: center;
+}
+
+
+

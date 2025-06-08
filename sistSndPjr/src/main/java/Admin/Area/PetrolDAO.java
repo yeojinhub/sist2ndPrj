@@ -195,6 +195,7 @@ public class PetrolDAO {
 			while( rs.next() ) {
 				petDTO = new PetrolDTO();
 				petDTO.setAreaNum(rs.getInt("area_num"));
+				petDTO.setPetNum(rs.getInt("pet_num"));
 				petDTO.setAreaName(rs.getString("name"));
 				petDTO.setAreaRoute(rs.getString("route"));
 				petDTO.setGasoline(rs.getString("gasoline"));
@@ -223,53 +224,51 @@ public class PetrolDAO {
 	 * @throws SQLException 예외처리
 	 */
 	public int getSearchPetrolCount(String searchType, String searchKeyword) throws SQLException {
-		int totalCount = 0;
-		
-		DBConnection dbCon = DBConnection.getInstance();
-		
-		ResultSet rs = null;
-		PreparedStatement pstmt = null;
-		Connection con = null;
-		
-		try {
-			con = dbCon.getDbCon();
-			
-			StringBuilder countQuery = new StringBuilder();
-			countQuery
-			.append("	SELECT COUNT(*) as total_count	")
-			.append("	FROM petrol	")
-			;
-			
-			// 검색어가 null이 아닌 경우에만 조건 추가 (PaginationUtil에서 이미 처리됨)
-			if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
-				switch (searchType) {
-					case "name":
-						countQuery.append("	where name LIKE ?	");
-						break;
-					case "route":
-						countQuery.append("	where route LIKE ?	");
-						break;
-				} //end switch
-			} //end if
-			
-			pstmt = con.prepareStatement(countQuery.toString());
-			
-			if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
-				pstmt.setString(1, "%" + searchKeyword + "%");
-			} //end if
-			
-			rs = pstmt.executeQuery();
-			
-			if (rs.next()) {
-				totalCount = rs.getInt("total_count");
-			} //end if
-			
-		} finally {
-			dbCon.dbClose(con, pstmt, rs);
-		} //end try finally
-		
-		return totalCount;
-	} //getSearchPetrolCount
+	    int totalCount = 0;
+	    
+	    DBConnection dbCon = DBConnection.getInstance();
+	    ResultSet rs = null;
+	    PreparedStatement pstmt = null;
+	    Connection con = null;
+	    
+	    try {
+	        con = dbCon.getDbCon();
+	        
+	        StringBuilder countQuery = new StringBuilder();
+	        countQuery
+	            .append("SELECT COUNT(*) AS total_count ")  // PETROL 기준 카운트
+	            .append("FROM petrol p ")
+	            .append("INNER JOIN area a ON p.area_num = a.area_num ");  // 필수 조인 추가
+
+	        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+	            switch (searchType) {
+	                case "name":
+	                    countQuery.append("WHERE a.name LIKE ? ");  // AREA 테이블 컬럼 사용
+	                    break;
+	                case "route":
+	                    countQuery.append("WHERE a.route LIKE ? ");  // AREA 테이블 컬럼 사용
+	                    break;
+	            }
+	        }
+
+	        pstmt = con.prepareStatement(countQuery.toString());
+
+	        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+	            String keyword = searchKeyword.trim();
+	            pstmt.setString(1, "%" + keyword + "%");
+	        }
+	        
+	        rs = pstmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            totalCount = rs.getInt("total_count");
+	        }
+	    } finally {
+	        dbCon.dbClose(con, pstmt, rs);
+	    }
+	    
+	    return totalCount;
+	}
 	
 	/**
 	 * 검색 조건에 따른 주유소 목록을 페이지네이션으로 조회합니다. (Oracle 12c 이상)

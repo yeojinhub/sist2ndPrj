@@ -132,76 +132,74 @@ public class FoodDAO {
 	 * @throws SQLException 예외처리
 	 */
 	public List<FoodDTO> searchAreasByPage(String searchType, String searchKeyword, PaginationDTO pagination) throws SQLException {
-		List<FoodDTO> areaList = new ArrayList<FoodDTO>();
-		
-		DBConnection dbCon = DBConnection.getInstance();
-		
-		ResultSet rs = null;
-		PreparedStatement pstmt = null;
-		Connection con = null;
-		
-		try {
-			con = dbCon.getDbCon();
-			
-			StringBuilder searchQuery = new StringBuilder();
-			searchQuery
-			.append("	SELECT * FROM (	")
-			.append("		SELECT ROWNUM as rnum, area_num, name, route, total_food, operation_time	")
-			.append("		FROM (	")
-			.append("			SELECT a.area_num, a.name, a.route,	")
-			.append("				COUNT(f.food_num) as total_food,	")
-			.append("				a.operation_time	")
-			.append("			FROM area a	")
-			;
-			
-			// 검색어가 null이 아닌 경우에만 조건 추가 (PaginationUtil에서 이미 처리됨)
-			if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
-				switch (searchType) {
-					case "name":
-						searchQuery.append("	where name LIKE ?	");
-						break;
-					case "route":
-						searchQuery.append("	where route LIKE ?	");
-						break;
-				} //end switch
-			} //end if
-			
-			searchQuery
-			.append("			LEFT JOIN food f ON f.area_num = a.area_num	")
-			.append("			group by a.area_num, a.name, a.route, a.operation_time	")
-			.append("			ORDER BY a.route ASC, a.area_num DESC	")
-			.append("		) WHERE ROWNUM <= ?	")
-			.append("	) WHERE rnum >= ?	");
-			
-			pstmt = con.prepareStatement(searchQuery.toString());
-			
-			int paramIndex = 1;
-			if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
-				pstmt.setString(paramIndex++, "%" + searchKeyword + "%");
-			} //end if
-			pstmt.setInt(paramIndex++, pagination.getEndRowNum());
-			pstmt.setInt(paramIndex, pagination.getStartRowNum());
-			
-			rs = pstmt.executeQuery();
-			
-			FoodDTO areaDTO = null;
-			while( rs.next() ) {
-				areaDTO = new FoodDTO();
-				areaDTO.setAreaNum(rs.getInt("area_num"));
-				areaDTO.setAreaName(rs.getString("name"));
-				areaDTO.setAreaRoute(rs.getString("route"));
-				areaDTO.setTotalFood(rs.getInt("total_food"));
-				areaDTO.setOperationTime(rs.getString("operation_time"));
-				
-				areaList.add(areaDTO);
-			} //end while
-			
-		} finally {
-			dbCon.dbClose(con, pstmt, rs);
-		} //end try finally
-		
-		return areaList;
-	} //searchAreasByPage
+	    List<FoodDTO> areaList = new ArrayList<FoodDTO>();
+	    
+	    DBConnection dbCon = DBConnection.getInstance();
+	    
+	    ResultSet rs = null;
+	    PreparedStatement pstmt = null;
+	    Connection con = null;
+	    
+	    try {
+	        con = dbCon.getDbCon();
+	        
+	        StringBuilder searchQuery = new StringBuilder();
+	        searchQuery
+	            .append("SELECT * FROM (")
+	            .append("    SELECT ROWNUM as rnum, area_num, name, route, total_food, operation_time")
+	            .append("    FROM (")
+	            .append("        SELECT a.area_num, a.name, a.route,")
+	            .append("            COUNT(f.food_num) as total_food,")
+	            .append("            a.operation_time")
+	            .append("        FROM area a")
+	            .append("        LEFT JOIN food f ON f.area_num = a.area_num");
+	        
+	        // 검색어가 null이 아닌 경우에만 조건 추가
+	        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+	            switch (searchType) {
+	                case "name":
+	                    searchQuery.append(" WHERE a.name LIKE ?");
+	                    break;
+	                case "route":
+	                    searchQuery.append(" WHERE a.route LIKE ?");
+	                    break;
+	            }
+	        }
+	        
+	        searchQuery
+	            .append("        GROUP BY a.area_num, a.name, a.route, a.operation_time")
+	            .append("        ORDER BY a.route ASC, a.area_num DESC")
+	            .append("    ) WHERE ROWNUM <= ?")
+	            .append(") WHERE rnum >= ?");
+	        
+	        pstmt = con.prepareStatement(searchQuery.toString());
+	        
+	        int paramIndex = 1;
+	        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+	            pstmt.setString(paramIndex++, "%" + searchKeyword + "%");
+	        }
+	        pstmt.setInt(paramIndex++, pagination.getEndRowNum());
+	        pstmt.setInt(paramIndex, pagination.getStartRowNum());
+	        
+	        rs = pstmt.executeQuery();
+	        
+	        FoodDTO areaDTO = null;
+	        while(rs.next()) {
+	            areaDTO = new FoodDTO();
+	            areaDTO.setAreaNum(rs.getInt("area_num"));
+	            areaDTO.setAreaName(rs.getString("name"));
+	            areaDTO.setAreaRoute(rs.getString("route"));
+	            areaDTO.setTotalFood(rs.getInt("total_food"));
+	            areaDTO.setOperationTime(rs.getString("operation_time"));
+	            
+	            areaList.add(areaDTO);
+	        }
+	    } finally {
+	        dbCon.dbClose(con, pstmt, rs);
+	    }
+	    
+	    return areaList;
+	}
 	
 	/**
 	 * 검색 조건에 따른 휴게소 수를 조회합니다.
