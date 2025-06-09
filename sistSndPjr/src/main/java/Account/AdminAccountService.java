@@ -6,6 +6,8 @@ import java.util.List;
 
 import Pagination.PaginationDTO;
 import Pagination.PaginationUtil;
+import kr.co.sist.cipher.DataDecryption;
+import kr.co.sist.cipher.DataEncryption;
 
 public class AdminAccountService {
 	
@@ -104,6 +106,7 @@ public class AdminAccountService {
             // 검색 조건과 페이지에 해당하는 사용자 목록 조회
             userList = accountDAO.searchUsersByPage(searchType, searchKeyword, pagination);
             
+            
         } catch (SQLException se) {
             se.printStackTrace();
             // 오류 발생 시 빈 페이지네이션 생성
@@ -141,9 +144,15 @@ public class AdminAccountService {
 		
 		AdminAccountDAO userDAO=AdminAccountDAO.getInstance();
 		
+		DataDecryption dd = new DataDecryption("asdf1234asdf1234");
+		
 		try {
 			userDTO = userDAO.selectOneUser(accNum);
-		} catch (SQLException e) {
+			
+			userDTO.setName(dd.decrypt(userDTO.getName()));
+			userDTO.setTel(dd.decrypt(userDTO.getTel()));
+			userDTO.setUser_email(dd.decrypt(userDTO.getUser_email()));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}  //end try catch
 		
@@ -160,6 +169,19 @@ public class AdminAccountService {
 		boolean flag = false;
 		
 		AdminAccountDAO userDAO = AdminAccountDAO.getInstance();
+		
+		String myKey = "asdf1234asdf1234";
+		DataEncryption de = new DataEncryption(myKey);
+		try {
+			// 일방향 암호화 (패스워드)
+			userDTO.setPass(DataEncryption.messageDigest("SHA-256", userDTO.getPass()));
+			// 양방향 암호화 (나머지)
+			userDTO.setUser_email(de.encrypt(userDTO.getUser_email()));
+			userDTO.setName(de.encrypt(userDTO.getName()));
+			userDTO.setTel(de.encrypt(userDTO.getTel()));
+		} catch (Exception e) {
+			System.err.println("복호화 실패 사유 : " + e.getMessage() + " / 원본 : " + userDTO.toString());
+		}// end try-catch
 		
 		try {
 			userDAO.insertUser(userDTO);
@@ -180,6 +202,19 @@ public class AdminAccountService {
 		boolean flag = false;
 		
 		AdminAccountDAO userDAO = AdminAccountDAO.getInstance();
+		
+		String myKey = "asdf1234asdf1234";
+		DataEncryption de = new DataEncryption(myKey);
+		try {
+			// 일방향 암호화 (패스워드)
+			userDTO.setPass(DataEncryption.messageDigest("SHA-256", userDTO.getPass()));
+			// 양방향 암호화 (나머지)
+			userDTO.setUser_email(de.encrypt(userDTO.getUser_email()));
+			userDTO.setName(de.encrypt(userDTO.getName()));
+			userDTO.setTel(de.encrypt(userDTO.getTel()));
+		} catch (Exception e) {
+			System.err.println("복호화 실패 사유 : " + e.getMessage() + " / 원본 : " + userDTO.toString());
+		}// end try-catch
 		
 		try {
 			userDAO.updateUser(userDTO);

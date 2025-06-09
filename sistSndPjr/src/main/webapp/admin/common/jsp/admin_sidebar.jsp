@@ -37,7 +37,7 @@
 				관리 <i class="fas fa-chevron-down arrow"></i></a>
 			<ul class="submenu">
 				<li><a href="/sistSndPjr/admin/area/area_list.jsp">상세정보 관리</a></li>
-				<li><a href="/sistSndPjr/admin/area/food_list.jsp">먹거리 관리</a></li>
+				<li><a href="/sistSndPjr/admin/area/food_witharea_list.jsp">먹거리 관리</a></li>
 				<li><a href="/sistSndPjr/admin/area/petrol_list.jsp">주유소 관리</a></li>
 			</ul></li>
 	</ul>
