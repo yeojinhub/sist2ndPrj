@@ -455,6 +455,114 @@ public class FoodDAO {
 	} //selectAllFood
 	
 	/**
+	 * 단일 음식 조회
+	 * @param num 조회할 음식 번호
+	 * @return fDTO 조회한 음식 정보
+	 * @throws SQLException
+	 */
+	public FoodDTO selectOneFood(int num) throws SQLException {
+		FoodDTO fDTO = null;
+		
+		DBConnection dbCon = DBConnection.getInstance();
+
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+
+		try {
+			// 1. JNDI 사용객체 생성.
+			// 2. DBCP에서 연결객체 얻기(DataSource).
+			// 3. Connection 얻기.
+			con = dbCon.getDbCon();
+
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder selectOneQuery = new StringBuilder();
+			selectOneQuery
+			.append("	select	f.food_num, f.name as food_name, f.price,	")
+			.append("	a.area_num, a.name as area_name, a.route	")
+			.append("	from	food f	")
+			.append("	left join area a on a.area_num=f.area_num	")
+			.append("	where	food_num=?	")
+			;
+			
+			pstmt = con.prepareStatement(selectOneQuery.toString());
+
+			// 5. bind 변수에 값 할당
+			pstmt.setInt(1, num);
+			
+			// 6. 쿼리문 수행 후 결과 얻기.
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				fDTO = new FoodDTO();
+				fDTO.setFoodNum(rs.getInt("food_num"));
+				fDTO.setFoodName(rs.getString("food_name"));
+				fDTO.setFoodPrice(rs.getString("price"));
+				fDTO.setAreaNum(rs.getInt("area_num"));
+				fDTO.setAreaName(rs.getString("area_name"));
+				fDTO.setAreaRoute(rs.getString("route"));
+			} // end if
+
+		} finally {
+			// 7. 연결 끊기.
+			dbCon.dbClose(con, pstmt, rs);
+		} // end try finally
+		
+		return fDTO;
+	} //selectOneFood
+	
+	/**
+	 * 음식 수정
+	 * @param fDTO 사용자로부터 입력받은 수정할 음식 정보
+	 * @return flagNum 성공시 1, 실패시 0 반환
+	 * @throws SQLException 예외처리
+	 */
+	public int updateFood(FoodDTO fDTO) throws SQLException {
+		int flagNum = 0;
+		
+		DBConnection dbCon = DBConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			// 1. JNDI 사용객체 생성.
+			// 2. DBCP에서 연결객체 얻기(DataSource).
+			// 3. Connection 얻기.
+			con = dbCon.getDbCon();
+			
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder updateQuery = new StringBuilder();
+			updateQuery
+			.append("	update	food	")
+			.append("	set name=?, price=?	")
+			.append("	where	food_num=?	")
+			;
+			System.out.println("DAO에서의 실행할 쿼리문 :"+updateQuery);
+
+			pstmt = con.prepareStatement(updateQuery.toString());
+			
+			// 5. bind 변수에 값 할당
+			pstmt.setString(1, fDTO.getFoodName());
+			pstmt.setString(2, fDTO.getFoodPrice());
+			pstmt.setInt(3, fDTO.getFoodNum());
+			
+			System.out.println("DAO에서의 저장된 dto 값 : "+fDTO);
+			
+			// 6. 쿼리문 수행 후 결과 얻기.
+			flagNum = pstmt.executeUpdate();
+			
+			System.out.println("DAO에서의 실행결과 번호 : "+flagNum);
+			
+		} finally {
+			// 7. 연결 끊기.
+			dbCon.dbClose(con, pstmt, null);
+		} //end try finally
+		
+		return flagNum;
+	} //updateFood
+	
+	/**
 	 * 음식 삭제
 	 * @param foodNumList 삭제할 음식 번호 리스트
 	 * @return flagNum 성공시 1, 실패시 0 반환

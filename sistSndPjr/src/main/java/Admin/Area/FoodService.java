@@ -160,6 +160,42 @@ public class FoodService {
 	} //searchAllFood
 	
 	/**
+	 * 단일 먹거리 조회
+	 * @param num 조회할 음식번호
+	 * @return fDTO 단일 먹거리 정보
+	 */
+	public FoodDTO searchOneFood(int num) {
+		FoodDTO fDTO = null;
+		
+		FoodDAO fDAO = FoodDAO.getInstance();
+		
+		try {
+			fDTO = fDAO.selectOneFood(num);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} //end try catch
+		
+		return fDTO;
+	} // searchOneFood
+	
+	public boolean modifyFood(FoodDTO fDTO) {
+		boolean flag = false;
+		
+		FoodDAO fDAO = FoodDAO.getInstance();
+		
+		try {
+			fDAO.updateFood(fDTO);
+			flag = true;
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} //end try catch
+		
+		System.out.println("Service에서의 음식 DTO 값 : "+fDTO);
+		
+		return flag;
+	} //modifyFood
+	
+	/**
 	 * 음식 상세정보 삭제
 	 * @param foodNumList 삭제할 음식 번호 리스트
 	 * @return flag 성공시 true, 실패시 false 반환
@@ -167,10 +203,10 @@ public class FoodService {
 	public boolean removeFood(List<Integer> foodNumList) {
 		boolean flag = false;
 		
-		FoodDAO foodDAO = FoodDAO.getInstance();
+		FoodDAO fDAO = FoodDAO.getInstance();
 		
 		try {
-			foodDAO.deleteFood(foodNumList);
+			fDAO.deleteFood(foodNumList);
 			flag = true;
 		} catch (SQLException se) {
 			se.printStackTrace();
