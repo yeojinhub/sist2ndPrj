@@ -107,7 +107,15 @@ request.setAttribute("noticeList", noticeList); */
 		.status-radio input[type="radio"] {
 		  margin-right: 5px;
 		  transform: scale(1.1);
-		}  
+		} 
+		
+		.pagination a.active {
+		font-weight: bold;
+		color: white;
+		background-color: #6a9c99;
+		padding: 5px 10px;
+		border-radius: 5px;
+	}
     </style>
 </head>
 <body>
@@ -167,19 +175,29 @@ request.setAttribute("noticeList", noticeList); */
                 </table>
             </div>
 
-            <!-- 페이지네이션 -->
-            <div class="pagination">
-                <!-- 첫 페이지로 이동 -->
-                <a href="?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="first-page"><i class="fas fa-angle-double-left"></i></a>
-
-                <!-- 페이지 번호 표시 -->
-                <c:forEach var="i" begin="1" end="${pagination.totalPages}">
-                    <a href="?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="<c:if test='${i == pagination.currentPage}'>active</c:if>">${i}</a>
-                </c:forEach>
-
-                <!-- 마지막 페이지로 이동 -->
-                <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="last-page"><i class="fas fa-angle-double-right"></i></a>
-            </div>
+			<div class="pagination">
+			    <!-- 첫 페이지로 이동 -->
+			    <a href="?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="first-page">
+			        <i class="fas fa-angle-double-left"></i>
+			    </a>
+			    <c:if test="${pagination.hasPrevious}">
+			        <a href="?page=${pagination.startPage - 1}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
+			            <i class="fas fa-angle-left"></i>
+			        </a>
+			    </c:if>
+			    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+			        <a href="?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" 
+			           class="${i == pagination.currentPage ? 'active' : ''}">${i}</a>
+			    </c:forEach>
+			    <c:if test="${pagination.hasNext}">
+			        <a href="?page=${pagination.endPage + 1}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
+			            <i class="fas fa-angle-right"></i>
+			        </a>
+			    </c:if>
+			    <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="last-page">
+			        <i class="fas fa-angle-double-right"></i>
+			    </a>
+			</div>
 
             <div class="button-group">
                 <button type="button" class="btn btn-add" onclick="location.href='notice_board_write.jsp'">작성</button>

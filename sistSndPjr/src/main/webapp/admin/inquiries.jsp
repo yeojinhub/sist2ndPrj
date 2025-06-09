@@ -98,7 +98,15 @@ request.setAttribute("inquiryList", inquiryList); */
 		  cursor: pointer;
 		  color:#ffffff;
 		  background-color: #96b1ad;
-		}   
+		}
+		
+		.pagination a.active {
+		font-weight: bold;
+		color: white;
+		background-color: #6a9c99;
+		padding: 5px 10px;
+		border-radius: 5px;
+	}  
     </style>
 </head>
 <body>
@@ -151,16 +159,31 @@ request.setAttribute("inquiryList", inquiryList); */
 			</div>
 
 			<div class="pagination">
-                <!-- 첫 페이지로 이동 -->
-                <a href="?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="first-page"><i class="fas fa-angle-double-left"></i></a>
-
-                <!-- 페이지 번호 표시 -->
-                <c:forEach var="i" begin="1" end="${pagination.totalPages}">
-                    <a href="?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="<c:if test='${i == pagination.currentPage}'>active</c:if>">${i}</a>
-                </c:forEach>
-
-                <!-- 마지막 페이지로 이동 -->
-                <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="last-page"><i class="fas fa-angle-double-right"></i></a>
+			    <!-- 첫 페이지로 이동 -->
+			    <a href="?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
+			        <i class="fas fa-angle-double-left"></i>
+			    </a>
+			
+			    <!-- 이전 그룹으로 이동 -->
+			    <c:if test="${pagination.hasPrevious}">
+			        <a href="?page=${pagination.startPage - 1}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
+			            <i class="fas fa-angle-left"></i>
+			        </a>
+			    </c:if>
+			    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+			        <a href="?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" 
+			           class="${i == pagination.currentPage ? 'active' : ''}">
+			           ${i}
+			        </a>
+			    </c:forEach>
+			    <c:if test="${pagination.hasNext}">
+			        <a href="?page=${pagination.endPage + 1}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
+			            <i class="fas fa-angle-right"></i>
+			        </a>
+			    </c:if>
+			    <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
+			        <i class="fas fa-angle-double-right"></i>
+			    </a>
 			</div>
 
 			<div class="button-group">

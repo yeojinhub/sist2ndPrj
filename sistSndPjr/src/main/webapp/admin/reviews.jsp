@@ -94,6 +94,14 @@
 	color:#ffffff;
 	background-color: #96b1ad;
 }
+
+.pagination a.active {
+    font-weight: bold;
+    color: white;
+    background-color: #6a9c99;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
 </style>
 
     
@@ -156,14 +164,23 @@
 				</table>
 			</div>
 
-            <div class="pagination">
-                <a href="?page=1" class="first-page"><i class="fas fa-angle-double-left"></i></a>
-                <c:forEach var="i" begin="1" end="${pagination.totalPages}">
-                    <a href="?page=${i}&hiddenType=${hiddenType}" class="${i == pagination.currentPage ? 'active' : ''}">${i}</a>
-                </c:forEach>
-                <a href="?page=1&hiddenType=${hiddenType}" class="first-page"><i class="fas fa-angle-double-left"></i></a>
-                <a href="?page=${pagination.totalPages}&hiddenType=${hiddenType}" class="last-page"><i class="fas fa-angle-double-right"></i></a>
-            </div>
+			<div class="pagination">
+			    <a href="?page=1&hiddenType=${hiddenType}" class="first-page"><i class="fas fa-angle-double-left"></i></a>
+			
+			    <c:if test="${pagination.hasPrevious}">
+			        <a href="?page=${pagination.startPage - 1}&hiddenType=${hiddenType}" class="prev-page"><i class="fas fa-angle-left"></i></a>
+			    </c:if>
+			
+			    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+			        <a href="?page=${i}&hiddenType=${hiddenType}" class="${i == pagination.currentPage ? 'active' : ''}">${i}</a>
+			    </c:forEach>
+			
+			    <c:if test="${pagination.hasNext}">
+			        <a href="?page=${pagination.endPage + 1}&hiddenType=${hiddenType}" class="next-page"><i class="fas fa-angle-right"></i></a>
+			    </c:if>
+			
+			    <a href="?page=${pagination.totalPages}&hiddenType=${hiddenType}" class="last-page"><i class="fas fa-angle-double-right"></i></a>
+			</div>
 
 			<div class="button-group">
 				<button type="submit" class="btn btn-hidden">숨김</button>
