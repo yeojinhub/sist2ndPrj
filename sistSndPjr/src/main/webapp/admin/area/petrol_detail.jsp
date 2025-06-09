@@ -67,11 +67,6 @@ request.setAttribute("petDTO", service.searchOnePetrol(num));
 									readonly="readonly" /></td>
 							</tr>
 							<tr>
-								<td>영업시간</td>
-								<td><input type="text" name="operationTime" id="operationTime"  value="${ petDTO.operationTime }"
-									readonly="readonly" /></td>
-							</tr>
-							<tr>
 								<td>휘발유</td>
 								<td><input type="text" name="gasoline" id="gasoline" value="${ petDTO.gasoline }" /></td>
 							</tr>

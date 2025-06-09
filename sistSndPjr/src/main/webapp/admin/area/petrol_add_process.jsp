@@ -17,10 +17,6 @@ if ("POST".equals(request.getMethod().toUpperCase())) {
 	petDTO.setAreaName(request.getParameter("name"));
 	petDTO.setAreaRoute(request.getParameter("route"));
 	petDTO.setAreaTel(request.getParameter("tel"));
-	petDTO.setOperationTime(request.getParameter("operationTime"));
-	petDTO.setAreaAddr(request.getParameter("addr"));
-	petDTO.setAreaLat(request.getParameter("lat"));
-	petDTO.setAreaLng(request.getParameter("lng"));
 	petDTO.setGasoline(request.getParameter("gasoline"));
 	petDTO.setDiesel(request.getParameter("diesel"));
 	petDTO.setLpg(request.getParameter("lpg"));

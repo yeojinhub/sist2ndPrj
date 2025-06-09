@@ -52,22 +52,6 @@
 								<td><input type="text" name="tel" id="tel" /></td>
 							</tr>
 							<tr>
-								<td>영업시간</td>
-								<td><input type="text" name="operationTime" id="operationTime" /></td>
-							</tr>
-							<tr>
-								<td>주소</td>
-								<td><input type="text" name="addr" id="addr" /></td>
-							</tr>
-							<tr>
-								<td>위도</td>
-								<td><input type="text" name="lat" id="lat" /></td>
-							</tr>
-							<tr>
-								<td>경도</td>
-								<td><input type="text" name="lng" id="lng" /></td>
-							</tr>
-							<tr>
 								<td>휘발유</td>
 								<td><input type="text" name="gasoline" id="gasoline" /></td>
 							</tr>

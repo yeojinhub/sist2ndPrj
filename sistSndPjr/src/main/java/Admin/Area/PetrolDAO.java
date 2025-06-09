@@ -85,15 +85,12 @@ public class PetrolDAO {
 			selectPageQuery
 			.append("	SELECT * FROM (	")
 			.append("		SELECT ROWNUM as rnum, pet_num, name, route,	")
-			.append("		gasoline, diesel, lpg, elect, hydro,	")
-			.append("		operation_time, area_num	")
+			.append("		gasoline, diesel, lpg, elect, hydro	")
 			.append("		FROM (	")
-			.append("			select	p.pet_num, a.name, a.route,	")
-			.append("			p.gasoline, p.diesel, p.lpg, p.elect, p.hydro,	")
-			.append("			a.operation_time, p.area_num	")
-			.append("			FROM petrol p	")
-			.append("			LEFT JOIN area a ON a.area_num = p.area_num	")
-			.append("			ORDER BY a.route ASC, area_num DESC	")
+			.append("			select	pet_num, name, route,	")
+			.append("			gasoline, diesel, lpg, elect, hydro	")
+			.append("			FROM petrol	")
+			.append("			ORDER BY route ASC, pet_num DESC	")
 			.append("		) WHERE ROWNUM <= ?	")
 			.append("	) WHERE rnum >= ?	")
 			;
@@ -116,8 +113,6 @@ public class PetrolDAO {
 				petDTO.setLpg(rs.getString("lpg"));
 				petDTO.setElect(rs.getString("elect"));
 				petDTO.setHydro(rs.getString("hydro"));
-				petDTO.setOperationTime(rs.getString("operation_time"));
-				petDTO.setAreaNum(rs.getInt("area_num"));
 				
 				petList.add(petDTO);
 			} //end while
@@ -153,14 +148,11 @@ public class PetrolDAO {
 			searchQuery
 			.append("	SELECT * FROM (	")
 			.append("		select ROWNUM as rnum, pet_num, name, route,	")
-			.append("		gasoline, diesel, lpg, elect, hydro,	")
-			.append("		operation_time, area_num	")
+			.append("		gasoline, diesel, lpg, elect, hydro	")
 			.append("		from (	")
-			.append("			select	p.pet_num, a.name, a.route,	")
-			.append("			p.gasoline, p.diesel, p.lpg, p.elect, p.hydro,	")
-			.append("			a.operation_time, p.area_num	")
-			.append("			from	petrol p	")
-			.append("			LEFT JOIN area a ON a.area_num = p.area_num	")
+			.append("			select	pet_num, name, route,	")
+			.append("			gasoline, diesel, lpg, elect, hydro	")
+			.append("			from	petrol	")
 			;
 			
 			// 검색어가 null이 아닌 경우에만 조건 추가 (PaginationUtil에서 이미 처리됨)
@@ -176,7 +168,7 @@ public class PetrolDAO {
 			} //end if
 			
 			searchQuery
-			.append("			order by a.route	")
+			.append("			order by route	")
 			.append("		) WHERE ROWNUM <= ?	")
 			.append("	) WHERE rnum >= ?	");
 			
@@ -194,7 +186,6 @@ public class PetrolDAO {
 			PetrolDTO petDTO = null;
 			while( rs.next() ) {
 				petDTO = new PetrolDTO();
-				petDTO.setAreaNum(rs.getInt("area_num"));
 				petDTO.setPetNum(rs.getInt("pet_num"));
 				petDTO.setAreaName(rs.getString("name"));
 				petDTO.setAreaRoute(rs.getString("route"));
@@ -203,8 +194,6 @@ public class PetrolDAO {
 				petDTO.setLpg(rs.getString("lpg"));
 				petDTO.setElect(rs.getString("elect"));
 				petDTO.setHydro(rs.getString("hydro"));
-				petDTO.setAreaNum(rs.getInt("area_num"));
-				petDTO.setOperationTime(rs.getString("operation_time"));
 				
 				petList.add(petDTO);
 			} //end while
@@ -237,16 +226,16 @@ public class PetrolDAO {
 	        StringBuilder countQuery = new StringBuilder();
 	        countQuery
 	            .append("SELECT COUNT(*) AS total_count ")  // PETROL 기준 카운트
-	            .append("FROM petrol p ")
-	            .append("INNER JOIN area a ON p.area_num = a.area_num ");  // 필수 조인 추가
+	            .append("FROM petrol ")
+	            ;
 
 	        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
 	            switch (searchType) {
 	                case "name":
-	                    countQuery.append("WHERE a.name LIKE ? ");  // AREA 테이블 컬럼 사용
+	                    countQuery.append("WHERE name LIKE ? ");  // AREA 테이블 컬럼 사용
 	                    break;
 	                case "route":
-	                    countQuery.append("WHERE a.route LIKE ? ");  // AREA 테이블 컬럼 사용
+	                    countQuery.append("WHERE route LIKE ? ");  // AREA 테이블 컬럼 사용
 	                    break;
 	            }
 	        }
@@ -292,12 +281,10 @@ public class PetrolDAO {
 			
 			StringBuilder searchQuery = new StringBuilder();
 			searchQuery
-			.append("	select	p.pet_num, a.name, a.route,	")
-			.append("	p.gasoline, p.diesel, p.lpg, p.elect, p.hydro,	")
-			.append("	a.operation_time, p.area_num	")
-			.append("	from	petrol p	")
-			.append("	LEFT JOIN area a ON a.area_num = p.area_num	")
-			.append("	order by a.route	")
+			.append("	select	pet_num, name, route,	")
+			.append("	gasoline, diesel, lpg, elect, hydro	")
+			.append("	from	petrol	")
+			.append("	order by route	")
 			;
 			
 			// 검색어가 null이 아닌 경우에만 조건 추가 (PaginationUtil에서 이미 처리됨)
@@ -337,8 +324,6 @@ public class PetrolDAO {
 				petDTO.setLpg(rs.getString("lpg"));
 				petDTO.setElect(rs.getString("elect"));
 				petDTO.setHydro(rs.getString("hydro"));
-				petDTO.setOperationTime(rs.getString("operation_time"));
-				petDTO.setAreaNum(rs.getInt("area_num"));
 				
 				petList.add(petDTO);
 			} //end while
@@ -373,12 +358,10 @@ public class PetrolDAO {
 			// 4. 쿼리문 생성객체 얻기.
 			StringBuilder selectAllQuery = new StringBuilder();
 			selectAllQuery
-			.append("	select	p.pet_num, a.name, a.route,	")
-			.append("	p.gasoline, p.diesel, p.lpg, p.elect, p.hydro,	")
-			.append("	a.operation_time, p.area_num	")
-			.append("	from	petrol p	")
-			.append("	LEFT JOIN area a ON a.area_num = p.area_num	")
-			.append("	order by a.route	")
+			.append("	select	pet_num, name, route,	")
+			.append("	gasoline, diesel, lpg, elect, hydro	")
+			.append("	from	petrol	")
+			.append("	order by route	")
 			;
 			
 			pstmt = con.prepareStatement(selectAllQuery.toString());
@@ -399,7 +382,6 @@ public class PetrolDAO {
 				petDTO.setLpg(rs.getString("lpg"));
 				petDTO.setElect(rs.getString("elect"));
 				petDTO.setHydro(rs.getString("hydro"));
-				petDTO.setOperationTime(rs.getString("operation_time"));
 
 				petList.add(petDTO);
 			} // end while
@@ -438,12 +420,10 @@ public class PetrolDAO {
 			// 4. 쿼리문 생성객체 얻기.
 			StringBuilder selectOneQuery = new StringBuilder();
 			selectOneQuery
-			.append("	select	p.pet_num, a.name, a.route, a.tel,	")
-			.append("	p.gasoline, p.diesel, p.lpg, p.elect, p.hydro,	")
-			.append("	a.operation_time	")
-			.append("	from	petrol p	")
-			.append("	LEFT JOIN area a ON a.area_num = p.area_num	")
-			.append("	where	p.pet_num=?	")
+			.append("	select	pet_num, name, route, tel,	")
+			.append("	gasoline, diesel, lpg, elect, hydro	")
+			.append("	from	petrol	")
+			.append("	where	pet_num=?	")
 			;
 			System.out.println("DAO에서의 실행할 쿼리문 :"+selectOneQuery);
 			
@@ -466,7 +446,6 @@ public class PetrolDAO {
 				petDTO.setLpg(rs.getString("lpg"));
 				petDTO.setElect(rs.getString("elect"));
 				petDTO.setHydro(rs.getString("hydro"));
-				petDTO.setOperationTime(rs.getString("operation_time"));
 			} // end while
 			System.out.println("DAO에서의 저장된 dto 값 : "+petDTO);
 		} finally {
@@ -499,31 +478,25 @@ public class PetrolDAO {
 			// 4. 쿼리문 생성객체 얻기.
 			StringBuilder insertQuery = new StringBuilder();
 			insertQuery
-			.append("	insert	into	area	")
-			.append("	(area_num, name, addr, tel, route, operation_time,	")
-			.append("	feed, sleep, shower, laundry, clinic, pharmacy, shelter, salon,	")
-			.append("	agricultural, repair, truck, temp, lat, lng)	")
-			.append("	values((select MAX(area_num) as area_num from area)+1,	")
-			.append("	?,?,?,?,?,	")
-			.append("	?,?,?,?,?,?,?,?,	")
-			.append("	?,?,?,?,?,?)	")
+			.append("	insert	into	petrol	")
+			.append("	(pet_num, name, tel, route,	")
+			.append("	gasoline, diesel, lpg, elect, hydro)	")
+			.append("	values(seq_pet_num.nextval,	")
+			.append("	?,?,?,	")
+			.append("	?,?,?,?,?)	")
 			;
 			
 			pstmt = con.prepareStatement(insertQuery.toString());
 			
 			// 5. bind 변수에 값 할당
 			pstmt.setString(1, petDTO.getAreaName());
-			pstmt.setString(2, petDTO.getAreaRoute());
-			pstmt.setString(3, petDTO.getAreaTel());
-			pstmt.setString(4, petDTO.getOperationTime());
-			pstmt.setString(5, petDTO.getAreaAddr());
-			pstmt.setString(6, petDTO.getAreaLat());
-			pstmt.setString(7, petDTO.getAreaLng());
-			pstmt.setString(8, petDTO.getGasoline());
-			pstmt.setString(9, petDTO.getDiesel());
-			pstmt.setString(10, petDTO.getLpg());
-			pstmt.setString(11, petDTO.getElect());
-			pstmt.setString(12, petDTO.getHydro());
+			pstmt.setString(2, petDTO.getAreaTel());
+			pstmt.setString(3, petDTO.getAreaRoute());
+			pstmt.setString(4, petDTO.getGasoline());
+			pstmt.setString(5, petDTO.getDiesel());
+			pstmt.setString(6, petDTO.getLpg());
+			pstmt.setString(7, petDTO.getElect());
+			pstmt.setString(8, petDTO.getHydro());
 			
 			// 6. 쿼리문 수행 후 결과 얻기.
 			rs=pstmt.executeQuery();

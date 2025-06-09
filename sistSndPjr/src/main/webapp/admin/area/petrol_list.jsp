@@ -104,23 +104,22 @@ request.setAttribute("pageInfoText", pageInfoText);
 							<th>LPG</th>
 							<th>전기충전소</th>
 							<th>수소충전소</th>
-							<th>영업시간</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:if test="${ empty petList }">
 						<tr>
-							<td colspan="10">주유소 정보가 존재하지 않습니다.</td>
+							<td colspan="9">주유소 정보가 존재하지 않습니다.</td>
 						</tr>
 						</c:if>
 						<c:forEach var="petDTO" items="${ petList }" varStatus="i">
 						<tr>
 							<td><input type="checkbox" name="chk" id="chk" value="${ petDTO.petNum }" /></td>
 							<td><c:out value="${ pagination.totalCount - ((pagination.currentPage - 1) * pagination.pageSize + i.count) + 1 }" /></td>
-							<td onclick="location.href='petrol_detail.jsp?petNum=${ petDTO.petNum }'">
+							<td class="onclickbtn" onclick="location.href='petrol_detail.jsp?petNum=${ petDTO.petNum }'">
 								<c:out value="${ petDTO.areaName }" />
 							</td>
-							<td onclick="location.href='petrol_detail.jsp?petNum=${ petDTO.petNum }'">
+							<td class="onclickbtn" onclick="location.href='petrol_detail.jsp?petNum=${ petDTO.petNum }'">
 								<c:out value="${ petDTO.areaRoute }" />
 							</td>
 							<td><c:out value="${ petDTO.gasoline }" /></td>
@@ -128,7 +127,6 @@ request.setAttribute("pageInfoText", pageInfoText);
 							<td><c:out value="${ petDTO.lpg }" /></td>
 							<td><c:out value="${ petDTO.elect }" /></td>
 							<td><c:out value="${ petDTO.hydro }" /></td>
-							<td><c:out value="${ petDTO.operationTime }" /></td>
 						</tr>
 						</c:forEach>
 					</tbody>
