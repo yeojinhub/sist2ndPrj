@@ -8,7 +8,7 @@
 <%
 int faqNum = Integer.parseInt(request.getParameter("faq_num"));
 FaqService service = new FaqService();
-FaqDTO fDTO = service.getNoticeOne(faqNum);
+FaqDTO fDTO = service.getFaqOne(faqNum);
 request.setAttribute("fDTO", fDTO);
 %>
 <!DOCTYPE html>

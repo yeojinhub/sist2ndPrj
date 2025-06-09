@@ -1,6 +1,3 @@
-<%@page import="Admin.Area.FoodService.PaginationResult"%>
-<%@page import="Pagination.PaginationDTO"%>
-<%@page import="Pagination.PaginationUtil"%>
 <%@page import="Admin.Area.FoodDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="Admin.Area.FoodService"%>
@@ -8,39 +5,24 @@
     pageEncoding="UTF-8"
     info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-//페이지 파라미터를 PaginationUtil로 안전하게 파싱
-String pageParam = request.getParameter("page");
-int currentPage = PaginationUtil.parsePageParameter(pageParam, 1);
+String paramNum=request.getParameter("areaNum");
 
-//검색 파라미터 받기
-String searchType = request.getParameter("searchType");
-String searchKeyword = request.getParameter("searchKeyword");
-
-//검색어를 PaginationUtil로 안전하게 처리
-searchKeyword = PaginationUtil.sanitizeSearchKeyword(searchKeyword);
+int num=0;
+try{
+	num=Integer.parseInt(paramNum);
+} catch(NumberFormatException nfe) {
+	nfe.printStackTrace();
+} //end try catch
 
 FoodService service = new FoodService();
-PaginationResult result;
-
-//검색 조건이 있으면 검색, 없으면 전체 조회
-if (searchKeyword != null) {
-	result = service.searchAreasWithPagination(searchType, searchKeyword, currentPage);
-} else {
-	result = service.getAreaListWithPagination(currentPage);
-} //end if else
-
-List<FoodDTO> areaList = result.getData();
-PaginationDTO pagination = result.getPagination();
-
-request.setAttribute("areaList", areaList);
-request.setAttribute("pagination", pagination);
-request.setAttribute("searchType", searchType);
-request.setAttribute("searchKeyword", searchKeyword);
-
-//페이지 정보 텍스트를 미리 계산해서 request에 저장
-String pageInfoText = PaginationUtil.getPageInfoText(pagination);
-request.setAttribute("pageInfoText", pageInfoText);
+List<FoodDTO> foodList = service.searchAllFood(num);
+request.setAttribute("foodList", foodList);
+		
+if (!foodList.isEmpty()) {
+    request.setAttribute("areaName", foodList.get(0).getAreaName());
+} //end if
 %>
 <!DOCTYPE html>
 <html>
@@ -60,6 +42,7 @@ request.setAttribute("pageInfoText", pageInfoText);
 
 <!-- 사용자 정의 JS 로드 -->
 <script src="/sistSndPjr/admin/script.js"></script>
+<script src="/sistSndPjr/admin/common/js/food_manage.js"></script>
 
 </head>
 <body>
@@ -70,128 +53,49 @@ request.setAttribute("pageInfoText", pageInfoText);
 		<!-- Main Content -->
 		<div class="main-content">
 			<div class="header">
-				<h1>먹거리 관리</h1>
-			</div>
-
-			<!-- 검색 폼 -->
-			<div class="search-div">
-				<form method="get" action="food_list.jsp">
-					<div style="width: 800px; display: flex; align-items: center; padding: 10px 15px; gap: 15px;">
-				 		<label style="width: 100px; font-size: 16px; font-weight: bold; white-space: nowrap;">검색 조건</label>
-				 		<select name="searchType" class="searchType">
-							<option value="route" ${searchType == 'route' ? 'selected' : ''}>노선명</option>
-							<option value="name" ${searchType == 'name' ? 'selected' : ''}>휴게소명</option>
-						</select>
-						<input type="text" name="searchKeyword" class="search-title"
-							placeholder="검색어를 입력하세요" value="${searchKeyword}"
-							style="margin: 0; flex: 1; height: 30px; padding: 0 10px; border: 1px solid #ccc; border-radius: 4px;" />
-						<button type="submit" class="btn-search">검색</button>
-					</div>
-				</form>
+				<h1>먹거리 수정</h1>
 			</div>
 
 			<div class="content">
+				<div>
+					<div>
+						<h1><c:out value="${ areaName }"></c:out> </h1>
+					</div>
+				</div>
+				
 				<table class="data-table">
 					<thead>
 						<tr>
+							<th><input type="checkbox" class="label-checkbox" name="chkAll" id="chkAll" /></th>
 							<th>번호</th>
-							<th>휴게소명</th>
-							<th>노선</th>
-							<th>음식개수</th>
-							<th>영업시간</th>
+							<th>음식명</th>
+							<th>가격</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:if test="${ empty areaList }">
+						<c:if test="${ empty foodList }">
 						<tr>
-							<td colspan="10">휴게소 정보가 존재하지 않습니다.</td>
+							<td colspan="4">먹거리 정보가 존재하지 않습니다.</td>
 						</tr>
 						</c:if>
-						<c:forEach var="foodDTO" items="${ areaList }" varStatus="i">
+						<c:forEach var="foodDTO" items="${ foodList }"  varStatus="i">
 						<tr>
-							<td><c:out value="${ pagination.totalCount - ((pagination.currentPage - 1) * pagination.pageSize + i.count) + 1 }" /></td>
-							<c:choose>
-							<c:when test="${ empty foodDTO.totalFood || foodDTO.totalFood==0 }">
-							<td onclick="location.href='food_add_frm.jsp'">
-								<c:out value="${ foodDTO.areaName }" />
+							<td><input type="checkbox" class="label-checkbox" name="chk" id="chk" value="${ foodDTO.foodNum }"></td>
+							<td><c:out value="${ i.count }" /></td>
+							<td class="onclickbtn" onclick="location.href='food_detail.jsp?foodNum=${ foodDTO.foodNum }'"><c:out value="${ foodDTO.foodName }" /></td>
+							<td class="onclickbtn" onclick="location.href='food_detail.jsp?foodNum=${ foodDTO.foodNum }'">
+							<fmt:formatNumber type="number" value="${ foodDTO.foodPrice }" maxFractionDigits="3" />원
 							</td>
-							<td onclick="location.href='food_add_frm.jsp'">
-								<c:out value="${ foodDTO.areaRoute }" />
-							</td>
-							</c:when>
-							<c:otherwise>
-							<td onclick="location.href='food_detail.jsp?areaNum=${ foodDTO.areaNum }'">
-								<c:out value="${ foodDTO.areaName }" />
-							</td>
-							<td onclick="location.href='food_detail.jsp?areaNum=${ foodDTO.areaNum }'">
-								<c:out value="${ foodDTO.areaRoute }" />
-							</td>
-							</c:otherwise>
-							</c:choose>
-							<td><c:out value="${ foodDTO.totalFood }" /></td>
-							<td><c:out value="${ foodDTO.operationTime }" /></td>
 						</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-			</div>
 
-			<!-- 페이지네이션 -->
-				<div class="pagination">
-					<!-- 첫 페이지로 -->
-					<c:if test="${pagination.hasPrevious}">
-						<a
-							href="?page=1<c:if test='${not empty searchKeyword}'>&searchType=${searchType}&searchKeyword=${searchKeyword}</c:if>"
-							class="first-page"> <i class="fas fa-angle-double-left"></i>
-						</a>
-					</c:if>
-
-					<!-- 이전 페이지 -->
-					<c:if test="${pagination.hasPrevious}">
-						<a
-							href="?page=${pagination.currentPage - 1}<c:if test='${not empty searchKeyword}'>&searchType=${searchType}&searchKeyword=${searchKeyword}</c:if>">
-							<i class="fas fa-angle-left"></i>
-						</a>
-					</c:if>
-
-					<!-- 페이지 번호들 -->
-					<c:forEach var="pageNum" begin="${pagination.startPage}"
-						end="${pagination.endPage}">
-						<c:choose>
-							<c:when test="${pageNum == pagination.currentPage}">
-								<a href="#" class="active">${pageNum}</a>
-							</c:when>
-							<c:otherwise>
-								<a
-									href="?page=${pageNum}<c:if test='${not empty searchKeyword}'>&searchType=${searchType}&searchKeyword=${searchKeyword}</c:if>">${pageNum}</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-
-					<!-- 다음 페이지 -->
-					<c:if test="${pagination.hasNext}">
-						<a
-							href="?page=${pagination.currentPage + 1}<c:if test='${not empty searchKeyword}'>&searchType=${searchType}&searchKeyword=${searchKeyword}</c:if>">
-							<i class="fas fa-angle-right"></i>
-						</a>
-					</c:if>
-
-					<!-- 마지막 페이지로 -->
-					<c:if test="${pagination.hasNext}">
-						<a
-							href="?page=${pagination.totalPages}<c:if test='${not empty searchKeyword}'>&searchType=${searchType}&searchKeyword=${searchKeyword}</c:if>"
-							class="last-page"> <i class="fas fa-angle-double-right"></i>
-						</a>
-					</c:if>
+				<div class="button-group-area-detail">
+					<button class="btn btn-add" id="btnFoodAddFrm">등록</button>
+					<button class="btn btn-remove" id="btnFoodRemove">삭제</button>
+					<button class="btn btn-back" id="btnFoodBack">뒤로</button>
 				</div>
-			
-
-				<!-- 페이지 정보 표시 - request attribute 사용 -->
-				<div style="text-align: center; margin: 10px 0; color: #666;">
-					${pageInfoText}
-				</div>
-
-			<div class="button-group">
 			</div>
 		</div>
 	</div>

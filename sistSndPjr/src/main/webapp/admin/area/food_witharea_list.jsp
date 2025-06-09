@@ -1,9 +1,9 @@
+<%@page import="Admin.Area.FoodService.PaginationResult"%>
 <%@page import="Pagination.PaginationDTO"%>
-<%@page import="Admin.Area.PetrolService.PaginationResult"%>
 <%@page import="Pagination.PaginationUtil"%>
-<%@page import="Admin.Area.PetrolDTO"%>
+<%@page import="Admin.Area.FoodDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="Admin.Area.PetrolService"%>
+<%@page import="Admin.Area.FoodService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""%>
@@ -20,20 +20,20 @@ String searchKeyword = request.getParameter("searchKeyword");
 //검색어를 PaginationUtil로 안전하게 처리
 searchKeyword = PaginationUtil.sanitizeSearchKeyword(searchKeyword);
 
-PetrolService service = new PetrolService();
+FoodService service = new FoodService();
 PaginationResult result;
 
 //검색 조건이 있으면 검색, 없으면 전체 조회
 if (searchKeyword != null) {
-	result = service.searchPetrolsWithPagination(searchType, searchKeyword, currentPage);
+	result = service.searchAreasWithPagination(searchType, searchKeyword, currentPage);
 } else {
-	result = service.getPetrolListWithPagination(currentPage);
+	result = service.getAreaListWithPagination(currentPage);
 } //end if else
 
-List<PetrolDTO> petList = result.getData();
+List<FoodDTO> areaList = result.getData();
 PaginationDTO pagination = result.getPagination();
 
-request.setAttribute("petList", petList);
+request.setAttribute("areaList", areaList);
 request.setAttribute("pagination", pagination);
 request.setAttribute("searchType", searchType);
 request.setAttribute("searchKeyword", searchKeyword);
@@ -60,24 +60,22 @@ request.setAttribute("pageInfoText", pageInfoText);
 
 <!-- 사용자 정의 JS 로드 -->
 <script src="/sistSndPjr/admin/script.js"></script>
-<script src="/sistSndPjr/admin/common/js/petrol_manage.js"></script>
 
 </head>
 <body>
     <div class="container">
         <!-- Sidebar -->
         <jsp:include page="/admin/common/jsp/admin_sidebar.jsp" />
-        
+
 		<!-- Main Content -->
 		<div class="main-content">
 			<div class="header">
-				<h1>주유소 관리</h1>
+				<h1>먹거리 관리</h1>
 			</div>
-			
-			<div class="content">
+
 			<!-- 검색 폼 -->
 			<div class="search-div">
-				<form method="get" action="petrol_list.jsp">
+				<form method="get" action="food_list.jsp">
 					<div style="width: 800px; display: flex; align-items: center; padding: 10px 15px; gap: 15px;">
 				 		<label style="width: 100px; font-size: 16px; font-weight: bold; white-space: nowrap;">검색 조건</label>
 				 		<select name="searchType" class="searchType">
@@ -92,47 +90,51 @@ request.setAttribute("pageInfoText", pageInfoText);
 				</form>
 			</div>
 
+			<div class="content">
 				<table class="data-table">
 					<thead>
 						<tr>
-							<th><input type="checkbox" name="chkAll" id="chkAll" /></th>
 							<th>번호</th>
 							<th>휴게소명</th>
 							<th>노선</th>
-							<th>휘발유</th>
-							<th>경유</th>
-							<th>LPG</th>
-							<th>전기충전소</th>
-							<th>수소충전소</th>
+							<th>음식개수</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:if test="${ empty petList }">
+						<c:if test="${ empty areaList }">
 						<tr>
-							<td colspan="9">주유소 정보가 존재하지 않습니다.</td>
+							<td colspan="5">휴게소 정보가 존재하지 않습니다.</td>
 						</tr>
 						</c:if>
-						<c:forEach var="petDTO" items="${ petList }" varStatus="i">
+						<c:forEach var="foodDTO" items="${ areaList }" varStatus="i">
 						<tr>
-							<td><input type="checkbox" name="chk" id="chk" value="${ petDTO.petNum }" /></td>
 							<td><c:out value="${ pagination.totalCount - ((pagination.currentPage - 1) * pagination.pageSize + i.count) + 1 }" /></td>
-							<td class="onclickbtn" onclick="location.href='petrol_detail.jsp?petNum=${ petDTO.petNum }'">
-								<c:out value="${ petDTO.areaName }" />
-							</td>
-							<td class="onclickbtn" onclick="location.href='petrol_detail.jsp?petNum=${ petDTO.petNum }'">
-								<c:out value="${ petDTO.areaRoute }" />
-							</td>
-							<td><c:out value="${ petDTO.gasoline }" /></td>
-							<td><c:out value="${ petDTO.diesel }" /></td>
-							<td><c:out value="${ petDTO.lpg }" /></td>
-							<td><c:out value="${ petDTO.elect }" /></td>
-							<td><c:out value="${ petDTO.hydro }" /></td>
+							<c:choose>
+								<c:when test="${ empty foodDTO.totalFood || foodDTO.totalFood==0 }">
+									<td class="onclickbtn" onclick="location.href='food_add_frm.jsp'">
+									<c:out value="${ foodDTO.areaName }" />
+									</td>
+									<td class="onclickbtn" onclick="location.href='food_add_frm.jsp'">
+									<c:out value="${ foodDTO.areaRoute }" />
+									</td>
+								</c:when>
+								<c:otherwise>
+									<td class="onclickbtn" onclick="location.href='food_list.jsp?areaNum=${ foodDTO.areaNum }'">
+									<c:out value="${ foodDTO.areaName }" />
+									</td>
+									<td class="onclickbtn" onclick="location.href='food_list.jsp?areaNum=${ foodDTO.areaNum }'">
+									<c:out value="${ foodDTO.areaRoute }" />
+									</td>
+								</c:otherwise>
+							</c:choose>
+							<td><c:out value="${ foodDTO.totalFood }" /></td>
 						</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-				
-				<!-- 페이지네이션 -->
+			</div>
+
+			<!-- 페이지네이션 -->
 				<div class="pagination">
 					<!-- 첫 페이지로 -->
 					<c:if test="${pagination.hasPrevious}">
@@ -180,16 +182,14 @@ request.setAttribute("pageInfoText", pageInfoText);
 						</a>
 					</c:if>
 				</div>
+			
 
 				<!-- 페이지 정보 표시 - request attribute 사용 -->
 				<div style="text-align: center; margin: 10px 0; color: #666;">
 					${pageInfoText}
 				</div>
-				
-				<div class="button-group">
-					<button class="btn btn-add" id="btnPetAddFrm">등록</button>
-					<button class="btn btn-remove" id="btnPetRemove">삭제</button>
-				</div>
+
+			<div class="button-group">
 			</div>
 		</div>
 	</div>

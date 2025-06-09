@@ -62,10 +62,6 @@ function chkAddNull(){
 	var	name = $("#name").val();
 	var route = $("#route").val();
 	var tel = $("#tel").val();
-	var operationTime = $("#operationTime").val();
-	var	addr = $("#addr").val();
-	var	lat = $("#lat").val();
-	var	lng = $("#lng").val();
 	var gasoline = $("#gasoline").val();
 	var diesel = $("#diesel").val();
 	var lpg = $("#lpg").val();
@@ -85,32 +81,6 @@ function chkAddNull(){
 		return false;
 	} // end if
 	console.log('노선 : ',route);
-	
-	if( operationTime.trim() == "" || operationTime.trim() == null ){
-		operationTime = "00:00-23:59";
-	} // end if
-	console.log('영업시간:',operationTime);
-	
-	if( addr.trim() == "" || addr.trim() == null ){
-		alert("주소는 필수로 입력해주세요.");
-		// early return
-		return false;
-	} // end if
-	console.log('주소 : ',addr);
-	
-	if( lat.trim() == "" || lat.trim() == null ){
-		alert("위도는 필수로 입력해주세요.");
-		// early return
-		return false;
-	} // end if
-	console.log('위도:',lat);
-	
-	if( lng.trim() == "" || lng.trim() == null ){
-		alert("경도는 필수로 입력해주세요.");
-		// early return
-		return false;
-	} // end if
-	console.log('경도:',lng);
 	
 	if( gasoline.trim() == "" || gasoline.trim() == null ){
 		gasoline = "X";
@@ -141,10 +111,6 @@ function chkAddNull(){
 		name: name,
 		route: route,
 		tel: tel,
-		operationTime: operationTime,
-		addr: addr,
-		lat: lat,
-		lng: lng,
 		gasoline: gasoline,
 		diesel: diesel,
 		lpg: lpg,

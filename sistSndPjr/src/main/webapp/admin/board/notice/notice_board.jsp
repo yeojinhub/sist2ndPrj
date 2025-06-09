@@ -93,29 +93,31 @@ request.setAttribute("noticeList", noticeList); */
 		  cursor: pointer;
 		  color:#ffffff;
 		  background-color: #96b1ad;
-		}   
+		} 
+		
+		.status-radio {
+		  display: flex;
+		  gap: 15px;
+		  align-items: center;
+		}
+		
+		.status-radio label {
+		  font-weight: bold;
+		}
+		
+		.status-radio input[type="radio"] {
+		  margin-right: 5px;
+		  transform: scale(1.1);
+		} 
+		
+		.pagination a.active {
+		font-weight: bold;
+		color: white;
+		background-color: #6a9c99;
+		padding: 5px 10px;
+		border-radius: 5px;
+	}
     </style>
-     <!-- jquery CDN -->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
-    <script type="text/javascript">
-    $(function() {
-    	$('#checkAll').change(function () {
-            const isChecked = $(this).prop('checked');
-            $('input[name="noticeCheck"]').prop('checked', isChecked);
-        });
-    });//ready
-    
-    function submitDelete() {
-        const checked = $('input[name="noticeCheck"]:checked');
-        if (checked.length == 0) {
-            alert("삭제할 공지사항을 선택하세요.");
-            return;
-        }
-        if (confirm("선택한 공지사항을 삭제하시겠습니까?")) {
-            $('#deleteForm').submit();
-        }
-    }
-    </script>
 </head>
 <body>
     <div class="container-">
@@ -137,62 +139,81 @@ request.setAttribute("noticeList", noticeList); */
 			
 			    <input type="text" class="search-title" name="searchKeyword" placeholder="검색어 입력" value="${searchKeyword != null ? searchKeyword : ''}"/>
 			
-			    <select name="statusType">
-			        <option value="all" ${statusType == 'all' ? 'selected' : ''}>전체</option>
-			        <option value="공지" ${statusType == '공지' ? 'selected' : ''}>공지</option>
-			        <option value="미공지" ${statusType == '미공지' ? 'selected' : ''}>미공지</option>
-			    </select>
+			    <div class="status-radio">
+			        <label><input type="radio" name="statusType" value="all" <%= "all".equals(statusType) || statusType == null ? "checked" : "" %>> 전체</label>
+			        <label><input type="radio" name="statusType" value="공지" <%= "공지".equals(statusType) ? "checked" : "" %>> 공지</label>
+			        <label><input type="radio" name="statusType" value="미공지" <%= "미공지".equals(statusType) ? "checked" : "" %>> 미공지</label>
+			    </div>
 			
 			    <button type="submit" class="btn-search">검색</button>
 			</form>
 
-            <form id="deleteForm" action="notice_delete_process.jsp" method="post">
-			    <table class="data-table">
-			        <thead>
-			            <tr>
-			                <th><input type="checkbox" id="checkAll" /></th>
-			                <th>번호</th>
-			                <th>제목</th>
-			                <th>작성자</th>
-			                <th>작성일</th>
-			                <th>상태</th>
-			            </tr>
-			        </thead>
-			        <tbody>
-			            <c:forEach var="notice" items="${noticeList}">
-			                <tr>
-			                    <td><input type="checkbox" name="noticeCheck" value="${notice.not_num}" /></td>
-			                    <td><c:out value="${notice.not_num}" /></td>
-			                    <td class="onclickbtn" onclick="location.href='notice_board_detail.jsp?not_num=${notice.not_num}'">
-			                        <c:out value="${notice.title}" />
-			                    </td>
-			                    <td><c:out value="${notice.name}" /></td>
-			                    <td><fmt:formatDate value="${notice.input_date}" pattern="yyyy-MM-dd" /></td>
-			                    <td><c:out value="${notice.status_type}" /></td>
-			                </tr>
-			            </c:forEach>
-			        </tbody>
-			    </table>
-			
-			    <div class="button-group">
-			        <button class="btn btn-add" onclick="location.href='notice_board_write.jsp'" type="button">작성</button>
-			        <button class="btn btn-delete" type="button" onclick="submitDelete()">삭제</button>
-			    </div>
-			</form>
-		</div>
-    </div>
-            <!-- 페이지네이션 -->
-            <div class="pagination">
-                <!-- 첫 페이지로 이동 -->
-                <a href="?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="first-page"><i class="fas fa-angle-double-left"></i></a>
-
-                <!-- 페이지 번호 표시 -->
-                <c:forEach var="i" begin="1" end="${pagination.totalPages}">
-                    <a href="?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="<c:if test='${i == pagination.currentPage}'>active</c:if>">${i}</a>
-                </c:forEach>
-
-                <!-- 마지막 페이지로 이동 -->
-                <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="last-page"><i class="fas fa-angle-double-right"></i></a>
+            <div class="content">
+            <form action="notice_multiple_delete.jsp" method="post">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"/></th>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="notice" items="${noticeList}">
+                            <tr >
+                                <td><input type="checkbox" name="not_nums" value="${notice.not_num}" onclick="event.stopPropagation();"/></td>
+                                <td><c:out value="${notice.not_num}" /></td>
+                                <td class="onclickbtn" onclick="location.href='notice_board_detail.jsp?not_num=${notice.not_num}'"><c:out value="${notice.title}" /></td>
+                                <td><c:out value="${notice.name}" /></td>
+                                <td><fmt:formatDate value="${notice.input_date}" pattern="yyyy-MM-dd" /></td>
+                                <td><c:out value="${notice.status_type}" /></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+          </form>  
             </div>
+
+            <div class="button-group">
+                <button type="button" class="btn btn-add" onclick="location.href='notice_board_write.jsp'">작성</button>
+                <button type="submit" class="btn btn-delete">삭제</button>
+            </div>
+             <!-- 페이지네이션 -->  
+			<div class="pagination">
+			    <a href="?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="first-page">
+			        <i class="fas fa-angle-double-left"></i>
+			    </a>
+			
+			    <a href="?page=${pagination.currentPage > 1 ? pagination.currentPage - 1 : 1}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
+			        <i class="fas fa-angle-left"></i>
+			    </a>
+			
+			    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+			        <a href="?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" 
+			           class="${i == pagination.currentPage ? 'active' : ''}">${i}</a>
+			    </c:forEach>
+			
+			    <a href="?page=${pagination.currentPage < pagination.totalPages ? pagination.currentPage + 1 : pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
+			        <i class="fas fa-angle-right"></i>
+			    </a>
+			
+			    <!-- 마지막 페이지로 이동 -->
+			    <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="last-page">
+			        <i class="fas fa-angle-double-right"></i>
+			    </a>
+			</div>
+        </div>
+    </div>
 </body>
+
+    <script>
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checked = this.checked;
+        document.querySelectorAll('input[name="not_nums"]').forEach(cb => cb.checked = checked);
+    });
+	</script>
+
 </html>
