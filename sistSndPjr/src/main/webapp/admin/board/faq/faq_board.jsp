@@ -47,9 +47,10 @@ request.setAttribute("noticeList", noticeList); */
     <meta charset="UTF-8">
     <title>관리자 대시보드</title>
     <link rel="stylesheet" href="../../common/css/styles.css">
- 	<script src="/sistSndPjr/admin/script.js"></script>
+    <script src="/sistSndPjr/admin/script.js"></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
 		/* 검색 영역 */
 		.search-div {
@@ -92,32 +93,32 @@ request.setAttribute("noticeList", noticeList); */
 		  cursor: pointer;
 		  color:#ffffff;
 		  background-color: #96b1ad;
-		}   
+		} 
+		
+		.status-radio {
+		  display: flex;
+		  gap: 15px;
+		  align-items: center;
+		}
+		
+		.status-radio label {
+		  font-weight: bold;
+		}
+		
+		.status-radio input[type="radio"] {
+		  margin-right: 5px;
+		  transform: scale(1.1);
+		}
+		
+		.pagination a.active {
+		font-weight: bold;
+		color: white;
+		background-color: #6a9c99;
+		padding: 5px 10px;
+		border-radius: 5px;
+	}
     </style>
-     <!-- jquery CDN -->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
-<script type="text/javascript">
-    $(function() {
-    	$('#checkAll').change(function () {
-            const isChecked = $(this).prop('checked');
-            $('input[name="faqCheck"]').prop('checked', isChecked);
-        });
-    	
-    	
-    });//ready
     
-    function submitDelete() {
-        const checked = $('input[name="faqCheck"]:checked');
-        if (checked.length == 0) {
-            alert("삭제할 FAQ를 선택하세요.");
-            return;
-        }
-
-        if (!confirm("선택한 FAQ를 삭제하시겠습니까?")) return;
-
-        $('#deleteForm').submit();
-    }
-</script>
 </head>
 <body>
     <div class="container">
@@ -142,53 +143,75 @@ request.setAttribute("noticeList", noticeList); */
 			    <button type="submit" class="btn-search">검색</button>
 			</form>
 
-			<form id="deleteForm" method="post" action="faq_delete_process.jsp">
-			    <div class="content">
-			        <table class="data-table">
-			            <thead>
-			                <tr>
-			                    <th><input type="checkbox" id="checkAll" /></th>
-			                    <th>번호</th>
-			                    <th>제목</th>
-			                    <th>작성자</th>
-			                    <th>작성일</th>
-			                </tr>
-			            </thead>
-			            <tbody>
-			                <c:forEach var="faq" items="${faqList}">
-			                    <tr>
-			                        <td><input type="checkbox" name="faqCheck" value="${faq.faq_num}" /></td>
-			                        <td><c:out value="${faq.faq_num}" /></td>
-			                        <td class="onclickbtn" onclick="location.href='faq_board_detail.jsp?faq_num=${faq.faq_num}'">
-			                            <c:out value="${faq.title}" />
-			                        </td>
-			                        <td><c:out value="${faq.name}" /></td>
-			                        <td><fmt:formatDate value="${faq.input_date}" pattern="yyyy-MM-dd" /></td>
-			                    </tr>
-			                </c:forEach>
-			            </tbody>
-			        </table>
-			
-			        <div class="button-group">
-			            <button type="button" class="btn btn-add" onclick="location.href='faq_board_write.jsp'">작성</button>
-			            <button type="button" class="btn btn-delete" onclick="submitDelete()">삭제</button>
-			        </div>
-			    </div>
-			</form>
+			<div class="content">
+			<form action="faq_multiple_delete.jsp" method="post">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                        	<th><input type="checkbox" id="selectAll"/></th>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <c:forEach var="faq" items="${faqList}">
+                            <tr>
+                                <td><input type="checkbox" name="faq_nums" value="${faq.faq_num}" onclick="event.stopPropagation();" /></td>
+                                <td><c:out value="${faq.faq_num}" /></td>
+                                <td class="onclickbtn" onclick="location.href='faq_board_detail.jsp?faq_num=${faq.faq_num}'"><c:out value="${faq.title}" /></td>
+                                <td><c:out value="${faq.name}" /></td>
+                                <td><fmt:formatDate value="${faq.input_date}" pattern="yyyy-MM-dd" /></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+                
+                <div class="button-group">
+                    <button type="button" class="btn btn-add" onclick="location.href='faq_board_write.jsp'">작성</button>
+                    <button type="submit" class="btn btn-delete">삭제</button>
+                </div>
+               </form> 
               <!-- 페이지네이션 -->  
-            <div class="pagination">
-                <!-- 첫 페이지로 이동 -->
-                <a href="?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="first-page"><i class="fas fa-angle-double-left"></i></a>
-
-                <!-- 페이지 번호 표시 -->
-                <c:forEach var="i" begin="1" end="${pagination.totalPages}">
-                    <a href="?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="<c:if test='${i == pagination.currentPage}'>active</c:if>">${i}</a>
-                </c:forEach>
-
-                <!-- 마지막 페이지로 이동 -->
-                <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="last-page"><i class="fas fa-angle-double-right"></i></a>
+				<div class="pagination">
+				    <!-- 첫 페이지로 이동 -->
+				    <a href="?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}">
+				        <i class="fas fa-angle-double-left"></i>
+				    </a>
+				
+				    <!-- 이전 페이지로 이동 (1페이지면 비활성화) -->
+				    <a href="<c:out value='?page=${pagination.currentPage - 1}&searchType=${searchType}&searchKeyword=${searchKeyword}'/>"
+				       class="${pagination.currentPage == 1 ? 'disabled' : ''}">
+				        <i class="fas fa-angle-left"></i>
+				    </a>
+				
+				    <!-- 숫자 페이지 -->
+				    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+				        <a href="?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}"
+				           class="${i == pagination.currentPage ? 'active' : ''}">${i}</a>
+				    </c:forEach>
+				
+				    <!-- 다음 페이지로 이동 -->
+				    <a href="<c:out value='?page=${pagination.currentPage + 1}&searchType=${searchType}&searchKeyword=${searchKeyword}'/>"
+				       class="${pagination.currentPage == pagination.totalPages ? 'disabled' : ''}">
+				        <i class="fas fa-angle-right"></i>
+				    </a>
+				
+				    <!-- 마지막 페이지로 이동 -->
+				    <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}">
+				        <i class="fas fa-angle-double-right"></i>
+				    </a>
+				</div>
             </div>
         </div>
     </div>
 </body>
+
+    <script>
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checked = this.checked;
+        document.querySelectorAll('input[name="faq_nums"]').forEach(cb => cb.checked = checked);
+    });
+	</script>
 </html>

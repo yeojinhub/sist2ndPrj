@@ -404,7 +404,7 @@ public class FaqDAO {
 	 * @return 검색 조건과 페이지에 해당하는 사용자 목록
 	 * @throws SQLException 예외처리
 	 */
-	public List<FaqDTO> searchNoticeByPage(String searchType, String searchKeyword, PaginationDTO pagination) throws SQLException {
+	public List<FaqDTO> searchFaqByPage(String searchType, String searchKeyword, PaginationDTO pagination) throws SQLException {
 		List<FaqDTO> faqList = new ArrayList<FaqDTO>();
 		
 		DBConnection dbCon = DBConnection.getInstance();
