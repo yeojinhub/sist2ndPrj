@@ -83,6 +83,16 @@
 	</script>
 	<script>
 		document.querySelector("form").onsubmit=function(){
+		    const title = document.querySelector('input[name="title"]').value.trim();
+		    const content = quill.root.innerText.trim(); // 텍스트만 검사
+		    if (title === "") {
+		      alert("제목을 입력해주세요.");
+		      return false;  // 폼 제출 막기
+		    }
+		    if (content === "") {
+		      alert("내용을 입력해주세요.");
+		      return false;
+		    }
 			document.getElementById("content").value=quill.root.innerHTML;
 		}
 	</script>

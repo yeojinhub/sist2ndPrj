@@ -92,8 +92,9 @@ public class ReviewService {
                     r.setName(decryptedName);
                     System.out.println("복호화된 이름: " + decryptedName);
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    r.setName("복호화 실패");
+                		System.err.println("복호화 실패 사유 : " + e.getMessage());
+               
+                   // r.setName("복호화 실패");
                 }
             }//for
         } catch (SQLException e) {
@@ -140,8 +141,7 @@ public class ReviewService {
                 r.setName(decryptedName);
                 System.out.println("복호화된 이름: " + decryptedName);
             } catch (Exception e) {
-                e.printStackTrace();
-                r.setName("복호화 실패");
+            	System.err.println("복호화 실패 사유 : " + e.getMessage());
             }
         }//for
         

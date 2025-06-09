@@ -174,26 +174,26 @@ request.setAttribute("noticeList", noticeList); */
                     </tbody>
                 </table>
             </div>
-
+             <!-- 페이지네이션 -->  
 			<div class="pagination">
-			    <!-- 첫 페이지로 이동 -->
 			    <a href="?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="first-page">
 			        <i class="fas fa-angle-double-left"></i>
 			    </a>
-			    <c:if test="${pagination.hasPrevious}">
-			        <a href="?page=${pagination.startPage - 1}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
-			            <i class="fas fa-angle-left"></i>
-			        </a>
-			    </c:if>
+			
+			    <a href="?page=${pagination.currentPage > 1 ? pagination.currentPage - 1 : 1}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
+			        <i class="fas fa-angle-left"></i>
+			    </a>
+			
 			    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
 			        <a href="?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" 
 			           class="${i == pagination.currentPage ? 'active' : ''}">${i}</a>
 			    </c:forEach>
-			    <c:if test="${pagination.hasNext}">
-			        <a href="?page=${pagination.endPage + 1}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
-			            <i class="fas fa-angle-right"></i>
-			        </a>
-			    </c:if>
+			
+			    <a href="?page=${pagination.currentPage < pagination.totalPages ? pagination.currentPage + 1 : pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
+			        <i class="fas fa-angle-right"></i>
+			    </a>
+			
+			    <!-- 마지막 페이지로 이동 -->
 			    <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="last-page">
 			        <i class="fas fa-angle-double-right"></i>
 			    </a>

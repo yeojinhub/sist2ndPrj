@@ -60,7 +60,7 @@ request.setAttribute("notice", notice);
                                     <td colspan="4">
                                         <div class="radio-container" style="border:2px solid #ccc; padding: 10px;" >
                                             <label><input type="radio" name="status_type" value="공지" <c:if test="${notice.status_type=='공지'}">checked</c:if> /> 공지</label>
-                                            <label><input type="radio" name="status_type" value="미공지" <c:if test="${notice.status_type=='미공지'}">checked</c:if>/> 미공지</label>
+                                            <label><input type="radio" name="status_type" value="미공지" <c:if test="${notice.status_type == null || notice.status_type == '' || notice.status_type == '미공지'}">checked</c:if> /> 미공지</label>
                                         </div>
                                     </td>
                                 </tr>

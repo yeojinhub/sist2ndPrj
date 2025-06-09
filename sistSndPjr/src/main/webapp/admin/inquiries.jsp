@@ -8,6 +8,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
+	request.setCharacterEncoding("UTF-8");
+
     LoginResultDTO userData = (LoginResultDTO) session.getAttribute("userData");
 %>
 <%
@@ -157,30 +159,44 @@ request.setAttribute("inquiryList", inquiryList); */
 					</tbody>
 				</table>
 			</div>
-
+              <!-- 페이지네이션 -->  
 			<div class="pagination">
-			    <!-- 첫 페이지로 이동 -->
 			    <a href="?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
 			        <i class="fas fa-angle-double-left"></i>
 			    </a>
 			
-			    <!-- 이전 그룹으로 이동 -->
-			    <c:if test="${pagination.hasPrevious}">
-			        <a href="?page=${pagination.startPage - 1}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
-			            <i class="fas fa-angle-left"></i>
-			        </a>
-			    </c:if>
+			    <c:choose>
+			        <c:when test="${pagination.currentPage > 1}">
+			            <a href="?page=${pagination.currentPage - 1}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
+			                <i class="fas fa-angle-left"></i>
+			            </a>
+			        </c:when>
+			        <c:otherwise>
+			            <a class="disabled">
+			                <i class="fas fa-angle-left"></i>
+			            </a>
+			        </c:otherwise>
+			    </c:choose>
+			
 			    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
-			        <a href="?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" 
-			           class="${i == pagination.currentPage ? 'active' : ''}">
-			           ${i}
-			        </a>
+			        <a href="?page=${i}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}"
+			           class="${i == pagination.currentPage ? 'active' : ''}">${i}</a>
 			    </c:forEach>
-			    <c:if test="${pagination.hasNext}">
-			        <a href="?page=${pagination.endPage + 1}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
-			            <i class="fas fa-angle-right"></i>
-			        </a>
-			    </c:if>
+			
+			    <c:choose>
+			        <c:when test="${pagination.currentPage < pagination.totalPages}">
+			            <a href="?page=${pagination.currentPage + 1}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
+			                <i class="fas fa-angle-right"></i>
+			            </a>
+			        </c:when>
+			        <c:otherwise>
+			            <a class="disabled">
+			                <i class="fas fa-angle-right"></i>
+			            </a>
+			        </c:otherwise>
+			    </c:choose>
+			
+			    <!-- 마지막 페이지로 이동 -->
 			    <a href="?page=${pagination.totalPages}&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}">
 			        <i class="fas fa-angle-double-right"></i>
 			    </a>

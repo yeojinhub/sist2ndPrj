@@ -19,21 +19,34 @@ public class InquiryService {
 		iDAO=InquiryDAO.getInstance();
 	}
 	
+	
+    // Base64 유효성 검사
+    private boolean isValidBase64(String input) {
+        if (input == null || input.length() % 4 != 0) return false;
+        return input.matches("^[A-Za-z0-9+/]+={0,2}$?");
+    }
+	
 	//detail넘어갈떄
-	public InquiryDTO getInquiryOne(int inqNum) {
-	    InquiryDTO dto = iDAO.getInquiryOne(inqNum);
-	    if (dto != null) {
-	        try {
-	            String myKey = "asdf1234asdf1234"; // 암호화 키
-	            DataDecryption dd = new DataDecryption(myKey);
-	            String decryptedName = dd.decrypt(dto.getName());
-	            dto.setName(decryptedName); // 복호화된 이름으로 교체
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	    }
-	    return dto;
-	}//getInquiryOne
+    public InquiryDTO getInquiryOne(int inqNum) {
+        InquiryDTO dto = iDAO.getInquiryOne(inqNum);
+        if (dto != null) {
+            try {
+                String myKey = "asdf1234asdf1234"; // 암호화 키
+                DataDecryption dd = new DataDecryption(myKey);
+                String encryptedName = dto.getName();
+                // 이름이 Base64 형식이면 복호화 시도
+                if (isValidBase64(encryptedName)) {
+                    String decryptedName = dd.decrypt(encryptedName);
+                    dto.setName(decryptedName);
+                } else {
+                    System.out.println("Base64 형식 아님: " + encryptedName);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return dto;
+    }//getInquiryOne
 	
 	//전체리스트
 	public List<InquiryDTO> getInquiryList() {
@@ -44,12 +57,12 @@ public class InquiryService {
 					
 			return list;
 		} catch (SQLException se) {
-			se.printStackTrace();
+			//se.printStackTrace();
 			return new ArrayList<>();
 		}
 	}//getInquiryList
 	
-    // 공지사항 작성
+    // 문의 작성
 	public boolean writeInquiry(InquiryDTO iDTO) {
 	    try {
 	        boolean result = iDAO.insertInquiry(iDTO);
@@ -57,7 +70,7 @@ public class InquiryService {
 	        return result;
 	    } catch (SQLException e) {
 	        System.out.println("writeInquiry 오류: " + e.getMessage());
-	        e.printStackTrace();
+	       // e.printStackTrace();
 	        return false;
 	    }
 	}
@@ -142,7 +155,6 @@ public class InquiryService {
     
     public PaginationResult getInquiryListWithPagination(int currentPage, int pageSize) {
         List<InquiryDTO> inquiryList = new ArrayList<InquiryDTO>();
-       // NoticeDAO noticeDAO = NoticeDAO.getInstance();
         PaginationDTO pagination = null;
         
         try {
@@ -161,9 +173,14 @@ public class InquiryService {
 					
 			for (InquiryDTO item : inquiryList) {
 				try {
-					String decryptedName = dd.decrypt(item.getName()); 
-					System.out.println("복호화된 이름 : "+ decryptedName);
-					item.setName(decryptedName);
+					String name=item.getName();
+                    if (isValidBase64(name)) {
+                        String decryptedName = dd.decrypt(name);
+                        item.setName(decryptedName);
+                        System.out.println("복호화된 이름 : " + decryptedName);
+                    } else {
+                        System.out.println("Base64 형식 아님: " + name);
+                    }
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -196,9 +213,7 @@ public class InquiryService {
 
     public PaginationResult searchInquiryWithPagination(String searchType, String searchKeyword, String statusType, int currentPage,int pageSize) {
         List<InquiryDTO> inquiryList = new ArrayList<>();
-        //NoticeDAO noticeDAO = NoticeDAO.getInstance();
         PaginationDTO pagination = null;
-        
         
         try {
         	// 검색어 정리
@@ -215,15 +230,20 @@ public class InquiryService {
             String myKey = "asdf1234asdf1234";
 			DataDecryption dd = new DataDecryption(myKey);
 					
-			for (InquiryDTO item : inquiryList) {
-				try {
-					String decryptedName = dd.decrypt(item.getName()); 
-					System.out.println("복호화된 이름 : "+ decryptedName);
-					item.setName(decryptedName);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
+            for (InquiryDTO item : inquiryList) {
+                try {
+                    String name = item.getName();
+                    if (isValidBase64(name)) {
+                        String decryptedName = dd.decrypt(name);
+                        item.setName(decryptedName);
+                        System.out.println("복호화된 이름 : " + decryptedName);
+                    } else {
+                        System.out.println("Base64 형식 아님: " + name);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             
         } catch (SQLException se) {
             se.printStackTrace();

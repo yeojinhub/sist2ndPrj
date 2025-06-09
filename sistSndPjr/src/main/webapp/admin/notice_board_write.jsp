@@ -23,6 +23,7 @@
 <!-- Quill JS -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 
+
 </head>
 
 <body>
@@ -54,7 +55,7 @@
                                      <td colspan="4">
                                         <div class="radio-container" style="border:1px solid #ccc; padding: 10px;">
                                             <label><input type="radio" name="status_type" value="공지" <c:if test="${notice.status_type=='공지'}">checked</c:if> /> 공지</label>
-                                            <label><input type="radio" name="status_type" value="미공지" <c:if test="${notice.status_type=='미공지'}">checked</c:if>/> 미공지</label>
+                                            <label><input type="radio" name="status_type" value="미공지" <c:if test="${notice.status_type == null || notice.status_type == '' || notice.status_type == '미공지'}">checked</c:if> /> 미공지</label>
                                         </div>
                                     </td>
 								</tr>
@@ -90,6 +91,16 @@
 	</script>
 	<script>
 		document.querySelector("form").onsubmit=function(){
+		    const title = document.querySelector('input[name="title"]').value.trim();
+		    const content = quill.root.innerText.trim(); // 텍스트만 검사
+		    if (title === "") {
+		      alert("제목을 입력해주세요.");
+		      return false;  // 폼 제출 막기
+		    }
+		    if (content === "") {
+		      alert("내용을 입력해주세요.");
+		      return false;
+		    }
 			document.getElementById("content").value=quill.root.innerHTML;
 		}
 	</script>
