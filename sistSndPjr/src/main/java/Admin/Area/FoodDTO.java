@@ -21,7 +21,6 @@ public class FoodDTO {
 	
 	private int areaNum; /* 휴게소번호 */
 	private String areaName; /* 휴게소이름 */
-	private String areaAddr; /* 휴게소주소 */
 	private String areaTel; /* 휴게소전화전호 */
 	private String areaRoute; /* 휴게소노선 */
 	private String operationTime; /* 휴게소영업시간 */

@@ -13,7 +13,15 @@ $(function(){
 			$('#chkAll').prop('checked', false);
 		} // end if else
 	}); // change
-
+	
+	$("#btnFoodAddFrm").click(function(){
+		location.href='food_add_frm.jsp';
+	}); // click
+	
+	$("#btnFoodModify").click(function(){
+		chkModifyNull();
+	}); // click
+	
 	$("#btnFoodRemove").click(function() {
 		const checkedValues = [];
 		$("input[name='chk']:checked").each(function() {
@@ -33,15 +41,38 @@ $(function(){
 
 		setEdit("r", checkedValues);
 	}); // click
-	
-	$("#btnFoodModify").click(function(){
-	}); // click
 
 	$("#btnFoodBack").click(function(){
-		location.href='food_list.jsp';
+		location.href='food_witharea_list.jsp';
 	}); // click
 	
 }); // ready
+
+function chkModifyNull(){
+	var foodName = $("#foodName").val();
+	var price = $("#price").val();
+	
+	if( foodName.trim() == "" || foodName.trim() == null ){
+		alert("음식명은 필수로 입력해주세요.");
+		// early return
+		return false;
+	} // end if
+	console.log('음식명 : ',foodName);
+
+	if( price.trim() == "" || price.trim() == null ){
+		price = "0";
+	} // end if
+	console.log('음식가격 : ',price);
+	
+
+	var param = {
+		foodName: foodName,
+		price: price
+	}; //param
+
+	setEdit("m", param);
+
+} // chkModifyNull
 
 function setEdit(flag, param){
 	
@@ -59,10 +90,37 @@ function setEdit(flag, param){
 	
 	if(flag == "m"){
 		url="food_modify_process.jsp";
-		modifyAreaProcess(url);
+		modifyFoodProcess(url, param);
 	} // end if
 	
 } //setEdit
+
+function modifyFoodProcess(actionUrl, param){
+
+	$.ajax({
+		url: actionUrl,
+		type: "post",
+		data: param,
+		error: function(xhr) {
+			alert("음식의 수정 작업이 정상적으로 수행되지 않았습니다.\n 잠시후 시도해주세요.");
+			console.error("status:", xhr.status); // 상태 코드
+			console.error("responseText:", xhr.responseText); // 서버에서 응답한 내용
+		}, // error
+		success: function(response) {
+			if (response.success) {
+				// 음식 수정성공
+				alert("음식 수정성공");
+				location.href = "food_list.jsp";
+			} else {
+				// 음식 삭제실패
+				alert("음식 수정성공" + response.message);
+				history.back();
+			} // end if else
+		} // success
+	}); // ajax
+
+} // removeFoodProcess
+
 
 function removeFoodProcess(actionUrl, checkedValues){
 

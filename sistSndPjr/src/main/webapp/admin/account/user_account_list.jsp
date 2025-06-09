@@ -1,3 +1,4 @@
+<%@page import="kr.co.sist.cipher.DataDecryption"%>
 <%@page import="Pagination.PaginationDTO"%>
 <%@page import="Account.AdminAccountService.PaginationResult"%>
 <%@page import="Pagination.PaginationUtil"%>
@@ -33,6 +34,18 @@ if (searchKeyword != null) {
 
 List<AccountDTO> userList = result.getData();
 PaginationDTO pagination = result.getPagination();
+
+//복호화
+DataDecryption dd = new DataDecryption("asdf1234asdf1234");
+for (AccountDTO item : userList) {
+	try {
+		item.setName(dd.decrypt(item.getName()));
+		item.setUser_email(dd.decrypt(item.getUser_email()));
+		item.setTel(dd.decrypt(item.getTel()));
+	} catch (Exception e) {
+		System.err.println("복호화 실패 사유 : " + e.getMessage() + " / 원본 : " + item.getName() + " / " + item.getUser_email() + " / " + item.getTel());
+	}// end try-catch
+}// end for
 
 request.setAttribute("userList", userList);
 request.setAttribute("pagination", pagination);

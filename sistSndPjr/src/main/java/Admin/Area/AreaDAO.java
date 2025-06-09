@@ -576,7 +576,106 @@ private static AreaDAO areaDAO;
 			// 2. DBCP에서 연결객체 얻기(DataSource).
 			// 3. Connection 얻기.
 			con = dbCon.getDbCon();
+			
+			
+			/*
+			 * 즐겨찾기 테이블 자식레코드 삭제
+			 */
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder deleteFavoriteQuery = new StringBuilder();
+			deleteFavoriteQuery
+			.append("	delete	from	favorite	")
+			.append("	where area_num in (	")
+			;
 
+			int countFavorite = 0;
+			for (int i = 0; i < areaList.size(); i++) {
+				if (i == areaList.size() - 1) {
+					deleteFavoriteQuery.append("	?	");
+				} else {
+					deleteFavoriteQuery.append("	?,	");
+				} // end if else
+				countFavorite++;
+			} // end for
+			deleteFavoriteQuery.append("	)	");
+
+			pstmt = con.prepareStatement(deleteFavoriteQuery.toString());
+
+			// 5. bind 변수에 값 할당
+			for (int j = 0; j < countFavorite; j++) {
+				pstmt.setInt(j + 1, areaList.get(j));
+			} // end for
+
+			// 6. 쿼리문 수행 후 결과 얻기.
+			pstmt.executeUpdate();
+			
+			
+			/*
+			 * 리뷰 테이블 자식레코드 삭제
+			 */
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder deleteReviewQuery = new StringBuilder();
+			deleteReviewQuery
+			.append("	delete	from	review	")
+			.append("	where area_num in (	")
+			;
+
+			int countReview = 0;
+			for (int i = 0; i < areaList.size(); i++) {
+				if (i == areaList.size() - 1) {
+					deleteReviewQuery.append("	?	");
+				} else {
+					deleteReviewQuery.append("	?,	");
+				} // end if else
+				countReview++;
+			} // end for
+			deleteReviewQuery.append("	)	");
+
+			pstmt = con.prepareStatement(deleteReviewQuery.toString());
+
+			// 5. bind 변수에 값 할당
+			for (int j = 0; j < countReview; j++) {
+				pstmt.setInt(j + 1, areaList.get(j));
+			} // end for
+
+			// 6. 쿼리문 수행 후 결과 얻기.
+			pstmt.executeUpdate();
+			
+			/*
+			 * 음식 테이블 자식레코드 삭제
+			 */
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder deleteFoodQuery = new StringBuilder();
+			deleteFoodQuery
+			.append("	delete	from food	")
+			.append("	where area_num in (	")
+			;
+
+			int countFood = 0;
+			for (int i = 0; i < areaList.size(); i++) {
+				if (i == areaList.size() - 1) {
+					deleteFoodQuery.append("	?	");
+				} else {
+					deleteFoodQuery.append("	?,	");
+				} // end if else
+				countFood++;
+			} // end for
+
+			deleteFoodQuery.append("	)	");
+
+			pstmt = con.prepareStatement(deleteFoodQuery.toString());
+
+			// 5. bind 변수에 값 할당
+			for (int j = 0; j < countFood; j++) {
+				pstmt.setInt(j + 1, areaList.get(j));
+			} // end for
+
+			// 6. 쿼리문 수행 후 결과 얻기.
+			flagNum = pstmt.executeUpdate();
+		
+			/*
+			 * 휴게소 테이블 삭제
+			 */
 			// 4. 쿼리문 생성객체 얻기.
 			StringBuilder deleteQuery = new StringBuilder();
 			deleteQuery

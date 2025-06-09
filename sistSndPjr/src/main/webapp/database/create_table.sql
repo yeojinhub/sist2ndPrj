@@ -107,7 +107,7 @@ CREATE TABLE AREA (
     AGRICULTURAL VARCHAR2(10) DEFAULT 'X', /* 농산물판매장 */
     REPAIR VARCHAR2(10) DEFAULT 'X', /* 경정비소 */
     TRUCK VARCHAR2(10) DEFAULT 'X', /* 화물차라운지 */
-    TEMP VARCHAR2(10), /* 추가시설 */
+    TEMP VARCHAR2(4000) DEFAULT 'X', /* 추가시설 */
     LAT VARCHAR2(255)  NOT NULL, /* 휴게소위도 */
     LNG VARCHAR2(255)  NOT NULL /* 휴게소경도 */
 );
@@ -123,13 +123,14 @@ CREATE TABLE FAVORITE (
 /* 주유소 테이블 생성 */
 CREATE TABLE PETROL (
     PET_NUM NUMBER(10) NOT NULL, /* 주유소번호 */
+    NAME VARCHAR2(255) NOT NULL, /* 주유소이름 */
     TEL VARCHAR2(50), /* 주유소전화번호 */
+    ROUTE VARCHAR2(255), /* 휴게소노선 */
     GASOLINE VARCHAR2(255), /* 휘발유 */
     DIESEL VARCHAR2(255), /* 경유 */
     LPG VARCHAR2(255), /* LPG */
     ELECT VARCHAR2(255) DEFAULT 'X', /* 전기 */
-    HYDRO VARCHAR2(255) DEFAULT 'X', /* 수소 */
-    AREA_NUM NUMBER(10) NOT NULL /* 휴게소번호 */
+    HYDRO VARCHAR2(255) DEFAULT 'X' /* 수소 */
 );
 
 /* 리뷰 테이블 생성 */
@@ -179,7 +180,7 @@ CREATE TABLE NOTICE (
     CONTENT VARCHAR2(4000) NOT NULL, /* 공지사항내용 */
     NAME VARCHAR2(255) NOT NULL, /* 공지사항작성자 */
     INPUT_DATE DATE DEFAULT SYSDATE, /* 공지사항작성일 */
-    STATUS_TYPE VARCHAR2(255) DEFAULT '미공지', /* 공지사항상태(공지중,미공지) */
+    STATUS_TYPE VARCHAR2(255) DEFAULT '공지', /* 공지사항상태(공지,미공지) */
     ACC_NUM NUMBER(10) NOT NULL /* 계정번호 */
 );
 
@@ -293,12 +294,6 @@ REFERENCES ACCOUNT (ACC_NUM);
 /* 즐겨찾기 테이블 휴게소번호 FK 설정 */
 ALTER TABLE FAVORITE
 ADD CONSTRAINT FK_AREA_TO_FAVORITE
-FOREIGN KEY (AREA_NUM)
-REFERENCES AREA (AREA_NUM);
-
-/* 주유소 테이블 휴게소번호 FK 설정 */
-ALTER TABLE PETROL
-ADD CONSTRAINT FK_AREA_TO_PETROL
 FOREIGN KEY (AREA_NUM)
 REFERENCES AREA (AREA_NUM);
 
