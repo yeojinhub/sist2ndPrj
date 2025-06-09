@@ -159,9 +159,10 @@
             <div class="pagination">
                 <a href="?page=1" class="first-page"><i class="fas fa-angle-double-left"></i></a>
                 <c:forEach var="i" begin="1" end="${pagination.totalPages}">
-                    <a href="?page=${i}" class="${i == pagination.currentPage ? 'active' : ''}">${i}</a>
+                    <a href="?page=${i}&hiddenType=${hiddenType}" class="${i == pagination.currentPage ? 'active' : ''}">${i}</a>
                 </c:forEach>
-                <a href="?page=${pagination.totalPages}" class="last-page"><i class="fas fa-angle-double-right"></i></a>
+                <a href="?page=1&hiddenType=${hiddenType}" class="first-page"><i class="fas fa-angle-double-left"></i></a>
+                <a href="?page=${pagination.totalPages}&hiddenType=${hiddenType}" class="last-page"><i class="fas fa-angle-double-right"></i></a>
             </div>
 
 			<div class="button-group">
