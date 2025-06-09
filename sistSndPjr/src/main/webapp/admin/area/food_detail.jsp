@@ -17,7 +17,6 @@ FoodService service = new FoodService();
 FoodDTO foodDTO = service.searchOneFood(num);
 request.setAttribute("foodDTO", foodDTO);
 		
-out.println("detail에서의 foodDTO 값 : "+foodDTO);
 %>
 <!DOCTYPE html>
 <html>

@@ -393,6 +393,58 @@ public class FoodDAO {
 	} //selectAllArea
 	
 	/**
+	 * 단일 휴게소 조회
+	 * @param num 조회할 휴게소 번호
+	 * @return fDTO 조회한 휴게소 정보
+	 * @throws SQLException 예외처리
+	 */
+	public FoodDTO selectOneArea(int num) throws SQLException {
+		FoodDTO fDTO = null;
+		
+		DBConnection dbCon = DBConnection.getInstance();
+
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+
+		try {
+			// 1. JNDI 사용객체 생성.
+			// 2. DBCP에서 연결객체 얻기(DataSource).
+			// 3. Connection 얻기.
+			con = dbCon.getDbCon();
+
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder selectOneQuery = new StringBuilder();
+			selectOneQuery
+			.append("	select	name, route	")
+			.append("	from	area	")
+			.append("	where	area_num=?	")
+			;
+			
+			pstmt = con.prepareStatement(selectOneQuery.toString());
+
+			// 5. bind 변수에 값 할당
+			pstmt.setInt(1, num);
+			
+			// 6. 쿼리문 수행 후 결과 얻기.
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				fDTO = new FoodDTO();
+				fDTO.setAreaName(rs.getString("area_name"));
+				fDTO.setAreaRoute(rs.getString("route"));
+				fDTO.setAreaNum(rs.getInt("area_num"));
+			} // end if
+
+		} finally {
+			// 7. 연결 끊기.
+			dbCon.dbClose(con, pstmt, rs);
+		} // end try finally
+		
+		return fDTO;
+	} //selectOneArea
+	
+	/**
 	 * 전체 먹거리 조회
 	 * @param num 조회할 휴게소 번호
 	 * @return areaList 조회한 전체 먹거리 리스트
@@ -458,7 +510,7 @@ public class FoodDAO {
 	 * 단일 음식 조회
 	 * @param num 조회할 음식 번호
 	 * @return fDTO 조회한 음식 정보
-	 * @throws SQLException
+	 * @throws SQLException 예외처리
 	 */
 	public FoodDTO selectOneFood(int num) throws SQLException {
 		FoodDTO fDTO = null;
@@ -510,6 +562,51 @@ public class FoodDAO {
 		
 		return fDTO;
 	} //selectOneFood
+	
+	/**
+	 * 음식 등록
+	 * @param fDTO 사용자로부터 입력받은 등록할 음식 정보
+	 * @throws SQLException 예외처리
+	 */
+	public void insertFood(FoodDTO fDTO) throws SQLException {
+
+		DBConnection dbCon = DBConnection.getInstance();
+
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		
+		try {
+			// 1. JNDI 사용객체 생성.
+			// 2. DBCP에서 연결객체 얻기(DataSource).
+			// 3. Connection 얻기.
+			con = dbCon.getDbCon();
+			
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder insertQuery = new StringBuilder();
+			insertQuery
+			.append("	insert	into	food	")
+			.append("	(food_num, name, price, area_num)	")
+			.append("	values(seq_food_num.nextval,	")
+			.append("	?,?,?)	")
+			;
+			
+			pstmt = con.prepareStatement(insertQuery.toString());
+			
+			// 5. bind 변수에 값 할당
+			pstmt.setString(1, fDTO.getFoodName());
+			pstmt.setString(2, fDTO.getFoodPrice());
+			pstmt.setInt(3, fDTO.getAreaNum());
+			
+			// 6. 쿼리문 수행 후 결과 얻기.
+			rs=pstmt.executeQuery();
+			
+		} finally {
+			// 7. 연결 끊기.
+			dbCon.dbClose(con, pstmt, rs);
+		} //end try finally
+		
+	} //insertFood
 	
 	/**
 	 * 음식 수정
