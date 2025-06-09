@@ -49,6 +49,7 @@ $(function(){
 }); // ready
 
 function chkModifyNull(){
+	var foodNum = $("#foodNum").val();
 	var foodName = $("#foodName").val();
 	var price = $("#price").val();
 	
@@ -66,6 +67,7 @@ function chkModifyNull(){
 	
 
 	var param = {
+		foodNum: foodNum,
 		foodName: foodName,
 		price: price
 	}; //param

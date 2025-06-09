@@ -15,8 +15,6 @@ String msg = "";
 foodDTO.setFoodName(request.getParameter("foodName"));
 foodDTO.setFoodPrice(request.getParameter("price"));
 
-out.println("process에서의 저장된 dto 값 : "+foodDTO);
-
 try {
 	foodDTO.setFoodNum(Integer.parseInt(request.getParameter("foodNum")));
 	out.println(Integer.parseInt(request.getParameter("foodNum")));
@@ -25,8 +23,6 @@ try {
 } catch(Exception e) {
 	msg = "예외 발생: " + e.getMessage();
 } // end try catch
-
-out.println("process에서의 저장된 dto 값 : "+foodDTO);
 
 JSONObject json = new JSONObject();
 json.put("success", flag);
