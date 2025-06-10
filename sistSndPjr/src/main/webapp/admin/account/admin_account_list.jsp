@@ -7,6 +7,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../common/jsp/login_chk.jsp" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%
 AdminAccountService accountService = new AdminAccountService();
 List<AccountDTO> adminList = accountService.selectAllAdmin();
@@ -59,10 +61,10 @@ request.setAttribute("adminList", adminList);
                     	</tr>
                     </c:if>
                     <c:forEach var="accountDTO" items="${ adminList }" varStatus="i">
-                        <tr onclick="location.href='admin_account_detail.jsp?acc_num=${ accountDTO.acc_num }'">
-                            <td><c:out value="${ i.count }" /></td>
-                            <td><c:out value="${ accountDTO.name }" /></td>
-                            <td><c:out value="${ accountDTO.adm_id }" /></td>
+                        <tr>
+                            <td><c:out value="${ fn:length(adminList) - i.index }" /></td>
+                            <td class="onclickbtn" onclick="location.href='admin_account_detail.jsp?acc_num=${ accountDTO.acc_num }'"><c:out value="${ accountDTO.name }" /></td>
+                            <td class="onclickbtn" onclick="location.href='admin_account_detail.jsp?acc_num=${ accountDTO.acc_num }'"><c:out value="${ accountDTO.adm_id }" /></td>
                             <td><c:out value="${ accountDTO.tel }" /></td>
                             <td><fmt:formatDate value="${ accountDTO.input_date }" pattern="yyyy-MM-dd" /></td>
                         </tr>

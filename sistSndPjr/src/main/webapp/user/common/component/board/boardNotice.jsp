@@ -9,6 +9,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:useBean id="rDTO" class="user.util.RangeDTO" scope="page" />
 <jsp:setProperty name="rDTO" property="*" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 var $contentDiv = $('.content');
 
@@ -26,14 +28,26 @@ $(function(){
             });
     });
     
-    $("#btnSearch").click(function() {
-		var keyword = $("#keyword").val();
-		if(keyword == ""){
-			alert("검색 키워드는 필수 입력입니다.");
-			return;
-		}
-		$("#searchFrm").submit();
-	});
+
+    $("#btnSearch").click(function(e) {
+        e.preventDefault();  // 기본 동작 막기 (submit 방지)
+
+        var keyword = $("#keyword").val();
+        if (keyword === "") {
+            Swal.fire({
+                title: '알림',
+                text: '검색 키워드는 필수 입력입니다.',
+                icon: 'warning',
+                confirmButtonText: '확인',
+                confirmButtonColor: '#3bc1b7'
+            });
+            return;
+        }
+
+        $("#searchFrm").submit(); // 조건 만족 시만 제출
+    });
+
+
     
 });
 </script>

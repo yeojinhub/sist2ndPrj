@@ -339,6 +339,7 @@ public class AdminAccountDAO {
 			.append("	select	acc_num, name, adm_id, tel, input_date	")
 			.append("	from	account	")
 			.append("	where	ROLLTYPE=0	")
+			.append("	ORDER BY input_date DESC	")
 			;
 			
 			pstmt = con.prepareStatement(selectAllQuery.toString());

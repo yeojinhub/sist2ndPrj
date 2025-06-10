@@ -14,7 +14,7 @@ pageContext.setAttribute("faqList", fs.searchAllFAQ());%>
 </script>
 <div>
 	<div style="position: relative;">
-		<h3 class="section-title">공지사항</h3>
+		<h3 class="section-title">FAQ</h3>
 		<hr class="line_gray">
 
 		<div class="accordion" id="accordionExample" style="width: 960px;">
