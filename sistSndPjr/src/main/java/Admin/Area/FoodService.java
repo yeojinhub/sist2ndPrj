@@ -141,6 +141,25 @@ public class FoodService {
 	} //searchAllArea
 	
 	/**
+	 * 단일 휴게소 상세정보 조회
+	 * @param num 조회할 휴게소 번호
+	 * @return fDTO 단일 휴게소 정보
+	 */
+	public FoodDTO searchOneArea(int num) {
+		FoodDTO fDTO = null;
+		
+		FoodDAO fDAO = FoodDAO.getInstance();
+		
+		try {
+			fDTO = fDAO.selectOneArea(num);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} //end try catch
+		
+		return fDTO;
+	} // searchOneArea
+	
+	/**
 	 * 전체 먹거리 조회
 	 * @param num 조회할 휴게소 번호
 	 * @return foodList 조회한 전체 먹거리 리스트
@@ -178,6 +197,31 @@ public class FoodService {
 		return fDTO;
 	} // searchOneFood
 	
+	/**
+	 * 음식 추가
+	 * @param fDTO 사용자로부터 입력받은 등록할 음식 정보
+	 * @return flag 성공시 true, 실패시 false 반환
+	 */
+	public boolean addFood(FoodDTO fDTO) {
+		boolean flag = false;
+		
+		FoodDAO fDAO = FoodDAO.getInstance();
+		
+		try {
+			fDAO.insertFood(fDTO);
+			flag = true;
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} //end try catch
+		
+		return flag;
+	} //addFood
+	
+	/**
+	 * 음식 수정
+	 * @param fDTO 사용자로부터 입력받은 수정할 음식 정보
+	 * @return flag 성공시 true, 실패시 false 반환
+	 */
 	public boolean modifyFood(FoodDTO fDTO) {
 		boolean flag = false;
 		

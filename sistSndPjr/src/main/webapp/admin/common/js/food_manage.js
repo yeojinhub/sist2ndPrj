@@ -18,6 +18,10 @@ $(function(){
 		location.href='food_add_frm.jsp';
 	}); // click
 	
+	$("#btnFoodAdd").click(function(){
+		chkAddNull();
+	}); // click
+	
 	$("#btnFoodModify").click(function(){
 		chkModifyNull();
 	}); // click
@@ -47,6 +51,32 @@ $(function(){
 	}); // click
 	
 }); // ready
+
+function chkAddNull(){
+	var foodName = $("#foodName").val();
+	var price = $("#price").val();
+	
+	if( foodName.trim() == "" || foodName.trim() == null ){
+		alert("음식명은 필수로 입력해주세요.");
+		// early return
+		return false;
+	} // end if
+	console.log('음식명 : ',foodName);
+
+	if( price.trim() == "" || price.trim() == null ){
+		price = "0";
+	} // end if
+	console.log('음식가격 : ',price);
+	
+
+	var param = {
+		foodName: foodName,
+		price: price
+	}; //param
+
+	setEdit("a", param);
+
+} // chkAddNull
 
 function chkModifyNull(){
 	var foodNum = $("#foodNum").val();
@@ -87,7 +117,7 @@ function setEdit(flag, param){
 	
 	if(flag == "a"){
 		url="food_add_process.jsp";
-		addAreaProcess(url, param);
+		addFoodProcess(url, param);
 	} // end if
 	
 	if(flag == "m"){
@@ -96,6 +126,32 @@ function setEdit(flag, param){
 	} // end if
 	
 } //setEdit
+
+function addFoodProcess(actionUrl, param){
+
+	$.ajax({
+		url: actionUrl,
+		type: "post",
+		data: param,
+		error: function(xhr) {
+			alert("음식의 등록 작업이 정상적으로 수행되지 않았습니다.\n 잠시후 시도해주세요.");
+			console.error("status:", xhr.status); // 상태 코드
+			console.error("responseText:", xhr.responseText); // 서버에서 응답한 내용
+		}, // error
+		success: function(response) {
+			if (response.success) {
+				// 음식 등록성공
+				alert("음식 등록성공");
+				location.href = "food_witharea_list.jsp";
+			} else {
+				// 음식 삭제실패
+				alert("음식 삭제실패" + response.message);
+				history.back();
+			} // end if else
+		} // success
+	}); // ajax
+
+} // addFoodProcess
 
 function modifyFoodProcess(actionUrl, param){
 
@@ -121,7 +177,7 @@ function modifyFoodProcess(actionUrl, param){
 		} // success
 	}); // ajax
 
-} // removeFoodProcess
+} // modifyFoodProcess
 
 
 function removeFoodProcess(actionUrl, checkedValues){

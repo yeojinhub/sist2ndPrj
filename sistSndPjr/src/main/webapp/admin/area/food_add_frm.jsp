@@ -1,11 +1,8 @@
 <%@page import="Admin.Area.FoodDTO"%>
-<%@page import="java.util.List"%>
 <%@page import="Admin.Area.FoodService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    info=""%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String paramNum=request.getParameter("areaNum");
 
@@ -17,8 +14,9 @@ try{
 } //end try catch
 
 FoodService service = new FoodService();
-List<FoodDTO> foodList = service.searchAllFood(num);
-request.setAttribute("foodList", foodList);
+FoodDTO foodDTO = service.searchOneArea(num);
+request.setAttribute("foodDTO", foodDTO);
+		
 %>
 <!DOCTYPE html>
 <html>
@@ -42,64 +40,54 @@ request.setAttribute("foodList", foodList);
 
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar -->
-        <jsp:include page="/admin/common/jsp/admin_sidebar.jsp" />
+	<div class="container">
+		<!-- Sidebar -->
+		<jsp:include page="/admin/common/jsp/admin_sidebar.jsp" />
 
 		<!-- Main Content -->
 		<div class="main-content">
 			<div class="header">
-				<h1>먹거리 수정</h1>
+				<h1>먹거리 추가</h1>
 			</div>
 
+			<form name="addFrm" id="addFrm" method="post">
 			<div class="content">
 				<div>
 					<div>
 						<h1><c:out value="${ foodDTO.areaName }"></c:out> </h1>
 					</div>
-					<div class="addBtn-wrapper">
-					<input type="button" class="btn btn-primary addBtn" value="추가+" />
-					</div>
 				</div>
-				<table class="data-table">
-					<thead>
-						<tr>
-							<th><input type="checkbox" class="label-checkbox" name="chkAll" id="chkAll" /></th>
-							<th>번호</th>
-							<th>음식명</th>
-							<th>가격</th>
-							<th>이미지</th>
-						</tr>
-					</thead>
+				
+				<input type="hidden" value="${ foodDTO.areaNum }" />
+				<table class="account-table account-content">
 					<tbody>
-						<c:if test="${ empty foodList }">
 						<tr>
-							<td><input type="checkbox" class="label-checkbox" name="chk" id="chk" value="${ foodDTO.foodNum }" /></td>
-							<td><input type="text" /></td>
-							<td><input type="text" name="name" id="name" /></td>
+							<td>휴게소명</td>
+							<td><input type="text" name="areaName" id="areaName" value="${ foodDTO.areaName }"
+									readonly="readonly"/></td>
+						</tr>
+						<tr>
+							<td>노선</td>
+							<td><input type="text" name="route" id="route" value="${ foodDTO.areaRoute }"
+									readonly="readonly"/></td>
+						</tr>
+						<tr>
+							<td>음식명</td>
+							<td><input type="text" name="foodName" id="foodName" /></td>
+						</tr>
+						<tr>
+							<td>가격</td>
 							<td><input type="text" name="price" id="price" /></td>
-							<td><input type="text" name="image" id="image" /></td>
 						</tr>
-						</c:if>
-						<c:forEach var="foodDTO" items="${ foodList }"  varStatus="i">
-						<tr>
-							<td><input type="checkbox" class="label-checkbox" name="chk" id="chk" value="${ foodDTO.foodNum }"></td>
-							<td><input type="text" value="${ i.count }" /></td>
-							<td><input type="text" name="name" id="name" value="${ foodDTO.foodName }" /></td>
-							<td>
-							<input type="text" name="price" id="price" value="<fmt:formatNumber type="number" value="${ foodDTO.foodPrice }" maxFractionDigits="3" />원" />
-							</td>
-							<td><input type="text" name="image" id="image" value="${ foodDTO.foodImage }" /></td>
-						</tr>
-						</c:forEach>
 					</tbody>
 				</table>
 
 				<div class="button-group-area-detail">
-					<button class="btn btn-edit" id="btnFoodAdd">등록</button>
-					<button class="btn btn-back" id="btnFoodBack">뒤로</button>
+					<input type="button" class="btn btn-add" id="btnFoodAdd" value="등록" />
+					<input type="button" class="btn btn-back" id="btnFoodBack" value="뒤로" />
 				</div>
 			</div>
+			</form>
 		</div>
 	</div>
 </body>
