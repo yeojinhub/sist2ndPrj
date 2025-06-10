@@ -98,10 +98,11 @@ LoginResultDTO userData = (LoginResultDTO) session.getAttribute("userData");
 	</script>
 	<script>
 		document.querySelector("form").onsubmit = function() {
-			const content = quill.root.innerText.trim(); // 텍스트만 검사
+		    const title = document.querySelector("input[name='title']").value.trim();
+		    const content = quill.root.innerText.trim(); 
 			if (title === "") {
 				alert("제목을 입력해주세요.");
-				return false; // 폼 제출 막기
+				return false;
 			}
 			if (content === "") {
 				alert("내용을 입력해주세요.");

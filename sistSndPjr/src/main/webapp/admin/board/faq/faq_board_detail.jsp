@@ -10,6 +10,11 @@ int faqNum = Integer.parseInt(request.getParameter("faq_num"));
 FaqService service = new FaqService();
 FaqDTO fDTO = service.getFaqOne(faqNum);
 request.setAttribute("fDTO", fDTO);
+
+System.out.println("faq_num: " + request.getParameter("faq_num"));
+System.out.println("title: " + request.getParameter("title"));
+System.out.println("content: " + request.getParameter("content"));
+
 %>
 <!DOCTYPE html>
 <html>

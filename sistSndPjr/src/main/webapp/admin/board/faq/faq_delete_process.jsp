@@ -23,7 +23,7 @@ if (faqNums != null) {
     for (String numStr : faqNums) {
         try {
             int num = Integer.parseInt(numStr);
-            if (!service.deleteNotice(num)) {
+            if (!service.deleteFaq(num)) {
                 allDeleted = false;
             }
         } catch (NumberFormatException e) {
@@ -33,7 +33,7 @@ if (faqNums != null) {
 } else if (singleFaqNum != null) {
     try {
         int num = Integer.parseInt(singleFaqNum);
-        allDeleted = service.deleteNotice(num);
+        allDeleted = service.deleteFaq(num);
     } catch (NumberFormatException e) {
         allDeleted = false;
     }
