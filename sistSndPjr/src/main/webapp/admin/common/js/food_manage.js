@@ -53,6 +53,7 @@ $(function(){
 }); // ready
 
 function chkAddNull(){
+	var areaNum = $("#areaNum").val();
 	var foodName = $("#foodName").val();
 	var price = $("#price").val();
 	
@@ -70,6 +71,7 @@ function chkAddNull(){
 	
 
 	var param = {
+		areaNum: areaNum,
 		foodName: foodName,
 		price: price
 	}; //param
@@ -94,7 +96,6 @@ function chkModifyNull(){
 		price = "0";
 	} // end if
 	console.log('음식가격 : ',price);
-	
 
 	var param = {
 		foodNum: foodNum,
@@ -145,7 +146,7 @@ function addFoodProcess(actionUrl, param){
 				location.href = "food_witharea_list.jsp";
 			} else {
 				// 음식 삭제실패
-				alert("음식 삭제실패" + response.message);
+				alert("음식 등록실패" + response.message);
 				history.back();
 			} // end if else
 		} // success
@@ -168,10 +169,10 @@ function modifyFoodProcess(actionUrl, param){
 			if (response.success) {
 				// 음식 수정성공
 				alert("음식 수정성공");
-				location.href = "food_list.jsp";
+				location.href = "food_witharea_list.jsp";
 			} else {
-				// 음식 삭제실패
-				alert("음식 수정성공" + response.message);
+				// 음식 수정실패
+				alert("음식 수정실패" + response.message);
 				history.back();
 			} // end if else
 		} // success
@@ -196,7 +197,7 @@ function removeFoodProcess(actionUrl, checkedValues){
 			if (response.success) {
 				// 음식 삭제성공
 				alert("음식 삭제성공");
-				location.href = "food_list.jsp";
+				location.href = "food_witharea_list.jsp";
 			} else {
 				// 음식 삭제실패
 				alert("음식 삭제실패" + response.message);

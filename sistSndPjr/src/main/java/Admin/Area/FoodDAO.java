@@ -431,9 +431,8 @@ public class FoodDAO {
 
 			if (rs.next()) {
 				fDTO = new FoodDTO();
-				fDTO.setAreaName(rs.getString("area_name"));
+				fDTO.setAreaName(rs.getString("name"));
 				fDTO.setAreaRoute(rs.getString("route"));
-				fDTO.setAreaNum(rs.getInt("area_num"));
 			} // end if
 
 		} finally {
@@ -590,6 +589,7 @@ public class FoodDAO {
 			.append("	values(seq_food_num.nextval,	")
 			.append("	?,?,?)	")
 			;
+			System.out.println("DAO에서의 실행쿼리문 : "+insertQuery);
 			
 			pstmt = con.prepareStatement(insertQuery.toString());
 			
@@ -597,6 +597,8 @@ public class FoodDAO {
 			pstmt.setString(1, fDTO.getFoodName());
 			pstmt.setString(2, fDTO.getFoodPrice());
 			pstmt.setInt(3, fDTO.getAreaNum());
+			
+			System.out.println("DAO에서의 음식 dto 값 : "+fDTO);
 			
 			// 6. 쿼리문 수행 후 결과 얻기.
 			rs=pstmt.executeQuery();
@@ -644,7 +646,7 @@ public class FoodDAO {
 			pstmt.setString(2, fDTO.getFoodPrice());
 			pstmt.setInt(3, fDTO.getFoodNum());
 			
-			System.out.println("DAO에서의 저장된 dto 값 : "+fDTO);
+			System.out.println("DAO에서의 저장된 dto 값 : "+fDTO.getFoodName()+fDTO.getFoodPrice()+fDTO.getFoodNum());
 			
 			// 6. 쿼리문 수행 후 결과 얻기.
 			flagNum = pstmt.executeUpdate();

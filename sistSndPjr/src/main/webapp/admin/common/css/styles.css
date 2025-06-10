@@ -466,6 +466,13 @@ textarea.content {
 	color: white;
 }
 
+.btn-remove {
+	height: 50px;
+	width: 80px;
+	background-color: #a4abbd;
+	color: white;
+}
+
 .btn-delete {
 	height: 50px;
 	width: 80px;

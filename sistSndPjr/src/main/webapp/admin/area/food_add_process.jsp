@@ -15,6 +15,9 @@ if ("POST".equals(request.getMethod().toUpperCase())) {
 	foodDTO.setFoodName(request.getParameter("foodName"));
 	foodDTO.setFoodPrice(request.getParameter("price"));
 	
+	System.out.println(foodDTO);
+	System.out.println(Integer.parseInt(request.getParameter("areaNum")));
+	
 	try {
 		foodDTO.setAreaNum(Integer.parseInt(request.getParameter("areaNum")));
 		FoodService service = new FoodService();

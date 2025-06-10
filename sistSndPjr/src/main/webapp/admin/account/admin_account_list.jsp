@@ -6,6 +6,7 @@
     info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="../common/jsp/login_chk.jsp" %>
 <%
 AdminAccountService accountService = new AdminAccountService();
 List<AccountDTO> adminList = accountService.selectAllAdmin();

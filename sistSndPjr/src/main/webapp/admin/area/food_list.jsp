@@ -6,6 +6,7 @@
     info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="../common/jsp/login_chk.jsp" %>
 <%
 String paramNum=request.getParameter("areaNum");
 
@@ -18,6 +19,8 @@ try{
 
 FoodService service = new FoodService();
 List<FoodDTO> foodList = service.searchAllFood(num);
+		
+request.setAttribute("num", num);
 request.setAttribute("foodList", foodList);
 		
 if (!foodList.isEmpty()) {
@@ -80,11 +83,13 @@ if (!foodList.isEmpty()) {
 						</c:if>
 						<c:forEach var="foodDTO" items="${ foodList }"  varStatus="i">
 						<tr>
-							<td><input type="checkbox" class="label-checkbox" name="chk" id="chk" value="${ foodDTO.foodNum }"></td>
+							<td><input type="checkbox" class="label-checkbox" name="chk" id="chk" value="${ foodDTO.foodNum }" /></td>
 							<td><c:out value="${ i.count }" /></td>
-							<td class="onclickbtn" onclick="location.href='food_detail.jsp?foodNum=${ foodDTO.foodNum }'"><c:out value="${ foodDTO.foodName }" /></td>
 							<td class="onclickbtn" onclick="location.href='food_detail.jsp?foodNum=${ foodDTO.foodNum }'">
-							<fmt:formatNumber type="number" value="${ foodDTO.foodPrice }" maxFractionDigits="3" />원
+								<c:out value="${ foodDTO.foodName }" />
+							</td>
+							<td class="onclickbtn" onclick="location.href='food_detail.jsp?foodNum=${ foodDTO.foodNum }'">
+								<fmt:formatNumber type="number" value="${ foodDTO.foodPrice }" maxFractionDigits="3" />원
 							</td>
 						</tr>
 						</c:forEach>
@@ -92,7 +97,7 @@ if (!foodList.isEmpty()) {
 				</table>
 
 				<div class="button-group-area-detail">
-					<button class="btn btn-add" id="btnFoodAddFrm">등록</button>
+					<button class="btn btn-add" id="btnFoodAddFrm2" onclick="location.href='food_add_frm.jsp?areaNum=${ num }'">등록</button>
 					<button class="btn btn-remove" id="btnFoodRemove">삭제</button>
 					<button class="btn btn-back" id="btnFoodBack">뒤로</button>
 				</div>

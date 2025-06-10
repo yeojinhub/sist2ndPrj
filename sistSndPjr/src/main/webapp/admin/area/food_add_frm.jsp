@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../common/jsp/login_chk.jsp" %>
 <%
 String paramNum=request.getParameter("areaNum");
 
@@ -15,6 +16,8 @@ try{
 
 FoodService service = new FoodService();
 FoodDTO foodDTO = service.searchOneArea(num);
+		
+request.setAttribute("num", num);
 request.setAttribute("foodDTO", foodDTO);
 		
 %>
@@ -50,7 +53,7 @@ request.setAttribute("foodDTO", foodDTO);
 				<h1>먹거리 추가</h1>
 			</div>
 
-			<form name="addFrm" id="addFrm" method="post">
+			<form name="addFrm" id="addFrm" method="post" action="food_add_process.jsp">
 			<div class="content">
 				<div>
 					<div>
@@ -58,7 +61,7 @@ request.setAttribute("foodDTO", foodDTO);
 					</div>
 				</div>
 				
-				<input type="hidden" value="${ foodDTO.areaNum }" />
+				<input type="hidden" name="areaNum" id="areaNum" value="${ num }" />
 				<table class="account-table account-content">
 					<tbody>
 						<tr>

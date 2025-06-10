@@ -17,7 +17,6 @@ foodDTO.setFoodPrice(request.getParameter("price"));
 
 try {
 	foodDTO.setFoodNum(Integer.parseInt(request.getParameter("foodNum")));
-	out.println(Integer.parseInt(request.getParameter("foodNum")));
 	FoodService service = new FoodService();
 	flag = service.modifyFood(foodDTO);
 } catch(Exception e) {

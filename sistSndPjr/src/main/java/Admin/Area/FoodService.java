@@ -205,6 +205,8 @@ public class FoodService {
 	public boolean addFood(FoodDTO fDTO) {
 		boolean flag = false;
 		
+		System.out.println("Service에서의 음식 dto 값 : "+fDTO.getFoodNum()+fDTO.getFoodName()+fDTO.getFoodPrice());
+		
 		FoodDAO fDAO = FoodDAO.getInstance();
 		
 		try {

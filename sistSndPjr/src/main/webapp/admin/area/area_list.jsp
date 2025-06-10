@@ -8,6 +8,7 @@
     pageEncoding="UTF-8"
     info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../common/jsp/login_chk.jsp" %>
 <%
 //페이지 파라미터를 PaginationUtil로 안전하게 파싱
 String pageParam = request.getParameter("page");

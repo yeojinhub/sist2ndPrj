@@ -2,6 +2,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
+<%@ include file="../common/jsp/login_chk.jsp" %>
 <% 
 String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 %>

@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class PetrolDTO {
 
-	private int area_num;
+	private int pet_num;
 	private String name, tel, route, gasoline, diesel, lpg, elect, hydro;
 	
 }// class

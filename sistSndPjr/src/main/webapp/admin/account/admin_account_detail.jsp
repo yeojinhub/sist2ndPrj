@@ -2,6 +2,7 @@
 <%@page import="Account.AccountDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="../common/jsp/login_chk.jsp" %>
 <%
 String paramNum=request.getParameter("acc_num");
 
