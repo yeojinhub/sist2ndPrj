@@ -14,22 +14,21 @@
 <jsp:useBean id="fDTO" class="Faq.FaqDTO" scope="request" />
 <jsp:setProperty name="fDTO" property="*" />
 <% 
-
-    fDTO.setName(userData.getName());
-    
+	fDTO.setName(userData.getName());
+	
 	FaqService faqService = new FaqService();
-    int accNum = faqService.getAccNumByAdmId(userData.getAdm_id());
-    System.out.println("ACC_NUM: " + accNum);
-    
-    if (accNum > 0) {
-        fDTO.setAcc_num(accNum);
-        boolean writeFlag = faqService.writeFaq(fDTO);
-        System.out.println("faq-Write Flag: " + writeFlag);
-        request.setAttribute("writeFlag", writeFlag);
-    } else {
-        System.out.println("ACC_NUM을 찾을 수 없습니다.");
-        request.setAttribute("writeFlag", false);
-    }
+	int accNum = faqService.getAccNumByAdmId(userData.getAdm_id());
+	System.out.println("ACC_NUM: " + accNum);
+	
+	if (accNum > 0) {
+	    fDTO.setAcc_num(accNum);
+	    boolean writeFlag = faqService.writeFaq(fDTO);
+	    System.out.println("faq-Write Flag: " + writeFlag);
+	    request.setAttribute("writeFlag", writeFlag);
+	} else {
+	    System.out.println("ACC_NUM을 찾을 수 없습니다.");
+	    request.setAttribute("writeFlag", false);
+	}
 %>
 
 <!DOCTYPE html>

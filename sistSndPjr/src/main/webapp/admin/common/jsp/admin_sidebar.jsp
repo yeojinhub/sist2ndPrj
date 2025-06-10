@@ -8,7 +8,7 @@
 
 	<div class="admin-info">
 		<span class="admin-label">관리자</span> <span class="admin-name">김민경님</span>
-		<button class="logout-btn">로그아웃</button>
+		<button class="logout-btn" onclick="location.href='/sistSndPjr/admin/login/admin_logout.jsp'">로그아웃</button>
 	</div>
 
 	<ul class="menu">

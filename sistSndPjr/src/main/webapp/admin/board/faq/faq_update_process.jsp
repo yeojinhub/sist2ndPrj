@@ -22,8 +22,8 @@
 	fDTO.setFaq_num(faqNum);
 	
 	boolean updateFlag=false;
-	FaqService noticeService=new FaqService();
-	updateFlag=noticeService.updateNotice(fDTO);
+	FaqService faqService=new FaqService();
+	updateFlag=faqService.updatFaq(fDTO);
 
 	request.setAttribute("updateFlag", updateFlag);
 %>
