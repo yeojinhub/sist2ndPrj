@@ -69,11 +69,11 @@ public class PetrolDAO {
 	        
 	        StringBuilder selectQuery = new StringBuilder();
 	        selectQuery.append("SELECT * FROM (")
-	                   .append("  SELECT ROW_NUMBER() OVER (ORDER BY A.AREA_NUM) RNUM, ")
-	                   .append("         A.AREA_NUM, NAME, A.TEL, ROUTE, ")
+	                   .append("  SELECT ROW_NUMBER() OVER (ORDER BY PET_NUM) RNUM, ")
+	                   .append("         NAME, TEL, ROUTE, PET_NUM, ")
 	                   .append("         GASOLINE, DIESEL, LPG, ELECT, HYDRO ")
-	                   .append("  FROM AREA A ")
-	                   .append("  INNER JOIN PETROL P ON A.AREA_NUM = P.AREA_NUM ");
+	                   .append("  FROM PETROL ")
+	                   .append("   ");
 
 	        //--- 조건 처리 시작 ---//
 	        String route = rDTO.getRoute();
@@ -120,7 +120,7 @@ public class PetrolDAO {
 	        
 	        while (rs.next()) {
 	            PetrolDTO pDTO = new PetrolDTO();
-	            pDTO.setArea_num(rs.getInt("AREA_NUM"));
+	            pDTO.setPet_num(rs.getInt("PET_NUM"));
 	            pDTO.setName(rs.getString("NAME"));
 	            pDTO.setTel(rs.getString("TEL"));
 	            pDTO.setRoute(rs.getString("ROUTE"));
@@ -161,8 +161,7 @@ public class PetrolDAO {
 	        
 	        StringBuilder selectQuery = new StringBuilder();
 	        selectQuery.append("SELECT COUNT(*) CNT ")
-	                   .append("FROM AREA A ")
-	                   .append("INNER JOIN PETROL P ON A.AREA_NUM = P.AREA_NUM ");
+	                   .append("FROM PETROL ");
 
 	        //--- 조건 처리 시작 ---//
 	        String route = rDTO.getRoute();
