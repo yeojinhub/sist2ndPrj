@@ -91,7 +91,7 @@
 								<label class="facility-label"><input type="checkbox" class="label-checkbox" name="agricultural" id="agricultural"> 농산물판매장</label>
 								<label class="facility-label"><input type="checkbox" class="label-checkbox" name="repair" id="repair"> 경정비소</label>
 								<label class="facility-label"><input type="checkbox" class="label-checkbox" name="truck" id="truck"> 화물차라운지</label>
-								<label class="facility-label"><input type="checkbox" class="label-checkbox" name="tempChk" id="tempChk"><input type="text" name="tempText" id="tempText" placeholder="추가시설"></label>
+								<input type="text" name="tempText" id="tempText" placeholder="추가시설">
 							</div>
 						</div>
 					</div>

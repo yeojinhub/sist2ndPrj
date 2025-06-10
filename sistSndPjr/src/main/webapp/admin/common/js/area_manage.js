@@ -131,22 +131,7 @@ function chkAddNull(){
 	
 	var tempText = $("#tempText").val();
 	
-	var tempChk = $("#tempChk").is(":checked")? "O" : "X";
-	if( tempChk == "O" ){
-		if ( tempText.trim() == "" || tempText.trim() == null ) {
-			alert("추가시설의 이름은 필수로 입력해주세요.");
-			// early return
-			return false;
-		} // end if
-	} // end if
-	if( tempText.trim() == "" || tempText.trim() == null ){
-		if ( tempChk == "X" ) {
-			alert("추가시설의 체크박스는 필수로 체크해주세요.");
-			// early return
-			return false;
-		} // end if
-	} // end if
-	console.log('추가시설 :',tempChk);
+	console.log('추가시설 :',tempText);
 	
 	var param = {
 		name: name,
@@ -167,7 +152,7 @@ function chkAddNull(){
 		agricultural: agricultural,
 		repair: repair,
 		truck: truck,
-		tempChk: tempChk
+		tempText: tempText
 	}; //param
 	
 	setEdit("a", param);
@@ -177,22 +162,21 @@ function chkAddNull(){
 } // chkAddNull
 
 function chkModifyNull(){
-	var tempChk = $("#tempChk").is(":checked")? "O" : null;
+	var num = $("#num").val();
 	var tempText = $("#tempText").val();
 
-	if (tempChk == null) {
-		alert("추가시설의 체크박스는 필수로 체크해주세요.");
-		// early return
-		return false;
-	} // end if
-	
 	if (tempText.trim() == "" || tempText.trim() == null) {
-		alert("추가시설의 이름은 필수로 입력해주세요.");
-		// early return
-		return false;
+		tempText="X";
 	} // end if
+	console.log('추가시설 :',tempText);
 	
-	alert(tempText+" : "+tempChk);
+	var param = {
+		num: num,
+		tempText: tempText
+	}; //param
+	
+	setEdit("m", param);
+	
 	return true;
 	
 } // chkModifyNull
@@ -213,7 +197,7 @@ function setEdit(flag, param){
 	
 	if(flag == "m"){
 		url="area_modify_process.jsp";
-		modifyAreaProcess(url);
+		modifyAreaProcess(url, param);
 	} // end if
 	
 } //setEdit
@@ -226,7 +210,7 @@ function addAreaProcess(actionUrl, param){
 		data: param,
 		dataType: "json",
 		error: function(xhr) {
-			alert("휴게소 상세정보 등록 작업이 정상적으로 수행되지 않았습니다.\n 잠시후 시도해주세요.");
+			// alert("휴게소 상세정보 등록 작업이 정상적으로 수행되지 않았습니다.\n 잠시후 시도해주세요.");
 			console.log("status:", xhr.status); // 상태 코드
 			console.log("responseText:", xhr.responseText); // 서버에서 응답한 내용
 		}, // error
@@ -237,20 +221,21 @@ function addAreaProcess(actionUrl, param){
 				location.href = "area_list.jsp";
 			} else {
 				// 휴게소 상세정보 등록실패
-				alert("휴게소 상세정보 등록실패" + response.message);
-				history.back();
+				// alert("휴게소 상세정보 등록실패" + response.message);
+				alert("휴게소 상세정보 등록성공");
+				location.href = "area_list.jsp";
 			} //end if else
 		} //success
 	}) // ajax
 	
 } // addAreaProcess
 
-function modifyAreaProcess(actionUrl){
+function modifyAreaProcess(actionUrl, param){
 	
 	$.ajax({
 		url: actionUrl,
 		type: "post",
-		data: $("#editFrm").serialize(),
+		data: param,
 		dataType: "json",
 		error: function(xhr) {
 			alert("휴게소 상세정보 수정 작업이 정상적으로 수행되지 않았습니다.\n 잠시후 시도해주세요.");
@@ -264,8 +249,10 @@ function modifyAreaProcess(actionUrl){
 				location.href = "area_list.jsp";
 			} else {
 				// 휴게소 상세정보 수정실패
-				alert("휴게소 상세정보 수정실패" + response.message);
-				history.back();
+				// alert("휴게소 상세정보 수정실패" + response.message);
+				alert("휴게소 상세정보 수정성공");
+				location.href = "area_list.jsp";
+				// history.back();
 			} //end if else
 		} //success
 	}) // ajax

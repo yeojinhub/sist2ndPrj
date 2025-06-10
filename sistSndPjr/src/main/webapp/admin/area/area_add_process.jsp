@@ -30,7 +30,7 @@ if ("POST".equals(request.getMethod().toUpperCase())) {
 	areaDTO.setAgricultural(request.getParameter("agricultural"));
 	areaDTO.setRepair(request.getParameter("repair"));
 	areaDTO.setTruck(request.getParameter("truck"));
-	areaDTO.setTemp(request.getParameter("tempChk"));
+	areaDTO.setTemp(request.getParameter("tempText"));
 } //end if
 
 try {

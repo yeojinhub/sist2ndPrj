@@ -119,24 +119,21 @@ request.setAttribute("facilityMap", facilityMap);
 							<c:forEach var="entry" items="${ facilityMap }">
 								<label class="facility-label">
 								<c:choose>
-									<c:when test="${ entry.key eq '추가시설' and entry.value eq 'O' }">
-										<input type="checkbox" class="label-checkbox" name="tempChk" id="tempChk" value="O"
-										<c:if test="${ entry.value eq 'O' }">checked="checked"</c:if> disabled="disabled" />
-										<c:out value="${entry.key}" />
+									<c:when test="${ entry.key eq '추가시설' and not empty entry.value }">
+										<input type="text" name="textText" id="tempText" value="${entry.value}" />
 									</c:when>
-									
+									 
 									<c:when test="${ entry.key eq '추가시설' and (entry.value eq 'X' or empty entry.value) }">
-										<input type="checkbox" class="label-checkbox" name="tempChk" id="tempChk" value="O"/>
-										<input type="text" name="tempText" id="tempText" placeholder="${entry.key}"  />
+										<input type="text" name="tempText" id="tempText" />
 									</c:when>
 									
 									<c:when test="${ entry.value eq 'O' }">
-										<input type="checkbox" class="label-checkbox" name="${entry.key}" checked="checked" disabled="disabled" />
+										<input type="checkbox" class="label-checkbox" name="${entry.key}" checked="checked" />
 										<c:out value="${ entry.key }" />
 									</c:when>
 									
 									<c:otherwise>
-										<input type="checkbox" class="label-checkbox" name="${entry.key}" disabled="disabled" />
+										<input type="checkbox" class="label-checkbox" name="${entry.key}" />
 										<c:out value="${ entry.key }" />
 									</c:otherwise>
 								</c:choose>

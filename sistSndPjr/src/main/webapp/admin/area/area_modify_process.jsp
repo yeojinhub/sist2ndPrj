@@ -12,7 +12,7 @@ request.setCharacterEncoding("UTF-8");
 boolean flag = false;
 String msg = "";
 
-areaDTO.setTemp( request.getParameter("tempChk"));
+areaDTO.setTemp( request.getParameter("tempText"));
 
 try {
 	areaDTO.setArea_num(Integer.parseInt(request.getParameter("num")));
