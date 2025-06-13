@@ -11,6 +11,11 @@ RestAreaDetailService rads = new RestAreaDetailService();
 
 AreaDetailDTO adDTO = rads.searchRestAreaDetail(Integer.parseInt(id));
 
+if (adDTO == null) {
+	response.sendRedirect("user_main_page.jsp");
+	return;
+}
+
 // 휴게소명, 방향 설정
 String name = adDTO.getName();
 String direction = adDTO.getDirection() == null ? "" : adDTO.getDirection();

@@ -66,7 +66,7 @@ public class PaginationUtil {
 		// 3-2. 페이지들(1, 2, 3...) 만들기
 		movePage = startPage;
 		StringBuilder pageLink = new StringBuilder();
-
+		
 		while (movePage <= endPage) {
 			if (movePage == currentPage) { // 현재 페이지는 링크를 설정하지 않고 span태그로 색상을 조정한다.
 				pageLink.append("<span style='text-decoration: underline;' class='number'>").append(currentPage).append("</span>");

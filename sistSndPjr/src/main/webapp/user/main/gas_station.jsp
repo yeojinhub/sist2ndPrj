@@ -13,7 +13,14 @@ request.setCharacterEncoding("UTF-8");
 <%
 request.setAttribute("menu", "gas");
 
+if (Integer.parseInt(request.getParameter("currentPage")) > 23) {
+	response.sendRedirect("?currentPage="+23);
+}
+
 boolean routeFlag = rDTO.getRoute() != null;
+
+
+System.out.println(rDTO);
 
 pageContext.setAttribute("rDTO", rDTO);
 pageContext.setAttribute("routeFlag", routeFlag);

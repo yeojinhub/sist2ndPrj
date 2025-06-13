@@ -16,19 +16,20 @@ public class RestAreaDetailService {
 		
 		try {
 			adDTO = radDAO.selectRestAreaDetail(num);
-			
-			if (adDTO.getName().contains("(")) {
-				String name = adDTO.getName();
+			if (adDTO != null) {
+				if (adDTO.getName().contains("(")) {
+					String name = adDTO.getName();
+					
+					adDTO.setDirection(name.substring(name.indexOf("("),name.lastIndexOf(")"))+")");
+					adDTO.setName(name.substring(0,name.lastIndexOf("("))+"휴게소");
+				} else {
+					adDTO.setName(adDTO.getName()+"휴게소");
+				}// end else-if
 				
-				adDTO.setDirection(name.substring(name.indexOf("("),name.lastIndexOf(")"))+")");
-				adDTO.setName(name.substring(0,name.lastIndexOf("("))+"휴게소");
-			} else {
-				adDTO.setName(adDTO.getName()+"휴게소");
-			}// end else-if
-			
-			if (adDTO.getTemp() == null) {
-				adDTO.setTemp("없음");
-			}// end if
+				if (adDTO.getTemp() == null) {
+					adDTO.setTemp("없음");
+				}// end if
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
