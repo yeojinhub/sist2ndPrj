@@ -12,6 +12,17 @@ request.setCharacterEncoding("UTF-8");
 boolean flag = false;
 String msg = "";
 
+areaDTO.setFeed( request.getParameter("수유실"));
+areaDTO.setSleep( request.getParameter("수면실"));
+areaDTO.setShower( request.getParameter("샤워실"));
+areaDTO.setLaundry( request.getParameter("세탁실"));
+areaDTO.setClinic( request.getParameter("병원"));
+areaDTO.setPharmacy( request.getParameter("약국"));
+areaDTO.setShelter( request.getParameter("쉼터"));
+areaDTO.setSalon( request.getParameter("이발소"));
+areaDTO.setAgricultural( request.getParameter("농산물판매장"));
+areaDTO.setRepair( request.getParameter("경정비소"));
+areaDTO.setTruck( request.getParameter("화물차라운지"));
 areaDTO.setTemp( request.getParameter("tempText"));
 
 try {

@@ -536,15 +536,26 @@ private static AreaDAO areaDAO;
 			StringBuilder updateQuery = new StringBuilder();
 			updateQuery
 			.append("	update	area	")
-			.append("	set temp=?	")
+			.append("	set feed=?, sleep=?, shower=?, laundry=?, clinic=?, pharmacy=?, shelter=?,  salon=?, agricultural=?, repair=?, truck=?, temp=?	")
 			.append("	where	area_num=?	")
 			;
 			
 			pstmt = con.prepareStatement(updateQuery.toString());
 			
 			// 5. bind 변수에 값 할당
-			pstmt.setString(1, areaDTO.getTemp());
-			pstmt.setInt(2, areaDTO.getArea_num());
+			pstmt.setString(1, areaDTO.getFeed());
+			pstmt.setString(2, areaDTO.getSleep());
+			pstmt.setString(3, areaDTO.getShower());
+			pstmt.setString(4, areaDTO.getLaundry());
+			pstmt.setString(5, areaDTO.getClinic());
+			pstmt.setString(6, areaDTO.getPharmacy());
+			pstmt.setString(7, areaDTO.getShelter());
+			pstmt.setString(8, areaDTO.getSalon());
+			pstmt.setString(9, areaDTO.getAgricultural());
+			pstmt.setString(10, areaDTO.getRepair());
+			pstmt.setString(11, areaDTO.getTruck());
+			pstmt.setString(12, areaDTO.getTemp());
+			pstmt.setInt(13, areaDTO.getArea_num());
 			
 			// 6. 쿼리문 수행 후 결과 얻기.
 			flagNum = pstmt.executeUpdate();

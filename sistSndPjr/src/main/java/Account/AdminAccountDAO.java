@@ -289,6 +289,79 @@ public class AdminAccountDAO {
 			// 3. Connection 얻기.
 			con = dbCon.getDbCon();
 			
+			/*
+			 * 즐겨찾기 테이블 자식레코드 삭제
+			 */
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder deleteFavoriteQuery = new StringBuilder();
+			deleteFavoriteQuery
+			.append("	delete	from	favorite	")
+			.append("	where	acc_num=?	");
+
+			pstmt = con.prepareStatement(deleteFavoriteQuery.toString());
+
+			// 5. bind 변수에 값 할당
+			pstmt.setInt(1, accNum);
+
+			// 6. 쿼리문 수행 후 결과 얻기.
+			pstmt.executeUpdate();
+			
+			/*
+			 * 리뷰 테이블 자식레코드 삭제
+			 */
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder deleteReviewQuery = new StringBuilder();
+			deleteReviewQuery
+			.append("	delete	from	review	")
+			.append("	where	acc_num=?	");
+
+			pstmt = con.prepareStatement(deleteReviewQuery.toString());
+
+			// 5. bind 변수에 값 할당
+			pstmt.setInt(1, accNum);
+
+			// 6. 쿼리문 수행 후 결과 얻기.
+			pstmt.executeUpdate();
+			
+			/*
+			 * 문의답변 테이블 자식레코드 삭제
+			 */
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder deleteAnswerQuery = new StringBuilder();
+			deleteAnswerQuery
+			
+			.append("	delete from answer	")
+			.append("	where inq_num in	")
+			.append("	(select inq_num from inquiry where acc_num = ?)	");
+
+			pstmt = con.prepareStatement(deleteAnswerQuery.toString());
+
+			// 5. bind 변수에 값 할당
+			pstmt.setInt(1, accNum);
+
+			// 6. 쿼리문 수행 후 결과 얻기.
+			pstmt.executeUpdate();
+			
+			/*
+			 * 문의사항 테이블 자식레코드 삭제
+			 */
+			// 4. 쿼리문 생성객체 얻기.
+			StringBuilder deleteInquiryQuery = new StringBuilder();
+			deleteInquiryQuery
+			.append("	delete	from	inquiry	")
+			.append("	where	acc_num=?	");
+
+			pstmt = con.prepareStatement(deleteInquiryQuery.toString());
+
+			// 5. bind 변수에 값 할당
+			pstmt.setInt(1, accNum);
+
+			// 6. 쿼리문 수행 후 결과 얻기.
+			pstmt.executeUpdate();
+			
+			/*
+			 * 계정 테이블 삭제
+			 */
 			// 4. 쿼리문 생성객체 얻기.
 			StringBuilder deleteQuery = new StringBuilder();
 			deleteQuery

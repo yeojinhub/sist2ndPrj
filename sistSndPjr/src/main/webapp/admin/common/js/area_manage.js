@@ -163,6 +163,28 @@ function chkAddNull(){
 
 function chkModifyNull(){
 	var num = $("#num").val();
+	var feed = $("#수유실").is(":checked")? "O" : "X";
+		console.log('수유실:',feed);
+		var sleep = $("#수면실").is(":checked")? "O" : "X";
+		console.log('수면실:',sleep);
+		var shower = $("#샤워실").is(":checked")? "O" : "X";
+		console.log('샤워실:',shower);
+		var laundry = $("#세탁실").is(":checked")? "O" : "X";
+		console.log('세탁실:',laundry);
+		var clinic  = $("#병원").is(":checked")? "O" : "X";
+		console.log('병원:',clinic);
+		var pharmacy = $("#약국").is(":checked")? "O" : "X";
+		console.log('약국:',pharmacy);
+		var shelter = $("#쉼터").is(":checked")? "O" : "X";
+		console.log('쉼터:',shelter);
+		var salon = $("#이발소").is(":checked")? "O" : "X";
+		console.log('이발소:',salon);
+		var agricultural = $("#농산물판매장").is(":checked")? "O" : "X";
+		console.log('농산물판매장 :',agricultural);
+		var repair = $("#경정비소").is(":checked")? "O" : "X";
+		console.log('경정비소 :',repair);
+		var truck = $("#화물차라운지").is(":checked")? "O" : "X";
+		console.log('화물차라운지 :',truck);
 	var tempText = $("#tempText").val();
 
 	if (tempText.trim() == "" || tempText.trim() == null) {
@@ -172,6 +194,17 @@ function chkModifyNull(){
 	
 	var param = {
 		num: num,
+		feed: feed,
+		sleep: sleep,
+		shower: shower,
+		laundry: laundry,
+		clinic: clinic,
+		pharmacy: pharmacy,
+		shelter: shelter,
+		salon: salon,
+		agricultural: agricultural,
+		repair: repair,
+		truck: truck,
 		tempText: tempText
 	}; //param
 	

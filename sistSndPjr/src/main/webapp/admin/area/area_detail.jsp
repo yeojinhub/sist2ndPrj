@@ -128,12 +128,12 @@ request.setAttribute("facilityMap", facilityMap);
 									</c:when>
 									
 									<c:when test="${ entry.value eq 'O' }">
-										<input type="checkbox" class="label-checkbox" name="${entry.key}" checked="checked" />
+										<input type="checkbox" class="label-checkbox" name="${entry.key}" id="${entry.key}" checked="checked" />
 										<c:out value="${ entry.key }" />
 									</c:when>
 									
 									<c:otherwise>
-										<input type="checkbox" class="label-checkbox" name="${entry.key}" />
+										<input type="checkbox" class="label-checkbox" name="${entry.key}" id="${entry.key}" />
 										<c:out value="${ entry.key }" />
 									</c:otherwise>
 								</c:choose>
