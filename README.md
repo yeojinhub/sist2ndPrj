@@ -4,11 +4,12 @@ sist 쌍용교육센터 2차 프로젝트
 모두쉼(4/28~6/12)
 - - -
 ## 목차
-1. [프로젝트 소개](#프로젝트 소개)
+1. [개요](#개요)
 2. [개발기간](#개발기간)
-3. [기술스택](#Stacks)
+3. [멤버구성](#멤버구성)
+4. [기술스택](#Stacks)
 - - -
-## 프로젝트 소개
+## 개요
 > 프로젝트 이름: 모두쉼
 > 모두쉼(고속도로 휴게소 정보 사이트)는 운전자와 여행객들이 전국 고속도로 휴게소의 다양한 정보를 손쉽게 확인할 수 있도록 지원하는 웹 페이지입니다.
 > 
@@ -21,10 +22,15 @@ sist 쌍용교육센터 2차 프로젝트
 - - -
 ## 멤버구성
 > 이여진(조장)[@yeojinhub](https://github.com/yeojinhub)
+>
 > 강태일(부조장)[@tgncosist2](https://github.com/tgncosist2)
+>
 > 김민경[@min-7343](https://github.com/min-7343)
+>
 > 장태규[@taegu825](https://github.com/taegu825)
+>
 > 유명규[@RyuMG](https://github.com/RyuMG)
+>
 > 이대웅[@bkj0517](https://github.com/bkj0517)
 - - -
 ## Stacks
