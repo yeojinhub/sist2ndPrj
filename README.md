@@ -2,24 +2,31 @@
 sist 쌍용교육센터 2차 프로젝트
 고속도로 휴게소 정보 사이트
 모두쉼(4/28~6/12)
-
+- - -
 ## 목차
+1. [프로젝트 소개](#프로젝트 소개)
+2. [개발기간](#개발기간)
+3. [기술스택](#Stacks)
 - - -
-1. [개요](#개요)
-2. [기술스택](#Stacks)
-
-## 개요
-- - -
+## 프로젝트 소개
 > 프로젝트 이름: 모두쉼
->
-> 프로젝트 지속기간: 2025/4/28~2025/6/12
+> 모두쉼(고속도로 휴게소 정보 사이트)는 운전자와 여행객들이 전국 고속도로 휴게소의 다양한 정보를 손쉽게 확인할 수 있도록 지원하는 웹 페이지입니다.
 > 
-> 개발 엔진 및 언어: Java EE, JavaScript, Sevlet, Html, CSS
+> 본 프로젝트는 사용자 중심의 직관적인 인터페이스와 안정적인 서버 환경을 제공하여, 고속도로 이용자들의 편의를 증진시키는데 목적이 있습니다.
 > 
-> 멤버: [이여진(조장)](https://github.com/yeojinhub), [강태일(부조장)](https://github.com/tgncosist2), [김민경](https://github.com/min-7343), [장태규](https://github.com/taegu825), [유명규](https://github.com/RyuMG), [이대웅](https://github.com/bkj0517)
-
-
-
+> 카카오맵API, javax.mail+SMTP, lombok 등 다양한 API와 라이브러리를 활용하며 지속적인 업데이트를 통해, 사용자에게 정확한 정보를 제공합니다.
+- - -
+## 개발기간
+> 2025/4/28~2025/6/12
+- - -
+## 멤버구성
+> 이여진(조장)[@yeojinhub](https://github.com/yeojinhub)
+> 강태일(부조장)[@tgncosist2](https://github.com/tgncosist2)
+> 김민경[@min-7343](https://github.com/min-7343)
+> 장태규[@taegu825](https://github.com/taegu825)
+> 유명규[@RyuMG](https://github.com/RyuMG)
+> 이대웅[@bkj0517](https://github.com/bkj0517)
+- - -
 ## Stacks
 > ### Front-End
 > 
