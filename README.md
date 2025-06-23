@@ -3,6 +3,10 @@ sist 쌍용교육센터 2차 프로젝트
 고속도로 휴게소 정보 사이트
 모두쉼(4/28~6/12)
 
+<p align="center">
+<img width="70%" src="https://github.com/user-attachments/assets/9410ef87-9090-4b86-898d-7d5bb94f06f7">
+</p>
+
 ## 📌 목차
 1. [개요](#개요)
 2. [개발기간](#개발기간)
