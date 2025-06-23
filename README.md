@@ -3,8 +3,8 @@ sist 쌍용교육센터 2차 프로젝트
 고속도로 휴게소 정보 사이트
 모두쉼(4/28~6/12)
 
-<p align="center">
-<img width="70%" src="https://github.com/user-attachments/assets/9410ef87-9090-4b86-898d-7d5bb94f06f7">
+<p>
+<img width="20%" src="https://github.com/user-attachments/assets/9410ef87-9090-4b86-898d-7d5bb94f06f7">
 </p>
 
 ## 📌 목차
@@ -12,6 +12,7 @@ sist 쌍용교육센터 2차 프로젝트
 2. [개발기간](#개발기간)
 3. [멤버구성](#멤버구성)
 4. [기술스택](#Stacks)
+5. [시연영상](#시연영상)
 
 ## 🖥️ 개요
 > 프로젝트 이름: 모두쉼
@@ -64,3 +65,16 @@ sist 쌍용교육센터 2차 프로젝트
 > 
 > ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
 > ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+
+## 시연 영상
+> ### 관리자 로그인, 대시보드, 계정 관리(회원 계정 관리, 관리자 계정 관리)
+>
+<p>
+  <img width="80%" src="https://github.com/user-attachments/assets/028af59f-0db8-4813-99d0-c54d0e935a61">
+</p>
+
+> ### 관리자 게시판 관리(공지사항 관리, FAQ 관리), 문의 관리
+>
+> <p>
+  <img width="80%" src="https://github.com/user-attachments/assets/c4f63136-5c4e-47be-bc34-55fd9c4498f3">
+</p>
