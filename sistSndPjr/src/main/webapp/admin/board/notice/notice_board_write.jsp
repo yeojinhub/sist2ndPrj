@@ -25,7 +25,7 @@ LoginResultDTO userData = (LoginResultDTO) session.getAttribute("userData");
 	rel="stylesheet">
 
 <!-- Quill JS -->
-<script src="/sistSndPjr/admin/script.js"></script>
+<script src="/admin/script.js"></script>
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 
 </head>
@@ -114,6 +114,7 @@ LoginResultDTO userData = (LoginResultDTO) session.getAttribute("userData");
 	</script>
 	<script>
 		document.querySelector("form").onsubmit = function() {
+			const title = document.querySelector("input[name='title']").value.trim();
 			const content = quill.root.innerText.trim(); // 텍스트만 검사
 			if (title === "") {
 				alert("제목을 입력해주세요.");

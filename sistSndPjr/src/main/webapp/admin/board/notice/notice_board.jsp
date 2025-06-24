@@ -48,7 +48,7 @@ request.setAttribute("noticeList", noticeList); */
     <meta charset="UTF-8">
     <title>관리자 대시보드</title>
     <link rel="stylesheet" href="../../common/css/styles.css">
-    <script src="/sistSndPjr/admin/script.js"></script>
+    <script src="/admin/script.js"></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -174,13 +174,13 @@ request.setAttribute("noticeList", noticeList); */
                         </c:forEach>
                     </tbody>
                 </table>
-          </form>  
             </div>
 
             <div class="button-group">
                 <button type="button" class="btn btn-add" onclick="location.href='notice_board_write.jsp'">작성</button>
                 <button type="submit" class="btn btn-delete">삭제</button>
             </div>
+          </form>  
              <!-- 페이지네이션 -->  
 			<div class="pagination">
 			    <a href="?page=1&searchType=${searchType}&searchKeyword=${searchKeyword}&statusType=${statusType}" class="first-page">

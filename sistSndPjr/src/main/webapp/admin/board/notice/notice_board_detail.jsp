@@ -24,7 +24,7 @@ request.setAttribute("notice", notice);
 
 
 <!-- Quill JS -->
-<script src="/sistSndPjr/admin/script.js"></script>
+<script src="/admin/script.js"></script>
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 
 </head>
