@@ -1,10 +1,10 @@
-# sist2ndPjr
+# sist2ndPrj
 sist 쌍용교육센터 2차 프로젝트
 고속도로 휴게소 정보 사이트
 모두쉼(4/28~6/12)
 
 <p>
-<img width="20%" src="https://github.com/user-attachments/assets/9410ef87-9090-4b86-898d-7d5bb94f06f7">
+<img width="100%" src="https://github.com/user-attachments/assets/cd035a27-9d9b-4be6-8c84-ab6dd7c90fd6">
 </p>
 
 ## 📌 목차
