@@ -4,7 +4,7 @@ sist 쌍용교육센터 2차 프로젝트
 모두쉼(4/28~6/12)
 
 <p>
-<img width="100%" src="https://github.com/user-attachments/assets/cd035a27-9d9b-4be6-8c84-ab6dd7c90fd6">
+<img width="100%" src="https://github.com/user-attachments/assets/675541e0-dc48-408e-bd85-7f75b8e2f107">
 </p>
 
 ## 📌 목차
