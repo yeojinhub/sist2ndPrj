@@ -26,17 +26,25 @@ sist 쌍용교육센터 2차 프로젝트
 > 2025/4/28~2025/6/12
 
 ## 🧑‍🤝‍🧑 멤버구성
-> 이여진(조장)[@yeojinhub](https://github.com/yeojinhub)
+> ### 이여진(조장)[@yeojinhub](https://github.com/yeojinhub)
 >
-> 강태일(부조장)[@tgncosist2](https://github.com/tgncosist2)
+> 관리자 계정 관리(회원 계정 관리, 관리자 계정 관리), 휴게소 관리(상세정보 관리, 먹거리 관리, 주유소 관리) 기능구현
 >
-> 김민경[@min-7343](https://github.com/min-7343)
+> ### 강태일(부조장)[@tgncosist2](https://github.com/tgncosist2)
 >
-> 장태규[@taegu825](https://github.com/taegu825)
+> ### 김민경[@min-7343](https://github.com/min-7343)
 >
-> 유명규[@RyuMG](https://github.com/RyuMG)
+> 관리자 로그인, 게시판 관리(공지사항 관리, FAQ 관리), 문의 관리, 리뷰 조회/신고 관리 기능구현
 >
-> 이대웅[@bkj0517](https://github.com/bkj0517)
+> ### 장태규[@taegu825](https://github.com/taegu825)
+> 
+> 관리자 대시보드, 한국도로공사 API를 활용한 DB 업데이트 기능구현
+>
+> ### 유명규[@RyuMG](https://github.com/RyuMG)
+>
+> 사용자 메인페이지, 노선별 주유소 UI, 게시판 기능구현
+> 
+> ### 이대웅[@bkj0517](https://github.com/bkj0517)
 
 ## ⚙️ Stacks
 > ### Front-End
@@ -70,7 +78,27 @@ sist 쌍용교육센터 2차 프로젝트
 > ![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=for-the-badge&logo=kakaotalk&logoColor=000000)
 > ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
-## 🎬 시연 영상
+## 🎬 사용자 시연 영상
+> ### 사용자 회원가입, 로그인, 메인페이지
+>
+<p>
+  <img width="80%" src="https://github.com/user-attachments/assets/a837a2d4-5bb6-4596-85c3-e385639059c7">
+</p>
+
+> ### 사용자 휴게소 편의시설 정보(상세페이지, 먹거리, 리뷰), 노선별 주유소
+>
+<p>
+  <img width="80%" src="https://github.com/user-attachments/assets/6fc0dc77-88e2-4448-9160-fb71629e1c72">
+</p>
+
+> ### 사용자 게시판(공지사항, FAQ)
+>
+<p>
+  <img width="80%" src="https://github.com/user-attachments/assets/2b548c14-1f3c-4313-bbbe-49e0da741f11">
+</p>
+
+## 🎬 관리자 시연 영상
+
 > ### 관리자 로그인, 대시보드, 계정 관리(회원 계정 관리, 관리자 계정 관리)
 >
 <p>
@@ -83,7 +111,7 @@ sist 쌍용교육센터 2차 프로젝트
   <img width="80%" src="https://github.com/user-attachments/assets/c4f63136-5c4e-47be-bc34-55fd9c4498f3">
 </p>
 
-> ### 관리자 리뷰 조회, 신고 관리
+> ### 관리자 리뷰 조회/신고 관리
 >
 > <p>
   <img width="80%" src="https://github.com/user-attachments/assets/7aac95f8-4a86-4914-8cc7-e265e35757e9">
