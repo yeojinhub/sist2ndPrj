@@ -61,13 +61,16 @@ sist 쌍용교육센터 2차 프로젝트
 > ![Google Colab](https://img.shields.io/badge/Google%20Colab-%23F9A825.svg?style=for-the-badge&logo=googlecolab&logoColor=white)
 > ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 > ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+> 
 >
 > ### Communication
 > 
 > ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
 > ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+> ![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=for-the-badge&logo=kakaotalk&logoColor=000000)
+> ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
-## 시연 영상
+## 🎬 시연 영상
 > ### 관리자 로그인, 대시보드, 계정 관리(회원 계정 관리, 관리자 계정 관리)
 >
 <p>
@@ -78,4 +81,16 @@ sist 쌍용교육센터 2차 프로젝트
 >
 > <p>
   <img width="80%" src="https://github.com/user-attachments/assets/c4f63136-5c4e-47be-bc34-55fd9c4498f3">
+</p>
+
+> ### 관리자 리뷰 조회, 신고 관리
+>
+> <p>
+  <img width="80%" src="https://github.com/user-attachments/assets/7aac95f8-4a86-4914-8cc7-e265e35757e9">
+</p>
+
+> ### 관리자 휴게소 관리(상세정보 관리, 먹거리 관리, 주유소 관리)
+>
+> <p>
+  <img width="80%" src="https://github.com/user-attachments/assets/ef87e0f9-7f6a-4308-9169-a3af2d54c19e">
 </p>
