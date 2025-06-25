@@ -8,11 +8,12 @@ sist 쌍용교육센터 2차 프로젝트
 </p>
 
 ## 📌 목차
-1. [개요](#개요)
-2. [개발기간](#개발기간)
-3. [멤버구성](#멤버구성)
-4. [기술스택](#Stacks)
-5. [시연영상](#시연영상)
+1. [개요](#-개요-)
+2. [개발기간](#-개발기간-)
+3. [멤버구성](#-멤버구성)
+4. [기술스택](#-Stacks-)
+5. [사용자 시연 영상](#-사용자-시연-영상)
+6. [관리자 시연 영상](#-관리자-시연-영상)
 
 ## 🖥️ 개요
 > 프로젝트 이름: 모두쉼
@@ -32,6 +33,8 @@ sist 쌍용교육센터 2차 프로젝트
 >
 > ### 강태일(부조장)[@tgncosist2](https://github.com/tgncosist2)
 >
+> 사용자 회원가입, 로그인, 휴게소 편의시설 정보(상세페이지, 먹거리, 리뷰), 노선별 주유소 기능구현
+> 
 > ### 김민경[@min-7343](https://github.com/min-7343)
 >
 > 관리자 로그인, 게시판 관리(공지사항 관리, FAQ 관리), 문의 관리, 리뷰 조회/신고 관리 기능구현
@@ -42,9 +45,11 @@ sist 쌍용교육센터 2차 프로젝트
 >
 > ### 유명규[@RyuMG](https://github.com/RyuMG)
 >
-> 사용자 메인페이지, 노선별 주유소 UI, 게시판 기능구현
+> 사용자 메인페이지, 노선별 주유소 UI, 게시판(공지사항, FAQ) 기능구현
 > 
 > ### 이대웅[@bkj0517](https://github.com/bkj0517)
+>
+> 사용자 마이페이지(내 정보, 나의 리뷰, 문의내역, 즐겨찾기) 기능구현
 
 ## ⚙️ Stacks
 > ### Front-End
@@ -79,10 +84,16 @@ sist 쌍용교육센터 2차 프로젝트
 > ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
 ## 🎬 사용자 시연 영상
-> ### 사용자 회원가입, 로그인, 메인페이지
+> ### 사용자 회원가입, 로그인
 >
 <p>
-  <img width="80%" src="https://github.com/user-attachments/assets/a837a2d4-5bb6-4596-85c3-e385639059c7">
+  <img width="80%" src="https://github.com/user-attachments/assets/fc587377-a7a1-48fb-b69f-7b4cadcce71f">
+</p>
+
+> ### 사용자 메인페이지
+>
+<p>
+  <img width="80%" src="https://github.com/user-attachments/assets/b4f0210d-8311-450e-a542-739f8ce46c34">
 </p>
 
 > ### 사용자 휴게소 편의시설 정보(상세페이지, 먹거리, 리뷰), 노선별 주유소
@@ -95,6 +106,12 @@ sist 쌍용교육센터 2차 프로젝트
 >
 <p>
   <img width="80%" src="https://github.com/user-attachments/assets/2b548c14-1f3c-4313-bbbe-49e0da741f11">
+</p>
+
+> ### 사용자 마이페이지(내 정보, 나의 리뷰, 문의내역, 즐겨찾기)
+>
+<p>
+  <img width="80%" src="https://github.com/user-attachments/assets/5a35fa80-fb0c-4de8-8e0e-b3be17dec502">
 </p>
 
 ## 🎬 관리자 시연 영상
