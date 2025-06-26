@@ -14,6 +14,7 @@ sist 쌍용교육센터 2차 프로젝트
 4. [기술스택](#-Stacks-)
 5. [사용자 시연 영상](#-사용자-시연-영상)
 6. [관리자 시연 영상](#-관리자-시연-영상)
+7. [ERD Diagram](#ERD-Diagram)
 
 ## 🖥️ 개요
 > 프로젝트 이름: 모두쉼
@@ -57,12 +58,16 @@ sist 쌍용교육센터 2차 프로젝트
 > ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 > ![CSS](https://img.shields.io/badge/css-%231572B6.svg?style=for-the-badge&logo=css&logoColor=white)
 > ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+> ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
 > 
 > ### Back End
 >
-> ![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black)
-> ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-> ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+> ![Apache Tomcat9](https://img.shields.io/badge/apache%20tomcat9-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black)
+> ![Java17](https://img.shields.io/badge/java17-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+> ![JSP](https://img.shields.io/badge/jsp-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+> ![JSTL](https://img.shields.io/badge/jstl-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+> ![Mybatis](https://img.shields.io/badge/Mybatis-FFFFFF?style=for-the-badge&logo=Mybatis&logoColor=#7D929E)
+> ![Lombok](https://img.shields.io/badge/Lombok-%23CC0000.svg?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
 > 
 > ### DataBase
 > 
@@ -71,10 +76,9 @@ sist 쌍용교육센터 2차 프로젝트
 >
 > ### Environment
 > 
-> ![Eclipse](https://img.shields.io/badge/Eclipse-FE7A16.svg?style=for-the-badge&logo=Eclipse&logoColor=white)
-> ![Google Colab](https://img.shields.io/badge/Google%20Colab-%23F9A825.svg?style=for-the-badge&logo=googlecolab&logoColor=white)
-> ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-> ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+> #### IDE ![Eclipse](https://img.shields.io/badge/Eclipse-FE7A16.svg?style=for-the-badge&logo=Eclipse&logoColor=white)
+> #### Build tools ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
+> #### Version control ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 >
 > ### Communication
 > 
@@ -138,4 +142,9 @@ sist 쌍용교육센터 2차 프로젝트
 >
 > <p>
   <img width="80%" src="https://github.com/user-attachments/assets/ef87e0f9-7f6a-4308-9169-a3af2d54c19e">
+</p>
+
+## ERD Diagram
+<p>
+  <img width="80%" src="https://github.com/user-attachments/assets/d1db5f9d-0140-432c-9a91-5ec471e0f028">
 </p>
