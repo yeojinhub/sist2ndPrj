@@ -25,7 +25,7 @@ sist 쌍용교육센터 2차 프로젝트
 > 카카오맵API, javax.mail+SMTP, lombok 등 다양한 API와 라이브러리를 활용하며 지속적인 업데이트를 통해, 사용자에게 정확한 정보를 제공합니다.
 
 ## 🕰️ 개발기간
-> 2025/4/28~2025/6/12
+> 2025/4/28~2025/6/12(7주)
 
 ## 🧑‍🤝‍🧑 멤버구성
 > ### 이여진(조장)[@yeojinhub](https://github.com/yeojinhub)
@@ -71,7 +71,7 @@ sist 쌍용교육센터 2차 프로젝트
 > 
 > ### DataBase
 > 
-> ![Oracle](https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white)
+> ![Oracle DataBase 19c](https://img.shields.io/badge/Oracle%20DataBase%2019c-F80000?style=for-the-badge&logo=oracle&logoColor=white)
 > ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
 >
 > ### Environment
