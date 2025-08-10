@@ -8,15 +8,15 @@ sist 쌍용교육센터 2차 프로젝트
 </p>
 
 ## 📌 목차
-1. [개요](#-개요-)
-2. [개발기간](#-개발기간-)
-3. [멤버구성](#-멤버구성)
-4. [기술스택](#-Stacks-)
-5. [사용자 시연 영상](#-사용자-시연-영상)
-6. [관리자 시연 영상](#-관리자-시연-영상)
+1. [💻 개요](#-개요)
+2. [📅 개발 기간](#-개발-기간)
+3. [🧑‍🤝‍🧑 멤버 구성](#-멤버-구성)
+4. [🛠️ 기술 스택](#-기술-스택)
+5. [🎬 사용자 시연 영상](#-사용자-시연-영상)
+6. [🎬 관리자 시연 영상](#-관리자-시연-영상)
 7. [ERD Diagram](#ERD-Diagram)
 
-## 🖥️ 개요
+## 💻 개요
 > 프로젝트 이름: 모두쉼
 > 모두쉼(고속도로 휴게소 정보 사이트)는 운전자와 여행객들이 전국 고속도로 휴게소의 다양한 정보를 손쉽게 확인할 수 있도록 지원하는 웹 페이지입니다.
 > 
@@ -24,10 +24,10 @@ sist 쌍용교육센터 2차 프로젝트
 > 
 > 카카오맵API, javax.mail+SMTP, lombok 등 다양한 API와 라이브러리를 활용하며 지속적인 업데이트를 통해, 사용자에게 정확한 정보를 제공합니다.
 
-## 🕰️ 개발기간
+## 📅 개발 기간
 > 2025/4/28~2025/6/12(7주)
 
-## 🧑‍🤝‍🧑 멤버구성
+## 🧑‍🤝‍🧑 멤버 구성
 > ### 이여진(조장)[@yeojinhub](https://github.com/yeojinhub)
 >
 > 관리자 계정 관리(회원 계정 관리, 관리자 계정 관리), 휴게소 관리(상세정보 관리, 먹거리 관리, 주유소 관리) 기능구현
@@ -52,7 +52,7 @@ sist 쌍용교육센터 2차 프로젝트
 >
 > 사용자 마이페이지(내 정보, 나의 리뷰, 문의내역, 즐겨찾기) 기능구현
 
-## ⚙️ Stacks
+## 🛠️ 기술 스택
 > ### Front-End
 > 
 > ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
@@ -62,17 +62,17 @@ sist 쌍용교육센터 2차 프로젝트
 > 
 > ### Back End
 >
-> ![Apache Tomcat9](https://img.shields.io/badge/apache%20tomcat9-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black)
 > ![Java17](https://img.shields.io/badge/java17-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 > ![JSP](https://img.shields.io/badge/jsp-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
-> ![JSTL](https://img.shields.io/badge/jstl-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
-> ![Mybatis](https://img.shields.io/badge/Mybatis-FFFFFF?style=for-the-badge&logo=Mybatis&logoColor=#7D929E)
+> ![Servlet](https://img.shields.io/badge/servlet-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+> ![JDBC](https://img.shields.io/badge/jdbc-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+> ![DBCP](https://img.shields.io/badge/dbcp-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+> ![Apache Tomcat9](https://img.shields.io/badge/apache%20tomcat9-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black)
 > ![Lombok](https://img.shields.io/badge/Lombok-%23CC0000.svg?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
 > 
 > ### DataBase
 > 
 > ![Oracle DataBase 19c](https://img.shields.io/badge/Oracle%20DataBase%2019c-F80000?style=for-the-badge&logo=oracle&logoColor=white)
-> ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
 >
 > ### Environment
 > 
