@@ -9,23 +9,42 @@ sist 쌍용교육센터 2차 프로젝트
 
 ## 📌 목차
 1. [💻 개요](#-개요)
-2. [📅 개발 기간](#-개발-기간)
-3. [🧑‍🤝‍🧑 멤버 구성](#-멤버-구성)
-4. [🛠️ 기술 스택](#-기술-스택)
-5. [🎬 사용자 시연 영상](#-사용자-시연-영상)
-6. [🎬 관리자 시연 영상](#-관리자-시연-영상)
-7. [ERD Diagram](#ERD-Diagram)
+2. [🚀 프로젝트 목표](#-프로젝트-목표)
+3. [📅 개발 기간](#-개발-기간)
+4. [🧑‍🤝‍🧑 멤버 구성](#-멤버-구성)
+5. [🛠️ 기술 스택](#-기술-스택)
+6. [🎬 사용자 시연 영상](#-사용자-시연-영상)
+7. [🎬 관리자 시연 영상](#-관리자-시연-영상)
+8. [ERD Diagram](#ERD-Diagram)
 
 ## 💻 개요
 > 프로젝트 이름: 모두쉼
-> 모두쉼(고속도로 휴게소 정보 사이트)는 운전자와 여행객들이 전국 고속도로 휴게소의 다양한 정보를 손쉽게 확인할 수 있도록 지원하는 웹 페이지입니다.
+> Servlet/JSP 기반 고속도로 휴게소 및 주유소 정보 사이트
+>
+> 운전자와 여행객들이 전국 실시간 고속도로 휴게소 정보(맛집/주유소/편의시설)를 제공
+> 
 > 
 > 본 프로젝트는 사용자 중심의 직관적인 인터페이스와 안정적인 서버 환경을 제공하여, 고속도로 이용자들의 편의를 증진시키는데 목적이 있습니다.
 > 
 > 카카오맵API, javax.mail+SMTP, lombok 등 다양한 API와 라이브러리를 활용하며 지속적인 업데이트를 통해, 사용자에게 정확한 정보를 제공합니다.
 
+## 🚀 프로젝트 목표
+> 실용적이고 직관적인 휴게소 정보 서비스 구현
+>
+> 사용자 중심의 직관적인 인터페이스와 안정적인 Java 기반 백엔드 서버 환경 제공
+> 
+> 고속도로 이용자들의 편의를 증진
+> 
+> 카카오맵 API를 통한 위치 기반 시각화 기능 구현
+>
+> javax.mail + SMTP를 활용한 이메일 인증
+> 
+[🔝 목차로 돌아가기](#-목차)
+
 ## 📅 개발 기간
 > 2025/4/28~2025/6/12(7주)
+> 
+
 
 ## 🧑‍🤝‍🧑 멤버 구성
 > ### 이여진(조장)[@yeojinhub](https://github.com/yeojinhub)
@@ -51,6 +70,8 @@ sist 쌍용교육센터 2차 프로젝트
 > ### 이대웅[@bkj0517](https://github.com/bkj0517)
 >
 > 사용자 마이페이지(내 정보, 나의 리뷰, 문의내역, 즐겨찾기) 기능구현
+> 
+[🔝 목차로 돌아가기](#-목차)
 
 ## 🛠️ 기술 스택
 > ### Front-End
@@ -65,6 +86,7 @@ sist 쌍용교육센터 2차 프로젝트
 > ![Java17](https://img.shields.io/badge/java17-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 > ![JSP](https://img.shields.io/badge/jsp-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
 > ![Servlet](https://img.shields.io/badge/servlet-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+> ![JSTL](https://img.shields.io/badge/jstl-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
 > ![JDBC](https://img.shields.io/badge/jdbc-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
 > ![DBCP](https://img.shields.io/badge/dbcp-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
 > ![Apache Tomcat9](https://img.shields.io/badge/apache%20tomcat9-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black)
@@ -86,6 +108,8 @@ sist 쌍용교육센터 2차 프로젝트
 > ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 > ![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=for-the-badge&logo=kakaotalk&logoColor=000000)
 > ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
+> 
+[🔝 목차로 돌아가기](#-목차)
 
 ## 🎬 사용자 시연 영상
 > ### 사용자 회원가입, 로그인
@@ -118,6 +142,8 @@ sist 쌍용교육센터 2차 프로젝트
   <img width="80%" src="https://github.com/user-attachments/assets/5a35fa80-fb0c-4de8-8e0e-b3be17dec502">
 </p>
 
+[🔝 목차로 돌아가기](#-목차)
+
 ## 🎬 관리자 시연 영상
 
 > ### 관리자 로그인, 대시보드, 계정 관리(회원 계정 관리, 관리자 계정 관리)
@@ -144,7 +170,13 @@ sist 쌍용교육센터 2차 프로젝트
   <img width="80%" src="https://github.com/user-attachments/assets/ef87e0f9-7f6a-4308-9169-a3af2d54c19e">
 </p>
 
+[🔝 목차로 돌아가기](#-목차)
+
 ## ERD Diagram
 <p>
   <img width="80%" src="https://github.com/user-attachments/assets/d1db5f9d-0140-432c-9a91-5ec471e0f028">
 </p>
+
+[🔝 목차로 돌아가기](#-목차)
+
+
