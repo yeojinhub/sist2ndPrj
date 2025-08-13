@@ -7,68 +7,98 @@ sist 쌍용교육센터 2차 프로젝트
 <img width="100%" src="https://github.com/user-attachments/assets/756394a1-1f1a-491f-9744-1b52c2ba3116">
 </p>
 
+<a id="목차"></a>
 ## 📌 목차
 1. [💻 개요](#-개요)
 2. [🚀 프로젝트 목표](#-프로젝트-목표)
 3. [📅 개발 기간](#-개발-기간)
 4. [🧑‍🤝‍🧑 멤버 구성](#-멤버-구성)
-5. [🛠️ 기술 스택](#-기술-스택)
-6. [🎬 사용자 시연 영상](#-사용자-시연-영상)
-7. [🎬 관리자 시연 영상](#-관리자-시연-영상)
-8. [ERD Diagram](#ERD-Diagram)
+5. [🛠️ 기술 스택](#기술-스택)
+6. [🏛 아키텍처 구조](#-아키텍처-구조)
+7. [🎬 사용자 시연 영상](#-사용자-시연-영상)
+8. [🎬 관리자 시연 영상](#-관리자-시연-영상)
+9. [ERD Diagram](#ERD-Diagram)
 
 ## 💻 개요
-> 프로젝트 이름: 모두쉼
+> 🔹 **프로젝트명** : 모두쉼
 > 
-> Servlet/JSP 기반 고속도로 휴게소 및 주유소 정보 사이트
+> 🔹 **유형** : Servlet/JSP 기반 고속도로 휴게소 및 주유소 정보 사이트
 >
-> 운전자와 여행객들이 전국 실시간 고속도로 휴게소 정보(맛집/주유소/편의시설)를 제공
+> 🔹 **설명** :
+> 
+> 운전자와 여행객들이 전국 고속도로 휴게소·주유소의 실시간 정보(맛집/주유소/편의시설)를 제공
+> 
+> 카카오맵 API를 통한 위치 시각화를 지원
+> 
+> 운전자와 여행객의 편의를 높이는 것을 목표
 > 
 
 ## 🚀 프로젝트 목표
-> 실용적이고 직관적인 휴게소 정보 서비스 구현
+> 🔹 실용적이고 직관적인 휴게소 정보 서비스 구현
+> 
+> 🔹 사용자 친화적인 UI와 안정적인 Java 기반 백엔드 서버 환경 구축
+> 
+> 🔹 전곡 고속도로 이용자들의 편의성 증대
 >
-> 사용자 중심의 직관적인 인터페이스와 안정적인 Java 기반 백엔드 서버 환경 제공
-> 
-> 고속도로 이용자들의 편의를 증진
-> 
-> 카카오맵 API를 통한 위치 기반 시각화 기능 구현
+> 🔹 카카오맵 API를 통한 위치 기반 시각화 기능 제공
 >
-> javax.mail + SMTP를 활용한 이메일 인증
+> 🔹 javax.mail + SMTP 기반 이메일 인증
 > 
-[🔝 목차로 돌아가기](#-목차)
+<p align="right">
+  <a href="#목차">🔝 목차로 돌아가기</a>
+</p>
 
 ## 📅 개발 기간
-> 2025/4/28~2025/6/12(7주)
+> 2025-4-28 ~ 2025-6-12(7주)
 > 
 
 
 ## 🧑‍🤝‍🧑 멤버 구성
-> ### 이여진(조장)[@yeojinhub](https://github.com/yeojinhub)
+> ### 👩‍💻 이여진(조장)\[[GitHub : @yeojinhub\]](https://github.com/yeojinhub)
 >
-> 관리자 계정 관리(회원 계정 관리, 관리자 계정 관리), 휴게소 관리(상세정보 관리, 먹거리 관리, 주유소 관리) 기능구현
->
-> ### 강태일(부조장)[@tgncosist2](https://github.com/tgncosist2)
->
-> 사용자 회원가입, 로그인, 휴게소 편의시설 정보(상세페이지, 먹거리, 리뷰), 노선별 주유소 기능구현
+> 🔹 **관리자 계정 관리** : 회원/관리자 계정 CRUD
 > 
-> ### 김민경[@min-7343](https://github.com/min-7343)
+> 🔹 **관리자 휴게소 관리** : 상세정보·먹거리·주유소 관리 CRUD
 >
-> 관리자 로그인, 게시판 관리(공지사항 관리, FAQ 관리), 문의 관리, 리뷰 조회/신고 관리 기능구현
+> ### 👨‍💻강태일(부조장)\[[@tgncosist2\]](https://github.com/tgncosist2)
 >
-> ### 장태규[@taegu825](https://github.com/taegu825)
+> 🔹 **사용자 회원 기능** : 회원가입, 로그인
 > 
-> 관리자 대시보드, 한국도로공사 API를 활용한 DB 업데이트 기능구현
+> 🔹 **사용자 휴게소 편의시설 정보** : 상세페이지, 먹거리, 리뷰
 >
-> ### 유명규[@RyuMG](https://github.com/RyuMG)
->
-> 사용자 메인페이지, 노선별 주유소 UI, 게시판(공지사항, FAQ) 기능구현
+> 🔹 **사용자 노선별 주유소** : 주유소 목록, 가격 조회 및 검색
 > 
-> ### 이대웅[@bkj0517](https://github.com/bkj0517)
+> ### 👩‍💻김민경\[[@min-7343\]](https://github.com/min-7343)
 >
-> 사용자 마이페이지(내 정보, 나의 리뷰, 문의내역, 즐겨찾기) 기능구현
+> 🔹 **관리자 로그인**
 > 
-[🔝 목차로 돌아가기](#-목차)
+> 🔹 **관리자 게시판 관리** : 공지사항, FAQ 관리 CRUD
+>
+> 🔹 **관리자 문의 관리**: 문의글 조회/답변
+>
+> 🔹 **관리자 리뷰 조회/신고 관리** : 리뷰 조회 및 신고 처리
+>
+> ### 👨‍💻장태규\[[@taegu825\]](https://github.com/taegu825)
+> 
+> 🔹 **관리자 대시보드** : 최근 30일 통계/현황 조회
+>
+> 🔹 **데이터 업데이트** : 한국도로공사 API 연동, 데이터 SQL/엑셀 변환 저장
+>
+> ### 👨‍💻유명규\[[@RyuMG\]](https://github.com/RyuMG)
+>
+> 🔹 **사용자 메인페이지** : UI 구현
+> 
+> 🔹 **사용자 노선별 주유소** : UI 구현
+>
+> 🔹 **사용자 게시판** : 공지사항, FAQ, 문의글 기능 구현
+> 
+> ### 👨‍💻이대웅\[[@bkj0517\]](https://github.com/bkj0517)
+>
+> 🔹 **사용자 마이페이지** : 내 정보, 나의 리뷰, 문의내역, 즐겨찾기 기능 구현
+> 
+<p align="right">
+  <a href="#목차">🔝 목차로 돌아가기</a>
+</p>
 
 ## 🛠️ 기술 스택
 > ### Front-End
@@ -106,7 +136,26 @@ sist 쌍용교육센터 2차 프로젝트
 > ![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=for-the-badge&logo=kakaotalk&logoColor=000000)
 > ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 > 
-[🔝 목차로 돌아가기](#-목차)
+<p align="right">
+  <a href="#목차">🔝 목차로 돌아가기</a>
+</p>
+
+## 🏛 아키텍처 구조
+> 🔹 MVC 패턴
+> 
+> **View(JSP)** → **Controller(Servlet)** → **Service** → **DAO** → **DB**
+>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↕
+>
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**DTO** 
+>
+> 🔹 JDBC + DBCP(JNDI DataSource) 기반 데이터베이스 연동
+>
+> 🔹 JSTL/EL 기반 데이터 출력
+>
+<p align="right">
+  <a href="#목차">🔝 목차로 돌아가기</a>
+</p>
 
 ## 🎬 사용자 시연 영상
 > ### 사용자 회원가입, 로그인
@@ -139,7 +188,9 @@ sist 쌍용교육센터 2차 프로젝트
   <img width="80%" src="https://github.com/user-attachments/assets/5a35fa80-fb0c-4de8-8e0e-b3be17dec502">
 </p>
 
-[🔝 목차로 돌아가기](#-목차)
+<p align="right">
+  <a href="#목차">🔝 목차로 돌아가기</a>
+</p>
 
 ## 🎬 관리자 시연 영상
 
@@ -167,13 +218,17 @@ sist 쌍용교육센터 2차 프로젝트
   <img width="80%" src="https://github.com/user-attachments/assets/ef87e0f9-7f6a-4308-9169-a3af2d54c19e">
 </p>
 
-[🔝 목차로 돌아가기](#-목차)
+<p align="right">
+  <a href="#목차">🔝 목차로 돌아가기</a>
+</p>
 
 ## ERD Diagram
 <p>
   <img width="80%" src="https://github.com/user-attachments/assets/d1db5f9d-0140-432c-9a91-5ec471e0f028">
 </p>
 
-[🔝 목차로 돌아가기](#-목차)
+<p align="right">
+  <a href="#목차">🔝 목차로 돌아가기</a>
+</p>
 
 
