@@ -10,17 +10,17 @@ sist 쌍용교육센터 2차 프로젝트
 
 <a id="목차"></a>
 ## 📌 목차
-1. [💻 개요](#-개요)
-2. [🚀 프로젝트 목표](#-프로젝트-목표)
+1. [📝 개요](#-개요)
+2. [🎯 프로젝트 목표](#-프로젝트-목표)
 3. [📅 개발 기간](#-개발-기간)
 4. [🧑‍🤝‍🧑 멤버 구성](#-멤버-구성)
 5. [🛠️ 기술 스택](#기술스택)
-6. [🏛 아키텍처 구조](#-아키텍처-구조)
+6. [🗂 아키텍처 구조](#-아키텍처-구조)
 7. [🎬 사용자 시연 영상](#-사용자-시연-영상)
 8. [🎬 관리자 시연 영상](#-관리자-시연-영상)
-9. [ERD Diagram](#ERD-Diagram)
+9. [🛢 ERD Diagram](#-Entity-Relationship-Diagram)
 
-## 💻 개요
+## 📝 개요
 > 🔹 **프로젝트명** : 모두쉼
 > 
 > 🔹 **유형** : Servlet/JSP 기반 고속도로 휴게소 및 주유소 정보 사이트
@@ -34,7 +34,7 @@ sist 쌍용교육센터 2차 프로젝트
 > 운전자와 여행객의 편의를 높이는 것을 목표
 > 
 
-## 🚀 프로젝트 목표
+## 🎯 프로젝트 목표
 > 🔹 실용적이고 직관적인 휴게소 정보 서비스 구현
 > 
 > 🔹 사용자 친화적인 UI와 안정적인 Java 기반 백엔드 서버 환경 구축
@@ -61,7 +61,7 @@ sist 쌍용교육센터 2차 프로젝트
 > 
 > 🔹 **관리자 휴게소 관리** : 상세정보·먹거리·주유소 관리 CRUD
 >
-> ### 👨‍💻강태일(부조장)\[[@tgncosist2\]](https://github.com/tgncosist2)
+> ### 👨‍💻강태일(부조장)\[[GitHub : @tgncosist2\]](https://github.com/tgncosist2)
 >
 > 🔹 **사용자 회원 기능** : 회원가입, 로그인
 > 
@@ -69,7 +69,7 @@ sist 쌍용교육센터 2차 프로젝트
 >
 > 🔹 **사용자 노선별 주유소** : 주유소 목록, 가격 조회 및 검색
 > 
-> ### 👩‍💻김민경\[[@min-7343\]](https://github.com/min-7343)
+> ### 👩‍💻김민경\[[GitHub : @min-7343\]](https://github.com/min-7343)
 >
 > 🔹 **관리자 로그인**
 > 
@@ -79,13 +79,13 @@ sist 쌍용교육센터 2차 프로젝트
 >
 > 🔹 **관리자 리뷰 조회/신고 관리** : 리뷰 조회 및 신고 처리
 >
-> ### 👨‍💻장태규\[[@taegu825\]](https://github.com/taegu825)
+> ### 👨‍💻장태규\[[GitHub : @taegu825\]](https://github.com/taegu825)
 > 
 > 🔹 **관리자 대시보드** : 최근 30일 통계/현황 조회
 >
 > 🔹 **데이터 업데이트** : 한국도로공사 API 연동, 데이터 SQL/엑셀 변환 저장
 >
-> ### 👨‍💻유명규\[[@RyuMG\]](https://github.com/RyuMG)
+> ### 👨‍💻유명규\[[GitHub : @RyuMG\]](https://github.com/RyuMG)
 >
 > 🔹 **사용자 메인페이지** : UI 구현
 > 
@@ -93,7 +93,7 @@ sist 쌍용교육센터 2차 프로젝트
 >
 > 🔹 **사용자 게시판** : 공지사항, FAQ, 문의글 기능 구현
 > 
-> ### 👨‍💻이대웅\[[@bkj0517\]](https://github.com/bkj0517)
+> ### 👨‍💻이대웅\[[GitHub : @bkj0517\]](https://github.com/bkj0517)
 >
 > 🔹 **사용자 마이페이지** : 내 정보, 나의 리뷰, 문의내역, 즐겨찾기 기능 구현
 > 
@@ -103,46 +103,48 @@ sist 쌍용교육센터 2차 프로젝트
 
 <a id="기술스택"></a>
 ## 🛠️ 기술 스택
-> ### Front-End
+> ### 🌐 Frontend
 > 
 > ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 > ![CSS](https://img.shields.io/badge/css-%231572B6.svg?style=for-the-badge&logo=css&logoColor=white)
 > ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 > ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
 > 
-> ### Back End
+> ### ⚙️ Backend
 >
-> ![Java17](https://img.shields.io/badge/java17-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-> ![JSP](https://img.shields.io/badge/jsp-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
-> ![Servlet](https://img.shields.io/badge/servlet-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+> ![Java 17](https://img.shields.io/badge/java%2017-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+> ![JSP/Servlet](https://img.shields.io/badge/jsp/servlet-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
 > ![JSTL](https://img.shields.io/badge/jstl-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
 > ![JDBC](https://img.shields.io/badge/jdbc-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
-> ![DBCP](https://img.shields.io/badge/dbcp-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
-> ![Apache Tomcat9](https://img.shields.io/badge/apache%20tomcat9-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black)
-> ![Lombok](https://img.shields.io/badge/Lombok-%23CC0000.svg?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
 > 
-> ### DataBase
+> ### 🛢 Database
 > 
-> ![Oracle DataBase 19c](https://img.shields.io/badge/Oracle%20DataBase%2019c-F80000?style=for-the-badge&logo=oracle&logoColor=white)
+> ![Oracle Database 19c](https://img.shields.io/badge/Oracle%20Database%2019c-F80000?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDQ4IDQ4Ij48ZWxsaXBzZSBjeD0iMjQiIGN5PSIxMiIgcng9IjIwIiByeT0iNiIvPjxlbGxpcHNlIGN4PSIyNCIgY3k9IjI0IiByeD0iMjAiIHJ5PSI2Ii8+PGVsbGlwc2UgY3g9IjI0IiBjeT0iMzYiIHJ4PSIyMCIgcnk9IjYiLz48L3N2Zz4=)
+> 
+> ### ☁️ Infrastructure
+> 
+> ![Apache Tomcat 9](https://img.shields.io/badge/apache%20tomcat%209-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black)
 >
-> ### Environment
+> ### 🧰 Development Tools
 > 
 > #### IDE ![Eclipse](https://img.shields.io/badge/Eclipse-FE7A16.svg?style=for-the-badge&logo=Eclipse&logoColor=white)
 > #### Build tools ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
 > #### Version control ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+> #### Library & Utility ![Lombok](https://img.shields.io/badge/Lombok-%23CC0000.svg?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
 >
-> ### Communication
-> 
-> ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
-> ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-> ![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=for-the-badge&logo=kakaotalk&logoColor=000000)
+> ### 🤝 Collaboration Tools
+>
 > ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
-> 
+> ![ERDCloud](https://img.shields.io/badge/ERDCloud-000000?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI%2BPHJlY3QgeD0iMiIgeT0iMTgiIHdpZHRoPSIxOCIgaGVpZ2h0PSIyOCIgcng9IjMiIHJ5PSIzIiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHg9IjQ0IiB5PSIxOCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjI4IiByeD0iMyIgcnk9IjMiIGZpbGw9IndoaXRlIi8%2BPHBhdGggZD0iTTI0LDMyIEwzNCwyMiBMNDQsMzIgTDM0LDQyIFoiIGZpbGw9IndoaXRlIi8%2BPC9zdmc%2B)
+> ![draw.io](https://img.shields.io/badge/draw.io-F08705?style=for-the-badge&logo=diagramsdotnet&logoColor=white)
+> ![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=for-the-badge&logo=kakaotalk&logoColor=000000)
+> ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
+>  
 <p align="right">
   <a href="#목차">🔝 목차로 돌아가기</a>
 </p>
 
-## 🏛 아키텍처 구조
+## 🗂 아키텍처 구조
 > 🔹 MVC 패턴
 > 
 > **View(JSP)** → **Controller(Servlet)** → **Service** → **DAO** → **DB**
@@ -224,7 +226,7 @@ sist 쌍용교육센터 2차 프로젝트
   <a href="#목차">🔝 목차로 돌아가기</a>
 </p>
 
-## ERD Diagram
+## 🛢 Entity Relationship Diagram
 <p>
   <img width="80%" src="https://github.com/user-attachments/assets/d1db5f9d-0140-432c-9a91-5ec471e0f028">
 </p>
