@@ -124,7 +124,13 @@ sist 쌍용교육센터 2차 프로젝트
 > ### ☁️ Infrastructure
 > 
 > ![Apache Tomcat 9](https://img.shields.io/badge/apache%20tomcat%209-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black)
->
+> 
+> ### 🔗 External API
+> 
+> ![카카오 맵 API](https://img.shields.io/badge/Kakao%20Map%20API-FFCD00?style=for-the-badge&logo=kakaotalk&logoColor=000000)
+> ![한국도로공사 고속도로 공공데이터 API](https://img.shields.io/badge/한국도로공사%20고속도로%20공공데이터%20API-%23575757.svg?style=for-the-badge&logoColor=important)
+> ![SMTP Email Verification](https://img.shields.io/badge/SMTP%20Email%20Verification-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+> 
 > ### 🧰 Development Tools
 > 
 > #### IDE ![Eclipse](https://img.shields.io/badge/Eclipse-FE7A16.svg?style=for-the-badge&logo=Eclipse&logoColor=white)
